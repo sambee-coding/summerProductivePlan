@@ -46,18 +46,34 @@
             </p>
         </div>
         
-        <div class="glass-card rounded-2xl p-4 flex items-center gap-4 shadow-2xl border border-cyan-500/20 w-full md:w-auto">
-            <div class="relative w-16 h-16 flex items-center justify-center">
-                <svg class="w-full h-full transform -rotate-90">
-                    <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
-                    <circle id="progressCircle" cx="32" cy="32" r="28" stroke="#2dd4bf" stroke-width="6" fill="transparent"
-                            stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
-                </svg>
-                <span id="progressText" class="absolute text-sm font-black text-cyan-300">0%</span>
+        <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+            <div class="glass-card rounded-2xl p-4 flex items-center gap-4 shadow-2xl border border-cyan-500/20 flex-1 min-w-[220px]">
+                <div class="relative w-16 h-16 flex items-center justify-center">
+                    <svg class="w-full h-full transform -rotate-90">
+                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
+                        <circle id="progressCircle" cx="32" cy="32" r="28" stroke="#2dd4bf" stroke-width="6" fill="transparent"
+                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
+                    </svg>
+                    <span id="progressText" class="absolute text-sm font-black text-cyan-300">0%</span>
+                </div>
+                <div>
+                    <div class="text-xs uppercase tracking-widest text-teal-400 font-bold">Daily Progress</div>
+                    <div id="progressStatus" class="text-sm font-medium text-cyan-100 mt-0.5">Let's create momentum! 💧</div>
+                </div>
             </div>
-            <div>
-                <div class="text-xs uppercase tracking-widest text-teal-400 font-bold">Daily Progress</div>
-                <div id="progressStatus" class="text-sm font-medium text-cyan-100 mt-0.5">Let's create momentum! 💧</div>
+            <div class="glass-card rounded-2xl p-4 flex items-center gap-4 shadow-2xl border border-cyan-500/20 min-w-[220px]">
+                <div class="relative w-16 h-16 flex items-center justify-center">
+                    <svg class="w-full h-full transform -rotate-90">
+                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
+                        <circle id="monthlyProgressCircle" cx="32" cy="32" r="28" stroke="#60a5fa" stroke-width="6" fill="transparent"
+                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
+                    </svg>
+                    <span id="monthlyProgressText" class="absolute text-sm font-black text-sky-300">0%</span>
+                </div>
+                <div>
+                    <div class="text-xs uppercase tracking-widest text-sky-400 font-bold">Month Progress</div>
+                    <div id="monthlyProgressStatus" class="text-sm font-medium text-cyan-100 mt-0.5">Track the whole sprint.</div>
+                </div>
             </div>
         </div>
     </header>
@@ -179,6 +195,27 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-cyan-200">Weekly Day Checklist</h4>
+                                <p id="weeklyProgressStatus" class="text-sm text-cyan-100/80 mt-1">Track your weekly check-ins.</p>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="relative w-16 h-16 flex items-center justify-center">
+                                    <svg class="w-full h-full transform -rotate-90">
+                                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
+                                        <circle id="weeklyProgressCircle" cx="32" cy="32" r="28" stroke="#f59e0b" stroke-width="6" fill="transparent"
+                                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
+                                    </svg>
+                                    <span id="weeklyProgressText" class="absolute text-sm font-black text-amber-300">0%</span>
+                                </div>
+                                <button type="button" onclick="resetWeekChecklist('week1')" class="text-xs text-teal-300 hover:text-teal-100">Clear week</button>
+                            </div>
+                        </div>
+                        <div id="weekChecklistArea" class="space-y-3"></div>
+                    </div>
                 `
             },
             week2: {
@@ -210,6 +247,27 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-cyan-200">Weekly Day Checklist</h4>
+                                <p id="weeklyProgressStatus" class="text-sm text-cyan-100/80 mt-1">Track your weekly check-ins.</p>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="relative w-16 h-16 flex items-center justify-center">
+                                    <svg class="w-full h-full transform -rotate-90">
+                                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
+                                        <circle id="weeklyProgressCircle" cx="32" cy="32" r="28" stroke="#f59e0b" stroke-width="6" fill="transparent"
+                                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
+                                    </svg>
+                                    <span id="weeklyProgressText" class="absolute text-sm font-black text-amber-300">0%</span>
+                                </div>
+                                <button type="button" onclick="resetWeekChecklist('week2')" class="text-xs text-teal-300 hover:text-teal-100">Clear week</button>
+                            </div>
+                        </div>
+                        <div id="weekChecklistArea" class="space-y-3"></div>
+                    </div>
                 `
             },
             week3: {
@@ -237,6 +295,27 @@
                                 <p class="text-xs text-cyan-100/70">Call a loved one and actively listen.</p>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-cyan-200">Weekly Day Checklist</h4>
+                                <p id="weeklyProgressStatus" class="text-sm text-cyan-100/80 mt-1">Track your weekly check-ins.</p>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="relative w-16 h-16 flex items-center justify-center">
+                                    <svg class="w-full h-full transform -rotate-90">
+                                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
+                                        <circle id="weeklyProgressCircle" cx="32" cy="32" r="28" stroke="#f59e0b" stroke-width="6" fill="transparent"
+                                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
+                                    </svg>
+                                    <span id="weeklyProgressText" class="absolute text-sm font-black text-amber-300">0%</span>
+                                </div>
+                                <button type="button" onclick="resetWeekChecklist('week3')" class="text-xs text-teal-300 hover:text-teal-100">Clear week</button>
+                            </div>
+                        </div>
+                        <div id="weekChecklistArea" class="space-y-3"></div>
                     </div>
                 `
             },
@@ -289,50 +368,286 @@
                         <div class="space-y-2">
                             <div class="flex flex-col sm:flex-row gap-2 border-b border-blue-900/50 pb-2">
                                 <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Morning</div>
-                                <div class="flex-1 text-sm text-cyan-100/90">
-                                    <span class="block">6:30–7:00: Prayer & Reflection</span>
-                                    <span class="block">7:00–7:45: Workout</span>
-                                    <span class="block">7:45–8:15: Breakfast</span>
-                                    <span class="block">8:15–8:45: Reading</span>
+                                <div class="flex-1 text-sm text-cyan-100/90 space-y-2">
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-0" onchange="saveDailyScheduleState(0)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">6:30–7:00: Prayer & Reflection</span></label>
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-1" onchange="saveDailyScheduleState(1)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">7:00–7:45: Workout</span></label>
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-2" onchange="saveDailyScheduleState(2)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">7:45–8:15: Breakfast</span></label>
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-3" onchange="saveDailyScheduleState(3)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">8:15–8:45: Reading</span></label>
                                 </div>
                             </div>
                             <div class="flex flex-col sm:flex-row gap-2 border-b border-blue-900/50 pb-2">
                                 <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Deep Work 1</div>
                                 <div class="flex-1 text-sm text-cyan-100/90">
-                                    <span class="block">9:00–11:00: Main technical focus of the day</span>
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-4" onchange="saveDailyScheduleState(4)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">9:00–11:00: Main technical focus of the day</span></label>
                                 </div>
                             </div>
                             <div class="flex flex-col sm:flex-row gap-2 border-b border-blue-900/50 pb-2">
                                 <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Break</div>
                                 <div class="flex-1 text-sm text-cyan-100/90">
-                                    <span class="block">11:00–11:30: Walk, Stretch, Hydrate</span>
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-5" onchange="saveDailyScheduleState(5)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">11:00–11:30: Walk, Stretch, Hydrate</span></label>
                                 </div>
                             </div>
                             <div class="flex flex-col sm:flex-row gap-2 border-b border-blue-900/50 pb-2">
                                 <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Deep Work 2</div>
                                 <div class="flex-1 text-sm text-cyan-100/90">
-                                    <span class="block">11:30–1:00: Project building</span>
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-6" onchange="saveDailyScheduleState(6)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">11:30–1:00: Project building</span></label>
                                 </div>
                             </div>
                             <div class="flex flex-col sm:flex-row gap-2 border-b border-blue-900/50 pb-2">
                                 <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Afternoon</div>
                                 <div class="flex-1 text-sm text-cyan-100/90">
-                                    <span class="block">2:00–3:30: Language learning, Portfolio work, Documentation</span>
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-7" onchange="saveDailyScheduleState(7)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">2:00–3:30: Language learning, Portfolio work, Documentation</span></label>
                                 </div>
                             </div>
                             <div class="flex flex-col sm:flex-row gap-2">
                                 <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Evening</div>
-                                <div class="flex-1 text-sm text-cyan-100/90">
-                                    <span class="block">6:00–7:00: Family/Loved Ones</span>
-                                    <span class="block">7:00–8:00: Drawing / Creativity / Relaxation</span>
-                                    <span class="block">8:00–8:15: Journal</span>
+                                <div class="flex-1 text-sm text-cyan-100/90 space-y-2">
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-8" onchange="saveDailyScheduleState(8)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">6:00–7:00: Family/Loved Ones</span></label>
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-9" onchange="saveDailyScheduleState(9)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">7:00–8:00: Drawing / Creativity / Relaxation</span></label>
+                                    <label class="flex items-start gap-3"><input type="checkbox" id="daily-item-10" onchange="saveDailyScheduleState(10)" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"><span class="block">8:00–8:15: Journal</span></label>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                            <div>
+                                <div class="text-xs uppercase tracking-widest text-teal-400 font-bold">Daily Schedule Progress</div>
+                                <div class="text-2xl font-black text-white" id="dailyScheduleProgressText">0%</div>
+                                <div id="dailyScheduleProgressStatus" class="text-sm text-cyan-100/80 mt-1">Complete your schedule items for today.</div>
+                            </div>
+                            <div class="relative w-20 h-20 flex items-center justify-center">
+                                <svg class="w-full h-full transform -rotate-90">
+                                    <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
+                                    <circle id="dailyScheduleProgressCircle" cx="32" cy="32" r="28" stroke="#34d399" stroke-width="6" fill="transparent"
+                                            stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
+                                </svg>
+                                <span id="dailyScheduleProgressNumber" class="absolute text-sm font-black text-emerald-300">0%</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="button" onclick="resetDailyScheduleChecklist()" class="text-xs text-teal-300 hover:text-teal-100">Clear today</button>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-lg font-bold text-cyan-200">Daily Schedule Checklist</h4>
+                        </div>
+                        <div id="dailyScheduleArea" class="space-y-3"></div>
+                    </div>
                 `
             }
         };
+
+        const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+        const weekChecklistDefaults = {
+            week1: [
+                'Set up project scaffold',
+                'Build the homepage section',
+                'Style with Tailwind',
+                'Add interactivity and controls',
+                'Publish on Vercel',
+                'Review your week',
+                'Plan next week'
+            ],
+            week2: [
+                'Design backend routes',
+                'Build API endpoints',
+                'Connect to database',
+                'Test data flows',
+                'Deploy backend',
+                'Reflect on learnings',
+                'Prepare next milestones'
+            ],
+            week3: [
+                'Add authentication',
+                'Create protected routes',
+                'Connect frontend + backend',
+                'Polish user experience',
+                'Test end-to-end',
+                'Review your app',
+                'Plan final polish'
+            ],
+            week4: [
+                'Build portfolio pages',
+                'Polish UI and copy',
+                'Add demo screenshots',
+                'Write project summary',
+                'Deploy portfolio',
+                'Share with others',
+                'Reflect and celebrate'
+            ]
+        };
+
+        function renderWeekChecklist(weekKey) {
+            const checklistContainer = document.getElementById('weekChecklistArea');
+            if (!checklistContainer) return;
+
+            const defaults = weekChecklistDefaults[weekKey] || weekChecklistDefaults.week1;
+            checklistContainer.innerHTML = weekDays.map((day, index) => {
+                const defaultText = defaults[index] || `Plan ${day}`;
+                const safeText = defaultText.replace(/"/g, '&quot;');
+                return `
+                    <label class="grid grid-cols-[auto_1fr] gap-3 items-start p-3 rounded-2xl bg-blue-950/30 border border-blue-500/20">
+                        <input type="checkbox" id="${weekKey}-day-${index}" onchange="saveWeekDayState('${weekKey}', ${index})" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between gap-3">
+                                <span class="text-sm font-bold text-cyan-100">${day}</span>
+                                <button type="button" onclick="resetWeekChecklistDay('${weekKey}', ${index})" class="text-[10px] uppercase tracking-widest text-teal-300 hover:text-teal-100">Reset</button>
+                            </div>
+                            <input type="text" id="${weekKey}-task-${index}" class="w-full bg-blue-950/50 border border-blue-500/20 rounded-xl px-3 py-2 text-sm text-cyan-100 focus:outline-none focus:border-teal-400" placeholder="${safeText}" onchange="saveWeekDayState('${weekKey}', ${index})">
+                        </div>
+                    </label>
+                `;
+            }).join('');
+
+            weekDays.forEach((_, index) => loadWeekChecklistState(weekKey, index));
+        }
+
+        function saveWeekDayState(weekKey, index) {
+            const checkbox = document.getElementById(`${weekKey}-day-${index}`);
+            const taskInput = document.getElementById(`${weekKey}-task-${index}`);
+            if (!checkbox || !taskInput) return;
+            localStorage.setItem(`${weekKey}_day_${index}_checked`, checkbox.checked);
+            localStorage.setItem(`${weekKey}_day_${index}_text`, taskInput.value.trim());
+            updateAllProgress();
+        }
+
+        function loadWeekChecklistState(weekKey, index) {
+            const checkbox = document.getElementById(`${weekKey}-day-${index}`);
+            const taskInput = document.getElementById(`${weekKey}-task-${index}`);
+            if (!checkbox || !taskInput) return;
+            const checked = localStorage.getItem(`${weekKey}_day_${index}_checked`);
+            const text = localStorage.getItem(`${weekKey}_day_${index}_text`);
+            if (checked !== null) checkbox.checked = checked === 'true';
+            if (text !== null) taskInput.value = text;
+        }
+
+        function resetWeekChecklistDay(weekKey, index) {
+            const checkbox = document.getElementById(`${weekKey}-day-${index}`);
+            const taskInput = document.getElementById(`${weekKey}-task-${index}`);
+            if (!checkbox || !taskInput) return;
+            checkbox.checked = false;
+            taskInput.value = '';
+            localStorage.removeItem(`${weekKey}_day_${index}_checked`);
+            localStorage.removeItem(`${weekKey}_day_${index}_text`);
+        }
+
+        function resetWeekChecklist(weekKey) {
+            weekDays.forEach((_, index) => resetWeekChecklistDay(weekKey, index));
+            updateAllProgress();
+        }
+
+        const dailyScheduleCount = 11;
+
+        function saveDailyScheduleState(index) {
+            const checkbox = document.getElementById(`daily-item-${index}`);
+            if (!checkbox) return;
+            localStorage.setItem(`daily_schedule_item_${index}_checked`, checkbox.checked);
+            updateAllProgress();
+        }
+
+        function loadDailyScheduleState(index) {
+            const checkbox = document.getElementById(`daily-item-${index}`);
+            if (!checkbox) return;
+            const checked = localStorage.getItem(`daily_schedule_item_${index}_checked`);
+            if (checked !== null) checkbox.checked = checked === 'true';
+        }
+
+        function renderDailyScheduleState() {
+            for (let i = 0; i < dailyScheduleCount; i++) {
+                loadDailyScheduleState(i);
+            }
+        }
+
+        function resetDailyScheduleChecklist() {
+            for (let i = 0; i < dailyScheduleCount; i++) {
+                const checkbox = document.getElementById(`daily-item-${i}`);
+                if (!checkbox) continue;
+                checkbox.checked = false;
+                localStorage.removeItem(`daily_schedule_item_${i}_checked`);
+            }
+            updateAllProgress();
+        }
+
+        function setProgressCircle(circleId, textId, percent) {
+            const circle = document.getElementById(circleId);
+            const text = document.getElementById(textId);
+            if (!circle || !text) return;
+            const total = 2 * Math.PI * 28;
+            const offset = total - (percent / 100) * total;
+            circle.style.strokeDashoffset = offset;
+            text.innerText = `${percent}%`;
+        }
+
+        function updateNonNegotiablesProgress() {
+            const checkboxes = Array.from(document.querySelectorAll('#nonNegotiablesList input[type="checkbox"]'));
+            const checkedCount = checkboxes.filter(cb => cb.checked).length;
+            const percentage = checkboxes.length > 0 ? Math.round((checkedCount / checkboxes.length) * 100) : 0;
+            setProgressCircle('progressCircle', 'progressText', percentage);
+            const status = document.getElementById('progressStatus');
+            if (status) status.innerText = percentage === 100 ? 'All done — keep the streak!' : 'Let\'s create momentum! 💧';
+        }
+
+        function updateDailyScheduleProgress() {
+            let checkedCount = 0;
+            for (let i = 0; i < dailyScheduleCount; i++) {
+                const checkbox = document.getElementById(`daily-item-${i}`);
+                if (checkbox && checkbox.checked) checkedCount += 1;
+            }
+            const percentage = dailyScheduleCount > 0 ? Math.round((checkedCount / dailyScheduleCount) * 100) : 0;
+            setProgressCircle('dailyScheduleProgressCircle', 'dailyScheduleProgressNumber', percentage);
+            const text = document.getElementById('dailyScheduleProgressText');
+            const status = document.getElementById('dailyScheduleProgressStatus');
+            if (text) text.innerText = `${percentage}%`;
+            if (status) status.innerText = percentage === 100 ? 'All schedule items complete today!' : 'Complete today\'s schedule.';
+        }
+
+        function updateWeeklyProgress(weekKey) {
+            const checkboxes = Array.from(document.querySelectorAll(`#weekChecklistArea input[type="checkbox"]`));
+            const checkedCount = checkboxes.filter(cb => cb.checked).length;
+            const percentage = checkboxes.length > 0 ? Math.round((checkedCount / checkboxes.length) * 100) : 0;
+            setProgressCircle('weeklyProgressCircle', 'weeklyProgressText', percentage);
+            const status = document.getElementById('weeklyProgressStatus');
+            if (status) status.innerText = percentage === 100 ? 'Weekly goals are complete!' : `Weekly goal progress — ${checkedCount}/${checkboxes.length}`;
+        }
+
+        function updateMonthlyProgress() {
+            const habitCheckboxes = Array.from(document.querySelectorAll('#nonNegotiablesList input[type="checkbox"]'));
+            const habitChecked = habitCheckboxes.filter(cb => cb.checked).length;
+            const habitTotal = habitCheckboxes.length;
+
+            let dailyChecked = 0;
+            for (let i = 0; i < dailyScheduleCount; i++) {
+                if (localStorage.getItem(`daily_schedule_item_${i}_checked`) === 'true') dailyChecked += 1;
+            }
+            const dailyTotal = dailyScheduleCount;
+
+            let weeklyChecked = 0;
+            let weeklyTotal = 0;
+            Object.keys(weekChecklistDefaults).forEach(weekKey => {
+                weekChecklistDefaults[weekKey].forEach((_, index) => {
+                    weeklyTotal += 1;
+                    if (localStorage.getItem(`${weekKey}_day_${index}_checked`) === 'true') weeklyChecked += 1;
+                });
+            });
+
+            const total = habitTotal + dailyTotal + weeklyTotal;
+            const checkedCount = habitChecked + dailyChecked + weeklyChecked;
+            const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+            setProgressCircle('monthlyProgressCircle', 'monthlyProgressText', percentage);
+            const status = document.getElementById('monthlyProgressStatus');
+            if (status) status.innerText = percentage === 100 ? 'Month complete — incredible!' : 'Monthly progress from all checklists.';
+        }
+
+        function updateAllProgress() {
+            updateNonNegotiablesProgress();
+            updateDailyScheduleProgress();
+            if (currentTabKey.startsWith('week')) updateWeeklyProgress(currentTabKey);
+            updateMonthlyProgress();
+        }
 
         let currentTabKey = 'week1';
 
@@ -349,18 +664,14 @@
             document.getElementById('currentTabSubtitle').innerText = targetData.subtitle;
             document.getElementById('currentTabTitle').innerText = targetData.title;
             document.getElementById('tabContentArea').innerHTML = targetData.content;
+            renderWeekChecklist(tabKey);
+            if (tabKey === 'daily') renderDailyScheduleState();
+            updateAllProgress();
         }
 
         function updateProgress() {
-            const checkboxes = Array.from(document.querySelectorAll('#nonNegotiablesList input[type="checkbox"]'));
-            const checkedCount = checkboxes.filter(cb => cb.checked).length;
-            const percentage = checkboxes.length > 0 ? Math.round((checkedCount / checkboxes.length) * 100) : 0;
-            
-            document.getElementById('progressText').innerText = `${percentage}%`;
-            const totalCircumference = 2 * Math.PI * 28;
-            document.getElementById('progressCircle').style.strokeDashoffset = totalCircumference - (percentage / 100) * totalCircumference;
-
             saveCheckedState();
+            updateAllProgress();
         }
 
         function saveCheckedState() {
@@ -427,6 +738,7 @@
 
             switchTab('week1');
             loadCheckedState();
+            updateAllProgress();
             fetchLogs();
         };
     </script>
