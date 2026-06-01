@@ -76,6 +76,9 @@
                 </div>
             </div>
         </div>
+        <div class="mt-6 flex justify-end px-4 md:px-0">
+            <a href="days.html" class="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-cyan-100 hover:bg-cyan-500/20 transition">Days</a>
+        </div>
     </header>
 
     <main class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -875,8 +878,32 @@
                 });
             });
 
-            const total = habitTotal + dailyTotal + weeklyDayTotal + weeklyScheduleTotal;
-            const checkedCount = habitChecked + dailyChecked + weeklyDayChecked + weeklyScheduleChecked;
+            let dayItemsChecked = 0;
+            let dayItemsTotal = 0;
+            for (let day = 1; day <= 30; day++) {
+                const state = JSON.parse(localStorage.getItem(`day_${day}_state`) || '{}');
+                if (Array.isArray(state.negotiables)) {
+                    state.negotiables.forEach(item => {
+                        dayItemsTotal += 1;
+                        if (item.done) dayItemsChecked += 1;
+                    });
+                }
+                if (Array.isArray(state.schedule)) {
+                    state.schedule.forEach(item => {
+                        dayItemsTotal += 1;
+                        if (item.done) dayItemsChecked += 1;
+                    });
+                }
+                if (Array.isArray(state.todos)) {
+                    state.todos.forEach(todo => {
+                        dayItemsTotal += 1;
+                        if (todo.done) dayItemsChecked += 1;
+                    });
+                }
+            }
+
+            const total = habitTotal + dailyTotal + weeklyDayTotal + weeklyScheduleTotal + dayItemsTotal;
+            const checkedCount = habitChecked + dailyChecked + weeklyDayChecked + weeklyScheduleChecked + dayItemsChecked;
             const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
             setProgressCircle('monthlyProgressCircle', 'monthlyProgressText', percentage);
             const status = document.getElementById('monthlyProgressStatus');
