@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌊 Sambee's 30-Day Growth Sprint 🚀</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #040f16; /* Deep sea blue base */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        .glass-card {
+            background: rgba(10, 25, 47, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(45, 212, 191, 0.15); /* Soft aqua border */
+        }
+        .glow-aqua:checked {
+            filter: drop-shadow(0 0 8px #2dd4bf);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2dd4bf;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="text-cyan-50 min-h-screen pb-16 selection:bg-teal-500 selection:text-white">
+
+    <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <header class="max-w-6xl mx-auto pt-8 px-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+        <div>
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🌊</span>
+                <h1 class="text-3xl font-black tracking-wide bg-gradient-to-r from-teal-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent uppercase">
+                    Sambee's 30-Day Growth Sprint
+                </h1>
+            </div>
+            <p id="liveDateDisplay" class="text-cyan-300 font-bold text-sm mt-1 bg-cyan-950/30 border border-cyan-500/10 px-3 py-1 rounded-lg inline-block shadow-sm">
+                Build. Learn. Communicate. Grow. 🚀
+            </p>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-4 flex items-center gap-4 shadow-2xl border border-cyan-500/20 w-full md:w-auto">
+            <div class="relative w-16 h-16 flex items-center justify-center">
+                <svg class="w-full h-full transform -rotate-90">
+                    <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
+                    <circle id="progressCircle" cx="32" cy="32" r="28" stroke="#2dd4bf" stroke-width="6" fill="transparent"
+                            stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
+                </svg>
+                <span id="progressText" class="absolute text-sm font-black text-cyan-300">0%</span>
+            </div>
+            <div>
+                <div class="text-xs uppercase tracking-widest text-teal-400 font-bold">Daily Progress</div>
+                <div id="progressStatus" class="text-sm font-medium text-cyan-100 mt-0.5">Let's create momentum! 💧</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-1 space-y-6">
+            <section class="glass-card rounded-3xl p-6 shadow-xl border-t-4 border-teal-500">
+                <h2 class="text-lg font-bold text-cyan-200 flex items-center gap-2 mb-4">
+                    <span>🔥</span> Daily Non-Negotiables
+                </h2>
+                <div class="space-y-3.5" id="nonNegotiablesList">
+                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
+                        <input type="checkbox" id="habit-prayer" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
+                        <span class="text-sm text-cyan-100/90">Prayer</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
+                        <input type="checkbox" id="habit-workout" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
+                        <span class="text-sm text-cyan-100/90">Workout <span class="text-xs text-cyan-400/60 block">(30–60 min)</span></span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
+                        <input type="checkbox" id="habit-read" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
+                        <span class="text-sm text-cyan-100/90">Read 10+ pages</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
+                        <input type="checkbox" id="habit-social" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
+                        <span class="text-sm text-cyan-100/90">Limit social media</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
+                        <input type="checkbox" id="habit-journal" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
+                        <span class="text-sm text-cyan-100/90">Journal <span class="text-xs text-cyan-400/60 block">(5–10 min)</span></span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
+                        <input type="checkbox" id="habit-english" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
+                        <span class="text-sm text-cyan-100/90">Speak English <span class="text-xs text-cyan-400/60 block">(15–20 min)</span></span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
+                        <input type="checkbox" id="habit-korean" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
+                        <span class="text-sm text-cyan-100/90">Korean practice <span class="text-xs text-cyan-400/60 block">(15–20 min)</span></span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="glass-card rounded-3xl p-6 shadow-xl border border-blue-500/20">
+                <h2 class="text-lg font-bold text-sky-300 flex items-center gap-2 mb-2">
+                    <span>🌍</span> Daily Log Stream
+                </h2>
+                <div class="space-y-3">
+                    <textarea id="progressLogInput" rows="3" class="w-full text-sm bg-blue-950/50 border border-blue-500/20 rounded-xl p-3 focus:outline-none focus:border-teal-500 text-cyan-100 placeholder-cyan-300/30" placeholder="Log your achievements today... 💧"></textarea>
+                    <button onclick="saveLogToCloud()" id="syncBtn" class="w-full py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 transition-all text-sm font-bold text-white rounded-xl shadow-lg">
+                        Save Log
+                    </button>
+                </div>
+                <div id="logFeed" class="mt-4 max-h-40 overflow-y-auto custom-scrollbar space-y-2 pt-2 border-t border-blue-900/40">
+                </div>
+            </section>
+        </div>
+
+        <div class="lg:col-span-2 space-y-6">
+            <div class="flex flex-wrap gap-2 bg-blue-950/40 p-2 rounded-2xl border border-blue-900/50">
+                <button onclick="switchTab('week1')" id="tab-week1" class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all">WEEK 1</button>
+                <button onclick="switchTab('week2')" id="tab-week2" class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all">WEEK 2</button>
+                <button onclick="switchTab('week3')" id="tab-week3" class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all">WEEK 3</button>
+                <button onclick="switchTab('week4')" id="tab-week4" class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all">WEEK 4</button>
+                <button onclick="switchTab('daily')" id="tab-daily" class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all">DAILY SCHEDULE</button>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6 shadow-2xl relative border border-teal-500/10">
+                <div class="mb-4">
+                    <span id="currentTabSubtitle" class="text-xs uppercase tracking-widest font-black text-teal-400 block mb-1">Growth Sprint Focus</span>
+                    <h3 id="currentTabTitle" class="text-2xl font-black text-white">Focus Space</h3>
+                </div>
+                <hr class="border-blue-950 my-4">
+                <div class="space-y-6" id="tabContentArea">
+                    <!-- Dynamic content injected here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const scheduleData = {
+            week1: {
+                subtitle: "Theme: Frontend Excellence",
+                title: "Week 1 // MVP #1 with Next.js + Tailwind",
+                content: `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-teal-950/30 rounded-xl border border-teal-500/20">
+                            <h4 class="text-sm font-bold text-cyan-300 mb-2">Goals & Milestones</h4>
+                            <ul class="text-sm text-cyan-100/80 space-y-1 list-disc pl-4">
+                                <li><strong>Goal:</strong> Build MVP #1</li>
+                                <li><strong>Milestone:</strong> ✅ MVP #1 Deployed</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-3 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <strong class="text-sky-300 text-sm block mb-1">Day 1</strong>
+                                <p class="text-xs text-cyan-100/70"><strong>Learn:</strong> Next.js App Router, Folder structure<br><strong>Build:</strong> Project setup<br><strong>Eng:</strong> Explain "What is Next.js?"<br><strong>Kor:</strong> Greetings</p>
+                            </div>
+                            <div class="p-3 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <strong class="text-sky-300 text-sm block mb-1">Day 2</strong>
+                                <p class="text-xs text-cyan-100/70"><strong>Learn:</strong> Components, Props<br><strong>Build:</strong> Homepage<br><strong>Eng:</strong> Talk about your day (5m)<br><strong>Kor:</strong> Self-introduction</p>
+                            </div>
+                            <div class="p-3 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <strong class="text-sky-300 text-sm block mb-1">Day 3</strong>
+                                <p class="text-xs text-cyan-100/70"><strong>Learn:</strong> State management<br><strong>Build:</strong> Core feature #1<br><strong>Other:</strong> Church if possible</p>
+                            </div>
+                            <div class="p-3 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <strong class="text-sky-300 text-sm block mb-1">Day 4</strong>
+                                <p class="text-xs text-cyan-100/70"><strong>Learn:</strong> Tailwind layouts<br><strong>Build:</strong> Responsive design<br><strong>Other:</strong> Drawing (30 min)</p>
+                            </div>
+                            <div class="p-3 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <strong class="text-sky-300 text-sm block mb-1">Day 5</strong>
+                                <p class="text-xs text-cyan-100/70"><strong>Build:</strong> Core feature #2<br><strong>Eng:</strong> Explain your project</p>
+                            </div>
+                            <div class="p-3 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <strong class="text-sky-300 text-sm block mb-1">Day 6 & 7</strong>
+                                <p class="text-xs text-cyan-100/70"><strong>Day 6:</strong> Finish MVP, Deploy on Vercel, Write README<br><strong>Day 7:</strong> Church, Family time, Weekly review</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            week2: {
+                subtitle: "Theme: Backend Fundamentals",
+                title: "Week 2 // Build MVP #2",
+                content: `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-teal-950/30 rounded-xl border border-teal-500/20">
+                            <h4 class="text-sm font-bold text-cyan-300 mb-2">Goals & Focus</h4>
+                            <ul class="text-sm text-cyan-100/80 space-y-1 list-disc pl-4">
+                                <li><strong>Focus:</strong> Node.js, Express, REST APIs, MongoDB</li>
+                                <li><strong>Projects:</strong> Personal API, Habit Tracker Backend, Goal Tracker Backend</li>
+                                <li><strong>Milestone:</strong> ✅ Backend Connected to Database</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div class="p-4 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <h4 class="text-sm font-bold text-sky-300 mb-2">🗣️ Language Goals</h4>
+                                <p class="text-xs text-cyan-100/70 mb-2"><strong>English:</strong> How APIs work, What I learned, Future goals</p>
+                                <p class="text-xs text-cyan-100/70"><strong>Korean:</strong> Numbers, Time, Ordering food</p>
+                            </div>
+                            <div class="p-4 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <h4 class="text-sm font-bold text-sky-300 mb-2">👨‍👩‍👧‍👦 Family Goals</h4>
+                                <ul class="text-xs text-cyan-100/70 list-disc pl-4">
+                                    <li>3 meaningful conversations</li>
+                                    <li>1 family meal without distractions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            week3: {
+                subtitle: "Theme: Full-Stack Integration",
+                title: "Week 3 // Build MVP #3",
+                content: `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-teal-950/30 rounded-xl border border-teal-500/20">
+                            <h4 class="text-sm font-bold text-cyan-300 mb-2">Goals & Focus</h4>
+                            <ul class="text-sm text-cyan-100/80 space-y-1 list-disc pl-4">
+                                <li><strong>Learn:</strong> Authentication, Protected routes, Database relationships</li>
+                                <li><strong>Projects:</strong> Goal Tracking App OR Student Planner OR Dormitory Management Mini-Version</li>
+                                <li><strong>Milestone:</strong> ✅ Full-Stack App Working</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div class="p-4 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <h4 class="text-sm font-bold text-sky-300 mb-2">🗣️ Language Goals</h4>
+                                <p class="text-xs text-cyan-100/70 mb-2"><strong>English:</strong> Record a 5-minute explanation of your project.</p>
+                                <p class="text-xs text-cyan-100/70"><strong>Korean:</strong> 1-minute self-introduction.</p>
+                            </div>
+                            <div class="p-4 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <h4 class="text-sm font-bold text-sky-300 mb-2">👨‍👩‍👧‍👦 Family Goals</h4>
+                                <p class="text-xs text-cyan-100/70">Call a loved one and actively listen.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            week4: {
+                subtitle: "Theme: Portfolio & Product Thinking",
+                title: "Week 4 // Build MVP #4",
+                content: `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-teal-950/30 rounded-xl border border-teal-500/20">
+                            <h4 class="text-sm font-bold text-cyan-300 mb-2">Goals & Focus</h4>
+                            <ul class="text-sm text-cyan-100/80 space-y-1 list-disc pl-4">
+                                <li><strong>Learn:</strong> UI/UX Engineering, User flows, Accessibility, Design systems</li>
+                                <li><strong>Projects:</strong> Smart Goal Tracker, Language Learning Dashboard, Morning Reflection Journal, or Music Discovery App</li>
+                                <li><strong>Milestone:</strong> ✅ Portfolio Project Deployed</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div class="p-4 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <h4 class="text-sm font-bold text-sky-300 mb-2">🗣️ Language Goals</h4>
+                                <p class="text-xs text-cyan-100/70 mb-2"><strong>English:</strong> 10-minute presentation: "My Journey This Month"</p>
+                                <p class="text-xs text-cyan-100/70"><strong>Korean:</strong> Basic conversation simulation.</p>
+                            </div>
+                            <div class="p-4 bg-blue-950/30 rounded-xl border border-blue-500/20">
+                                <h4 class="text-sm font-bold text-sky-300 mb-2">👨‍👩‍👧‍👦 Family Goals</h4>
+                                <p class="text-xs text-cyan-100/70">Express appreciation to someone important in your life.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            daily: {
+                subtitle: "Time & Weekly Focus Structure",
+                title: "Daily Time Template",
+                content: `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-teal-950/30 rounded-xl border border-teal-500/20">
+                            <h4 class="text-sm font-bold text-cyan-300 mb-2">Weekly Focus Structure</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-cyan-100/80">
+                                <div class="bg-blue-900/30 p-2 rounded border border-blue-500/10"><strong>Mon:</strong> Frontend</div>
+                                <div class="bg-blue-900/30 p-2 rounded border border-blue-500/10"><strong>Tue:</strong> Backend</div>
+                                <div class="bg-blue-900/30 p-2 rounded border border-blue-500/10"><strong>Wed:</strong> UI/UX Eng</div>
+                                <div class="bg-blue-900/30 p-2 rounded border border-blue-500/10"><strong>Thu:</strong> Database/APIs</div>
+                                <div class="bg-blue-900/30 p-2 rounded border border-blue-500/10"><strong>Fri:</strong> Full-Stack</div>
+                                <div class="bg-blue-900/30 p-2 rounded border border-blue-500/10"><strong>Sat:</strong> Ship/Deploy</div>
+                                <div class="bg-blue-900/30 p-2 rounded border border-blue-500/10 col-span-2 md:col-span-2"><strong>Sun:</strong> Church, Family, Reflection</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex flex-col sm:flex-row gap-2 border-b border-blue-900/50 pb-2">
+                                <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Morning</div>
+                                <div class="flex-1 text-sm text-cyan-100/90">
+                                    <span class="block">6:30–7:00: Prayer & Reflection</span>
+                                    <span class="block">7:00–7:45: Workout</span>
+                                    <span class="block">7:45–8:15: Breakfast</span>
+                                    <span class="block">8:15–8:45: Reading</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-2 border-b border-blue-900/50 pb-2">
+                                <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Deep Work 1</div>
+                                <div class="flex-1 text-sm text-cyan-100/90">
+                                    <span class="block">9:00–11:00: Main technical focus of the day</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-2 border-b border-blue-900/50 pb-2">
+                                <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Break</div>
+                                <div class="flex-1 text-sm text-cyan-100/90">
+                                    <span class="block">11:00–11:30: Walk, Stretch, Hydrate</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-2 border-b border-blue-900/50 pb-2">
+                                <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Deep Work 2</div>
+                                <div class="flex-1 text-sm text-cyan-100/90">
+                                    <span class="block">11:30–1:00: Project building</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-2 border-b border-blue-900/50 pb-2">
+                                <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Afternoon</div>
+                                <div class="flex-1 text-sm text-cyan-100/90">
+                                    <span class="block">2:00–3:30: Language learning, Portfolio work, Documentation</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-2">
+                                <div class="w-24 text-sky-400 font-bold text-xs uppercase tracking-wider">Evening</div>
+                                <div class="flex-1 text-sm text-cyan-100/90">
+                                    <span class="block">6:00–7:00: Family/Loved Ones</span>
+                                    <span class="block">7:00–8:00: Drawing / Creativity / Relaxation</span>
+                                    <span class="block">8:00–8:15: Journal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        let currentTabKey = 'week1';
+
+        function switchTab(tabKey) {
+            currentTabKey = tabKey;
+            document.querySelectorAll('.day-tab').forEach(tab => {
+                tab.classList.remove('bg-gradient-to-r', 'from-teal-500', 'to-cyan-500', 'text-white', 'shadow-lg');
+                tab.classList.add('text-cyan-300/60', 'hover:text-cyan-200');
+            });
+            const selectedTab = document.getElementById(`tab-${tabKey}`);
+            selectedTab.classList.add('bg-gradient-to-r', 'from-teal-500', 'to-cyan-500', 'text-white', 'shadow-lg');
+
+            const targetData = scheduleData[tabKey];
+            document.getElementById('currentTabSubtitle').innerText = targetData.subtitle;
+            document.getElementById('currentTabTitle').innerText = targetData.title;
+            document.getElementById('tabContentArea').innerHTML = targetData.content;
+        }
+
+        function updateProgress() {
+            const checkboxes = Array.from(document.querySelectorAll('#nonNegotiablesList input[type="checkbox"]'));
+            const checkedCount = checkboxes.filter(cb => cb.checked).length;
+            const percentage = checkboxes.length > 0 ? Math.round((checkedCount / checkboxes.length) * 100) : 0;
+            
+            document.getElementById('progressText').innerText = `${percentage}%`;
+            const totalCircumference = 2 * Math.PI * 28;
+            document.getElementById('progressCircle').style.strokeDashoffset = totalCircumference - (percentage / 100) * totalCircumference;
+
+            saveCheckedState();
+        }
+
+        function saveCheckedState() {
+            const today = new Date().toLocaleDateString();
+            document.querySelectorAll('#nonNegotiablesList input[type="checkbox"]').forEach(box => {
+                if(box.id) localStorage.setItem(`sprint_${today}_${box.id}`, box.checked);
+            });
+        }
+
+        function loadCheckedState() {
+            const today = new Date().toLocaleDateString();
+            document.querySelectorAll('#nonNegotiablesList input[type="checkbox"]').forEach(box => {
+                if(box.id && localStorage.getItem(`sprint_${today}_${box.id}`) !== null) {
+                    box.checked = localStorage.getItem(`sprint_${today}_${box.id}`) === 'true';
+                }
+            });
+            updateProgress();
+        }
+
+        // Local Storage Logging
+        function saveLogToCloud() {
+            const textInput = document.getElementById('progressLogInput');
+            const dataText = textInput.value.trim();
+            if(!dataText) return;
+
+            const timestamp = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            
+            const localFallback = JSON.parse(localStorage.getItem('sprint_logs') || '[]');
+            localFallback.unshift({ time: timestamp, content: dataText });
+            localStorage.setItem('sprint_logs', JSON.stringify(localFallback));
+
+            textInput.value = '';
+            fetchLogs();
+        }
+
+        function fetchLogs() {
+            const nodeFeed = document.getElementById('logFeed');
+            const localFallback = JSON.parse(localStorage.getItem('sprint_logs') || '[]');
+            
+            if(localFallback.length === 0) {
+                nodeFeed.innerHTML = `<p class="text-xs text-cyan-400/30 italic text-center py-4">No logs yet. Start executing!</p>`;
+                return;
+            }
+            nodeFeed.innerHTML = localFallback.map(log => `
+                <div class="p-2.5 rounded-xl bg-blue-950/40 border border-blue-900/30 text-xs animation-fade-in">
+                    <span class="text-[10px] font-bold text-teal-400 block mb-0.5">${log.time}</span>
+                    <p class="text-cyan-100/80 leading-relaxed">${log.content}</p>
+                </div>
+            `).join('');
+        }
+
+        window.onload = () => {
+            function updateLiveTime() {
+                const today = new Date();
+                const dateOptions = { weekday: 'long', month: 'long', day: 'numeric' };
+                const formattedDate = today.toLocaleDateString('en-US', dateOptions);
+                const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                const formattedTime = today.toLocaleTimeString('en-US', timeOptions);
+                document.getElementById('liveDateDisplay').innerText = `💧 Today is ${formattedDate} — ${formattedTime}`;
+            }
+
+            updateLiveTime();
+            setInterval(updateLiveTime, 1000);
+
+            switchTab('week1');
+            loadCheckedState();
+            fetchLogs();
+        };
+    </script>
+</body>
+</html>
