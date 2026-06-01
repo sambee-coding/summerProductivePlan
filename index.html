@@ -132,6 +132,19 @@
                 </div>
                 <div id="logFeed" class="mt-4 max-h-40 overflow-y-auto custom-scrollbar space-y-2 pt-2 border-t border-blue-900/40">
                 </div>
+                <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10 mt-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-lg font-bold text-cyan-200">June 30 Secret Letter</h4>
+                    </div>
+                    <p id="ventPrompt" class="text-sm text-cyan-100/80 mb-4">Type your secret vent here. The content will stay hidden until June 30.</p>
+                    <textarea id="ventTextarea" rows="6" placeholder="Write your hidden letter here..." class="w-full resize-none rounded-3xl bg-blue-950/60 border border-blue-500/20 px-4 py-3 text-sm text-cyan-100 focus:outline-none focus:border-teal-400"></textarea>
+                    <div class="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                        <button type="button" onclick="storeVentEntry()" class="w-full sm:w-auto px-4 py-2 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-xs font-bold uppercase tracking-wide text-slate-950">Store vent</button>
+                        <span id="ventCount" class="text-xs text-cyan-300/70">No stored vents yet.</span>
+                    </div>
+                    <p id="ventUnlockHint" class="mt-3 text-xs text-cyan-300/70">Your words are stored safely and revealed only on June 30.</p>
+                    <div id="ventHistory" class="mt-4 space-y-3"></div>
+                </div>
             </section>
         </div>
 
@@ -481,6 +494,17 @@
                         </div>
                         <div id="dailyScheduleArea" class="space-y-3"></div>
                     </div>
+                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-lg font-bold text-cyan-200">Daily Todos</h4>
+                            <div class="text-xs text-cyan-300">Create tasks for today</div>
+                        </div>
+                        <div class="flex gap-2 mb-3">
+                            <input id="dailyTodoInput" type="text" placeholder="Add a todo for today" class="flex-1 bg-blue-950/50 border border-blue-500/20 rounded-xl px-3 py-2 text-sm text-cyan-100 focus:outline-none focus:border-teal-400">
+                            <button onclick="addDailyTodo()" class="px-4 py-2 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-xs font-bold">Add</button>
+                        </div>
+                        <div id="dailyTodosList" class="space-y-2"></div>
+                    </div>
                 `
             }
         };
@@ -697,6 +721,76 @@
             }
         }
 
+        // Daily todos (per-day) — stored with date key YYYY-MM-DD
+        function getTodayKey() {
+            return new Date().toISOString().slice(0,10);
+        }
+
+        function getDailyTodosKey(key) {
+            return `daily_todos_${key}`;
+        }
+
+        function loadDailyTodosForKey(key) {
+            try {
+                return JSON.parse(localStorage.getItem(getDailyTodosKey(key)) || '[]');
+            } catch (e) { return []; }
+        }
+
+        function saveDailyTodosForKey(key, todos) {
+            localStorage.setItem(getDailyTodosKey(key), JSON.stringify(todos));
+        }
+
+        function renderDailyTodos() {
+            const key = getTodayKey();
+            const list = document.getElementById('dailyTodosList');
+            if (!list) return;
+            const todos = loadDailyTodosForKey(key);
+            if (todos.length === 0) {
+                list.innerHTML = `<p class="text-xs text-cyan-300/60 italic">No todos for today. Add one!</p>`;
+                return;
+            }
+            list.innerHTML = todos.map((t, i) => `
+                <div class="flex items-center gap-3 p-2 rounded-xl bg-blue-950/30 border border-blue-900/30">
+                    <input type="checkbox" id="daily-todo-${i}" ${t.done ? 'checked' : ''} onchange="toggleDailyTodo(${i})" class="glow-aqua h-4 w-4">
+                    <div class="flex-1 text-sm ${t.done ? 'line-through text-cyan-400/60' : 'text-cyan-100/90'}">${t.text}</div>
+                    <button onclick="removeDailyTodo(${i})" class="text-xs text-rose-400 hover:text-rose-300">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function addDailyTodo() {
+            const input = document.getElementById('dailyTodoInput');
+            if (!input) return;
+            const text = input.value.trim();
+            if (!text) return;
+            const key = getTodayKey();
+            const todos = loadDailyTodosForKey(key);
+            todos.push({ text, done: false, time: new Date().toLocaleTimeString() });
+            saveDailyTodosForKey(key, todos);
+            input.value = '';
+            renderDailyTodos();
+            updateAllProgress();
+        }
+
+        function toggleDailyTodo(index) {
+            const key = getTodayKey();
+            const todos = loadDailyTodosForKey(key);
+            if (!todos[index]) return;
+            todos[index].done = !todos[index].done;
+            saveDailyTodosForKey(key, todos);
+            renderDailyTodos();
+            updateAllProgress();
+        }
+
+        function removeDailyTodo(index) {
+            const key = getTodayKey();
+            const todos = loadDailyTodosForKey(key);
+            todos.splice(index, 1);
+            saveDailyTodosForKey(key, todos);
+            renderDailyTodos();
+            updateAllProgress();
+        }
+
         function saveWeekDailyScheduleState(weekKey, index) {
             const checkbox = document.getElementById(`${weekKey}-daily-schedule-${index}`);
             if (!checkbox) return;
@@ -726,12 +820,21 @@
                 const checkbox = document.getElementById(`daily-item-${i}`);
                 if (checkbox && checkbox.checked) checkedCount += 1;
             }
-            const percentage = dailyScheduleCount > 0 ? Math.round((checkedCount / dailyScheduleCount) * 100) : 0;
+
+            // Include today's todos in the daily progress
+            const todos = loadDailyTodosForKey(getTodayKey());
+            const todoTotal = todos.length;
+            const todoDone = todos.filter(t => t.done).length;
+
+            const totalItems = dailyScheduleCount + todoTotal;
+            const totalDone = checkedCount + todoDone;
+            const percentage = totalItems > 0 ? Math.round((totalDone / totalItems) * 100) : 0;
+
             setProgressCircle('dailyScheduleProgressCircle', 'dailyScheduleProgressNumber', percentage);
             const text = document.getElementById('dailyScheduleProgressText');
             const status = document.getElementById('dailyScheduleProgressStatus');
             if (text) text.innerText = `${percentage}%`;
-            if (status) status.innerText = percentage === 100 ? 'All schedule items complete today!' : 'Complete today\'s schedule.';
+            if (status) status.innerText = percentage === 100 ? 'All schedule items and todos complete today!' : `Progress: ${totalDone}/${totalItems}`;
         }
 
         function updateWeeklyProgress(weekKey) {
@@ -804,7 +907,10 @@
             document.getElementById('tabContentArea').innerHTML = targetData.content;
             renderWeekChecklist(tabKey);
             if (tabKey.startsWith('week')) renderWeekDailySchedule(tabKey);
-            if (tabKey === 'daily') renderDailyScheduleState();
+            if (tabKey === 'daily') {
+                renderDailyScheduleState();
+                renderDailyTodos();
+            }
             updateAllProgress();
         }
 
@@ -862,6 +968,74 @@
             `).join('');
         }
 
+        // Vent (secret letter) helpers — stored and revealed on/after June 30
+        function getJune30UnlockDate() {
+            const d = new Date();
+            d.setMonth(5); // June (0-indexed)
+            d.setDate(30);
+            d.setHours(0,0,0,0);
+            return d;
+        }
+
+        function isVentUnlocked() {
+            return new Date() >= getJune30UnlockDate();
+        }
+
+        function getVentStorageKey() {
+            const y = new Date().getFullYear();
+            return `vent_messages_${y}_06_30`;
+        }
+
+        function loadVentMessages() {
+            try {
+                return JSON.parse(localStorage.getItem(getVentStorageKey()) || '[]');
+            } catch (e) { return []; }
+        }
+
+        function saveVentMessages(messages) {
+            localStorage.setItem(getVentStorageKey(), JSON.stringify(messages));
+        }
+
+        function storeVentEntry() {
+            const ta = document.getElementById('ventTextarea');
+            if (!ta) return;
+            const text = ta.value.trim();
+            if (!text) return;
+            const messages = loadVentMessages();
+            messages.push({ text, time: new Date().toLocaleString() });
+            saveVentMessages(messages);
+            ta.value = '';
+            renderVentHistory();
+        }
+
+        function renderVentHistory() {
+            const count = document.getElementById('ventCount');
+            const history = document.getElementById('ventHistory');
+            const prompt = document.getElementById('ventPrompt');
+            const unlocked = isVentUnlocked();
+            const messages = loadVentMessages();
+            if (count) count.innerText = messages.length === 0 ? 'No stored vents yet.' : `${messages.length} stored vent${messages.length === 1 ? '' : 's'}`;
+            if (prompt) {
+                const formatted = getJune30UnlockDate().toLocaleDateString();
+                prompt.innerText = unlocked ? `Your secret letters are revealed.` : `Your secret letters are hidden until ${formatted}.`;
+            }
+            if (!history) return;
+            if (!unlocked) {
+                history.innerHTML = `<p class="text-xs text-cyan-300/60 italic">Vents are hidden until June 30.</p>`;
+                return;
+            }
+            if (messages.length === 0) {
+                history.innerHTML = `<p class="text-xs text-cyan-300/60 italic">No vents stored.</p>`;
+                return;
+            }
+            history.innerHTML = messages.map(m => `
+                <div class="p-3 rounded-xl bg-blue-950/40 border border-blue-900/30 text-sm">
+                    <div class="text-[11px] text-teal-300 mb-1">${m.time}</div>
+                    <div class="text-cyan-100/80">${m.text}</div>
+                </div>
+            `).join('');
+        }
+
         window.onload = () => {
             function updateLiveTime() {
                 const today = new Date();
@@ -879,6 +1053,8 @@
             loadCheckedState();
             updateAllProgress();
             fetchLogs();
+            renderVentHistory();
+            renderDailyTodos();
         };
     </script>
 </body>
