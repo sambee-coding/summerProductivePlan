@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Reading & Reflection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: #040f16;
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      .glass-card {
+        background: rgba(10, 25, 47, 0.82);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(56, 189, 248, 0.16);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #38bdf8;
+        border-radius: 999px;
+      }
+    </style>
+  </head>
+  <body
+    class="text-cyan-50 min-h-screen pb-16 selection:bg-sky-500 selection:text-white"
+  >
+    <div
+      class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none"
+    ></div>
+    <div
+      class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"
+    ></div>
+
+    <header
+      class="max-w-6xl mx-auto pt-8 px-4 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8"
+    >
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">📚</span>
+          <h1
+            class="text-3xl font-black tracking-wide bg-gradient-to-r from-sky-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent uppercase"
+          >
+            Reading & Reflection
+          </h1>
+        </div>
+        <p
+          class="text-cyan-300 font-bold text-sm mt-2 bg-cyan-950/30 border border-cyan-500/10 px-3 py-1 rounded-lg inline-block shadow-sm"
+        >
+          Track books, add daily reflections, attach images, and share your
+          insights.
+        </p>
+      </div>
+      <div class="flex gap-3">
+        <a
+          href="index.html"
+          class="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-cyan-100 hover:bg-cyan-500/20 transition"
+          >Home</a
+        >
+      </div>
+    </header>
+
+    <main
+      class="max-w-6xl mx-auto px-4 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]"
+    >
+      <section
+        class="glass-card rounded-3xl p-6 shadow-2xl border border-sky-500/10"
+      >
+        <div class="flex flex-col gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div
+              class="rounded-3xl border border-sky-500/10 bg-blue-950/40 p-5"
+            >
+              <div
+                class="text-xs uppercase tracking-widest text-sky-300 font-bold mb-3"
+              >
+                Books tracked
+              </div>
+              <div class="text-4xl font-black text-white" id="bookCount">0</div>
+              <div class="text-xs text-cyan-300/70 mt-2">
+                Books in your reading list
+              </div>
+            </div>
+            <div
+              class="rounded-3xl border border-sky-500/10 bg-blue-950/40 p-5"
+            >
+              <div
+                class="text-xs uppercase tracking-widest text-teal-300 font-bold mb-3"
+              >
+                Reflections saved
+              </div>
+              <div class="text-4xl font-black text-white" id="reflectionCount">
+                0
+              </div>
+              <div class="text-xs text-cyan-300/70 mt-2">
+                Daily entries you can review anytime
+              </div>
+            </div>
+          </div>
+
+          <div id="sidebarBookList" class="space-y-3"></div>
+
+          <div class="rounded-3xl border border-sky-500/10 bg-blue-950/40 p-5">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <div
+                  class="text-xs uppercase tracking-widest text-sky-300 font-bold"
+                >
+                  Add a new book
+                </div>
+                <p class="text-sm text-cyan-100/80">
+                  Save the title and author first, then reflect on it daily.
+                </p>
+              </div>
+            </div>
+            <div class="grid gap-3">
+              <input
+                id="newBookTitle"
+                type="text"
+                placeholder="Book title"
+                class="rounded-2xl border border-blue-500/20 bg-blue-950/60 px-4 py-3 text-sm text-cyan-100 focus:outline-none focus:border-sky-400"
+              />
+              <input
+                id="newBookAuthor"
+                type="text"
+                placeholder="Author"
+                class="rounded-2xl border border-blue-500/20 bg-blue-950/60 px-4 py-3 text-sm text-cyan-100 focus:outline-none focus:border-sky-400"
+              />
+              <div class="flex gap-3">
+                <button
+                  onclick="addBook()"
+                  class="flex-1 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-500 px-4 py-3 text-xs font-bold uppercase tracking-wider text-slate-950 hover:brightness-110 transition"
+                >
+                  Add Book
+                </button>
+                <button
+                  onclick="clearBookForm()"
+                  class="rounded-2xl border border-sky-500/20 px-4 py-3 text-xs font-bold uppercase tracking-wider text-sky-100 hover:bg-sky-500/10 transition"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="glass-card rounded-3xl p-6 shadow-2xl border border-sky-500/10"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-sky-300 font-bold">
+              Selected book
+            </p>
+            <h2 id="selectedBookTitle" class="text-2xl font-black text-white">
+              No book selected
+            </h2>
+            <p id="selectedBookAuthor" class="text-sm text-cyan-300/80 mt-1">
+              Pick a book from the left.
+            </p>
+          </div>
+          <button
+            onclick="deleteSelectedBook()"
+            class="rounded-full border border-rose-400/20 px-4 py-2 text-xs font-bold uppercase tracking-wider text-rose-300 hover:bg-rose-500/10 transition"
+          >
+            Remove
+          </button>
+        </div>
+        <div
+          class="rounded-3xl border border-blue-500/10 bg-blue-950/40 p-5 mb-6"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="text-xs uppercase tracking-widest text-teal-300 font-bold"
+            >
+              Reading Status
+            </div>
+            <select
+              id="selectedBookStatus"
+              onchange="updateBookStatus()"
+              class="rounded-2xl border border-blue-500/20 bg-blue-950/60 px-4 py-3 text-sm text-cyan-100 focus:outline-none focus:border-sky-400"
+            >
+              <option value="reading">Reading</option>
+              <option value="completed">Completed</option>
+              <option value="planning">Planning</option>
+            </select>
+          </div>
+          <div class="mt-4 text-sm text-cyan-200" id="selectedBookMeta">
+            No book selected yet.
+          </div>
+        </div>
+        <div class="mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <p
+                class="text-xs uppercase tracking-widest text-sky-300 font-bold"
+              >
+                Daily reflection
+              </p>
+              <p class="text-sm text-cyan-100/80">
+                Write about the book and upload a picture if you want.
+              </p>
+            </div>
+            <button
+              onclick="saveReflection()"
+              class="rounded-2xl bg-gradient-to-r from-sky-500 to-teal-500 px-4 py-3 text-xs font-bold uppercase tracking-wider text-slate-950 hover:brightness-110 transition"
+            >
+              Save Reflection
+            </button>
+          </div>
+          <textarea
+            id="reflectionInput"
+            rows="5"
+            class="w-full rounded-3xl border border-blue-500/20 bg-blue-950/60 px-4 py-4 text-sm text-cyan-100 focus:outline-none focus:border-sky-400"
+            placeholder="Write your daily thoughts about the book..."
+          ></textarea>
+          <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            <input
+              id="reflectionImageInput"
+              type="file"
+              accept="image/*"
+              multiple
+              class="text-xs text-cyan-200"
+              onchange="handleImageUpload(event)"
+            />
+            <div
+              class="rounded-3xl border border-blue-500/10 bg-blue-950/30 p-3 min-h-[88px]"
+              id="imagePreviewArea"
+            >
+              <p class="text-xs text-cyan-300/70">
+                Image previews appear here.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-3xl border border-sky-500/10 bg-blue-950/40 p-5">
+          <div class="flex items-center justify-between mb-4">
+            <p class="text-xs uppercase tracking-widest text-sky-300 font-bold">
+              Reflections
+            </p>
+            <span
+              id="selectedReflectionCount"
+              class="text-xs uppercase tracking-widest text-slate-400"
+              >0 entries</span
+            >
+          </div>
+          <div
+            id="reflectionList"
+            class="space-y-4 custom-scrollbar max-h-[420px] overflow-y-auto"
+          ></div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      function getBooksKey() {
+        return "books_tracker_data";
+      }
+
+      function loadBooks() {
+        const raw = localStorage.getItem(getBooksKey());
+        if (!raw) return [];
+        try {
+          return JSON.parse(raw);
+        } catch (err) {
+          return [];
+        }
+      }
+
+      function saveBooks(books) {
+        localStorage.setItem(getBooksKey(), JSON.stringify(books));
+      }
+
+      function createBook(title, author) {
+        return {
+          id: Date.now().toString(),
+          title: title.trim(),
+          author: author.trim(),
+          status: "reading",
+          reflections: [],
+          createdAt: new Date().toISOString(),
+        };
+      }
+
+      function renderSidebar() {
+        const books = loadBooks();
+        const list = document.getElementById("bookCount");
+        const reflectionCount = document.getElementById("reflectionCount");
+        list.innerText = books.length;
+        reflectionCount.innerText = books.reduce(
+          (sum, book) => sum + book.reflections.length,
+          0,
+        );
+
+        const sidebar = document.getElementById("sidebarBookList");
+        if (!sidebar) return;
+        sidebar.innerHTML = books
+          .map((book) => {
+            const reflections = book.reflections.length;
+            return `
+                    <button type="button" class="group w-full text-left rounded-3xl border border-blue-500/10 bg-blue-950/50 p-4 hover:border-sky-400 hover:bg-sky-500/10 transition" onclick="selectBook('${book.id}')">
+                        <div class="flex items-center justify-between gap-3">
+                            <div>
+                                <p class="text-sm font-bold text-white">${book.title}</p>
+                                <p class="text-xs text-cyan-300/70 mt-1">${book.author}</p>
+                            </div>
+                            <span class="text-xs uppercase tracking-widest text-sky-300">${book.status}</span>
+                        </div>
+                        <p class="mt-3 text-xs text-cyan-300/70">${reflections} reflection${reflections === 1 ? "" : "s"}</p>
+                    </button>
+                `;
+          })
+          .join("");
+      }
+
+      function selectBook(bookId) {
+        const books = loadBooks();
+        const book = books.find((item) => item.id === bookId);
+        if (!book) return;
+        localStorage.setItem("selected_book_id", bookId);
+        renderSelectedBook();
+      }
+
+      function getSelectedBookId() {
+        return localStorage.getItem("selected_book_id");
+      }
+
+      function getSelectedBook() {
+        const id = getSelectedBookId();
+        const books = loadBooks();
+        return books.find((book) => book.id === id) || null;
+      }
+
+      function renderSelectedBook() {
+        const book = getSelectedBook();
+        const title = document.getElementById("selectedBookTitle");
+        const author = document.getElementById("selectedBookAuthor");
+        const status = document.getElementById("selectedBookStatus");
+        const meta = document.getElementById("selectedBookMeta");
+        const reflectionsList = document.getElementById("reflectionList");
+        const reflectionCount = document.getElementById(
+          "selectedReflectionCount",
+        );
+
+        if (!book) {
+          title.innerText = "No book selected";
+          author.innerText =
+            "Pick a book from the reading list to add reflections.";
+          status.value = "reading";
+          meta.innerText = "Select a book first.";
+          reflectionsList.innerHTML =
+            '<p class="text-xs text-cyan-300/70 italic">Select a book to see your reflections.</p>';
+          reflectionCount.innerText = "0 entries";
+          return;
+        }
+
+        title.innerText = book.title;
+        author.innerText = book.author ? `by ${book.author}` : "Author not set";
+        status.value = book.status;
+        meta.innerText = `${book.reflections.length} reflection${book.reflections.length === 1 ? "" : "s"} · Added ${new Date(book.createdAt).toLocaleDateString()}`;
+        reflectionCount.innerText = `${book.reflections.length} entries`;
+
+        if (!book.reflections.length) {
+          reflectionsList.innerHTML =
+            '<p class="text-xs text-cyan-300/70 italic">No reflections yet. Save one to build your reading habit.</p>';
+          return;
+        }
+
+        reflectionsList.innerHTML = book.reflections
+          .slice()
+          .reverse()
+          .map((entry, index) => {
+            const imageHtml = (entry.images || [])
+              .map(
+                (src) =>
+                  `<img src="${src}" class="h-24 w-auto rounded-2xl border border-blue-500/20 object-cover" />`,
+              )
+              .join("");
+            return `
+                    <div class="rounded-3xl border border-blue-500/10 bg-blue-950/70 p-4">
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                            <div>
+                                <p class="text-xs uppercase tracking-widest text-sky-300 font-bold">${new Date(entry.date).toLocaleString()}</p>
+                                <p class="text-sm text-cyan-100/80 mt-2">${entry.text.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button type="button" onclick="shareReflection('${book.id}','${entry.id}')" class="rounded-2xl bg-sky-500/20 px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-sky-200 hover:bg-sky-500/30 transition">Share</button>
+                                <button type="button" onclick="deleteReflection('${book.id}','${entry.id}')" class="rounded-2xl bg-rose-500/20 px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-rose-200 hover:bg-rose-500/30 transition">Delete</button>
+                            </div>
+                        </div>
+                        ${imageHtml ? `<div class="mt-4 grid grid-cols-2 gap-2">${imageHtml}</div>` : ""}
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      function addBook() {
+        const titleInput = document.getElementById("newBookTitle");
+        const authorInput = document.getElementById("newBookAuthor");
+        const title = titleInput.value.trim();
+        const author = authorInput.value.trim();
+        if (!title) return;
+        const books = loadBooks();
+        books.push(createBook(title, author));
+        saveBooks(books);
+        titleInput.value = "";
+        authorInput.value = "";
+        renderSidebar();
+        selectBook(books[books.length - 1].id);
+      }
+
+      function clearBookForm() {
+        document.getElementById("newBookTitle").value = "";
+        document.getElementById("newBookAuthor").value = "";
+      }
+
+      function updateBookStatus() {
+        const book = getSelectedBook();
+        if (!book) return;
+        book.status = document.getElementById("selectedBookStatus").value;
+        const books = loadBooks().map((item) =>
+          item.id === book.id ? book : item,
+        );
+        saveBooks(books);
+        renderSidebar();
+        renderSelectedBook();
+      }
+
+      function handleImageUpload(event) {
+        const files = Array.from(event.target.files || []);
+        const preview = document.getElementById("imagePreviewArea");
+        preview.innerHTML = "";
+        files.forEach((file) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const img = document.createElement("img");
+            img.src = reader.result;
+            img.className =
+              "h-24 w-auto rounded-2xl border border-blue-500/20 object-cover";
+            preview.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function saveReflection() {
+        const book = getSelectedBook();
+        if (!book) return;
+        const text = document.getElementById("reflectionInput").value.trim();
+        if (!text) return;
+        const files = document.getElementById("reflectionImageInput").files;
+        const images = [];
+        const readerPromises = [];
+        for (const file of Array.from(files || [])) {
+          readerPromises.push(
+            new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                images.push(reader.result);
+                resolve();
+              };
+              reader.readAsDataURL(file);
+            }),
+          );
+        }
+        Promise.all(readerPromises).then(() => {
+          const entry = {
+            id: Date.now().toString(),
+            text,
+            date: new Date().toISOString(),
+            images,
+          };
+          book.reflections.push(entry);
+          const books = loadBooks().map((item) =>
+            item.id === book.id ? book : item,
+          );
+          saveBooks(books);
+          document.getElementById("reflectionInput").value = "";
+          document.getElementById("reflectionImageInput").value = "";
+          document.getElementById("imagePreviewArea").innerHTML =
+            '<p class="text-xs text-cyan-300/70 italic">Image previews appear here.</p>';
+          renderSidebar();
+          renderSelectedBook();
+        });
+      }
+
+      function deleteSelectedBook() {
+        const book = getSelectedBook();
+        if (!book) return;
+        const books = loadBooks().filter((item) => item.id !== book.id);
+        saveBooks(books);
+        localStorage.removeItem("selected_book_id");
+        renderSidebar();
+        renderSelectedBook();
+      }
+
+      function deleteReflection(bookId, reflectionId) {
+        const books = loadBooks();
+        const target = books.find((book) => book.id === bookId);
+        if (!target) return;
+        target.reflections = target.reflections.filter(
+          (ref) => ref.id !== reflectionId,
+        );
+        saveBooks(books);
+        renderSidebar();
+        renderSelectedBook();
+      }
+
+      function dataURLtoBlob(dataURL) {
+        const [meta, base64] = dataURL.split(",");
+        const mime = meta.match(/:(.*?);/)[1];
+        const binary = atob(base64);
+        const array = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i += 1) {
+          array[i] = binary.charCodeAt(i);
+        }
+        return new Blob([array], { type: mime });
+      }
+
+      async function shareReflection(bookId, reflectionId) {
+        const books = loadBooks();
+        const book = books.find((item) => item.id === bookId);
+        if (!book) return;
+        const entry = book.reflections.find((ref) => ref.id === reflectionId);
+        if (!entry) return;
+
+        const plainText = `Book: ${book.title}\nAuthor: ${book.author || "Unknown"}\nDate: ${new Date(entry.date).toLocaleDateString()}\n\n${entry.text}`;
+        const htmlText = `
+          <div style="font-family:Arial,Helvetica,sans-serif;color:#0f172a;line-height:1.5;">
+            <p><strong>Book:</strong> ${book.title}</p>
+            <p><strong>Author:</strong> ${book.author || "Unknown"}</p>
+            <p><strong>Date:</strong> ${new Date(entry.date).toLocaleDateString()}</p>
+            <p style="margin-top:16px;">${entry.text.replace(/\n/g, "<br/>")}</p>
+            ${
+              entry.images && entry.images.length
+                ? `<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;">${entry.images
+                    .map(
+                      (src) =>
+                        `<img src="${src}" style="max-width:240px;max-height:180px;border-radius:16px;border:1px solid #cbd5e1;object-fit:cover;" />`,
+                    )
+                    .join("")}</div>`
+                : ""
+            }
+          </div>
+        `;
+
+        if (navigator.clipboard && navigator.clipboard.write) {
+          try {
+            const clipboardItems = [
+              new ClipboardItem({
+                "text/plain": new Blob([plainText], { type: "text/plain" }),
+                "text/html": new Blob([htmlText], { type: "text/html" }),
+              }),
+            ];
+            if (entry.images && entry.images.length) {
+              entry.images.forEach((src) => {
+                const blob = dataURLtoBlob(src);
+                clipboardItems.push(
+                  new ClipboardItem({
+                    [blob.type]: blob,
+                  }),
+                );
+              });
+            }
+            await navigator.clipboard.write(clipboardItems);
+            alert(
+              "Reflection and images copied to clipboard. You can paste them into a compatible app.",
+            );
+            return;
+          } catch (error) {
+            // Fall back to text-only copy if HTML or image clipboard isn't supported.
+          }
+        }
+
+        navigator.clipboard
+          .writeText(plainText)
+          .then(() => {
+            alert(
+              "Reflection copied to clipboard. Share the text version. Image copy is not available in this browser.",
+            );
+          })
+          .catch(() => {
+            alert("Could not copy reflection. Please try again.");
+          });
+      }
+
+      window.onload = () => {
+        renderSidebar();
+        renderSelectedBook();
+        const selected = getSelectedBookId();
+        if (selected) selectBook(selected);
+      };
+    </script>
+  </body>
+</html>

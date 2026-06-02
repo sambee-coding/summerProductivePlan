@@ -1,184 +1,433 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🌊 Sambee's 30-Day Growth Sprint 🚀</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            background-color: #040f16; /* Deep sea blue base */
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-        .glass-card {
-            background: rgba(10, 25, 47, 0.75);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(45, 212, 191, 0.15); /* Soft aqua border */
-        }
-        .glow-aqua:checked {
-            filter: drop-shadow(0 0 8px #2dd4bf);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #2dd4bf;
-            border-radius: 10px;
-        }
+      body {
+        background-color: #040f16; /* Deep sea blue base */
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      .glass-card {
+        background: rgba(10, 25, 47, 0.75);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(45, 212, 191, 0.15); /* Soft aqua border */
+      }
+      .glow-aqua:checked {
+        filter: drop-shadow(0 0 8px #2dd4bf);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #2dd4bf;
+        border-radius: 10px;
+      }
     </style>
-</head>
-<body class="text-cyan-50 min-h-screen pb-16 selection:bg-teal-500 selection:text-white">
+  </head>
+  <body
+    class="text-cyan-50 min-h-screen pb-16 selection:bg-teal-500 selection:text-white"
+  >
+    <div
+      class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"
+    ></div>
+    <div
+      class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"
+    ></div>
 
-    <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <header
+      class="max-w-6xl mx-auto pt-8 px-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8"
+    >
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🌊</span>
+          <h1
+            class="text-3xl font-black tracking-wide bg-gradient-to-r from-teal-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent uppercase"
+          >
+            Sambee's 30-Day Growth Sprint
+          </h1>
+        </div>
+        <p
+          id="liveDateDisplay"
+          class="text-cyan-300 font-bold text-sm mt-1 bg-cyan-950/30 border border-cyan-500/10 px-3 py-1 rounded-lg inline-block shadow-sm"
+        >
+          Build. Learn. Communicate. Grow. 🚀
+        </p>
+      </div>
 
-    <header class="max-w-6xl mx-auto pt-8 px-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
-        <div>
-            <div class="flex items-center gap-2">
-                <span class="text-2xl">🌊</span>
-                <h1 class="text-3xl font-black tracking-wide bg-gradient-to-r from-teal-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent uppercase">
-                    Sambee's 30-Day Growth Sprint
-                </h1>
+      <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+        <div
+          class="glass-card rounded-2xl p-4 flex items-center gap-4 shadow-2xl border border-cyan-500/20 flex-1 min-w-[220px]"
+        >
+          <div class="relative w-16 h-16 flex items-center justify-center">
+            <svg class="w-full h-full transform -rotate-90">
+              <circle
+                cx="32"
+                cy="32"
+                r="28"
+                stroke="rgba(45,212,191,0.05)"
+                stroke-width="6"
+                fill="transparent"
+              />
+              <circle
+                id="progressCircle"
+                cx="32"
+                cy="32"
+                r="28"
+                stroke="#2dd4bf"
+                stroke-width="6"
+                fill="transparent"
+                stroke-dasharray="175"
+                stroke-dashoffset="175"
+                class="transition-all duration-500 ease-out"
+              />
+            </svg>
+            <span
+              id="progressText"
+              class="absolute text-sm font-black text-cyan-300"
+              >0%</span
+            >
+          </div>
+          <div>
+            <div
+              class="text-xs uppercase tracking-widest text-teal-400 font-bold"
+            >
+              Daily Progress
             </div>
-            <p id="liveDateDisplay" class="text-cyan-300 font-bold text-sm mt-1 bg-cyan-950/30 border border-cyan-500/10 px-3 py-1 rounded-lg inline-block shadow-sm">
-                Build. Learn. Communicate. Grow. 🚀
-            </p>
-        </div>
-        
-        <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-            <div class="glass-card rounded-2xl p-4 flex items-center gap-4 shadow-2xl border border-cyan-500/20 flex-1 min-w-[220px]">
-                <div class="relative w-16 h-16 flex items-center justify-center">
-                    <svg class="w-full h-full transform -rotate-90">
-                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
-                        <circle id="progressCircle" cx="32" cy="32" r="28" stroke="#2dd4bf" stroke-width="6" fill="transparent"
-                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
-                    </svg>
-                    <span id="progressText" class="absolute text-sm font-black text-cyan-300">0%</span>
-                </div>
-                <div>
-                    <div class="text-xs uppercase tracking-widest text-teal-400 font-bold">Daily Progress</div>
-                    <div id="progressStatus" class="text-sm font-medium text-cyan-100 mt-0.5">Let's create momentum! 💧</div>
-                </div>
+            <div
+              id="progressStatus"
+              class="text-sm font-medium text-cyan-100 mt-0.5"
+            >
+              Let's create momentum! 💧
             </div>
-            <div class="glass-card rounded-2xl p-4 flex items-center gap-4 shadow-2xl border border-cyan-500/20 min-w-[220px]">
-                <div class="relative w-16 h-16 flex items-center justify-center">
-                    <svg class="w-full h-full transform -rotate-90">
-                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
-                        <circle id="monthlyProgressCircle" cx="32" cy="32" r="28" stroke="#60a5fa" stroke-width="6" fill="transparent"
-                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
-                    </svg>
-                    <span id="monthlyProgressText" class="absolute text-sm font-black text-sky-300">0%</span>
-                </div>
-                <div>
-                    <div class="text-xs uppercase tracking-widest text-sky-400 font-bold">Month Progress</div>
-                    <div id="monthlyProgressStatus" class="text-sm font-medium text-cyan-100 mt-0.5">Track the whole sprint.</div>
-                </div>
+          </div>
+        </div>
+        <div
+          class="glass-card rounded-2xl p-4 flex items-center gap-4 shadow-2xl border border-cyan-500/20 min-w-[220px]"
+        >
+          <div class="relative w-16 h-16 flex items-center justify-center">
+            <svg class="w-full h-full transform -rotate-90">
+              <circle
+                cx="32"
+                cy="32"
+                r="28"
+                stroke="rgba(45,212,191,0.05)"
+                stroke-width="6"
+                fill="transparent"
+              />
+              <circle
+                id="monthlyProgressCircle"
+                cx="32"
+                cy="32"
+                r="28"
+                stroke="#60a5fa"
+                stroke-width="6"
+                fill="transparent"
+                stroke-dasharray="175"
+                stroke-dashoffset="175"
+                class="transition-all duration-500 ease-out"
+              />
+            </svg>
+            <span
+              id="monthlyProgressText"
+              class="absolute text-sm font-black text-sky-300"
+              >0%</span
+            >
+          </div>
+          <div>
+            <div
+              class="text-xs uppercase tracking-widest text-sky-400 font-bold"
+            >
+              Month Progress
             </div>
+            <div
+              id="monthlyProgressStatus"
+              class="text-sm font-medium text-cyan-100 mt-0.5"
+            >
+              Track the whole sprint.
+            </div>
+          </div>
         </div>
-        <div class="mt-6 flex justify-end px-4 md:px-0">
-            <a href="days.html" class="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-cyan-100 hover:bg-cyan-500/20 transition">Days</a>
-        </div>
+      </div>
+      <div class="mt-6 flex flex-wrap justify-end gap-3 px-4 md:px-0">
+        <a
+          href="days.html"
+          class="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-cyan-100 hover:bg-cyan-500/20 transition"
+          >Days</a
+        >
+        <a
+          href="books.html"
+          class="rounded-full border border-sky-500/40 bg-sky-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-sky-100 hover:bg-sky-500/20 transition"
+          >Books</a
+        >
+      </div>
     </header>
 
     <main class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-1 space-y-6">
-            <section class="glass-card rounded-3xl p-6 shadow-xl border-t-4 border-teal-500">
-                <h2 class="text-lg font-bold text-cyan-200 flex items-center gap-2 mb-4">
-                    <span>🔥</span> Daily Non-Negotiables
-                </h2>
-                <div class="space-y-3.5" id="nonNegotiablesList">
-                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
-                        <input type="checkbox" id="habit-prayer" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
-                        <span class="text-sm text-cyan-100/90">Prayer</span>
-                    </label>
-                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
-                        <input type="checkbox" id="habit-workout" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
-                        <span class="text-sm text-cyan-100/90">Workout <span class="text-xs text-cyan-400/60 block">(30–60 min)</span></span>
-                    </label>
-                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
-                        <input type="checkbox" id="habit-read" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
-                        <span class="text-sm text-cyan-100/90">Read 10+ pages</span>
-                    </label>
-                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
-                        <input type="checkbox" id="habit-social" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
-                        <span class="text-sm text-cyan-100/90">Limit social media</span>
-                    </label>
-                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
-                        <input type="checkbox" id="habit-journal" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
-                        <span class="text-sm text-cyan-100/90">Journal <span class="text-xs text-cyan-400/60 block">(5–10 min)</span></span>
-                    </label>
-                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
-                        <input type="checkbox" id="habit-english" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
-                        <span class="text-sm text-cyan-100/90">Speak English <span class="text-xs text-cyan-400/60 block">(15–20 min)</span></span>
-                    </label>
-                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
-                        <input type="checkbox" id="habit-korean" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
-                        <span class="text-sm text-cyan-100/90">Korean practice <span class="text-xs text-cyan-400/60 block">(15–20 min)</span></span>
-                    </label>
-                    <label class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer">
-                        <input type="checkbox" id="habit-dsa" onchange="updateProgress()" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
-                        <span class="text-sm text-cyan-100/90">Solve 1 DSA Problem <span class="text-xs text-cyan-400/60 block">(20–30 min)</span></span>
-                    </label>
-                </div>
-            </section>
+      <div class="lg:col-span-1 space-y-6">
+        <section
+          class="glass-card rounded-3xl p-6 shadow-xl border-t-4 border-teal-500"
+        >
+          <h2
+            class="text-lg font-bold text-cyan-200 flex items-center gap-2 mb-4"
+          >
+            <span>🔥</span> Daily Non-Negotiables
+          </h2>
+          <div class="space-y-3.5" id="nonNegotiablesList">
+            <label
+              class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                id="habit-prayer"
+                onchange="updateProgress()"
+                class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"
+              />
+              <span class="text-sm text-cyan-100/90">Prayer</span>
+            </label>
+            <label
+              class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                id="habit-workout"
+                onchange="updateProgress()"
+                class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"
+              />
+              <span class="text-sm text-cyan-100/90"
+                >Workout
+                <span class="text-xs text-cyan-400/60 block"
+                  >(30–60 min)</span
+                ></span
+              >
+            </label>
+            <label
+              class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                id="habit-read"
+                onchange="updateProgress()"
+                class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"
+              />
+              <span class="text-sm text-cyan-100/90">Read 10+ pages</span>
+            </label>
+            <label
+              class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                id="habit-social"
+                onchange="updateProgress()"
+                class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"
+              />
+              <span class="text-sm text-cyan-100/90">Limit social media</span>
+            </label>
+            <label
+              class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                id="habit-journal"
+                onchange="updateProgress()"
+                class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"
+              />
+              <span class="text-sm text-cyan-100/90"
+                >Journal
+                <span class="text-xs text-cyan-400/60 block"
+                  >(5–10 min)</span
+                ></span
+              >
+            </label>
+            <label
+              class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                id="habit-english"
+                onchange="updateProgress()"
+                class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"
+              />
+              <span class="text-sm text-cyan-100/90"
+                >Speak English
+                <span class="text-xs text-cyan-400/60 block"
+                  >(15–20 min)</span
+                ></span
+              >
+            </label>
+            <label
+              class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                id="habit-korean"
+                onchange="updateProgress()"
+                class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"
+              />
+              <span class="text-sm text-cyan-100/90"
+                >Korean practice
+                <span class="text-xs text-cyan-400/60 block"
+                  >(15–20 min)</span
+                ></span
+              >
+            </label>
+            <label
+              class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-teal-950/20 transition cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                id="habit-dsa"
+                onchange="updateProgress()"
+                class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4"
+              />
+              <span class="text-sm text-cyan-100/90"
+                >Solve 1 DSA Problem
+                <span class="text-xs text-cyan-400/60 block"
+                  >(20–30 min)</span
+                ></span
+              >
+            </label>
+          </div>
+        </section>
 
-            <section class="glass-card rounded-3xl p-6 shadow-xl border border-blue-500/20">
-                <h2 class="text-lg font-bold text-sky-300 flex items-center gap-2 mb-2">
-                    <span>🌍</span> Daily Log Stream
-                </h2>
-                <div class="space-y-3">
-                    <textarea id="progressLogInput" rows="3" class="w-full text-sm bg-blue-950/50 border border-blue-500/20 rounded-xl p-3 focus:outline-none focus:border-teal-500 text-cyan-100 placeholder-cyan-300/30" placeholder="Log your achievements today... 💧"></textarea>
-                    <button onclick="saveLogToCloud()" id="syncBtn" class="w-full py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 transition-all text-sm font-bold text-white rounded-xl shadow-lg">
-                        Save Log
-                    </button>
-                </div>
-                <div id="logFeed" class="mt-4 max-h-40 overflow-y-auto custom-scrollbar space-y-2 pt-2 border-t border-blue-900/40">
-                </div>
-                <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10 mt-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h4 class="text-lg font-bold text-cyan-200">June 30 Secret Letter</h4>
-                    </div>
-                    <p id="ventPrompt" class="text-sm text-cyan-100/80 mb-4">Type your secret vent here. The content will stay hidden until June 30.</p>
-                    <textarea id="ventTextarea" rows="6" placeholder="Write your hidden letter here..." class="w-full resize-none rounded-3xl bg-blue-950/60 border border-blue-500/20 px-4 py-3 text-sm text-cyan-100 focus:outline-none focus:border-teal-400"></textarea>
-                    <div class="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                        <button type="button" onclick="storeVentEntry()" class="w-full sm:w-auto px-4 py-2 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-xs font-bold uppercase tracking-wide text-slate-950">Store vent</button>
-                        <span id="ventCount" class="text-xs text-cyan-300/70">No stored vents yet.</span>
-                    </div>
-                    <p id="ventUnlockHint" class="mt-3 text-xs text-cyan-300/70">Your words are stored safely and revealed only on June 30.</p>
-                    <div id="ventHistory" class="mt-4 space-y-3"></div>
-                </div>
-            </section>
+        <section
+          class="glass-card rounded-3xl p-6 shadow-xl border border-blue-500/20"
+        >
+          <h2
+            class="text-lg font-bold text-sky-300 flex items-center gap-2 mb-2"
+          >
+            <span>🌍</span> Daily Log Stream
+          </h2>
+          <div class="space-y-3">
+            <textarea
+              id="progressLogInput"
+              rows="3"
+              class="w-full text-sm bg-blue-950/50 border border-blue-500/20 rounded-xl p-3 focus:outline-none focus:border-teal-500 text-cyan-100 placeholder-cyan-300/30"
+              placeholder="Log your achievements today... 💧"
+            ></textarea>
+            <button
+              onclick="saveLogToCloud()"
+              id="syncBtn"
+              class="w-full py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 transition-all text-sm font-bold text-white rounded-xl shadow-lg"
+            >
+              Save Log
+            </button>
+          </div>
+          <div
+            id="logFeed"
+            class="mt-4 max-h-40 overflow-y-auto custom-scrollbar space-y-2 pt-2 border-t border-blue-900/40"
+          ></div>
+          <div
+            class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10 mt-6"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="text-lg font-bold text-cyan-200">
+                June 30 Secret Letter
+              </h4>
+            </div>
+            <p id="ventPrompt" class="text-sm text-cyan-100/80 mb-4">
+              Type your secret vent here. The content will stay hidden until
+              June 30.
+            </p>
+            <textarea
+              id="ventTextarea"
+              rows="6"
+              placeholder="Write your hidden letter here..."
+              class="w-full resize-none rounded-3xl bg-blue-950/60 border border-blue-500/20 px-4 py-3 text-sm text-cyan-100 focus:outline-none focus:border-teal-400"
+            ></textarea>
+            <div
+              class="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+            >
+              <button
+                type="button"
+                onclick="storeVentEntry()"
+                class="w-full sm:w-auto px-4 py-2 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-xs font-bold uppercase tracking-wide text-slate-950"
+              >
+                Store vent
+              </button>
+              <span id="ventCount" class="text-xs text-cyan-300/70"
+                >No stored vents yet.</span
+              >
+            </div>
+            <p id="ventUnlockHint" class="mt-3 text-xs text-cyan-300/70">
+              Your words are stored safely and revealed only on June 30.
+            </p>
+            <div id="ventHistory" class="mt-4 space-y-3"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="lg:col-span-2 space-y-6">
+        <div
+          class="flex flex-wrap gap-2 bg-blue-950/40 p-2 rounded-2xl border border-blue-900/50"
+        >
+          <button
+            onclick="switchTab('week1')"
+            id="tab-week1"
+            class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all"
+          >
+            WEEK 1
+          </button>
+          <button
+            onclick="switchTab('week2')"
+            id="tab-week2"
+            class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all"
+          >
+            WEEK 2
+          </button>
+          <button
+            onclick="switchTab('week3')"
+            id="tab-week3"
+            class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all"
+          >
+            WEEK 3
+          </button>
+          <button
+            onclick="switchTab('week4')"
+            id="tab-week4"
+            class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all"
+          >
+            WEEK 4
+          </button>
+          <button
+            onclick="switchTab('daily')"
+            id="tab-daily"
+            class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all"
+          >
+            DAILY SCHEDULE
+          </button>
         </div>
 
-        <div class="lg:col-span-2 space-y-6">
-            <div class="flex flex-wrap gap-2 bg-blue-950/40 p-2 rounded-2xl border border-blue-900/50">
-                <button onclick="switchTab('week1')" id="tab-week1" class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all">WEEK 1</button>
-                <button onclick="switchTab('week2')" id="tab-week2" class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all">WEEK 2</button>
-                <button onclick="switchTab('week3')" id="tab-week3" class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all">WEEK 3</button>
-                <button onclick="switchTab('week4')" id="tab-week4" class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all">WEEK 4</button>
-                <button onclick="switchTab('daily')" id="tab-daily" class="day-tab flex-1 min-w-[80px] text-center py-2.5 text-xs font-black tracking-widest rounded-xl transition-all">DAILY SCHEDULE</button>
-            </div>
-
-            <div class="glass-card rounded-3xl p-6 shadow-2xl relative border border-teal-500/10">
-                <div class="mb-4">
-                    <span id="currentTabSubtitle" class="text-xs uppercase tracking-widest font-black text-teal-400 block mb-1">Growth Sprint Focus</span>
-                    <h3 id="currentTabTitle" class="text-2xl font-black text-white">Focus Space</h3>
-                </div>
-                <hr class="border-blue-950 my-4">
-                <div class="space-y-6" id="tabContentArea">
-                    <!-- Dynamic content injected here -->
-                </div>
-            </div>
+        <div
+          class="glass-card rounded-3xl p-6 shadow-2xl relative border border-teal-500/10"
+        >
+          <div class="mb-4">
+            <span
+              id="currentTabSubtitle"
+              class="text-xs uppercase tracking-widest font-black text-teal-400 block mb-1"
+              >Growth Sprint Focus</span
+            >
+            <h3 id="currentTabTitle" class="text-2xl font-black text-white">
+              Focus Space
+            </h3>
+          </div>
+          <hr class="border-blue-950 my-4" />
+          <div class="space-y-6" id="tabContentArea">
+            <!-- Dynamic content injected here -->
+          </div>
         </div>
+      </div>
     </main>
 
     <script>
-        const scheduleData = {
-            week1: {
-                subtitle: "Theme: Frontend Excellence",
-                title: "Week 1 // MVP #1 with Next.js + Tailwind",
-                content: `
+      const scheduleData = {
+        week1: {
+          subtitle: "Theme: Frontend Excellence",
+          title: "Week 1 // MVP #1 with Next.js + Tailwind",
+          content: `
                     <div class="space-y-4">
                         <div class="p-4 bg-teal-950/30 rounded-xl border border-teal-500/20">
                             <h4 class="text-sm font-bold text-cyan-300 mb-2">Goals & Milestones</h4>
@@ -241,12 +490,12 @@
                         </div>
                         <div id="weekChecklistArea" class="space-y-3"></div>
                     </div>
-                `
-            },
-            week2: {
-                subtitle: "Theme: Backend Fundamentals",
-                title: "Week 2 // Build MVP #2",
-                content: `
+                `,
+        },
+        week2: {
+          subtitle: "Theme: Backend Fundamentals",
+          title: "Week 2 // Build MVP #2",
+          content: `
                     <div class="space-y-4">
                         <div class="p-4 bg-teal-950/30 rounded-xl border border-teal-500/20">
                             <h4 class="text-sm font-bold text-cyan-300 mb-2">Goals & Focus</h4>
@@ -298,12 +547,12 @@
                         </div>
                         <div id="weekChecklistArea" class="space-y-3"></div>
                     </div>
-                `
-            },
-            week3: {
-                subtitle: "Theme: Full-Stack Integration",
-                title: "Week 3 // Build MVP #3",
-                content: `
+                `,
+        },
+        week3: {
+          subtitle: "Theme: Full-Stack Integration",
+          title: "Week 3 // Build MVP #3",
+          content: `
                     <div class="space-y-4">
                         <div class="p-4 bg-teal-950/30 rounded-xl border border-teal-500/20">
                             <h4 class="text-sm font-bold text-cyan-300 mb-2">Goals & Focus</h4>
@@ -352,12 +601,12 @@
                         </div>
                         <div id="weekChecklistArea" class="space-y-3"></div>
                     </div>
-                `
-            },
-            week4: {
-                subtitle: "Theme: Portfolio & Product Thinking",
-                title: "Week 4 // Build MVP #4",
-                content: `
+                `,
+        },
+        week4: {
+          subtitle: "Theme: Portfolio & Product Thinking",
+          title: "Week 4 // Build MVP #4",
+          content: `
                     <div class="space-y-4">
                         <div class="p-4 bg-teal-950/30 rounded-xl border border-teal-500/20">
                             <h4 class="text-sm font-bold text-cyan-300 mb-2">Goals & Focus</h4>
@@ -406,12 +655,12 @@
                         </div>
                         <div id="weekChecklistArea" class="space-y-3"></div>
                     </div>
-                `
-            },
-            daily: {
-                subtitle: "Time & Weekly Focus Structure",
-                title: "Daily Time Template",
-                content: `
+                `,
+        },
+        daily: {
+          subtitle: "Time & Weekly Focus Structure",
+          title: "Daily Time Template",
+          content: `
                     <div class="space-y-4">
                         <div class="p-4 bg-teal-950/30 rounded-xl border border-teal-500/20">
                             <h4 class="text-sm font-bold text-cyan-300 mb-2">Weekly Focus Structure</h4>
@@ -508,115 +757,117 @@
                         </div>
                         <div id="dailyTodosList" class="space-y-2"></div>
                     </div>
-                `
-            }
-        };
+                `,
+        },
+      };
 
-        const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-        const weekChecklistDefaults = {
-            week1: [
-                'Set up project scaffold',
-                'Build the homepage section',
-                'Style with Tailwind',
-                'Add interactivity and controls',
-                'Publish on Vercel',
-                'Review your week',
-                'Plan next week'
-            ],
-            week2: [
-                'Design backend routes',
-                'Build API endpoints',
-                'Connect to database',
-                'Test data flows',
-                'Deploy backend',
-                'Reflect on learnings',
-                'Prepare next milestones'
-            ],
-            week3: [
-                'Add authentication',
-                'Create protected routes',
-                'Connect frontend + backend',
-                'Polish user experience',
-                'Test end-to-end',
-                'Review your app',
-                'Plan final polish'
-            ],
-            week4: [
-                'Build portfolio pages',
-                'Polish UI and copy',
-                'Add demo screenshots',
-                'Write project summary',
-                'Deploy portfolio',
-                'Share with others',
-                'Reflect and celebrate'
-            ]
-        };
+      const weekChecklistDefaults = {
+        week1: [
+          "Set up project scaffold",
+          "Build the homepage section",
+          "Style with Tailwind",
+          "Add interactivity and controls",
+          "Publish on Vercel",
+          "Review your week",
+          "Plan next week",
+        ],
+        week2: [
+          "Design backend routes",
+          "Build API endpoints",
+          "Connect to database",
+          "Test data flows",
+          "Deploy backend",
+          "Reflect on learnings",
+          "Prepare next milestones",
+        ],
+        week3: [
+          "Add authentication",
+          "Create protected routes",
+          "Connect frontend + backend",
+          "Polish user experience",
+          "Test end-to-end",
+          "Review your app",
+          "Plan final polish",
+        ],
+        week4: [
+          "Build portfolio pages",
+          "Polish UI and copy",
+          "Add demo screenshots",
+          "Write project summary",
+          "Deploy portfolio",
+          "Share with others",
+          "Reflect and celebrate",
+        ],
+      };
 
-        const weekDailySchedules = {
-            week1: [
-                'Finalize project setup',
-                'Code review & testing',
-                'Documentation time',
-                'Deploy to staging',
-                'Gather feedback',
-                'Final polish',
-                'Relaxation time',
-                'Team standup',
-                'Sprint planning',
-                'Code refactoring',
-                'Reflection'
-            ],
-            week2: [
-                'API endpoint review',
-                'Database optimization',
-                'Integration testing',
-                'Error handling',
-                'Performance tuning',
-                'Documentation',
-                'Reflection',
-                'Database backup',
-                'API documentation',
-                'Load testing',
-                'Security audit'
-            ],
-            week3: [
-                'Authentication setup',
-                'Route protection',
-                'Frontend integration',
-                'End-to-end tests',
-                'Security review',
-                'Deployment prep',
-                'Team feedback',
-                'Feature polishing',
-                'Bug fixes',
-                'Performance optimization',
-                'Final testing'
-            ],
-            week4: [
-                'Portfolio refinement',
-                'Demo recording',
-                'Case study writing',
-                'Code cleanup',
-                'Final deployment',
-                'Presentation prep',
-                'Celebration time',
-                'Portfolio review',
-                'Resume update',
-                'LinkedIn post',
-                'Share achievements'
-            ]
-        };
+      const weekDailySchedules = {
+        week1: [
+          "Finalize project setup",
+          "Code review & testing",
+          "Documentation time",
+          "Deploy to staging",
+          "Gather feedback",
+          "Final polish",
+          "Relaxation time",
+          "Team standup",
+          "Sprint planning",
+          "Code refactoring",
+          "Reflection",
+        ],
+        week2: [
+          "API endpoint review",
+          "Database optimization",
+          "Integration testing",
+          "Error handling",
+          "Performance tuning",
+          "Documentation",
+          "Reflection",
+          "Database backup",
+          "API documentation",
+          "Load testing",
+          "Security audit",
+        ],
+        week3: [
+          "Authentication setup",
+          "Route protection",
+          "Frontend integration",
+          "End-to-end tests",
+          "Security review",
+          "Deployment prep",
+          "Team feedback",
+          "Feature polishing",
+          "Bug fixes",
+          "Performance optimization",
+          "Final testing",
+        ],
+        week4: [
+          "Portfolio refinement",
+          "Demo recording",
+          "Case study writing",
+          "Code cleanup",
+          "Final deployment",
+          "Presentation prep",
+          "Celebration time",
+          "Portfolio review",
+          "Resume update",
+          "LinkedIn post",
+          "Share achievements",
+        ],
+      };
 
-        function renderWeekChecklist(weekKey) {
-            const checklistContainer = document.getElementById('weekChecklistArea');
-            if (!checklistContainer) return;
+      function renderWeekChecklist(weekKey) {
+        const checklistContainer = document.getElementById("weekChecklistArea");
+        if (!checklistContainer) return;
 
-            const defaults = weekChecklistDefaults[weekKey] || weekChecklistDefaults.week1;
-            checklistContainer.innerHTML = weekDays.map((day, index) => {
-                const defaultText = defaults[index] || `Plan ${day}`;
-                const safeText = defaultText.replace(/"/g, '&quot;');
-                return `
+        const defaults =
+          weekChecklistDefaults[weekKey] || weekChecklistDefaults.week1;
+        checklistContainer.innerHTML = weekDays
+          .map((day, index) => {
+            const defaultText = defaults[index] || `Plan ${day}`;
+            const safeText = defaultText.replace(/"/g, "&quot;");
+            return `
                     <label class="grid grid-cols-[auto_1fr] gap-3 items-start p-3 rounded-2xl bg-blue-950/30 border border-blue-500/20">
                         <input type="checkbox" id="${weekKey}-day-${index}" onchange="saveWeekDayState('${weekKey}', ${index})" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
                         <div class="space-y-2">
@@ -628,461 +879,626 @@
                         </div>
                     </label>
                 `;
-            }).join('');
+          })
+          .join("");
 
-            weekDays.forEach((_, index) => loadWeekChecklistState(weekKey, index));
+        weekDays.forEach((_, index) => loadWeekChecklistState(weekKey, index));
+      }
+
+      function saveWeekDayState(weekKey, index) {
+        const checkbox = document.getElementById(`${weekKey}-day-${index}`);
+        const taskInput = document.getElementById(`${weekKey}-task-${index}`);
+        if (!checkbox || !taskInput) return;
+        localStorage.setItem(
+          `${weekKey}_day_${index}_checked`,
+          checkbox.checked,
+        );
+        localStorage.setItem(
+          `${weekKey}_day_${index}_text`,
+          taskInput.value.trim(),
+        );
+        updateAllProgress();
+      }
+
+      function loadWeekChecklistState(weekKey, index) {
+        const checkbox = document.getElementById(`${weekKey}-day-${index}`);
+        const taskInput = document.getElementById(`${weekKey}-task-${index}`);
+        if (!checkbox || !taskInput) return;
+        const checked = localStorage.getItem(`${weekKey}_day_${index}_checked`);
+        const text = localStorage.getItem(`${weekKey}_day_${index}_text`);
+        if (checked !== null) checkbox.checked = checked === "true";
+        if (text !== null) taskInput.value = text;
+      }
+
+      function resetWeekChecklistDay(weekKey, index) {
+        const checkbox = document.getElementById(`${weekKey}-day-${index}`);
+        const taskInput = document.getElementById(`${weekKey}-task-${index}`);
+        if (!checkbox || !taskInput) return;
+        checkbox.checked = false;
+        taskInput.value = "";
+        localStorage.removeItem(`${weekKey}_day_${index}_checked`);
+        localStorage.removeItem(`${weekKey}_day_${index}_text`);
+      }
+
+      function resetWeekChecklist(weekKey) {
+        weekDays.forEach((_, index) => resetWeekChecklistDay(weekKey, index));
+        updateAllProgress();
+      }
+
+      const dailyScheduleCount = 11;
+
+      function saveDailyScheduleState(index) {
+        const checkbox = document.getElementById(`daily-item-${index}`);
+        if (!checkbox) return;
+        localStorage.setItem(
+          `daily_schedule_item_${index}_checked`,
+          checkbox.checked,
+        );
+        updateAllProgress();
+      }
+
+      function loadDailyScheduleState(index) {
+        const checkbox = document.getElementById(`daily-item-${index}`);
+        if (!checkbox) return;
+        const checked = localStorage.getItem(
+          `daily_schedule_item_${index}_checked`,
+        );
+        if (checked !== null) checkbox.checked = checked === "true";
+      }
+
+      function renderDailyScheduleState() {
+        for (let i = 0; i < dailyScheduleCount; i++) {
+          loadDailyScheduleState(i);
         }
+      }
 
-        function saveWeekDayState(weekKey, index) {
-            const checkbox = document.getElementById(`${weekKey}-day-${index}`);
-            const taskInput = document.getElementById(`${weekKey}-task-${index}`);
-            if (!checkbox || !taskInput) return;
-            localStorage.setItem(`${weekKey}_day_${index}_checked`, checkbox.checked);
-            localStorage.setItem(`${weekKey}_day_${index}_text`, taskInput.value.trim());
-            updateAllProgress();
+      function resetDailyScheduleChecklist() {
+        for (let i = 0; i < dailyScheduleCount; i++) {
+          const checkbox = document.getElementById(`daily-item-${i}`);
+          if (!checkbox) continue;
+          checkbox.checked = false;
+          localStorage.removeItem(`daily_schedule_item_${i}_checked`);
         }
+        updateAllProgress();
+      }
 
-        function loadWeekChecklistState(weekKey, index) {
-            const checkbox = document.getElementById(`${weekKey}-day-${index}`);
-            const taskInput = document.getElementById(`${weekKey}-task-${index}`);
-            if (!checkbox || !taskInput) return;
-            const checked = localStorage.getItem(`${weekKey}_day_${index}_checked`);
-            const text = localStorage.getItem(`${weekKey}_day_${index}_text`);
-            if (checked !== null) checkbox.checked = checked === 'true';
-            if (text !== null) taskInput.value = text;
-        }
+      function setProgressCircle(circleId, textId, percent) {
+        const circle = document.getElementById(circleId);
+        const text = document.getElementById(textId);
+        if (!circle || !text) return;
+        const total = 2 * Math.PI * 28;
+        const offset = total - (percent / 100) * total;
+        circle.style.strokeDashoffset = offset;
+        text.innerText = `${percent}%`;
+      }
 
-        function resetWeekChecklistDay(weekKey, index) {
-            const checkbox = document.getElementById(`${weekKey}-day-${index}`);
-            const taskInput = document.getElementById(`${weekKey}-task-${index}`);
-            if (!checkbox || !taskInput) return;
-            checkbox.checked = false;
-            taskInput.value = '';
-            localStorage.removeItem(`${weekKey}_day_${index}_checked`);
-            localStorage.removeItem(`${weekKey}_day_${index}_text`);
-        }
-
-        function resetWeekChecklist(weekKey) {
-            weekDays.forEach((_, index) => resetWeekChecklistDay(weekKey, index));
-            updateAllProgress();
-        }
-
-        const dailyScheduleCount = 11;
-
-        function saveDailyScheduleState(index) {
-            const checkbox = document.getElementById(`daily-item-${index}`);
-            if (!checkbox) return;
-            localStorage.setItem(`daily_schedule_item_${index}_checked`, checkbox.checked);
-            updateAllProgress();
-        }
-
-        function loadDailyScheduleState(index) {
-            const checkbox = document.getElementById(`daily-item-${index}`);
-            if (!checkbox) return;
-            const checked = localStorage.getItem(`daily_schedule_item_${index}_checked`);
-            if (checked !== null) checkbox.checked = checked === 'true';
-        }
-
-        function renderDailyScheduleState() {
-            for (let i = 0; i < dailyScheduleCount; i++) {
-                loadDailyScheduleState(i);
-            }
-        }
-
-        function resetDailyScheduleChecklist() {
-            for (let i = 0; i < dailyScheduleCount; i++) {
-                const checkbox = document.getElementById(`daily-item-${i}`);
-                if (!checkbox) continue;
-                checkbox.checked = false;
-                localStorage.removeItem(`daily_schedule_item_${i}_checked`);
-            }
-            updateAllProgress();
-        }
-
-        function setProgressCircle(circleId, textId, percent) {
-            const circle = document.getElementById(circleId);
-            const text = document.getElementById(textId);
-            if (!circle || !text) return;
-            const total = 2 * Math.PI * 28;
-            const offset = total - (percent / 100) * total;
-            circle.style.strokeDashoffset = offset;
-            text.innerText = `${percent}%`;
-        }
-
-        function renderWeekDailySchedule(weekKey) {
-            const container = document.getElementById(`${weekKey}DailySchedule`);
-            if (!container) return;
-            const tasks = weekDailySchedules[weekKey] || [];
-            container.innerHTML = tasks.map((task, index) => `
+      function renderWeekDailySchedule(weekKey) {
+        const container = document.getElementById(`${weekKey}DailySchedule`);
+        if (!container) return;
+        const tasks = weekDailySchedules[weekKey] || [];
+        container.innerHTML = tasks
+          .map(
+            (task, index) => `
                 <label class="flex items-start gap-3 p-2.5 rounded-xl bg-blue-950/30 border border-blue-500/20 hover:bg-blue-950/50 transition cursor-pointer">
                     <input type="checkbox" id="${weekKey}-daily-schedule-${index}" onchange="saveWeekDailyScheduleState('${weekKey}', ${index})" class="glow-aqua mt-1 rounded-md border-cyan-800 bg-blue-950 text-teal-500 h-4 w-4">
                     <span class="text-sm text-cyan-100/90">${task}</span>
                 </label>
-            `).join('');
-            for (let i = 0; i < tasks.length; i++) {
-                loadWeekDailyScheduleState(weekKey, i);
-            }
+            `,
+          )
+          .join("");
+        for (let i = 0; i < tasks.length; i++) {
+          loadWeekDailyScheduleState(weekKey, i);
         }
+      }
 
-        // Daily todos (per-day) — stored with date key YYYY-MM-DD
-        function getTodayKey() {
-            return new Date().toISOString().slice(0,10);
+      // Daily todos (per-day) — stored with date key YYYY-MM-DD
+      function getTodayKey() {
+        return new Date().toISOString().slice(0, 10);
+      }
+
+      function getDailyTodosKey(key) {
+        return `daily_todos_${key}`;
+      }
+
+      function loadDailyTodosForKey(key) {
+        try {
+          return JSON.parse(
+            localStorage.getItem(getDailyTodosKey(key)) || "[]",
+          );
+        } catch (e) {
+          return [];
         }
+      }
 
-        function getDailyTodosKey(key) {
-            return `daily_todos_${key}`;
+      function saveDailyTodosForKey(key, todos) {
+        localStorage.setItem(getDailyTodosKey(key), JSON.stringify(todos));
+      }
+
+      function renderDailyTodos() {
+        const key = getTodayKey();
+        const list = document.getElementById("dailyTodosList");
+        if (!list) return;
+        const todos = loadDailyTodosForKey(key);
+        if (todos.length === 0) {
+          list.innerHTML = `<p class="text-xs text-cyan-300/60 italic">No todos for today. Add one!</p>`;
+          return;
         }
-
-        function loadDailyTodosForKey(key) {
-            try {
-                return JSON.parse(localStorage.getItem(getDailyTodosKey(key)) || '[]');
-            } catch (e) { return []; }
-        }
-
-        function saveDailyTodosForKey(key, todos) {
-            localStorage.setItem(getDailyTodosKey(key), JSON.stringify(todos));
-        }
-
-        function renderDailyTodos() {
-            const key = getTodayKey();
-            const list = document.getElementById('dailyTodosList');
-            if (!list) return;
-            const todos = loadDailyTodosForKey(key);
-            if (todos.length === 0) {
-                list.innerHTML = `<p class="text-xs text-cyan-300/60 italic">No todos for today. Add one!</p>`;
-                return;
-            }
-            list.innerHTML = todos.map((t, i) => `
+        list.innerHTML = todos
+          .map(
+            (t, i) => `
                 <div class="flex items-center gap-3 p-2 rounded-xl bg-blue-950/30 border border-blue-900/30">
-                    <input type="checkbox" id="daily-todo-${i}" ${t.done ? 'checked' : ''} onchange="toggleDailyTodo(${i})" class="glow-aqua h-4 w-4">
-                    <div class="flex-1 text-sm ${t.done ? 'line-through text-cyan-400/60' : 'text-cyan-100/90'}">${t.text}</div>
+                    <input type="checkbox" id="daily-todo-${i}" ${t.done ? "checked" : ""} onchange="toggleDailyTodo(${i})" class="glow-aqua h-4 w-4">
+                    <div class="flex-1 text-sm ${t.done ? "line-through text-cyan-400/60" : "text-cyan-100/90"}">${t.text}</div>
                     <button onclick="removeDailyTodo(${i})" class="text-xs text-rose-400 hover:text-rose-300">Remove</button>
                 </div>
-            `).join('');
+            `,
+          )
+          .join("");
+      }
+
+      function addDailyTodo() {
+        const input = document.getElementById("dailyTodoInput");
+        if (!input) return;
+        const text = input.value.trim();
+        if (!text) return;
+        const key = getTodayKey();
+        const todos = loadDailyTodosForKey(key);
+        todos.push({
+          text,
+          done: false,
+          time: new Date().toLocaleTimeString(),
+        });
+        saveDailyTodosForKey(key, todos);
+        input.value = "";
+        renderDailyTodos();
+        updateAllProgress();
+      }
+
+      function toggleDailyTodo(index) {
+        const key = getTodayKey();
+        const todos = loadDailyTodosForKey(key);
+        if (!todos[index]) return;
+        todos[index].done = !todos[index].done;
+        saveDailyTodosForKey(key, todos);
+        renderDailyTodos();
+        updateAllProgress();
+      }
+
+      function removeDailyTodo(index) {
+        const key = getTodayKey();
+        const todos = loadDailyTodosForKey(key);
+        todos.splice(index, 1);
+        saveDailyTodosForKey(key, todos);
+        renderDailyTodos();
+        updateAllProgress();
+      }
+
+      function saveWeekDailyScheduleState(weekKey, index) {
+        const checkbox = document.getElementById(
+          `${weekKey}-daily-schedule-${index}`,
+        );
+        if (!checkbox) return;
+        localStorage.setItem(
+          `${weekKey}_daily_schedule_${index}_checked`,
+          checkbox.checked,
+        );
+        updateAllProgress();
+      }
+
+      function loadWeekDailyScheduleState(weekKey, index) {
+        const checkbox = document.getElementById(
+          `${weekKey}-daily-schedule-${index}`,
+        );
+        if (!checkbox) return;
+        const checked = localStorage.getItem(
+          `${weekKey}_daily_schedule_${index}_checked`,
+        );
+        if (checked !== null) checkbox.checked = checked === "true";
+      }
+
+      function updateNonNegotiablesProgress() {
+        const checkboxes = Array.from(
+          document.querySelectorAll(
+            '#nonNegotiablesList input[type="checkbox"]',
+          ),
+        );
+        const checkedCount = checkboxes.filter((cb) => cb.checked).length;
+        const percentage =
+          checkboxes.length > 0
+            ? Math.round((checkedCount / checkboxes.length) * 100)
+            : 0;
+        setProgressCircle("progressCircle", "progressText", percentage);
+        const status = document.getElementById("progressStatus");
+        if (status)
+          status.innerText =
+            percentage === 100
+              ? "All done — keep the streak!"
+              : "Let's create momentum! 💧";
+      }
+
+      function updateDailyScheduleProgress() {
+        let checkedCount = 0;
+        for (let i = 0; i < dailyScheduleCount; i++) {
+          const checkbox = document.getElementById(`daily-item-${i}`);
+          if (checkbox && checkbox.checked) checkedCount += 1;
         }
 
-        function addDailyTodo() {
-            const input = document.getElementById('dailyTodoInput');
-            if (!input) return;
-            const text = input.value.trim();
-            if (!text) return;
-            const key = getTodayKey();
-            const todos = loadDailyTodosForKey(key);
-            todos.push({ text, done: false, time: new Date().toLocaleTimeString() });
-            saveDailyTodosForKey(key, todos);
-            input.value = '';
-            renderDailyTodos();
-            updateAllProgress();
+        // Include today's todos in the daily progress
+        const todos = loadDailyTodosForKey(getTodayKey());
+        const todoTotal = todos.length;
+        const todoDone = todos.filter((t) => t.done).length;
+
+        const totalItems = dailyScheduleCount + todoTotal;
+        const totalDone = checkedCount + todoDone;
+        const percentage =
+          totalItems > 0 ? Math.round((totalDone / totalItems) * 100) : 0;
+
+        setProgressCircle(
+          "dailyScheduleProgressCircle",
+          "dailyScheduleProgressNumber",
+          percentage,
+        );
+        const text = document.getElementById("dailyScheduleProgressText");
+        const status = document.getElementById("dailyScheduleProgressStatus");
+        if (text) text.innerText = `${percentage}%`;
+        if (status)
+          status.innerText =
+            percentage === 100
+              ? "All schedule items and todos complete today!"
+              : `Progress: ${totalDone}/${totalItems}`;
+      }
+
+      function updateWeeklyProgress(weekKey) {
+        const checkboxes = Array.from(
+          document.querySelectorAll(
+            `#weekChecklistArea input[type="checkbox"]`,
+          ),
+        );
+        const checkedCount = checkboxes.filter((cb) => cb.checked).length;
+        const percentage =
+          checkboxes.length > 0
+            ? Math.round((checkedCount / checkboxes.length) * 100)
+            : 0;
+        setProgressCircle(
+          "weeklyProgressCircle",
+          "weeklyProgressText",
+          percentage,
+        );
+        const status = document.getElementById("weeklyProgressStatus");
+        if (status)
+          status.innerText =
+            percentage === 100
+              ? "Weekly goals are complete!"
+              : `Weekly goal progress — ${checkedCount}/${checkboxes.length}`;
+      }
+
+      function updateMonthlyProgress() {
+        const habitCheckboxes = Array.from(
+          document.querySelectorAll(
+            '#nonNegotiablesList input[type="checkbox"]',
+          ),
+        );
+        const habitChecked = habitCheckboxes.filter((cb) => cb.checked).length;
+        const habitTotal = habitCheckboxes.length;
+
+        let dailyChecked = 0;
+        for (let i = 0; i < dailyScheduleCount; i++) {
+          if (
+            localStorage.getItem(`daily_schedule_item_${i}_checked`) === "true"
+          )
+            dailyChecked += 1;
         }
+        const dailyTotal = dailyScheduleCount;
 
-        function toggleDailyTodo(index) {
-            const key = getTodayKey();
-            const todos = loadDailyTodosForKey(key);
-            if (!todos[index]) return;
-            todos[index].done = !todos[index].done;
-            saveDailyTodosForKey(key, todos);
-            renderDailyTodos();
-            updateAllProgress();
-        }
+        let weeklyDayChecked = 0;
+        let weeklyDayTotal = 0;
+        Object.keys(weekChecklistDefaults).forEach((weekKey) => {
+          weekChecklistDefaults[weekKey].forEach((_, index) => {
+            weeklyDayTotal += 1;
+            if (
+              localStorage.getItem(`${weekKey}_day_${index}_checked`) === "true"
+            )
+              weeklyDayChecked += 1;
+          });
+        });
 
-        function removeDailyTodo(index) {
-            const key = getTodayKey();
-            const todos = loadDailyTodosForKey(key);
-            todos.splice(index, 1);
-            saveDailyTodosForKey(key, todos);
-            renderDailyTodos();
-            updateAllProgress();
-        }
+        let weeklyScheduleChecked = 0;
+        let weeklyScheduleTotal = 0;
+        Object.keys(weekDailySchedules).forEach((weekKey) => {
+          weekDailySchedules[weekKey].forEach((_, index) => {
+            weeklyScheduleTotal += 1;
+            if (
+              localStorage.getItem(
+                `${weekKey}_daily_schedule_${index}_checked`,
+              ) === "true"
+            )
+              weeklyScheduleChecked += 1;
+          });
+        });
 
-        function saveWeekDailyScheduleState(weekKey, index) {
-            const checkbox = document.getElementById(`${weekKey}-daily-schedule-${index}`);
-            if (!checkbox) return;
-            localStorage.setItem(`${weekKey}_daily_schedule_${index}_checked`, checkbox.checked);
-            updateAllProgress();
-        }
-
-        function loadWeekDailyScheduleState(weekKey, index) {
-            const checkbox = document.getElementById(`${weekKey}-daily-schedule-${index}`);
-            if (!checkbox) return;
-            const checked = localStorage.getItem(`${weekKey}_daily_schedule_${index}_checked`);
-            if (checked !== null) checkbox.checked = checked === 'true';
-        }
-
-        function updateNonNegotiablesProgress() {
-            const checkboxes = Array.from(document.querySelectorAll('#nonNegotiablesList input[type="checkbox"]'));
-            const checkedCount = checkboxes.filter(cb => cb.checked).length;
-            const percentage = checkboxes.length > 0 ? Math.round((checkedCount / checkboxes.length) * 100) : 0;
-            setProgressCircle('progressCircle', 'progressText', percentage);
-            const status = document.getElementById('progressStatus');
-            if (status) status.innerText = percentage === 100 ? 'All done — keep the streak!' : 'Let\'s create momentum! 💧';
-        }
-
-        function updateDailyScheduleProgress() {
-            let checkedCount = 0;
-            for (let i = 0; i < dailyScheduleCount; i++) {
-                const checkbox = document.getElementById(`daily-item-${i}`);
-                if (checkbox && checkbox.checked) checkedCount += 1;
-            }
-
-            // Include today's todos in the daily progress
-            const todos = loadDailyTodosForKey(getTodayKey());
-            const todoTotal = todos.length;
-            const todoDone = todos.filter(t => t.done).length;
-
-            const totalItems = dailyScheduleCount + todoTotal;
-            const totalDone = checkedCount + todoDone;
-            const percentage = totalItems > 0 ? Math.round((totalDone / totalItems) * 100) : 0;
-
-            setProgressCircle('dailyScheduleProgressCircle', 'dailyScheduleProgressNumber', percentage);
-            const text = document.getElementById('dailyScheduleProgressText');
-            const status = document.getElementById('dailyScheduleProgressStatus');
-            if (text) text.innerText = `${percentage}%`;
-            if (status) status.innerText = percentage === 100 ? 'All schedule items and todos complete today!' : `Progress: ${totalDone}/${totalItems}`;
-        }
-
-        function updateWeeklyProgress(weekKey) {
-            const checkboxes = Array.from(document.querySelectorAll(`#weekChecklistArea input[type="checkbox"]`));
-            const checkedCount = checkboxes.filter(cb => cb.checked).length;
-            const percentage = checkboxes.length > 0 ? Math.round((checkedCount / checkboxes.length) * 100) : 0;
-            setProgressCircle('weeklyProgressCircle', 'weeklyProgressText', percentage);
-            const status = document.getElementById('weeklyProgressStatus');
-            if (status) status.innerText = percentage === 100 ? 'Weekly goals are complete!' : `Weekly goal progress — ${checkedCount}/${checkboxes.length}`;
-        }
-
-        function updateMonthlyProgress() {
-            const habitCheckboxes = Array.from(document.querySelectorAll('#nonNegotiablesList input[type="checkbox"]'));
-            const habitChecked = habitCheckboxes.filter(cb => cb.checked).length;
-            const habitTotal = habitCheckboxes.length;
-
-            let dailyChecked = 0;
-            for (let i = 0; i < dailyScheduleCount; i++) {
-                if (localStorage.getItem(`daily_schedule_item_${i}_checked`) === 'true') dailyChecked += 1;
-            }
-            const dailyTotal = dailyScheduleCount;
-
-            let weeklyDayChecked = 0;
-            let weeklyDayTotal = 0;
-            Object.keys(weekChecklistDefaults).forEach(weekKey => {
-                weekChecklistDefaults[weekKey].forEach((_, index) => {
-                    weeklyDayTotal += 1;
-                    if (localStorage.getItem(`${weekKey}_day_${index}_checked`) === 'true') weeklyDayChecked += 1;
-                });
+        let dayItemsChecked = 0;
+        let dayItemsTotal = 0;
+        for (let day = 1; day <= 30; day++) {
+          const state = JSON.parse(
+            localStorage.getItem(`day_${day}_state`) || "{}",
+          );
+          if (Array.isArray(state.negotiables)) {
+            state.negotiables.forEach((item) => {
+              dayItemsTotal += 1;
+              if (item.done) dayItemsChecked += 1;
             });
-
-            let weeklyScheduleChecked = 0;
-            let weeklyScheduleTotal = 0;
-            Object.keys(weekDailySchedules).forEach(weekKey => {
-                weekDailySchedules[weekKey].forEach((_, index) => {
-                    weeklyScheduleTotal += 1;
-                    if (localStorage.getItem(`${weekKey}_daily_schedule_${index}_checked`) === 'true') weeklyScheduleChecked += 1;
-                });
+          }
+          if (Array.isArray(state.schedule)) {
+            state.schedule.forEach((item) => {
+              dayItemsTotal += 1;
+              if (item.done) dayItemsChecked += 1;
             });
+          }
+          if (Array.isArray(state.todos)) {
+            state.todos.forEach((todo) => {
+              dayItemsTotal += 1;
+              if (todo.done) dayItemsChecked += 1;
+            });
+          }
+        }
 
-            let dayItemsChecked = 0;
-            let dayItemsTotal = 0;
-            for (let day = 1; day <= 30; day++) {
-                const state = JSON.parse(localStorage.getItem(`day_${day}_state`) || '{}');
-                if (Array.isArray(state.negotiables)) {
-                    state.negotiables.forEach(item => {
-                        dayItemsTotal += 1;
-                        if (item.done) dayItemsChecked += 1;
-                    });
-                }
-                if (Array.isArray(state.schedule)) {
-                    state.schedule.forEach(item => {
-                        dayItemsTotal += 1;
-                        if (item.done) dayItemsChecked += 1;
-                    });
-                }
-                if (Array.isArray(state.todos)) {
-                    state.todos.forEach(todo => {
-                        dayItemsTotal += 1;
-                        if (todo.done) dayItemsChecked += 1;
-                    });
-                }
+        const total =
+          habitTotal +
+          dailyTotal +
+          weeklyDayTotal +
+          weeklyScheduleTotal +
+          dayItemsTotal;
+        const checkedCount =
+          habitChecked +
+          dailyChecked +
+          weeklyDayChecked +
+          weeklyScheduleChecked +
+          dayItemsChecked;
+        const percentage =
+          total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+        setProgressCircle(
+          "monthlyProgressCircle",
+          "monthlyProgressText",
+          percentage,
+        );
+        const status = document.getElementById("monthlyProgressStatus");
+        if (status)
+          status.innerText =
+            percentage === 100
+              ? "Month complete — incredible!"
+              : "Monthly progress from all checklists.";
+      }
+
+      function updateAllProgress() {
+        updateNonNegotiablesProgress();
+        updateDailyScheduleProgress();
+        if (currentTabKey.startsWith("week"))
+          updateWeeklyProgress(currentTabKey);
+        updateMonthlyProgress();
+      }
+
+      let currentTabKey = "week1";
+
+      function switchTab(tabKey) {
+        currentTabKey = tabKey;
+        document.querySelectorAll(".day-tab").forEach((tab) => {
+          tab.classList.remove(
+            "bg-gradient-to-r",
+            "from-teal-500",
+            "to-cyan-500",
+            "text-white",
+            "shadow-lg",
+          );
+          tab.classList.add("text-cyan-300/60", "hover:text-cyan-200");
+        });
+        const selectedTab = document.getElementById(`tab-${tabKey}`);
+        selectedTab.classList.add(
+          "bg-gradient-to-r",
+          "from-teal-500",
+          "to-cyan-500",
+          "text-white",
+          "shadow-lg",
+        );
+
+        const targetData = scheduleData[tabKey];
+        document.getElementById("currentTabSubtitle").innerText =
+          targetData.subtitle;
+        document.getElementById("currentTabTitle").innerText = targetData.title;
+        document.getElementById("tabContentArea").innerHTML =
+          targetData.content;
+        renderWeekChecklist(tabKey);
+        if (tabKey.startsWith("week")) renderWeekDailySchedule(tabKey);
+        if (tabKey === "daily") {
+          renderDailyScheduleState();
+          renderDailyTodos();
+        }
+        updateAllProgress();
+      }
+
+      function updateProgress() {
+        saveCheckedState();
+        updateAllProgress();
+      }
+
+      function saveCheckedState() {
+        const today = new Date().toLocaleDateString();
+        document
+          .querySelectorAll('#nonNegotiablesList input[type="checkbox"]')
+          .forEach((box) => {
+            if (box.id)
+              localStorage.setItem(`sprint_${today}_${box.id}`, box.checked);
+          });
+      }
+
+      function loadCheckedState() {
+        const today = new Date().toLocaleDateString();
+        document
+          .querySelectorAll('#nonNegotiablesList input[type="checkbox"]')
+          .forEach((box) => {
+            if (
+              box.id &&
+              localStorage.getItem(`sprint_${today}_${box.id}`) !== null
+            ) {
+              box.checked =
+                localStorage.getItem(`sprint_${today}_${box.id}`) === "true";
             }
+          });
+        updateProgress();
+      }
 
-            const total = habitTotal + dailyTotal + weeklyDayTotal + weeklyScheduleTotal + dayItemsTotal;
-            const checkedCount = habitChecked + dailyChecked + weeklyDayChecked + weeklyScheduleChecked + dayItemsChecked;
-            const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
-            setProgressCircle('monthlyProgressCircle', 'monthlyProgressText', percentage);
-            const status = document.getElementById('monthlyProgressStatus');
-            if (status) status.innerText = percentage === 100 ? 'Month complete — incredible!' : 'Monthly progress from all checklists.';
+      // Local Storage Logging
+      function saveLogToCloud() {
+        const textInput = document.getElementById("progressLogInput");
+        const dataText = textInput.value.trim();
+        if (!dataText) return;
+
+        const timestamp = new Date().toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        const localFallback = JSON.parse(
+          localStorage.getItem("sprint_logs") || "[]",
+        );
+        localFallback.unshift({ time: timestamp, content: dataText });
+        localStorage.setItem("sprint_logs", JSON.stringify(localFallback));
+
+        textInput.value = "";
+        fetchLogs();
+      }
+
+      function fetchLogs() {
+        const nodeFeed = document.getElementById("logFeed");
+        const localFallback = JSON.parse(
+          localStorage.getItem("sprint_logs") || "[]",
+        );
+
+        if (localFallback.length === 0) {
+          nodeFeed.innerHTML = `<p class="text-xs text-cyan-400/30 italic text-center py-4">No logs yet. Start executing!</p>`;
+          return;
         }
-
-        function updateAllProgress() {
-            updateNonNegotiablesProgress();
-            updateDailyScheduleProgress();
-            if (currentTabKey.startsWith('week')) updateWeeklyProgress(currentTabKey);
-            updateMonthlyProgress();
-        }
-
-        let currentTabKey = 'week1';
-
-        function switchTab(tabKey) {
-            currentTabKey = tabKey;
-            document.querySelectorAll('.day-tab').forEach(tab => {
-                tab.classList.remove('bg-gradient-to-r', 'from-teal-500', 'to-cyan-500', 'text-white', 'shadow-lg');
-                tab.classList.add('text-cyan-300/60', 'hover:text-cyan-200');
-            });
-            const selectedTab = document.getElementById(`tab-${tabKey}`);
-            selectedTab.classList.add('bg-gradient-to-r', 'from-teal-500', 'to-cyan-500', 'text-white', 'shadow-lg');
-
-            const targetData = scheduleData[tabKey];
-            document.getElementById('currentTabSubtitle').innerText = targetData.subtitle;
-            document.getElementById('currentTabTitle').innerText = targetData.title;
-            document.getElementById('tabContentArea').innerHTML = targetData.content;
-            renderWeekChecklist(tabKey);
-            if (tabKey.startsWith('week')) renderWeekDailySchedule(tabKey);
-            if (tabKey === 'daily') {
-                renderDailyScheduleState();
-                renderDailyTodos();
-            }
-            updateAllProgress();
-        }
-
-        function updateProgress() {
-            saveCheckedState();
-            updateAllProgress();
-        }
-
-        function saveCheckedState() {
-            const today = new Date().toLocaleDateString();
-            document.querySelectorAll('#nonNegotiablesList input[type="checkbox"]').forEach(box => {
-                if(box.id) localStorage.setItem(`sprint_${today}_${box.id}`, box.checked);
-            });
-        }
-
-        function loadCheckedState() {
-            const today = new Date().toLocaleDateString();
-            document.querySelectorAll('#nonNegotiablesList input[type="checkbox"]').forEach(box => {
-                if(box.id && localStorage.getItem(`sprint_${today}_${box.id}`) !== null) {
-                    box.checked = localStorage.getItem(`sprint_${today}_${box.id}`) === 'true';
-                }
-            });
-            updateProgress();
-        }
-
-        // Local Storage Logging
-        function saveLogToCloud() {
-            const textInput = document.getElementById('progressLogInput');
-            const dataText = textInput.value.trim();
-            if(!dataText) return;
-
-            const timestamp = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-            
-            const localFallback = JSON.parse(localStorage.getItem('sprint_logs') || '[]');
-            localFallback.unshift({ time: timestamp, content: dataText });
-            localStorage.setItem('sprint_logs', JSON.stringify(localFallback));
-
-            textInput.value = '';
-            fetchLogs();
-        }
-
-        function fetchLogs() {
-            const nodeFeed = document.getElementById('logFeed');
-            const localFallback = JSON.parse(localStorage.getItem('sprint_logs') || '[]');
-            
-            if(localFallback.length === 0) {
-                nodeFeed.innerHTML = `<p class="text-xs text-cyan-400/30 italic text-center py-4">No logs yet. Start executing!</p>`;
-                return;
-            }
-            nodeFeed.innerHTML = localFallback.map(log => `
+        nodeFeed.innerHTML = localFallback
+          .map(
+            (log) => `
                 <div class="p-2.5 rounded-xl bg-blue-950/40 border border-blue-900/30 text-xs animation-fade-in">
                     <span class="text-[10px] font-bold text-teal-400 block mb-0.5">${log.time}</span>
                     <p class="text-cyan-100/80 leading-relaxed">${log.content}</p>
                 </div>
-            `).join('');
-        }
+            `,
+          )
+          .join("");
+      }
 
-        // Vent (secret letter) helpers — stored and revealed on/after June 30
-        function getJune30UnlockDate() {
-            const d = new Date();
-            d.setMonth(5); // June (0-indexed)
-            d.setDate(30);
-            d.setHours(0,0,0,0);
-            return d;
-        }
+      // Vent (secret letter) helpers — stored and revealed on/after June 30
+      function getJune30UnlockDate() {
+        const d = new Date();
+        d.setMonth(5); // June (0-indexed)
+        d.setDate(30);
+        d.setHours(0, 0, 0, 0);
+        return d;
+      }
 
-        function isVentUnlocked() {
-            return new Date() >= getJune30UnlockDate();
-        }
+      function isVentUnlocked() {
+        return new Date() >= getJune30UnlockDate();
+      }
 
-        function getVentStorageKey() {
-            const y = new Date().getFullYear();
-            return `vent_messages_${y}_06_30`;
-        }
+      function getVentStorageKey() {
+        const y = new Date().getFullYear();
+        return `vent_messages_${y}_06_30`;
+      }
 
-        function loadVentMessages() {
-            try {
-                return JSON.parse(localStorage.getItem(getVentStorageKey()) || '[]');
-            } catch (e) { return []; }
+      function loadVentMessages() {
+        try {
+          return JSON.parse(localStorage.getItem(getVentStorageKey()) || "[]");
+        } catch (e) {
+          return [];
         }
+      }
 
-        function saveVentMessages(messages) {
-            localStorage.setItem(getVentStorageKey(), JSON.stringify(messages));
+      function saveVentMessages(messages) {
+        localStorage.setItem(getVentStorageKey(), JSON.stringify(messages));
+      }
+
+      function storeVentEntry() {
+        const ta = document.getElementById("ventTextarea");
+        if (!ta) return;
+        const text = ta.value.trim();
+        if (!text) return;
+        const messages = loadVentMessages();
+        messages.push({ text, time: new Date().toLocaleString() });
+        saveVentMessages(messages);
+        ta.value = "";
+        renderVentHistory();
+      }
+
+      function renderVentHistory() {
+        const count = document.getElementById("ventCount");
+        const history = document.getElementById("ventHistory");
+        const prompt = document.getElementById("ventPrompt");
+        const unlocked = isVentUnlocked();
+        const messages = loadVentMessages();
+        if (count)
+          count.innerText =
+            messages.length === 0
+              ? "No stored vents yet."
+              : `${messages.length} stored vent${messages.length === 1 ? "" : "s"}`;
+        if (prompt) {
+          const formatted = getJune30UnlockDate().toLocaleDateString();
+          prompt.innerText = unlocked
+            ? `Your secret letters are revealed.`
+            : `Your secret letters are hidden until ${formatted}.`;
         }
-
-        function storeVentEntry() {
-            const ta = document.getElementById('ventTextarea');
-            if (!ta) return;
-            const text = ta.value.trim();
-            if (!text) return;
-            const messages = loadVentMessages();
-            messages.push({ text, time: new Date().toLocaleString() });
-            saveVentMessages(messages);
-            ta.value = '';
-            renderVentHistory();
+        if (!history) return;
+        if (!unlocked) {
+          history.innerHTML = `<p class="text-xs text-cyan-300/60 italic">Vents are hidden until June 30.</p>`;
+          return;
         }
-
-        function renderVentHistory() {
-            const count = document.getElementById('ventCount');
-            const history = document.getElementById('ventHistory');
-            const prompt = document.getElementById('ventPrompt');
-            const unlocked = isVentUnlocked();
-            const messages = loadVentMessages();
-            if (count) count.innerText = messages.length === 0 ? 'No stored vents yet.' : `${messages.length} stored vent${messages.length === 1 ? '' : 's'}`;
-            if (prompt) {
-                const formatted = getJune30UnlockDate().toLocaleDateString();
-                prompt.innerText = unlocked ? `Your secret letters are revealed.` : `Your secret letters are hidden until ${formatted}.`;
-            }
-            if (!history) return;
-            if (!unlocked) {
-                history.innerHTML = `<p class="text-xs text-cyan-300/60 italic">Vents are hidden until June 30.</p>`;
-                return;
-            }
-            if (messages.length === 0) {
-                history.innerHTML = `<p class="text-xs text-cyan-300/60 italic">No vents stored.</p>`;
-                return;
-            }
-            history.innerHTML = messages.map(m => `
+        if (messages.length === 0) {
+          history.innerHTML = `<p class="text-xs text-cyan-300/60 italic">No vents stored.</p>`;
+          return;
+        }
+        history.innerHTML = messages
+          .map(
+            (m) => `
                 <div class="p-3 rounded-xl bg-blue-950/40 border border-blue-900/30 text-sm">
                     <div class="text-[11px] text-teal-300 mb-1">${m.time}</div>
                     <div class="text-cyan-100/80">${m.text}</div>
                 </div>
-            `).join('');
+            `,
+          )
+          .join("");
+      }
+
+      window.onload = () => {
+        function updateLiveTime() {
+          const today = new Date();
+          const dateOptions = {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+          };
+          const formattedDate = today.toLocaleDateString("en-US", dateOptions);
+          const timeOptions = {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true,
+          };
+          const formattedTime = today.toLocaleTimeString("en-US", timeOptions);
+          document.getElementById("liveDateDisplay").innerText =
+            `💧 Today is ${formattedDate} — ${formattedTime}`;
         }
 
-        window.onload = () => {
-            function updateLiveTime() {
-                const today = new Date();
-                const dateOptions = { weekday: 'long', month: 'long', day: 'numeric' };
-                const formattedDate = today.toLocaleDateString('en-US', dateOptions);
-                const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-                const formattedTime = today.toLocaleTimeString('en-US', timeOptions);
-                document.getElementById('liveDateDisplay').innerText = `💧 Today is ${formattedDate} — ${formattedTime}`;
-            }
+        updateLiveTime();
+        setInterval(updateLiveTime, 1000);
 
-            updateLiveTime();
-            setInterval(updateLiveTime, 1000);
-
-            switchTab('week1');
-            loadCheckedState();
-            updateAllProgress();
-            fetchLogs();
-            renderVentHistory();
-            renderDailyTodos();
-        };
+        switchTab("week1");
+        loadCheckedState();
+        updateAllProgress();
+        fetchLogs();
+        renderVentHistory();
+        renderDailyTodos();
+      };
     </script>
-</body>
+  </body>
 </html>
