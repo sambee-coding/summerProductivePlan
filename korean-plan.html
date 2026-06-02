@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>30-Day Korean Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: #040f16;
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      .glass-card {
+        background: rgba(10, 25, 47, 0.8);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(45, 212, 191, 0.16);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #2dd4bf;
+        border-radius: 999px;
+      }
+    </style>
+  </head>
+  <body
+    class="text-cyan-50 min-h-screen pb-16 selection:bg-teal-500 selection:text-white"
+  >
+    <div
+      class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"
+    ></div>
+    <div
+      class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"
+    ></div>
+
+    <header
+      class="max-w-6xl mx-auto pt-8 px-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8"
+    >
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🇰🇷</span>
+          <h1
+            class="text-3xl font-black tracking-wide bg-gradient-to-r from-teal-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent uppercase"
+          >
+            30-Day Korean Conversation Plan
+          </h1>
+        </div>
+        <p
+          class="text-cyan-300 font-bold text-sm mt-2 bg-cyan-950/30 border border-cyan-500/10 px-3 py-1 rounded-lg inline-block shadow-sm"
+        >
+          Focus on Hangul, patterns, speaking, listening, and shadowing for 30
+          days.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3 w-full md:w-auto">
+        <a
+          href="index.html"
+          class="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-cyan-100 hover:bg-cyan-500/20 transition"
+          >Home</a
+        >
+        <a
+          href="days.html"
+          class="rounded-full border border-sky-500/40 bg-sky-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-sky-100 hover:bg-sky-500/20 transition"
+          >Days</a
+        >
+        <a
+          href="books.html"
+          class="rounded-full border border-sky-500/40 bg-sky-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-sky-100 hover:bg-sky-500/20 transition"
+          >Books</a
+        >
+      </div>
+    </header>
+
+    <main
+      class="max-w-6xl mx-auto px-4 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]"
+    >
+      <section
+        class="glass-card rounded-3xl p-6 shadow-2xl border border-teal-500/10"
+      >
+        <div class="space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div
+              class="rounded-3xl border border-cyan-500/10 bg-blue-950/40 p-5"
+            >
+              <div
+                class="text-xs uppercase tracking-widest text-teal-400 font-bold mb-3"
+              >
+                Plan Focus
+              </div>
+              <ul class="space-y-2 text-sm text-cyan-100/90">
+                <li>• Hangul first</li>
+                <li>• Core sentence patterns</li>
+                <li>• Daily speaking practice</li>
+                <li>• High-frequency vocabulary</li>
+                <li>• Listening + shadowing</li>
+              </ul>
+            </div>
+            <div
+              class="rounded-3xl border border-cyan-500/10 bg-blue-950/40 p-5"
+            >
+              <div
+                class="text-xs uppercase tracking-widest text-sky-400 font-bold mb-3"
+              >
+                Daily structure
+              </div>
+              <ul class="space-y-2 text-sm text-cyan-100/90">
+                <li>15m Vocabulary</li>
+                <li>15m Grammar</li>
+                <li>15m Listening</li>
+                <li>15m Speaking</li>
+                <li>15–30m Practice / Review</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div
+              class="rounded-3xl border border-cyan-500/10 bg-blue-950/40 p-5"
+            >
+              <div
+                class="text-xs uppercase tracking-widest text-teal-400 font-bold mb-3"
+              >
+                Monthly Progress
+              </div>
+              <div class="relative w-28 h-28 mx-auto">
+                <svg class="w-full h-full transform -rotate-90">
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    stroke="rgba(45,212,191,0.05)"
+                    stroke-width="6"
+                    fill="transparent"
+                  />
+                  <circle
+                    id="monthCircle"
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    stroke="#60a5fa"
+                    stroke-width="6"
+                    fill="transparent"
+                    stroke-dasharray="175"
+                    stroke-dashoffset="175"
+                    class="transition-all duration-500"
+                  />
+                </svg>
+                <span
+                  id="monthPercent"
+                  class="absolute inset-0 flex items-center justify-center text-sm font-black text-sky-300"
+                  >0%</span
+                >
+              </div>
+              <p
+                id="monthStatus"
+                class="text-xs text-cyan-300/70 text-center mt-3"
+              >
+                Track the full 30-day plan.
+              </p>
+            </div>
+            <div
+              class="rounded-3xl border border-cyan-500/10 bg-blue-950/40 p-5"
+            >
+              <div
+                class="text-xs uppercase tracking-widest text-amber-400 font-bold mb-3"
+              >
+                Week Progress
+              </div>
+              <div class="relative w-28 h-28 mx-auto">
+                <svg class="w-full h-full transform -rotate-90">
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    stroke="rgba(45,212,191,0.05)"
+                    stroke-width="6"
+                    fill="transparent"
+                  />
+                  <circle
+                    id="weekCircle"
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    stroke="#f59e0b"
+                    stroke-width="6"
+                    fill="transparent"
+                    stroke-dasharray="175"
+                    stroke-dashoffset="175"
+                    class="transition-all duration-500"
+                  />
+                </svg>
+                <span
+                  id="weekPercent"
+                  class="absolute inset-0 flex items-center justify-center text-sm font-black text-amber-300"
+                  >0%</span
+                >
+              </div>
+              <p
+                id="weekStatus"
+                class="text-xs text-cyan-300/70 text-center mt-3"
+              >
+                Check your current week.
+              </p>
+            </div>
+            <div
+              class="rounded-3xl border border-cyan-500/10 bg-blue-950/40 p-5"
+            >
+              <div
+                class="text-xs uppercase tracking-widest text-emerald-400 font-bold mb-3"
+              >
+                Day Progress
+              </div>
+              <div class="relative w-28 h-28 mx-auto">
+                <svg class="w-full h-full transform -rotate-90">
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    stroke="rgba(45,212,191,0.05)"
+                    stroke-width="6"
+                    fill="transparent"
+                  />
+                  <circle
+                    id="dayCircle"
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    stroke="#34d399"
+                    stroke-width="6"
+                    fill="transparent"
+                    stroke-dasharray="175"
+                    stroke-dashoffset="175"
+                    class="transition-all duration-500"
+                  />
+                </svg>
+                <span
+                  id="dayPercent"
+                  class="absolute inset-0 flex items-center justify-center text-sm font-black text-emerald-300"
+                  >0%</span
+                >
+              </div>
+              <p
+                id="dayStatus"
+                class="text-xs text-cyan-300/70 text-center mt-3"
+              >
+                Complete today's checklist.
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-3xl border border-blue-500/20 bg-blue-950/40 p-5">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <div
+                  class="text-xs uppercase tracking-widest text-sky-300 font-bold"
+                >
+                  Select a day
+                </div>
+                <p id="weekLabel" class="text-sm text-cyan-100/80">Week 1</p>
+              </div>
+              <button
+                onclick="resetCurrentDay()"
+                class="rounded-full bg-slate-900/80 px-4 py-2 text-xs font-bold uppercase tracking-wider text-cyan-100 hover:bg-slate-800 transition"
+              >
+                Reset day
+              </button>
+            </div>
+            <div id="daysGrid" class="grid grid-cols-5 gap-2"></div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="glass-card rounded-3xl p-6 shadow-2xl border border-teal-500/10"
+      >
+        <div class="space-y-6">
+          <div
+            class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-xs uppercase tracking-widest text-teal-400 font-bold"
+              >
+                Day
+              </p>
+              <h2 id="selectedDay" class="text-3xl font-black text-white">
+                Day 1
+              </h2>
+              <p id="selectedWeek" class="text-sm text-cyan-300/80 mt-1">
+                Week 1
+              </p>
+            </div>
+            <div
+              class="rounded-3xl bg-blue-950/40 border border-blue-500/20 p-4 text-sm text-cyan-100"
+            >
+              <span class="font-bold text-sky-300">Tip:</span> Complete every
+              checkbox to move the tracker forward.
+            </div>
+          </div>
+
+          <div class="rounded-3xl border border-blue-500/20 bg-blue-950/40 p-5">
+            <div class="mb-4">
+              <h3 class="text-lg font-bold text-cyan-200">Today's Focus</h3>
+              <p id="daySubtitle" class="text-sm text-cyan-300/80 mt-2"></p>
+            </div>
+            <div class="grid gap-4">
+              <div
+                class="rounded-3xl border border-sky-500/10 bg-blue-950/60 p-4"
+              >
+                <div
+                  class="text-xs uppercase tracking-widest text-sky-300 font-bold mb-3"
+                >
+                  Learn
+                </div>
+                <p id="dayLearn" class="text-sm text-cyan-100/90"></p>
+              </div>
+              <div
+                class="rounded-3xl border border-sky-500/10 bg-blue-950/60 p-4"
+              >
+                <div
+                  class="text-xs uppercase tracking-widest text-sky-300 font-bold mb-3"
+                >
+                  Vocabulary / Grammar
+                </div>
+                <p id="dayVocab" class="text-sm text-cyan-100/90"></p>
+              </div>
+              <div
+                class="rounded-3xl border border-sky-500/10 bg-blue-950/60 p-4"
+              >
+                <div
+                  class="text-xs uppercase tracking-widest text-sky-300 font-bold mb-3"
+                >
+                  Speaking Practice
+                </div>
+                <p id="daySpeaking" class="text-sm text-cyan-100/90"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-3xl border border-blue-500/20 bg-blue-950/40 p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-cyan-200">Daily Checklist</h3>
+              <span
+                id="checklistCount"
+                class="text-xs uppercase tracking-widest text-slate-400"
+                >0 items</span
+              >
+            </div>
+            <div id="dayChecklist" class="space-y-3"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const totalDays = 30;
+      let currentDay = 1;
+
+      const koreanPlan = {
+        1: {
+          subtitle: "Hangul vowels and survival greetings",
+          learn: "Vowels: ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ",
+          vocab: "안녕하세요, 감사합니다, 네, 아니요",
+          speaking: "Practice saying greetings and short replies aloud.",
+          checklist: [
+            "Learn the core vowels: ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ",
+            "Memorize 안녕하세요, 감사합니다, 네, 아니요",
+            "Say each word aloud 3 times",
+            "Listen to native vowel pronunciation",
+          ],
+        },
+        2: {
+          subtitle: "Finish the vowel set and practice a dialogue",
+          learn: "Remaining vowels and pronunciation",
+          vocab: "죄송합니다, 괜찮아요, 안녕히 가세요",
+          speaking: "Create and say a mini dialogue with greetings.",
+          checklist: [
+            "Learn the remaining vowels",
+            "Memorize 죄송합니다, 괜찮아요, 안녕히 가세요",
+            "Practice a short greeting dialogue",
+            "Repeat the dialogue aloud",
+          ],
+        },
+        3: {
+          subtitle: "Start Korean consonants and core nouns",
+          learn: "Basic consonants: ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅊ ㅋ ㅌ ㅍ ㅎ",
+          vocab: "이름, 사람, 친구",
+          speaking: "Say each new word clearly and slowly.",
+          checklist: [
+            "Learn the basic consonants",
+            "Write each consonant once",
+            "Memorize 이름, 사람, 친구",
+            "Say each word aloud",
+          ],
+        },
+        4: {
+          subtitle: "Combine letters into syllables",
+          learn: "Create syllables: 가 나 다 라 마",
+          vocab: "Read simple syllables aloud",
+          speaking: "Read each syllable slowly and clearly.",
+          checklist: [
+            "Combine letters into syllables",
+            "Read 가 나 다 라 마 aloud",
+            "Practice writing each syllable",
+            "Listen and repeat syllable sounds",
+          ],
+        },
+        5: {
+          subtitle: "Learn batchim basics",
+          learn: "Batchim rules for ending consonants",
+          vocab: "한국, 한국어, 학생",
+          speaking: "Read the words with batchim sounds.",
+          checklist: [
+            "Learn batchim basics",
+            "Read 한국, 한국어, 학생 aloud",
+            "Write each batchim word",
+            "Practice the ending sounds",
+          ],
+        },
+        6: {
+          subtitle: "Introduce yourself with 나는/저는",
+          learn: "Grammar: 저는 ___ 입니다",
+          vocab: "Sentence patterns for personal introduction",
+          speaking: "Say 저는 학생입니다 and 저는 Samrawit입니다.",
+          checklist: [
+            "Learn 저는 ___ 입니다 grammar",
+            "Make two example sentences",
+            "Practice your self-introduction",
+            "Repeat the sentences aloud",
+          ],
+        },
+        7: {
+          subtitle: "Review Week 1 and introduce yourself",
+          learn: "Review vowels, consonants, and basic greetings",
+          vocab: "Use key words from Week 1",
+          speaking: "Introduce yourself for 30 seconds.",
+          checklist: [
+            "Review Week 1 vocabulary and grammar",
+            "Say a 30-second introduction",
+            "Practice 안녕하세요. 저는 Samrawit입니다.",
+            "Practice 저는 학생입니다. 한국어를 공부합니다.",
+          ],
+        },
+        8: {
+          subtitle: "Learn the topic marker",
+          learn: "Grammar: 은/는",
+          vocab: "Practice 저는 학생입니다",
+          speaking: "Say topic-marker sentences aloud.",
+          checklist: [
+            "Learn 은/는 topic marker",
+            "Create a sentence with 저는 학생입니다",
+            "Say the sentence twice",
+            "Review Day 7 introduction",
+          ],
+        },
+        9: {
+          subtitle: "Learn the subject marker",
+          learn: "Grammar: 이/가",
+          vocab: "Practice 친구가 있어요, 시간이 있어요",
+          speaking: "Say both example sentences aloud.",
+          checklist: [
+            "Learn 이/가 subject marker",
+            "Practice 친구가 있어요",
+            "Practice 시간이 있어요",
+            "Repeat the sentences aloud",
+          ],
+        },
+        10: {
+          subtitle: "Use polite endings with 예요/이에요",
+          learn: "Grammar: 이에요 / 예요",
+          vocab: "학생이에요, 의사예요",
+          speaking: "Say the polite forms aloud.",
+          checklist: [
+            "Learn 이에요 / 예요",
+            "Practice 학생이에요",
+            "Practice 의사예요",
+            "Repeat both forms",
+          ],
+        },
+        11: {
+          subtitle: "Learn numbers 1–20",
+          learn: "Korean numbers: 하나 to 스물",
+          vocab: "Read numbers out loud",
+          speaking: "Count aloud slowly and clearly.",
+          checklist: [
+            "Learn numbers 1–20",
+            "Say 하나 둘 셋 넷 aloud",
+            "Write the Korean numbers once",
+            "Practice counting in Korean",
+          ],
+        },
+        12: {
+          subtitle: "Practice possession and absence",
+          learn: "Grammar: 있어요 / 없어요",
+          vocab: "친구가 있어요, 돈이 없어요",
+          speaking: "Say both example sentences aloud.",
+          checklist: [
+            "Learn 있어요 / 없어요",
+            "Practice 친구가 있어요",
+            "Practice 돈이 없어요",
+            "Repeat the sentences naturally",
+          ],
+        },
+        13: {
+          subtitle: "Family vocabulary practice",
+          learn: "Family words: 엄마, 아빠, 형, 누나",
+          vocab: "Say each family member word",
+          speaking: "Use one family word in a sentence.",
+          checklist: [
+            "Learn family vocabulary",
+            "Write each family word",
+            "Say each word aloud",
+            "Make a family sentence",
+          ],
+        },
+        14: {
+          subtitle: "Speak about yourself for 1 minute",
+          learn: "Use basic personal phrases",
+          vocab: "Name, age, country, family",
+          speaking: "Talk for one minute without stopping.",
+          checklist: [
+            "Prepare a 1-minute self-introduction",
+            "Include name, age, country, and family",
+            "Say it aloud slowly",
+            "Review and repeat once more",
+          ],
+        },
+        15: {
+          subtitle: "Learn key question words",
+          learn: "뭐, 어디, 누구, 언제, 왜",
+          vocab: "Understand what each question asks",
+          speaking: "Ask one simple question aloud.",
+          checklist: [
+            "Learn the question words",
+            "Practice saying each word",
+            "Create one question aloud",
+            "Review each meaning",
+          ],
+        },
+        16: {
+          subtitle: "Use polite verb endings",
+          learn: "Verb + 아요/어요",
+          vocab: "가요, 먹어요, 공부해요",
+          speaking: "Repeat the verbs with endings.",
+          checklist: [
+            "Learn 아요/어요 endings",
+            "Practice 가요, 먹어요, 공부해요",
+            "Say each verb sentence aloud",
+            "Repeat the endings with new verbs",
+          ],
+        },
+        17: {
+          subtitle: "Practice daily activity verbs",
+          learn: "먹다, 자다, 공부하다, 일하다",
+          vocab: "Use each verb in the present tense",
+          speaking: "Say the words aloud clearly.",
+          checklist: [
+            "Learn daily activity verbs",
+            "Say each verb aloud",
+            "Use one verb in a sentence",
+            "Review the present tense forms",
+          ],
+        },
+        18: {
+          subtitle: "Learn common time expressions",
+          learn: "오늘, 내일, 어제",
+          vocab: "Use time expressions in sentences",
+          speaking: "Say each expression aloud.",
+          checklist: [
+            "Learn time expressions",
+            "Practice saying each word",
+            "Use each in a sentence",
+            "Listen to example pronunciation",
+          ],
+        },
+        19: {
+          subtitle: "Say what you like",
+          learn: "좋아해요",
+          vocab: "저는 음악을 좋아해요",
+          speaking: "Say the sentence aloud twice.",
+          checklist: [
+            "Learn 좋아해요",
+            "Practice 저는 음악을 좋아해요",
+            "Say it aloud twice",
+            "Make one more 좋아해요 sentence",
+          ],
+        },
+        20: {
+          subtitle: "Say what you dislike",
+          learn: "싫어해요",
+          vocab: "Use 싫어해요 in a sentence",
+          speaking: "Practice the phrase aloud.",
+          checklist: [
+            "Learn 싫어해요",
+            "Make one dislike sentence",
+            "Compare 좋아해요 and 싫어해요",
+            "Repeat the phrase twice",
+          ],
+        },
+        21: {
+          subtitle: "Speak for 2–3 minutes",
+          learn: "Build longer answers",
+          vocab: "Hobbies, family, studies, food",
+          speaking: "Talk about at least two topics.",
+          checklist: [
+            "Talk about hobbies and family",
+            "Talk about studies and food",
+            "Speak for 2–3 minutes",
+            "Use simple Korean phrases throughout",
+          ],
+        },
+        22: {
+          subtitle: "Use future tense forms",
+          learn: "갈 거예요, 공부할 거예요",
+          vocab: "Practice future sentence patterns",
+          speaking: "Say future sentences aloud.",
+          checklist: [
+            "Learn 갈 거예요 and 공부할 거예요",
+            "Say each sentence aloud",
+            "Use one new verb in future form",
+            "Review the meaning of future tense",
+          ],
+        },
+        23: {
+          subtitle: "Learn past tense phrases",
+          learn: "갔어요, 먹었어요",
+          vocab: "Practice past sentence patterns",
+          speaking: "Say the past forms aloud.",
+          checklist: [
+            "Learn past tense forms",
+            "Practice 갔어요 and 먹었어요",
+            "Write one past example",
+            "Repeat the pattern aloud",
+          ],
+        },
+        24: {
+          subtitle: "Connect sentences with 그리고",
+          learn: "그리고 = and",
+          vocab: "저는 학생이고 그리고 한국어를 공부해요.",
+          speaking: "Say the connected sentence slowly.",
+          checklist: [
+            "Learn 그리고 for connection",
+            "Practice the example sentence",
+            "Say it slowly aloud",
+            "Connect two simple ideas",
+          ],
+        },
+        25: {
+          subtitle: "Share simple opinions",
+          learn: "재미있어요, 어려워요, 쉬워요",
+          vocab: "Practice each opinion word",
+          speaking: "Make one opinion sentence aloud.",
+          checklist: [
+            "Learn opinion words",
+            "Say each word aloud",
+            "Create a sentence with 재미있어요",
+            "Create a sentence with 어려워요 or 쉬워요",
+          ],
+        },
+        26: {
+          subtitle: "Practice conversation fillers",
+          learn: "음..., 그래요?, 정말요?, 맞아요",
+          vocab: "Use fillers in short responses",
+          speaking: "Repeat fillers in a mock reply.",
+          checklist: [
+            "Learn conversation fillers",
+            "Practice each filler naturally",
+            "Say a response with 그래요?",
+            "Repeat fillers in a mini dialogue",
+          ],
+        },
+        27: {
+          subtitle: "Learn food ordering phrases",
+          learn: "이것 주세요, 얼마예요?",
+          vocab: "Practice ordering expressions",
+          speaking: "Say both phrases aloud.",
+          checklist: [
+            "Learn ordering phrases",
+            "Practice both phrases aloud",
+            "Imagine ordering food in Korean",
+            "Repeat the dialogue once",
+          ],
+        },
+        28: {
+          subtitle: "Practice asking simple questions",
+          learn: "뭐 좋아해요?, 어디 가요?, 한국어 공부해요?",
+          vocab: "Question patterns for daily life",
+          speaking: "Ask each question aloud.",
+          checklist: [
+            "Learn question forms",
+            "Say each question aloud",
+            "Practice answering one question",
+            "Review the question structures",
+          ],
+        },
+        29: {
+          subtitle: "Practice the full mock conversation",
+          learn: "Common introductory questions",
+          vocab: "Sample dialogue phrases",
+          speaking: "Speak both sides of the conversation.",
+          checklist: [
+            "Practice the full mock conversation",
+            "Say 이름이 뭐예요? and 저는 Samrawit이에요.",
+            "Say 어디에서 왔어요? and 에티오피아에서 왔어요.",
+            "Say 취미가 뭐예요? and 독서하고 한국어 공부하는 것을 좋아해요.",
+          ],
+        },
+        30: {
+          subtitle: "Final 5-minute speaking challenge",
+          learn: "Review all core topics",
+          vocab: "Self, studies, goals, family, hobbies",
+          speaking: "Speak continuously for 5 minutes.",
+          checklist: [
+            "Speak about yourself for 5 minutes",
+            "Talk about your studies and goals",
+            "Talk about your family and hobbies",
+            "Explain why you're learning Korean",
+          ],
+        },
+      };
+
+      function getDayStateKey(day) {
+        return `korean_day_${day}_state`;
+      }
+
+      function defaultDayState(day) {
+        const plan = koreanPlan[day];
+        return {
+          checklist: (plan ? plan.checklist : []).map((label) => ({
+            label,
+            done: false,
+          })),
+        };
+      }
+
+      function loadDayState(day) {
+        const saved = localStorage.getItem(getDayStateKey(day));
+        if (!saved) return defaultDayState(day);
+        try {
+          const parsed = JSON.parse(saved);
+          return {
+            checklist: Array.isArray(parsed.checklist)
+              ? parsed.checklist
+              : defaultDayState(day).checklist,
+          };
+        } catch (error) {
+          return defaultDayState(day);
+        }
+      }
+
+      function saveDayState(day, state) {
+        localStorage.setItem(getDayStateKey(day), JSON.stringify(state));
+        updateAllProgress();
+      }
+
+      function renderDayButton(day) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = day;
+        button.className =
+          "rounded-2xl border border-blue-500/20 bg-blue-950/40 px-3 py-3 text-sm font-bold text-cyan-100 transition hover:bg-cyan-500/10";
+        button.onclick = () => selectDay(day);
+        button.id = `day-button-${day}`;
+        return button;
+      }
+
+      function renderDayButtons() {
+        const container = document.getElementById("daysGrid");
+        container.innerHTML = "";
+        for (let day = 1; day <= totalDays; day++) {
+          container.appendChild(renderDayButton(day));
+        }
+      }
+
+      function selectDay(day) {
+        currentDay = day;
+        document.querySelectorAll("#daysGrid button").forEach((button) => {
+          button.classList.remove(
+            "bg-cyan-500/20",
+            "text-white",
+            "border-cyan-500/40",
+          );
+          button.classList.add("bg-blue-950/40", "text-cyan-100");
+        });
+        const activeButton = document.getElementById(`day-button-${day}`);
+        if (activeButton) {
+          activeButton.classList.add(
+            "bg-cyan-500/20",
+            "text-white",
+            "border-cyan-500/40",
+          );
+        }
+        const plan = koreanPlan[day];
+        document.getElementById("selectedDay").innerText = `Day ${day}`;
+        document.getElementById("selectedWeek").innerText =
+          `Week ${Math.min(5, Math.ceil(day / 7))}`;
+        document.getElementById("weekLabel").innerText =
+          `Week ${Math.min(5, Math.ceil(day / 7))}`;
+        document.getElementById("daySubtitle").innerText = plan
+          ? plan.subtitle
+          : "Follow the plan for today.";
+        document.getElementById("dayLearn").innerText = plan
+          ? plan.learn
+          : "Review your core focus.";
+        document.getElementById("dayVocab").innerText = plan
+          ? plan.vocab
+          : "Review vocabulary.";
+        document.getElementById("daySpeaking").innerText = plan
+          ? plan.speaking
+          : "Practice speaking aloud.";
+        renderDayContent();
+        updateAllProgress();
+      }
+
+      function renderDayContent() {
+        const state = loadDayState(currentDay);
+        const container = document.getElementById("dayChecklist");
+        if (!state.checklist.length) {
+          container.innerHTML = `<p class="text-xs text-cyan-300/60 italic">No checklist items for this day.</p>`;
+        } else {
+          container.innerHTML = state.checklist
+            .map(
+              (item, index) => `
+                <label class="grid grid-cols-[auto_1fr] gap-3 items-start rounded-2xl border border-blue-500/15 bg-blue-950/60 p-3">
+                  <input type="checkbox" ${item.done ? "checked" : ""} onchange="toggleChecklistItem(${index})" class="glow-aqua mt-1 h-4 w-4 rounded-md border-cyan-800 bg-blue-950 text-teal-500" />
+                  <div class="space-y-1">
+                    <div class="text-sm text-cyan-100">${item.label.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+                  </div>
+                </label>
+              `,
+            )
+            .join("");
+        }
+        document.getElementById("checklistCount").innerText =
+          `${state.checklist.length} items`;
+      }
+
+      function toggleChecklistItem(index) {
+        const state = loadDayState(currentDay);
+        if (!state.checklist[index]) return;
+        state.checklist[index].done = !state.checklist[index].done;
+        saveDayState(currentDay, state);
+        renderDayContent();
+      }
+
+      function setCircleProgress(circleId, textId, percent) {
+        const circle = document.getElementById(circleId);
+        const text = document.getElementById(textId);
+        if (!circle || !text) return;
+        const total = 2 * Math.PI * 28;
+        const offset = total - (percent / 100) * total;
+        circle.style.strokeDashoffset = offset;
+        text.textContent = `${percent}%`;
+      }
+
+      function updateDayProgress() {
+        const state = loadDayState(currentDay);
+        const total = state.checklist.length;
+        const done = state.checklist.filter((item) => item.done).length;
+        const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+        setCircleProgress("dayCircle", "dayPercent", percent);
+        document.getElementById("dayStatus").innerText =
+          percent === 100
+            ? "All checklist items complete!"
+            : `Today: ${done}/${total} complete`;
+      }
+
+      function updateWeekProgress() {
+        const weekNumber = Math.min(5, Math.ceil(currentDay / 7));
+        const start = (weekNumber - 1) * 7 + 1;
+        const end = Math.min(start + 6, totalDays);
+        let total = 0;
+        let done = 0;
+        for (let day = start; day <= end; day++) {
+          const state = loadDayState(day);
+          total += state.checklist.length;
+          done += state.checklist.filter((item) => item.done).length;
+        }
+        const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+        setCircleProgress("weekCircle", "weekPercent", percent);
+        document.getElementById("weekStatus").innerText =
+          percent === 100
+            ? `Week ${weekNumber} fully complete`
+            : `Week ${weekNumber}: ${done}/${total}`;
+      }
+
+      function updateMonthProgress() {
+        let total = 0;
+        let done = 0;
+        for (let day = 1; day <= totalDays; day++) {
+          const state = loadDayState(day);
+          total += state.checklist.length;
+          done += state.checklist.filter((item) => item.done).length;
+        }
+        const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+        setCircleProgress("monthCircle", "monthPercent", percent);
+        document.getElementById("monthStatus").innerText =
+          percent === 100 ? "30-day plan complete!" : `Month: ${done}/${total}`;
+      }
+
+      function updateAllProgress() {
+        updateDayProgress();
+        updateWeekProgress();
+        updateMonthProgress();
+      }
+
+      function resetCurrentDay() {
+        localStorage.removeItem(getDayStateKey(currentDay));
+        renderDayContent();
+        updateAllProgress();
+      }
+
+      window.onload = () => {
+        renderDayButtons();
+        selectDay(1);
+        updateAllProgress();
+      };
+    </script>
+  </body>
+</html>
