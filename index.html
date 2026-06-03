@@ -26,6 +26,16 @@
         background: #2dd4bf;
         border-radius: 10px;
       }
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 8px rgba(251,191,36,0.3); }
+        50% { box-shadow: 0 0 20px rgba(251,191,36,0.6); }
+      }
+      .streak-glow { animation: pulse-glow 2s ease-in-out infinite; }
+      .heatmap-cell { transition: all 0.2s ease; }
+      .heatmap-cell:hover { transform: scale(1.15); }
+      .mood-btn { transition: all 0.15s ease; }
+      .mood-btn:hover { transform: scale(1.2); }
+      .mood-btn.active { transform: scale(1.25); ring: 2px solid white; }
     </style>
   </head>
   <body
@@ -151,6 +161,17 @@
             </div>
           </div>
         </div>
+        <div
+          id="streakCard"
+          class="glass-card rounded-2xl p-4 flex items-center gap-3 shadow-2xl border border-amber-500/30 streak-glow min-w-[140px]"
+        >
+          <span class="text-3xl">🔥</span>
+          <div>
+            <div class="text-xs uppercase tracking-widest text-amber-400 font-bold">Streak</div>
+            <div id="streakCount" class="text-2xl font-black text-amber-300">0</div>
+            <div class="text-[10px] text-amber-200/60">consecutive days</div>
+          </div>
+        </div>
       </div>
       <div class="mt-6 flex flex-wrap justify-end gap-3 px-4 md:px-0">
         <a
@@ -168,8 +189,44 @@
           class="rounded-full border border-sky-500/40 bg-sky-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-sky-100 hover:bg-sky-500/20 transition"
           >Books</a
         >
+        <button
+          onclick="exportData()"
+          class="rounded-full border border-emerald-500/40 bg-emerald-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-emerald-100 hover:bg-emerald-500/20 transition"
+        >Export Data</button>
+        <label
+          class="rounded-full border border-violet-500/40 bg-violet-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-violet-100 hover:bg-violet-500/20 transition cursor-pointer"
+        >Import Data
+          <input type="file" accept=".json" onchange="importData(event)" class="hidden" />
+        </label>
       </div>
     </header>
+
+    <!-- Motivational Quote Banner -->
+    <div class="max-w-6xl mx-auto px-4 mb-6">
+      <div class="glass-card rounded-2xl p-4 border border-cyan-500/10 text-center">
+        <p id="dailyQuote" class="text-sm italic text-cyan-200/80">"The secret of getting ahead is getting started."</p>
+        <p id="dailyQuoteAuthor" class="text-xs text-teal-400/70 mt-1">— Mark Twain</p>
+      </div>
+    </div>
+
+    <!-- 30-Day Heatmap -->
+    <div class="max-w-6xl mx-auto px-4 mb-6">
+      <section class="glass-card rounded-3xl p-5 shadow-xl border border-teal-500/10">
+        <h2 class="text-sm font-bold text-cyan-200 flex items-center gap-2 mb-3">
+          <span>📊</span> 30-Day Progress Heatmap
+        </h2>
+        <div class="flex flex-wrap gap-1.5" id="heatmapGrid"></div>
+        <div class="flex items-center gap-2 mt-3 text-[10px] text-cyan-300/60">
+          <span>Less</span>
+          <div class="w-4 h-4 rounded bg-blue-950/60 border border-blue-500/20"></div>
+          <div class="w-4 h-4 rounded bg-amber-900/60"></div>
+          <div class="w-4 h-4 rounded bg-amber-600/70"></div>
+          <div class="w-4 h-4 rounded bg-emerald-600/80"></div>
+          <div class="w-4 h-4 rounded bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.4)]"></div>
+          <span>More</span>
+        </div>
+      </section>
+    </div>
 
     <main class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-1 space-y-6">
@@ -298,6 +355,38 @@
           </div>
         </section>
 
+        <!-- Mood Tracker -->
+        <section class="glass-card rounded-3xl p-6 shadow-xl border-t-4 border-purple-500">
+          <h2 class="text-lg font-bold text-cyan-200 flex items-center gap-2 mb-3">
+            <span>😊</span> How are you feeling?
+          </h2>
+          <div class="flex justify-center gap-3" id="moodButtons">
+            <button onclick="setMood('😴')" class="mood-btn text-2xl p-2 rounded-xl bg-blue-950/40 border border-blue-500/20 hover:bg-blue-900/40" title="Tired">😴</button>
+            <button onclick="setMood('😐')" class="mood-btn text-2xl p-2 rounded-xl bg-blue-950/40 border border-blue-500/20 hover:bg-blue-900/40" title="Okay">😐</button>
+            <button onclick="setMood('😊')" class="mood-btn text-2xl p-2 rounded-xl bg-blue-950/40 border border-blue-500/20 hover:bg-blue-900/40" title="Good">😊</button>
+            <button onclick="setMood('🔥')" class="mood-btn text-2xl p-2 rounded-xl bg-blue-950/40 border border-blue-500/20 hover:bg-blue-900/40" title="On Fire">🔥</button>
+          </div>
+          <p id="moodStatus" class="text-xs text-cyan-300/60 text-center mt-2">Tap to log your mood</p>
+        </section>
+
+        <!-- Sleep Log -->
+        <section class="glass-card rounded-3xl p-6 shadow-xl border-t-4 border-indigo-500">
+          <h2 class="text-lg font-bold text-cyan-200 flex items-center gap-2 mb-3">
+            <span>🌙</span> Sleep Log
+          </h2>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs text-cyan-300/70 block mb-1">Bedtime</label>
+              <input type="time" id="sleepBedtime" onchange="saveSleepLog()" class="w-full bg-blue-950/50 border border-blue-500/20 rounded-xl px-3 py-2 text-sm text-cyan-100 focus:outline-none focus:border-teal-400" />
+            </div>
+            <div>
+              <label class="text-xs text-cyan-300/70 block mb-1">Wake up</label>
+              <input type="time" id="sleepWakeup" onchange="saveSleepLog()" class="w-full bg-blue-950/50 border border-blue-500/20 rounded-xl px-3 py-2 text-sm text-cyan-100 focus:outline-none focus:border-teal-400" />
+            </div>
+          </div>
+          <div id="sleepDuration" class="text-center mt-3 text-sm font-bold text-indigo-300"></div>
+        </section>
+
         <section
           class="glass-card rounded-3xl p-6 shadow-xl border border-blue-500/20"
         >
@@ -363,6 +452,96 @@
             <div id="ventHistory" class="mt-4 space-y-3"></div>
           </div>
         </section>
+
+        <section class="glass-card rounded-3xl p-6 shadow-xl border-t-4 border-amber-500 mt-6">
+          <h2 class="text-lg font-bold text-cyan-200 flex items-center gap-2 mb-4">
+            <span>⏱️</span> Pomodoro Timer
+          </h2>
+          <!-- State Tabs -->
+          <div class="flex gap-1.5 mb-4 bg-blue-950/40 p-1 rounded-xl border border-blue-900/50 text-xs w-full max-w-xs mx-auto">
+            <button onclick="setPomoSessionState('work')" id="pomoStateTab-work" class="flex-1 text-center py-1.5 font-bold rounded-lg transition-all bg-amber-500/20 text-amber-300">
+              Work
+            </button>
+            <button onclick="setPomoSessionState('shortBreak')" id="pomoStateTab-shortBreak" class="flex-1 text-center py-1.5 font-bold rounded-lg transition-all text-cyan-300/60 hover:text-cyan-200">
+              Short Break
+            </button>
+            <button onclick="setPomoSessionState('longBreak')" id="pomoStateTab-longBreak" class="flex-1 text-center py-1.5 font-bold rounded-lg transition-all text-cyan-300/60 hover:text-cyan-200">
+              Long Break
+            </button>
+          </div>
+          <div class="flex flex-col items-center justify-center">
+            <div id="pomodoroDisplay" class="text-4xl font-black text-white tracking-widest mb-4 font-mono">25:00</div>
+            <div class="flex flex-wrap justify-center gap-3">
+              <button onclick="togglePomodoro()" id="pomodoroToggleBtn" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-sm font-bold text-white shadow-lg w-24">Start</button>
+              <button onclick="resetPomodoro()" class="px-5 py-2 rounded-xl bg-blue-950/60 border border-blue-500/20 text-sm font-bold text-cyan-100 hover:bg-blue-900/60 transition">Reset</button>
+              <button onclick="togglePomodoroSettings()" id="pomodoroSettingsBtn" class="px-3 py-2 rounded-xl bg-blue-950/60 border border-blue-500/20 text-sm font-bold text-cyan-100 hover:bg-blue-900/60 transition flex items-center gap-1.5" title="Customize Timer">
+                <span>⚙️</span> Customize
+              </button>
+            </div>
+            
+            <!-- Customize Settings Panel -->
+            <div id="pomodoroSettingsPanel" class="hidden mt-5 pt-4 border-t border-cyan-500/10 w-full space-y-4">
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="text-[10px] uppercase tracking-wider text-cyan-300/70 block mb-1 text-center">Work (Min)</label>
+                  <input type="number" id="pomoWorkDuration" min="1" max="180" class="w-full bg-blue-950/50 border border-blue-500/20 rounded-xl px-2 py-1.5 text-xs text-cyan-100 text-center focus:outline-none focus:border-teal-400" />
+                </div>
+                <div>
+                  <label class="text-[10px] uppercase tracking-wider text-cyan-300/70 block mb-1 text-center">Short Break</label>
+                  <input type="number" id="pomoShortDuration" min="1" max="60" class="w-full bg-blue-950/50 border border-blue-500/20 rounded-xl px-2 py-1.5 text-xs text-cyan-100 text-center focus:outline-none focus:border-teal-400" />
+                </div>
+                <div>
+                  <label class="text-[10px] uppercase tracking-wider text-cyan-300/70 block mb-1 text-center">Long Break</label>
+                  <input type="number" id="pomoLongDuration" min="1" max="60" class="w-full bg-blue-950/50 border border-blue-500/20 rounded-xl px-2 py-1.5 text-xs text-cyan-100 text-center focus:outline-none focus:border-teal-400" />
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-3 items-center">
+                <div>
+                  <label class="text-[10px] uppercase tracking-wider text-cyan-300/70 block mb-1">Alert Sound</label>
+                  <select id="pomoSoundSelect" class="w-full bg-blue-950/50 border border-blue-500/20 rounded-xl px-2 py-1.5 text-xs text-cyan-100 focus:outline-none focus:border-teal-400">
+                    <option value="classic">Classic Chime</option>
+                    <option value="zen">Zen Bowl</option>
+                    <option value="digital">Digital Beep</option>
+                    <option value="uplifting">Uplifting Melody</option>
+                    <option value="none">Mute</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="text-[10px] uppercase tracking-wider text-cyan-300/70 block mb-1">Desktop Alerts</label>
+                  <button id="pomoNotificationToggle" onclick="togglePomoNotifications()" class="w-full py-1.5 rounded-xl text-xs font-bold transition border border-red-500/30 bg-red-950/20 text-red-400 hover:bg-red-950/30">
+                    Disabled
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <button onclick="testPomoAlert()" class="flex-1 py-2 bg-blue-900/30 hover:bg-blue-900/50 border border-blue-500/20 text-[10px] font-bold text-cyan-300 rounded-xl transition">
+                  Test Alert
+                </button>
+                <button onclick="savePomodoroSettings()" class="flex-1 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-[10px] font-bold text-slate-950 rounded-xl shadow-lg transition">
+                  Apply & Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="glass-card rounded-3xl p-6 shadow-xl border-t-4 border-sky-500 mt-6 relative">
+          <div class="absolute top-5 right-5 flex flex-col items-center justify-center">
+            <div class="bg-sky-500/20 border border-sky-500/40 text-sky-300 font-black rounded-full h-10 w-10 flex items-center justify-center shadow-[0_0_10px_rgba(14,165,233,0.3)]">
+              <span id="waterStreakCount" class="text-sm">0</span>
+            </div>
+            <div class="text-[9px] text-sky-300/60 font-bold uppercase mt-1">Streak</div>
+          </div>
+          <h2 class="text-lg font-bold text-cyan-200 flex items-center gap-2 mb-4">
+            <span>💧</span> Hydration Tracker
+          </h2>
+          <p class="text-xs text-cyan-300/70 mb-3 text-center pr-12">Aim for 8 glasses a day</p>
+          <div class="flex flex-wrap justify-center gap-2" id="waterTrackerGrid">
+             <!-- 8 glasses generated by JS -->
+          </div>
+        </section>
       </div>
 
       <div class="lg:col-span-2 space-y-6">
@@ -423,6 +602,35 @@
           <div class="space-y-6" id="tabContentArea">
             <!-- Dynamic content injected here -->
           </div>
+
+          <!-- Shared Weekly Section -->
+          <div id="sharedWeeklySection" class="space-y-6 hidden mt-6">
+            <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
+                <h4 class="text-lg font-bold text-cyan-200 mb-4">Daily Schedule</h4>
+                <div class="space-y-2.5" id="weekDailyScheduleArea"></div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
+                <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
+                    <div>
+                        <h4 class="text-lg font-bold text-cyan-200">Weekly Day Checklist</h4>
+                        <p id="weeklyProgressStatus" class="text-sm text-cyan-100/80 mt-1">Track your weekly check-ins.</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="relative w-16 h-16 flex items-center justify-center">
+                            <svg class="w-full h-full transform -rotate-90">
+                                <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
+                                <circle id="weeklyProgressCircle" cx="32" cy="32" r="28" stroke="#f59e0b" stroke-width="6" fill="transparent"
+                                        stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
+                            </svg>
+                            <span id="weeklyProgressText" class="absolute text-sm font-black text-amber-300">0%</span>
+                        </div>
+                        <button type="button" onclick="resetWeekChecklist(currentTabKey)" class="text-xs text-teal-300 hover:text-teal-100">Clear week</button>
+                    </div>
+                </div>
+                <div id="weekChecklistArea" class="space-y-3"></div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -469,32 +677,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <h4 class="text-lg font-bold text-cyan-200 mb-4">Daily Schedule</h4>
-                        <div class="space-y-2.5" id="week1DailySchedule"></div>
-                    </div>
-
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
-                            <div>
-                                <h4 class="text-lg font-bold text-cyan-200">Weekly Day Checklist</h4>
-                                <p id="weeklyProgressStatus" class="text-sm text-cyan-100/80 mt-1">Track your weekly check-ins.</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="relative w-16 h-16 flex items-center justify-center">
-                                    <svg class="w-full h-full transform -rotate-90">
-                                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
-                                        <circle id="weeklyProgressCircle" cx="32" cy="32" r="28" stroke="#f59e0b" stroke-width="6" fill="transparent"
-                                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
-                                    </svg>
-                                    <span id="weeklyProgressText" class="absolute text-sm font-black text-amber-300">0%</span>
-                                </div>
-                                <button type="button" onclick="resetWeekChecklist('week1')" class="text-xs text-teal-300 hover:text-teal-100">Clear week</button>
-                            </div>
-                        </div>
-                        <div id="weekChecklistArea" class="space-y-3"></div>
-                    </div>
                 `,
         },
         week2: {
@@ -526,32 +708,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <h4 class="text-lg font-bold text-cyan-200 mb-4">Daily Schedule</h4>
-                        <div class="space-y-2.5" id="week2DailySchedule"></div>
-                    </div>
-
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
-                            <div>
-                                <h4 class="text-lg font-bold text-cyan-200">Weekly Day Checklist</h4>
-                                <p id="weeklyProgressStatus" class="text-sm text-cyan-100/80 mt-1">Track your weekly check-ins.</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="relative w-16 h-16 flex items-center justify-center">
-                                    <svg class="w-full h-full transform -rotate-90">
-                                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
-                                        <circle id="weeklyProgressCircle" cx="32" cy="32" r="28" stroke="#f59e0b" stroke-width="6" fill="transparent"
-                                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
-                                    </svg>
-                                    <span id="weeklyProgressText" class="absolute text-sm font-black text-amber-300">0%</span>
-                                </div>
-                                <button type="button" onclick="resetWeekChecklist('week2')" class="text-xs text-teal-300 hover:text-teal-100">Clear week</button>
-                            </div>
-                        </div>
-                        <div id="weekChecklistArea" class="space-y-3"></div>
-                    </div>
                 `,
         },
         week3: {
@@ -580,32 +736,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <h4 class="text-lg font-bold text-cyan-200 mb-4">Daily Schedule</h4>
-                        <div class="space-y-2.5" id="week3DailySchedule"></div>
-                    </div>
-
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
-                            <div>
-                                <h4 class="text-lg font-bold text-cyan-200">Weekly Day Checklist</h4>
-                                <p id="weeklyProgressStatus" class="text-sm text-cyan-100/80 mt-1">Track your weekly check-ins.</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="relative w-16 h-16 flex items-center justify-center">
-                                    <svg class="w-full h-full transform -rotate-90">
-                                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
-                                        <circle id="weeklyProgressCircle" cx="32" cy="32" r="28" stroke="#f59e0b" stroke-width="6" fill="transparent"
-                                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
-                                    </svg>
-                                    <span id="weeklyProgressText" class="absolute text-sm font-black text-amber-300">0%</span>
-                                </div>
-                                <button type="button" onclick="resetWeekChecklist('week3')" class="text-xs text-teal-300 hover:text-teal-100">Clear week</button>
-                            </div>
-                        </div>
-                        <div id="weekChecklistArea" class="space-y-3"></div>
-                    </div>
                 `,
         },
         week4: {
@@ -633,32 +763,6 @@
                                 <p class="text-xs text-cyan-100/70">Express appreciation to someone important in your life.</p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <h4 class="text-lg font-bold text-cyan-200 mb-4">Daily Schedule</h4>
-                        <div class="space-y-2.5" id="week4DailySchedule"></div>
-                    </div>
-
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
-                            <div>
-                                <h4 class="text-lg font-bold text-cyan-200">Weekly Day Checklist</h4>
-                                <p id="weeklyProgressStatus" class="text-sm text-cyan-100/80 mt-1">Track your weekly check-ins.</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="relative w-16 h-16 flex items-center justify-center">
-                                    <svg class="w-full h-full transform -rotate-90">
-                                        <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
-                                        <circle id="weeklyProgressCircle" cx="32" cy="32" r="28" stroke="#f59e0b" stroke-width="6" fill="transparent"
-                                                stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
-                                    </svg>
-                                    <span id="weeklyProgressText" class="absolute text-sm font-black text-amber-300">0%</span>
-                                </div>
-                                <button type="button" onclick="resetWeekChecklist('week4')" class="text-xs text-teal-300 hover:text-teal-100">Clear week</button>
-                            </div>
-                        </div>
-                        <div id="weekChecklistArea" class="space-y-3"></div>
                     </div>
                 `,
         },
@@ -724,46 +828,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-                            <div>
-                                <div class="text-xs uppercase tracking-widest text-teal-400 font-bold">Daily Schedule Progress</div>
-                                <div class="text-2xl font-black text-white" id="dailyScheduleProgressText">0%</div>
-                                <div id="dailyScheduleProgressStatus" class="text-sm text-cyan-100/80 mt-1">Complete your schedule items for today.</div>
-                            </div>
-                            <div class="relative w-20 h-20 flex items-center justify-center">
-                                <svg class="w-full h-full transform -rotate-90">
-                                    <circle cx="32" cy="32" r="28" stroke="rgba(45,212,191,0.05)" stroke-width="6" fill="transparent"/>
-                                    <circle id="dailyScheduleProgressCircle" cx="32" cy="32" r="28" stroke="#34d399" stroke-width="6" fill="transparent"
-                                            stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-500 ease-out"/>
-                                </svg>
-                                <span id="dailyScheduleProgressNumber" class="absolute text-sm font-black text-emerald-300">0%</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-end">
-                            <button type="button" onclick="resetDailyScheduleChecklist()" class="text-xs text-teal-300 hover:text-teal-100">Clear today</button>
-                        </div>
-                    </div>
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <div class="flex items-center justify-between mb-4">
-                            <h4 class="text-lg font-bold text-cyan-200">Daily Schedule Checklist</h4>
-                        </div>
-                        <div id="dailyScheduleArea" class="space-y-3"></div>
-                    </div>
-                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-teal-500/10">
-                        <div class="flex items-center justify-between mb-4">
-                            <h4 class="text-lg font-bold text-cyan-200">Daily Todos</h4>
-                            <div class="text-xs text-cyan-300">Create tasks for today</div>
-                        </div>
-                        <div class="flex gap-2 mb-3">
-                            <input id="dailyTodoInput" type="text" placeholder="Add a todo for today" class="flex-1 bg-blue-950/50 border border-blue-500/20 rounded-xl px-3 py-2 text-sm text-cyan-100 focus:outline-none focus:border-teal-400">
-                            <button onclick="addDailyTodo()" class="px-4 py-2 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-xs font-bold">Add</button>
-                        </div>
-                        <div id="dailyTodosList" class="space-y-2"></div>
-                    </div>
                 `,
-        },
+        }
       };
 
       const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -978,7 +1044,7 @@
       }
 
       function renderWeekDailySchedule(weekKey) {
-        const container = document.getElementById(`${weekKey}DailySchedule`);
+        const container = document.getElementById("weekDailyScheduleArea");
         if (!container) return;
         const tasks = weekDailySchedules[weekKey] || [];
         container.innerHTML = tasks
@@ -1311,8 +1377,16 @@
         document.getElementById("currentTabTitle").innerText = targetData.title;
         document.getElementById("tabContentArea").innerHTML =
           targetData.content;
-        renderWeekChecklist(tabKey);
-        if (tabKey.startsWith("week")) renderWeekDailySchedule(tabKey);
+        
+        const sharedWeekly = document.getElementById("sharedWeeklySection");
+        if (tabKey.startsWith("week")) {
+            sharedWeekly.classList.remove("hidden");
+            renderWeekChecklist(tabKey);
+            renderWeekDailySchedule(tabKey);
+        } else {
+            sharedWeekly.classList.add("hidden");
+        }
+
         if (tabKey === "daily") {
           renderDailyScheduleState();
           renderDailyTodos();
@@ -1474,6 +1548,695 @@
           .join("");
       }
 
+      // Pomodoro Logic
+      let pomodoroWorkTime = 25 * 60;
+      let pomodoroShortBreak = 5 * 60;
+      let pomodoroLongBreak = 15 * 60;
+      let pomodoroTime = pomodoroWorkTime;
+      let pomodoroInterval = null;
+      let isPomodoroRunning = false;
+      let pomodoroSessionState = "work"; // "work", "shortBreak", "longBreak"
+      let pomodoroSound = "classic";
+      let pomodoroNotifications = false;
+      let pomodoroAudioCtx = null;
+
+      function updatePomodoroDisplay() {
+        const m = Math.floor(pomodoroTime / 60).toString().padStart(2, '0');
+        const s = (pomodoroTime % 60).toString().padStart(2, '0');
+        const display = document.getElementById("pomodoroDisplay");
+        if (display) display.innerText = `${m}:${s}`;
+      }
+
+      function initAudioContext() {
+        try {
+          if (!pomodoroAudioCtx) {
+            pomodoroAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (pomodoroAudioCtx.state === 'suspended') {
+            pomodoroAudioCtx.resume();
+          }
+        } catch (e) {
+          console.error("Failed to initialize AudioContext: ", e);
+        }
+      }
+
+      function setPomoSessionState(state) {
+        if (isPomodoroRunning) {
+          if (!confirm("A timer is currently running. Switch session and reset timer?")) {
+            return;
+          }
+        }
+        clearInterval(pomodoroInterval);
+        isPomodoroRunning = false;
+        pomodoroSessionState = state;
+        
+        // Update state tabs UI
+        const tabs = ["work", "shortBreak", "longBreak"];
+        tabs.forEach(t => {
+          const btn = document.getElementById(`pomoStateTab-${t}`);
+          if (btn) {
+            btn.classList.remove("bg-amber-500/20", "text-amber-300");
+            btn.classList.add("text-cyan-300/60", "hover:text-cyan-200");
+          }
+        });
+        
+        const activeBtn = document.getElementById(`pomoStateTab-${state}`);
+        if (activeBtn) {
+          activeBtn.classList.remove("text-cyan-300/60", "hover:text-cyan-200");
+          activeBtn.classList.add("bg-amber-500/20", "text-amber-300");
+        }
+        
+        // Update duration
+        if (state === "work") {
+          pomodoroTime = pomodoroWorkTime;
+        } else if (state === "shortBreak") {
+          pomodoroTime = pomodoroShortBreak;
+        } else {
+          pomodoroTime = pomodoroLongBreak;
+        }
+        
+        updatePomodoroDisplay();
+        
+        const btn = document.getElementById("pomodoroToggleBtn");
+        if (btn) {
+          btn.innerText = "Start";
+          btn.classList.remove("from-rose-500", "to-red-500");
+          btn.classList.add("from-amber-500", "to-orange-500");
+        }
+      }
+
+      function togglePomodoro() {
+        initAudioContext();
+        const btn = document.getElementById("pomodoroToggleBtn");
+        if (isPomodoroRunning) {
+          clearInterval(pomodoroInterval);
+          btn.innerText = "Start";
+          btn.classList.remove("from-rose-500", "to-red-500");
+          btn.classList.add("from-amber-500", "to-orange-500");
+        } else {
+          if (pomodoroNotifications && Notification.permission === "default") {
+            Notification.requestPermission().then(permission => {
+              updateNotificationUI(permission === "granted");
+            });
+          }
+          
+          pomodoroInterval = setInterval(() => {
+            if (pomodoroTime > 0) {
+              pomodoroTime--;
+              updatePomodoroDisplay();
+            } else {
+              handlePomodoroCompletion();
+            }
+          }, 1000);
+          btn.innerText = "Pause";
+          btn.classList.remove("from-amber-500", "to-orange-500");
+          btn.classList.add("from-rose-500", "to-red-500");
+        }
+        isPomodoroRunning = !isPomodoroRunning;
+      }
+
+      function handlePomodoroCompletion() {
+        clearInterval(pomodoroInterval);
+        playPomodoroChime();
+        
+        let title = "";
+        let body = "";
+        let nextState = "work";
+        
+        if (pomodoroSessionState === "work") {
+          title = "Pomodoro Complete! ⏱️";
+          body = "Great work! Time for a short break. 🎉";
+          nextState = "shortBreak";
+        } else {
+          title = "Break Over! ☕";
+          body = "Ready to focus? Let's start the next Pomodoro session. 🚀";
+          nextState = "work";
+        }
+        
+        // HTML5 Desktop Notification
+        if (pomodoroNotifications && Notification.permission === "granted") {
+          try {
+            new Notification(title, {
+              body: body,
+              icon: "https://cdn-icons-png.flaticon.com/512/2693/2693507.png"
+            });
+          } catch (e) {
+            console.error("Desktop Notification error: ", e);
+          }
+        }
+        
+        // Fallback Alert
+        setTimeout(() => {
+          alert(`${title}\n\n${body}`);
+          setPomoSessionState(nextState);
+        }, 100);
+        
+        isPomodoroRunning = false;
+        const btn = document.getElementById("pomodoroToggleBtn");
+        if (btn) {
+          btn.innerText = "Start";
+          btn.classList.remove("from-rose-500", "to-red-500");
+          btn.classList.add("from-amber-500", "to-orange-500");
+        }
+      }
+
+      function resetPomodoro() {
+        clearInterval(pomodoroInterval);
+        isPomodoroRunning = false;
+        
+        if (pomodoroSessionState === "work") {
+          pomodoroTime = pomodoroWorkTime;
+        } else if (pomodoroSessionState === "shortBreak") {
+          pomodoroTime = pomodoroShortBreak;
+        } else {
+          pomodoroTime = pomodoroLongBreak;
+        }
+        
+        updatePomodoroDisplay();
+        const btn = document.getElementById("pomodoroToggleBtn");
+        if (btn) {
+          btn.innerText = "Start";
+          btn.classList.remove("from-rose-500", "to-red-500");
+          btn.classList.add("from-amber-500", "to-orange-500");
+        }
+      }
+
+      function togglePomodoroSettings() {
+        initAudioContext();
+        const panel = document.getElementById("pomodoroSettingsPanel");
+        if (panel) panel.classList.toggle("hidden");
+      }
+
+      function togglePomoNotifications() {
+        initAudioContext();
+        if (Notification.permission === "denied") {
+          alert("Notification permission has been blocked by your browser. Please enable notifications in your browser's site settings.");
+          return;
+        }
+        
+        if (Notification.permission === "granted") {
+          pomodoroNotifications = !pomodoroNotifications;
+          localStorage.setItem("pomodoro_notifications", pomodoroNotifications);
+          updateNotificationUI(pomodoroNotifications);
+        } else {
+          Notification.requestPermission().then(permission => {
+            const granted = permission === "granted";
+            pomodoroNotifications = granted;
+            localStorage.setItem("pomodoro_notifications", pomodoroNotifications);
+            updateNotificationUI(pomodoroNotifications);
+            if (!granted) {
+              alert("Desktop notifications were not enabled.");
+            }
+          });
+        }
+      }
+
+      function updateNotificationUI(enabled) {
+        const toggleBtn = document.getElementById("pomoNotificationToggle");
+        if (!toggleBtn) return;
+        
+        if (enabled && Notification.permission === "granted") {
+          toggleBtn.innerText = "Enabled";
+          toggleBtn.classList.remove("border-red-500/30", "bg-red-950/20", "text-red-400", "hover:bg-red-950/30");
+          toggleBtn.classList.add("border-emerald-500/30", "bg-emerald-950/20", "text-emerald-400", "hover:bg-emerald-950/30");
+        } else {
+          toggleBtn.innerText = "Disabled";
+          toggleBtn.classList.remove("border-emerald-500/30", "bg-emerald-950/20", "text-emerald-400", "hover:bg-emerald-950/30");
+          toggleBtn.classList.add("border-red-500/30", "bg-red-950/20", "text-red-400", "hover:bg-red-950/30");
+        }
+      }
+
+      function loadPomodoroSettings() {
+        const workMin = parseInt(localStorage.getItem("pomodoro_work_duration")) || 25;
+        const shortMin = parseInt(localStorage.getItem("pomodoro_short_duration")) || 5;
+        const longMin = parseInt(localStorage.getItem("pomodoro_long_duration")) || 15;
+        
+        pomodoroWorkTime = workMin * 60;
+        pomodoroShortBreak = shortMin * 60;
+        pomodoroLongBreak = longMin * 60;
+        
+        pomodoroSound = localStorage.getItem("pomodoro_sound") || "classic";
+        pomodoroNotifications = localStorage.getItem("pomodoro_notifications") === "true";
+        
+        const workInput = document.getElementById("pomoWorkDuration");
+        const shortInput = document.getElementById("pomoShortDuration");
+        const longInput = document.getElementById("pomoLongDuration");
+        const soundSelect = document.getElementById("pomoSoundSelect");
+        
+        if (workInput) workInput.value = workMin;
+        if (shortInput) shortInput.value = shortMin;
+        if (longInput) longInput.value = longMin;
+        if (soundSelect) soundSelect.value = pomodoroSound;
+        
+        updateNotificationUI(pomodoroNotifications);
+        
+        if (!isPomodoroRunning) {
+          if (pomodoroSessionState === "work") {
+            pomodoroTime = pomodoroWorkTime;
+          } else if (pomodoroSessionState === "shortBreak") {
+            pomodoroTime = pomodoroShortBreak;
+          } else {
+            pomodoroTime = pomodoroLongBreak;
+          }
+          updatePomodoroDisplay();
+        }
+      }
+
+      function savePomodoroSettings() {
+        initAudioContext();
+        
+        const workInput = document.getElementById("pomoWorkDuration");
+        const shortInput = document.getElementById("pomoShortDuration");
+        const longInput = document.getElementById("pomoLongDuration");
+        const soundSelect = document.getElementById("pomoSoundSelect");
+        
+        const workMin = workInput ? (parseInt(workInput.value) || 25) : 25;
+        const shortMin = shortInput ? (parseInt(shortInput.value) || 5) : 5;
+        const longMin = longInput ? (parseInt(longInput.value) || 15) : 15;
+        
+        localStorage.setItem("pomodoro_work_duration", workMin);
+        localStorage.setItem("pomodoro_short_duration", shortMin);
+        localStorage.setItem("pomodoro_long_duration", longMin);
+        
+        if (soundSelect) {
+          pomodoroSound = soundSelect.value;
+          localStorage.setItem("pomodoro_sound", pomodoroSound);
+        }
+        
+        pomodoroWorkTime = workMin * 60;
+        pomodoroShortBreak = shortMin * 60;
+        pomodoroLongBreak = longMin * 60;
+        
+        if (!isPomodoroRunning) {
+          if (pomodoroSessionState === "work") {
+            pomodoroTime = pomodoroWorkTime;
+          } else if (pomodoroSessionState === "shortBreak") {
+            pomodoroTime = pomodoroShortBreak;
+          } else {
+            pomodoroTime = pomodoroLongBreak;
+          }
+          updatePomodoroDisplay();
+        }
+        
+        const panel = document.getElementById("pomodoroSettingsPanel");
+        if (panel) panel.classList.add("hidden");
+        
+        alert("Pomodoro settings saved!");
+      }
+
+      function testPomoAlert() {
+        initAudioContext();
+        playPomodoroChime();
+        
+        if (pomodoroNotifications) {
+          if (Notification.permission === "granted") {
+            try {
+              new Notification("Test Notification ⏱️", {
+                body: "This is how you will be alerted when a session ends!",
+                icon: "https://cdn-icons-png.flaticon.com/512/2693/2693507.png"
+              });
+            } catch (e) {
+              console.error(e);
+            }
+          } else {
+            Notification.requestPermission().then(permission => {
+              if (permission === "granted") {
+                new Notification("Test Notification ⏱️", {
+                  body: "This is how you will be alerted when a session ends!",
+                  icon: "https://cdn-icons-png.flaticon.com/512/2693/2693507.png"
+                });
+              }
+            });
+          }
+        } else {
+          setTimeout(() => alert("Sound tested! Enable 'Desktop Alerts' for desktop notifications when running in the background."), 150);
+        }
+      }
+
+      // Water Tracker Logic
+      function loadWaterTracker() {
+        const today = new Date().toLocaleDateString();
+        let count = parseInt(localStorage.getItem(`water_${today}`)) || 0;
+        const grid = document.getElementById("waterTrackerGrid");
+        if (!grid) return;
+        
+        grid.innerHTML = Array.from({length: 8}).map((_, i) => `
+          <button onclick="toggleWater(${i})" class="w-10 h-10 rounded-full flex items-center justify-center transition-all ${i < count ? 'bg-sky-500 text-white shadow-[0_0_10px_rgba(14,165,233,0.5)]' : 'bg-blue-950/50 border border-blue-500/20 text-sky-500/30 hover:bg-blue-900/60'}">
+            <span class="text-lg">💧</span>
+          </button>
+        `).join("");
+      }
+
+      window.toggleWater = function(index) {
+        const today = new Date().toLocaleDateString();
+        let count = parseInt(localStorage.getItem(`water_${today}`)) || 0;
+        if (index === count - 1) { // Clicking the last filled glass removes it
+          count--;
+        } else if (index === count) { // Clicking the next empty glass fills it
+          count++;
+        } else {
+            count = index + 1;
+        }
+        localStorage.setItem(`water_${today}`, count);
+        loadWaterTracker();
+        calculateWaterStreak();
+      }
+
+      function calculateWaterStreak() {
+        let streak = 0;
+        const today = new Date();
+        
+        for (let i = 0; i < 365; i++) {
+          const checkDate = new Date(today);
+          checkDate.setDate(today.getDate() - i);
+          const dateStr = checkDate.toLocaleDateString();
+          
+          const count = parseInt(localStorage.getItem(`water_${dateStr}`)) || 0;
+          
+          if (count >= 8 && i === 0) {
+            streak++;
+          } else if (count >= 8) {
+            streak++;
+          } else if (i === 0) {
+             // Today is not complete yet (less than 8), don't break streak yet, skip
+             continue;
+          } else {
+             break; // streak broken
+          }
+        }
+        
+        const el = document.getElementById("waterStreakCount");
+        if (el) el.innerText = streak;
+      }
+
+      // ===== MOTIVATIONAL QUOTES =====
+      const quotes = [
+        { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+        { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
+        { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+        { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+        { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+        { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+        { text: "Your limitation—it's only your imagination.", author: "Unknown" },
+        { text: "Push yourself, because no one else is going to do it for you.", author: "Unknown" },
+        { text: "Great things never come from comfort zones.", author: "Unknown" },
+        { text: "Dream it. Wish it. Do it.", author: "Unknown" },
+        { text: "Hard work beats talent when talent doesn't work hard.", author: "Tim Notke" },
+        { text: "The man who moves a mountain begins by carrying away small stones.", author: "Confucius" },
+        { text: "What you do today can improve all your tomorrows.", author: "Ralph Marston" },
+        { text: "Start where you are. Use what you have. Do what you can.", author: "Arthur Ashe" },
+        { text: "Discipline is the bridge between goals and accomplishment.", author: "Jim Rohn" },
+        { text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", author: "Aristotle" },
+        { text: "Consistency is the hallmark of the unimaginative.", author: "Oscar Wilde" },
+        { text: "Stay hungry, stay foolish.", author: "Steve Jobs" },
+        { text: "Action is the foundational key to all success.", author: "Pablo Picasso" },
+        { text: "You don't have to be great to start, but you have to start to be great.", author: "Zig Ziglar" },
+        { text: "A year from now you will wish you had started today.", author: "Karen Lamb" },
+        { text: "Small daily improvements over time lead to stunning results.", author: "Robin Sharma" },
+        { text: "Focus on being productive instead of busy.", author: "Tim Ferriss" },
+        { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb" },
+        { text: "Strive for progress, not perfection.", author: "Unknown" },
+        { text: "The pain you feel today will be the strength you feel tomorrow.", author: "Unknown" },
+        { text: "Don't stop when you're tired. Stop when you're done.", author: "Unknown" },
+        { text: "Fall seven times, stand up eight.", author: "Japanese Proverb" },
+        { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+        { text: "You are never too old to set another goal or to dream a new dream.", author: "C.S. Lewis" },
+      ];
+
+      function loadDailyQuote() {
+        const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+        const quote = quotes[dayOfYear % quotes.length];
+        const quoteEl = document.getElementById("dailyQuote");
+        const authorEl = document.getElementById("dailyQuoteAuthor");
+        if (quoteEl) quoteEl.innerText = `"${quote.text}"`;
+        if (authorEl) authorEl.innerText = `— ${quote.author}`;
+      }
+
+      // ===== STREAK COUNTER =====
+      function calculateStreak() {
+        let streak = 0;
+        const today = new Date();
+        const habitIds = ['habit-prayer','habit-workout','habit-read','habit-social','habit-journal','habit-english','habit-korean','habit-dsa'];
+
+        for (let i = 0; i < 365; i++) {
+          const checkDate = new Date(today);
+          checkDate.setDate(today.getDate() - i);
+          const dateStr = checkDate.toLocaleDateString();
+          let allDone = true;
+          for (const id of habitIds) {
+            const val = localStorage.getItem(`sprint_${dateStr}_${id}`);
+            if (val !== "true") {
+              allDone = false;
+              break;
+            }
+          }
+          if (allDone && i === 0) {
+            // Today might not be finished yet, check if at least one is checked
+            const anyCheckedToday = habitIds.some(id => localStorage.getItem(`sprint_${dateStr}_${id}`) === "true");
+            if (!anyCheckedToday) {
+              // Skip today, start counting from yesterday
+              continue;
+            }
+            streak++;
+          } else if (allDone) {
+            streak++;
+          } else if (i === 0) {
+            // Today not done yet is okay, skip
+            continue;
+          } else {
+            break;
+          }
+        }
+        const el = document.getElementById("streakCount");
+        if (el) el.innerText = streak;
+        const card = document.getElementById("streakCard");
+        if (card) {
+          if (streak >= 7) {
+            card.classList.add("streak-glow");
+          } else {
+            card.classList.remove("streak-glow");
+          }
+        }
+      }
+
+      // ===== MOOD TRACKER =====
+      function setMood(emoji) {
+        const today = new Date().toLocaleDateString();
+        localStorage.setItem(`mood_${today}`, emoji);
+        renderMoodState();
+      }
+
+      function renderMoodState() {
+        const today = new Date().toLocaleDateString();
+        const mood = localStorage.getItem(`mood_${today}`);
+        const buttons = document.querySelectorAll('#moodButtons .mood-btn');
+        buttons.forEach(btn => {
+          btn.classList.remove('active', 'ring-2', 'ring-white', 'bg-teal-900/40');
+          if (mood && btn.innerText.trim() === mood) {
+            btn.classList.add('active', 'ring-2', 'ring-white', 'bg-teal-900/40');
+          }
+        });
+        const status = document.getElementById('moodStatus');
+        if (status) {
+          status.innerText = mood ? `Today's mood: ${mood}` : 'Tap to log your mood';
+        }
+      }
+
+      // ===== SLEEP LOG =====
+      function saveSleepLog() {
+        const today = new Date().toLocaleDateString();
+        const bedtime = document.getElementById('sleepBedtime').value;
+        const wakeup = document.getElementById('sleepWakeup').value;
+        localStorage.setItem(`sleep_bedtime_${today}`, bedtime);
+        localStorage.setItem(`sleep_wakeup_${today}`, wakeup);
+        updateSleepDuration();
+      }
+
+      function loadSleepLog() {
+        const today = new Date().toLocaleDateString();
+        const bedtime = localStorage.getItem(`sleep_bedtime_${today}`);
+        const wakeup = localStorage.getItem(`sleep_wakeup_${today}`);
+        if (bedtime) document.getElementById('sleepBedtime').value = bedtime;
+        if (wakeup) document.getElementById('sleepWakeup').value = wakeup;
+        updateSleepDuration();
+      }
+
+      function updateSleepDuration() {
+        const bedtime = document.getElementById('sleepBedtime').value;
+        const wakeup = document.getElementById('sleepWakeup').value;
+        const el = document.getElementById('sleepDuration');
+        if (!bedtime || !wakeup || !el) { if(el) el.innerText = ''; return; }
+        const [bh, bm] = bedtime.split(':').map(Number);
+        const [wh, wm] = wakeup.split(':').map(Number);
+        let mins = (wh * 60 + wm) - (bh * 60 + bm);
+        if (mins < 0) mins += 24 * 60; // overnight
+        const hours = Math.floor(mins / 60);
+        const remaining = mins % 60;
+        let emoji = '😴';
+        if (hours >= 7 && hours <= 9) emoji = '✅';
+        else if (hours < 6) emoji = '⚠️';
+        el.innerText = `${emoji} ${hours}h ${remaining}m of sleep`;
+      }
+
+      // ===== HEATMAP =====
+      function renderHeatmap() {
+        const grid = document.getElementById('heatmapGrid');
+        if (!grid) return;
+        let html = '';
+        for (let day = 1; day <= 30; day++) {
+          const state = JSON.parse(localStorage.getItem(`day_${day}_state`) || '{}');
+          let total = 0, done = 0;
+          if (Array.isArray(state.negotiables)) {
+            total += state.negotiables.length;
+            done += state.negotiables.filter(i => i.done).length;
+          }
+          if (Array.isArray(state.schedule)) {
+            total += state.schedule.length;
+            done += state.schedule.filter(i => i.done).length;
+          }
+          if (Array.isArray(state.todos)) {
+            total += state.todos.length;
+            done += state.todos.filter(i => i.done).length;
+          }
+          const pct = total > 0 ? done / total : 0;
+          let colorClass = 'bg-blue-950/60 border border-blue-500/20';
+          if (pct > 0 && pct < 0.25) colorClass = 'bg-amber-900/60';
+          else if (pct >= 0.25 && pct < 0.5) colorClass = 'bg-amber-600/70';
+          else if (pct >= 0.5 && pct < 1) colorClass = 'bg-emerald-600/80';
+          else if (pct >= 1) colorClass = 'bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.4)]';
+          html += `<div class="heatmap-cell w-7 h-7 rounded-md ${colorClass} flex items-center justify-center text-[10px] font-bold text-white/70 cursor-default" title="Day ${day}: ${Math.round(pct*100)}%">${day}</div>`;
+        }
+        grid.innerHTML = html;
+      }
+
+      // ===== EXPORT / IMPORT =====
+      function exportData() {
+        const data = {};
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          data[key] = localStorage.getItem(key);
+        }
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `sambee-tracker-backup-${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function importData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const data = JSON.parse(e.target.result);
+            Object.keys(data).forEach(key => {
+              localStorage.setItem(key, data[key]);
+            });
+            alert('Data imported successfully! Refreshing...');
+            location.reload();
+          } catch (err) {
+            alert('Invalid backup file.');
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      // ===== POMODORO SOUND =====
+      function playPomodoroChime() {
+        if (pomodoroSound === "none") return;
+        
+        try {
+          if (!pomodoroAudioCtx) {
+            pomodoroAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (pomodoroAudioCtx.state === 'suspended') {
+            pomodoroAudioCtx.resume();
+          }
+          
+          const now = pomodoroAudioCtx.currentTime;
+          
+          if (pomodoroSound === "zen") {
+            const freqs = [150, 225, 300, 450];
+            freqs.forEach((freq, idx) => {
+              const osc = pomodoroAudioCtx.createOscillator();
+              const gainNode = pomodoroAudioCtx.createGain();
+              osc.type = 'sine';
+              osc.frequency.value = freq;
+              
+              const decay = 2.5 / (idx + 1);
+              gainNode.gain.setValueAtTime(idx === 0 ? 0.3 : 0.1, now);
+              gainNode.gain.exponentialRampToValueAtTime(0.001, now + decay);
+              
+              osc.connect(gainNode);
+              gainNode.connect(pomodoroAudioCtx.destination);
+              osc.start(now);
+              osc.stop(now + decay);
+            });
+          } else if (pomodoroSound === "digital") {
+            const playBeep = (time, duration) => {
+              const osc = pomodoroAudioCtx.createOscillator();
+              const gainNode = pomodoroAudioCtx.createGain();
+              osc.type = 'triangle';
+              osc.frequency.value = 880;
+              
+              gainNode.gain.setValueAtTime(0.25, time);
+              gainNode.gain.setValueAtTime(0.25, time + duration - 0.02);
+              gainNode.gain.exponentialRampToValueAtTime(0.001, time + duration);
+              
+              osc.connect(gainNode);
+              gainNode.connect(pomodoroAudioCtx.destination);
+              osc.start(time);
+              osc.stop(time + duration);
+            };
+            playBeep(now, 0.1);
+            playBeep(now + 0.15, 0.1);
+            playBeep(now + 0.3, 0.2);
+          } else if (pomodoroSound === "uplifting") {
+            const notes = [783.99, 1046.5, 1318.51, 1567.98];
+            notes.forEach((freq, i) => {
+              const osc = pomodoroAudioCtx.createOscillator();
+              const gainNode = pomodoroAudioCtx.createGain();
+              osc.type = 'sine';
+              osc.frequency.value = freq;
+              gainNode.gain.setValueAtTime(0.15, now + i * 0.08);
+              gainNode.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.15);
+              osc.connect(gainNode);
+              gainNode.connect(pomodoroAudioCtx.destination);
+              osc.start(now + i * 0.08);
+              osc.stop(now + i * 0.08 + 0.15);
+            });
+          } else { // "classic"
+            const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
+            notes.forEach((freq, i) => {
+              const osc = pomodoroAudioCtx.createOscillator();
+              const gainNode = pomodoroAudioCtx.createGain();
+              osc.type = 'sine';
+              osc.frequency.value = freq;
+              gainNode.gain.setValueAtTime(0.2, now + i * 0.15);
+              gainNode.gain.exponentialRampToValueAtTime(0.001, now + i * 0.15 + 0.3);
+              osc.connect(gainNode);
+              gainNode.connect(pomodoroAudioCtx.destination);
+              osc.start(now + i * 0.15);
+              osc.stop(now + i * 0.15 + 0.3);
+            });
+          }
+        } catch(e) {
+          console.error("Audio Context playback error: ", e);
+        }
+      }
+
+      // ===== KEYBOARD SHORTCUT =====
+      document.addEventListener('keydown', (e) => {
+        // Space to toggle pomodoro (only when not typing in an input/textarea)
+        if (e.code === 'Space' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) {
+          e.preventDefault();
+          togglePomodoro();
+        }
+      });
+
       window.onload = () => {
         function updateLiveTime() {
           const today = new Date();
@@ -1503,6 +2266,14 @@
         fetchLogs();
         renderVentHistory();
         renderDailyTodos();
+        loadWaterTracker();
+        calculateWaterStreak();
+        loadDailyQuote();
+        calculateStreak();
+        renderMoodState();
+        loadSleepLog();
+        renderHeatmap();
+        loadPomodoroSettings();
       };
     </script>
   </body>

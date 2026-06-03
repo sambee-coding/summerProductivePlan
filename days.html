@@ -338,18 +338,18 @@
       function defaultDayState(day) {
         return {
           negotiables: [
-            { label: "Morning ritual: prayer & planning", done: false },
-            { label: "Healthy movement or exercise", done: false },
-            { label: "Focused deep work session", done: false },
-            { label: "Language practice or review", done: false },
-            { label: "Reflection / journal entry", done: false },
+            { label: "Morning ritual: prayer & planning", done: false, subtasks: [] },
+            { label: "Healthy movement or exercise", done: false, subtasks: [] },
+            { label: "Focused deep work session", done: false, subtasks: [] },
+            { label: "Language practice or review", done: false, subtasks: [] },
+            { label: "Reflection / journal entry", done: false, subtasks: [] },
           ],
           schedule: [
-            { label: "Morning routine & preparation", done: false },
-            { label: "Primary focus block", done: false },
-            { label: "Lunch + reset time", done: false },
-            { label: "Secondary focus block", done: false },
-            { label: "Evening review & rest", done: false },
+            { label: "Morning routine & preparation", done: false, subtasks: [] },
+            { label: "Primary focus block", done: false, subtasks: [] },
+            { label: "Lunch + reset time", done: false, subtasks: [] },
+            { label: "Secondary focus block", done: false, subtasks: [] },
+            { label: "Evening review & rest", done: false, subtasks: [] },
           ],
           todos: [],
         };
@@ -360,13 +360,19 @@
         if (!saved) return defaultDayState(day);
         try {
           const parsed = JSON.parse(saved);
+          
+          const processItems = (items, defaultItems) => {
+              if (!Array.isArray(items)) return defaultItems;
+              return items.map((item, i) => ({
+                  label: item.label || (defaultItems[i] ? defaultItems[i].label : ""),
+                  done: item.done || false,
+                  subtasks: Array.isArray(item.subtasks) ? item.subtasks : []
+              }));
+          };
+
           return {
-            negotiables: Array.isArray(parsed.negotiables)
-              ? parsed.negotiables
-              : defaultDayState(day).negotiables,
-            schedule: Array.isArray(parsed.schedule)
-              ? parsed.schedule
-              : defaultDayState(day).schedule,
+            negotiables: processItems(parsed.negotiables, defaultDayState(day).negotiables),
+            schedule: processItems(parsed.schedule, defaultDayState(day).schedule),
             todos: Array.isArray(parsed.todos) ? parsed.todos : [],
           };
         } catch (error) {
@@ -427,34 +433,39 @@
         updateAllProgress();
       }
 
+      function renderItemWithSubtasks(section, item, index) {
+          const subtasksHtml = item.subtasks.map((sub, sIndex) => `
+              <div class="flex items-center gap-2 mt-2 ml-4">
+                  <input type="checkbox" ${sub.done ? "checked" : ""} onchange="toggleSubtask('${section}', ${index}, ${sIndex})" class="glow-aqua h-3 w-3 rounded-md border-cyan-800 bg-blue-950 text-teal-500">
+                  <input type="text" value="${sub.label.replace(/"/g, "&quot;")}" onchange="updateSubtaskLabel('${section}', ${index}, ${sIndex}, this.value)" class="flex-1 bg-transparent border-b border-blue-500/20 px-1 py-1 text-xs focus:outline-none focus:border-teal-400 ${sub.done ? 'line-through text-cyan-500/50' : 'text-cyan-100'}" />
+                  <button type="button" onclick="removeSubtask('${section}', ${index}, ${sIndex})" class="text-[10px] text-rose-400 hover:text-rose-300">✕</button>
+              </div>
+          `).join("");
+
+          return `
+                <div class="rounded-2xl border border-blue-500/15 bg-blue-950/60 p-3">
+                    <label class="grid grid-cols-[auto_1fr] gap-3 items-start">
+                        <input type="checkbox" ${item.done ? "checked" : ""} onchange="toggleDayFlag('${section}', ${index})" class="glow-aqua mt-1 h-4 w-4 rounded-md border-cyan-800 bg-blue-950 text-teal-500">
+                        <div class="space-y-2">
+                            <div class="flex gap-2">
+                                <input type="text" value="${item.label.replace(/"/g, "&quot;")}" onchange="updateDayLabel('${section}', ${index}, this.value)" class="w-full bg-blue-950/70 border border-blue-500/20 rounded-xl px-3 py-2 text-sm text-cyan-100 focus:outline-none focus:border-teal-400" />
+                                <button type="button" onclick="addSubtask('${section}', ${index})" class="px-2 py-1 bg-blue-900/50 rounded-lg text-xs text-teal-300 hover:bg-blue-800/50" title="Add sub-task">+</button>
+                            </div>
+                        </div>
+                    </label>
+                    <div class="pl-6 space-y-1">
+                        ${subtasksHtml}
+                    </div>
+                </div>
+            `;
+      }
+
       function renderDayContent() {
         const state = loadDayState(currentDay);
         const negotiables = document.getElementById("dayNegotiables");
         const schedule = document.getElementById("daySchedule");
-        negotiables.innerHTML = state.negotiables
-          .map(
-            (item, index) => `
-                <label class="grid grid-cols-[auto_1fr] gap-3 items-start rounded-2xl border border-blue-500/15 bg-blue-950/60 p-3">
-                    <input type="checkbox" ${item.done ? "checked" : ""} onchange="toggleDayFlag('negotiables', ${index})" class="glow-aqua mt-1 h-4 w-4 rounded-md border-cyan-800 bg-blue-950 text-teal-500">
-                    <div class="space-y-2">
-                        <input type="text" value="${item.label.replace(/"/g, "&quot;")}" onchange="updateDayLabel('negotiables', ${index}, this.value)" class="w-full bg-blue-950/70 border border-blue-500/20 rounded-xl px-3 py-3 text-sm text-cyan-100 focus:outline-none focus:border-teal-400" />
-                    </div>
-                </label>
-            `,
-          )
-          .join("");
-        schedule.innerHTML = state.schedule
-          .map(
-            (item, index) => `
-                <label class="grid grid-cols-[auto_1fr] gap-3 items-start rounded-2xl border border-blue-500/15 bg-blue-950/60 p-3">
-                    <input type="checkbox" ${item.done ? "checked" : ""} onchange="toggleDayFlag('schedule', ${index})" class="glow-aqua mt-1 h-4 w-4 rounded-md border-cyan-800 bg-blue-950 text-teal-500">
-                    <div class="space-y-2">
-                        <input type="text" value="${item.label.replace(/"/g, "&quot;")}" onchange="updateDayLabel('schedule', ${index}, this.value)" class="w-full bg-blue-950/70 border border-blue-500/20 rounded-xl px-3 py-3 text-sm text-cyan-100 focus:outline-none focus:border-teal-400" />
-                    </div>
-                </label>
-            `,
-          )
-          .join("");
+        negotiables.innerHTML = state.negotiables.map((item, index) => renderItemWithSubtasks('negotiables', item, index)).join("");
+        schedule.innerHTML = state.schedule.map((item, index) => renderItemWithSubtasks('schedule', item, index)).join("");
         renderDayTodos(state.todos);
         document.getElementById("negotiableCount").innerText =
           `${state.negotiables.length} items`;
@@ -480,6 +491,38 @@
           value.trim() || defaultDayState(currentDay)[section][index].label;
         saveDayState(currentDay, state);
         renderDayContent();
+      }
+
+      function addSubtask(section, index) {
+          const state = loadDayState(currentDay);
+          if (!state[section] || !state[section][index]) return;
+          state[section][index].subtasks.push({ label: "New sub-task", done: false });
+          saveDayState(currentDay, state);
+          renderDayContent();
+      }
+
+      function toggleSubtask(section, index, sIndex) {
+          const state = loadDayState(currentDay);
+          if (!state[section] || !state[section][index] || !state[section][index].subtasks[sIndex]) return;
+          state[section][index].subtasks[sIndex].done = !state[section][index].subtasks[sIndex].done;
+          saveDayState(currentDay, state);
+          renderDayContent();
+      }
+
+      function updateSubtaskLabel(section, index, sIndex, value) {
+          const state = loadDayState(currentDay);
+          if (!state[section] || !state[section][index] || !state[section][index].subtasks[sIndex]) return;
+          state[section][index].subtasks[sIndex].label = value.trim() || "Sub-task";
+          saveDayState(currentDay, state);
+          renderDayContent();
+      }
+
+      function removeSubtask(section, index, sIndex) {
+          const state = loadDayState(currentDay);
+          if (!state[section] || !state[section][index] || !state[section][index].subtasks[sIndex]) return;
+          state[section][index].subtasks.splice(sIndex, 1);
+          saveDayState(currentDay, state);
+          renderDayContent();
       }
 
       function renderDayTodos(todos) {
