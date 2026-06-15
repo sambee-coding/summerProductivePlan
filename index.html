@@ -1132,6 +1132,7 @@
         saveDailyTodosForKey(key, todos);
         input.value = "";
         renderDailyTodos();
+        markActivity();
         updateAllProgress();
       }
 
@@ -1142,6 +1143,7 @@
         todos[index].done = !todos[index].done;
         saveDailyTodosForKey(key, todos);
         renderDailyTodos();
+        markActivity();
         updateAllProgress();
       }
 
@@ -1151,6 +1153,7 @@
         todos.splice(index, 1);
         saveDailyTodosForKey(key, todos);
         renderDailyTodos();
+        markActivity();
         updateAllProgress();
       }
 
@@ -1163,6 +1166,7 @@
           `${weekKey}_daily_schedule_${index}_checked`,
           checkbox.checked,
         );
+        markActivity();
         updateAllProgress();
       }
 
@@ -1404,7 +1408,13 @@
         updateAllProgress();
       }
 
+      function markActivity() {
+        localStorage.setItem(`activity_${new Date().toLocaleDateString()}`, "true");
+        if (typeof calculateStreak === "function") calculateStreak();
+      }
+
       function updateProgress() {
+        markActivity();
         saveCheckedState();
         updateAllProgress();
       }
@@ -1453,6 +1463,7 @@
         localStorage.setItem("sprint_logs", JSON.stringify(localFallback));
 
         textInput.value = "";
+        markActivity();
         fetchLogs();
       }
 
@@ -2019,27 +2030,22 @@
           const checkDate = new Date(today);
           checkDate.setDate(today.getDate() - i);
           const dateStr = checkDate.toLocaleDateString();
-          let allDone = true;
+          let allHabitsDone = true;
+          let anyHabitsDone = false;
           for (const id of habitIds) {
             const val = localStorage.getItem(`sprint_${dateStr}_${id}`);
-            if (val !== "true") {
-              allDone = false;
-              break;
-            }
+            if (val === "true") anyHabitsDone = true;
+            else allHabitsDone = false;
           }
-          if (allDone && i === 0) {
-            // Today might not be finished yet, check if at least one is checked
-            const anyCheckedToday = habitIds.some(id => localStorage.getItem(`sprint_${dateStr}_${id}`) === "true");
-            if (!anyCheckedToday) {
-              // Skip today, start counting from yesterday
-              continue;
-            }
+          
+          const hasActivity = localStorage.getItem(`activity_${dateStr}`) === "true";
+
+          if (allHabitsDone || hasActivity) {
             streak++;
-          } else if (allDone) {
-            streak++;
+          } else if (i === 0 && anyHabitsDone) {
+            // Today in progress, ignore
           } else if (i === 0) {
-            // Today not done yet is okay, skip
-            continue;
+            // Today untouched, ignore
           } else {
             break;
           }
