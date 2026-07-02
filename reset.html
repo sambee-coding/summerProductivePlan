@@ -1,0 +1,149 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Month Reset</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body { background-color: #040f16; font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      .glass-card { background: rgba(10,25,47,0.82); backdrop-filter: blur(18px); border: 1px solid rgba(45,212,191,0.16); }
+      @keyframes pulse-glow { 0%,100%{box-shadow:0 0 8px rgba(45,212,191,0.3)} 50%{box-shadow:0 0 28px rgba(45,212,191,0.7)} }
+      .glow-pulse { animation: pulse-glow 2s ease-in-out infinite; }
+      @keyframes fade-in { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+      .fade-in { animation: fade-in 0.6s ease forwards; }
+      @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+      .spin { animation: spin-slow 1.2s linear infinite; }
+      .safe-badge { background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); }
+      .danger-badge { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); }
+    </style>
+  </head>
+  <body class="text-cyan-50 min-h-screen flex items-center justify-center p-4">
+    <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-rose-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div id="mainCard" class="glass-card rounded-3xl p-8 md:p-12 max-w-2xl w-full shadow-2xl fade-in">
+      <div class="text-center mb-8">
+        <div class="text-6xl mb-4">🌊</div>
+        <h1 class="text-3xl font-black tracking-wide bg-gradient-to-r from-teal-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent uppercase mb-2">
+          New Month Reset
+        </h1>
+        <p class="text-cyan-300/80 text-sm">Starting fresh for <span class="font-bold text-teal-300">July</span> — Day 2 begins now! 🚀</p>
+      </div>
+
+      <div class="safe-badge rounded-2xl p-5 mb-4">
+        <div class="flex items-center gap-2 text-emerald-300 font-bold text-sm uppercase tracking-wider mb-3">
+          <span>✅</span> Will be PRESERVED
+        </div>
+        <ul class="space-y-2 text-sm text-emerald-100/90">
+          <li class="flex items-center gap-2"><span class="text-lg">📚</span> All your books and reading reflections</li>
+          <li class="flex items-center gap-2"><span class="text-lg">🇰🇷</span> All Korean plan day progress (all 30 days)</li>
+        </ul>
+      </div>
+
+      <div class="danger-badge rounded-2xl p-5 mb-8">
+        <div class="flex items-center gap-2 text-rose-300 font-bold text-sm uppercase tracking-wider mb-3">
+          <span>🗑️</span> Will be CLEARED (fresh start)
+        </div>
+        <ul class="space-y-1.5 text-sm text-rose-100/80">
+          <li class="flex items-start gap-2"><span>•</span> Daily non-negotiable habits (checkboxes)</li>
+          <li class="flex items-start gap-2"><span>•</span> All day states in the 30-Day Scheduler</li>
+          <li class="flex items-start gap-2"><span>•</span> Week 1-4 checklists and weekly schedules</li>
+          <li class="flex items-start gap-2"><span>•</span> Daily schedule checkboxes</li>
+          <li class="flex items-start gap-2"><span>•</span> Progress logs and vent letters</li>
+          <li class="flex items-start gap-2"><span>•</span> Streak, activity, and mood data</li>
+          <li class="flex items-start gap-2"><span>•</span> Pomodoro session count and settings</li>
+          <li class="flex items-start gap-2"><span>•</span> Water tracker and sleep log data</li>
+          <li class="flex items-start gap-2"><span>•</span> Daily todos</li>
+        </ul>
+      </div>
+
+      <div class="glass-card rounded-2xl p-4 mb-8 border border-amber-500/20 text-center">
+        <p class="text-xs uppercase tracking-widest text-amber-400 font-bold mb-1">Today's Date</p>
+        <p id="todayDate" class="text-xl font-black text-white"></p>
+        <p class="text-sm text-cyan-300/70 mt-1">The scheduler will open on <span class="text-teal-300 font-bold">Day 1</span> ready for Day 2 tomorrow.</p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="index.html" class="flex-1 text-center py-3.5 rounded-2xl border border-blue-500/20 bg-blue-950/40 text-sm font-bold text-cyan-100 hover:bg-blue-900/40 transition uppercase tracking-wider">
+          Cancel — Go back
+        </a>
+        <button id="resetBtn" onclick="performReset()"
+          class="flex-1 py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-orange-500 text-sm font-black text-white shadow-lg hover:brightness-110 transition uppercase tracking-wider glow-pulse">
+          🔄 Reset and Start Fresh
+        </button>
+      </div>
+    </div>
+
+    <div id="successCard" class="glass-card rounded-3xl p-8 md:p-12 max-w-2xl w-full shadow-2xl hidden text-center">
+      <div class="text-6xl mb-4">✅</div>
+      <h2 class="text-2xl font-black text-teal-300 mb-2">Reset Complete!</h2>
+      <p class="text-cyan-100/80 text-sm mb-6">Books and Korean data preserved. Everything else cleared.<br>Starting fresh on <strong class="text-teal-300">Day 1</strong> — you got this! 💪</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="index.html" class="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-sm font-black text-slate-950 shadow-lg hover:brightness-110 transition uppercase tracking-wider">
+          Go to Home 🏠
+        </a>
+        <a href="days.html" class="px-8 py-3.5 rounded-2xl border border-cyan-500/40 bg-cyan-500/10 text-sm font-black text-cyan-100 hover:bg-cyan-500/20 transition uppercase tracking-wider">
+          Go to Days 📆
+        </a>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('todayDate').innerText = new Date().toLocaleDateString('en-US', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+
+      function performReset() {
+        const btn = document.getElementById('resetBtn');
+        btn.disabled = true;
+        btn.textContent = '⟳ Resetting...';
+
+        const PRESERVE_PATTERNS = [
+          /^books_tracker_data$/,
+          /^selected_book_id$/,
+          /^korean_day_\d+_state$/,
+        ];
+
+        function shouldPreserve(key) {
+          return PRESERVE_PATTERNS.some(function(p) { return p.test(key); });
+        }
+
+        var allKeys = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          allKeys.push(localStorage.key(i));
+        }
+
+        allKeys.forEach(function(key) {
+          if (!shouldPreserve(key)) {
+            localStorage.removeItem(key);
+          }
+        });
+
+        // Explicitly clear known keys
+        for (var d = 1; d <= 30; d++) {
+          localStorage.removeItem('day_' + d + '_state');
+        }
+        for (var s = 0; s < 11; s++) {
+          localStorage.removeItem('daily_schedule_item_' + s + '_checked');
+        }
+        ['week1','week2','week3','week4'].forEach(function(wk) {
+          for (var idx = 0; idx < 7; idx++) {
+            localStorage.removeItem(wk + '_day_' + idx + '_checked');
+            localStorage.removeItem(wk + '_day_' + idx + '_text');
+            for (var j = 0; j < 11; j++) {
+              localStorage.removeItem(wk + '_daily_schedule_' + j + '_checked');
+            }
+          }
+        });
+
+        setTimeout(function() {
+          document.getElementById('mainCard').classList.add('hidden');
+          var sc = document.getElementById('successCard');
+          sc.classList.remove('hidden');
+          sc.classList.add('fade-in');
+        }, 800);
+      }
+    </script>
+  </body>
+</html>
