@@ -423,12 +423,12 @@
           >
             <div class="flex items-center justify-between mb-4">
               <h4 class="text-lg font-bold text-cyan-200">
-                June 30 Secret Letter
+                July 31 Secret Letter
               </h4>
             </div>
             <p id="ventPrompt" class="text-sm text-cyan-100/80 mb-4">
               Type your secret vent here. The content will stay hidden until
-              June 30.
+              July 31.
             </p>
             <textarea
               id="ventTextarea"
@@ -451,7 +451,7 @@
               >
             </div>
             <p id="ventUnlockHint" class="mt-3 text-xs text-cyan-300/70">
-              Your words are stored safely and revealed only on June 30.
+              Your words are stored safely and revealed only on July 31.
             </p>
             <div id="ventHistory" class="mt-4 space-y-3"></div>
           </div>
@@ -1493,22 +1493,22 @@
           .join("");
       }
 
-      // Vent (secret letter) helpers — stored and revealed on/after June 30
-      function getJune30UnlockDate() {
+      // Vent (secret letter) helpers — stored and revealed on/after July 31
+      function getUnlockDate() {
         const d = new Date();
-        d.setMonth(5); // June (0-indexed)
-        d.setDate(30);
+        d.setMonth(6); // July (0-indexed)
+        d.setDate(31);
         d.setHours(0, 0, 0, 0);
         return d;
       }
 
       function isVentUnlocked() {
-        return new Date() >= getJune30UnlockDate();
+        return new Date() >= getUnlockDate();
       }
 
       function getVentStorageKey() {
         const y = new Date().getFullYear();
-        return `vent_messages_${y}_06_30`;
+        return `vent_messages_${y}_07_31`;
       }
 
       function loadVentMessages() {
@@ -1547,14 +1547,14 @@
               ? "No stored vents yet."
               : `${messages.length} stored vent${messages.length === 1 ? "" : "s"}`;
         if (prompt) {
-          const formatted = getJune30UnlockDate().toLocaleDateString();
+          const formatted = getUnlockDate().toLocaleDateString();
           prompt.innerText = unlocked
             ? `Your secret letters are revealed.`
             : `Your secret letters are hidden until ${formatted}.`;
         }
         if (!history) return;
         if (!unlocked) {
-          history.innerHTML = `<p class="text-xs text-cyan-300/60 italic">Vents are hidden until June 30.</p>`;
+          history.innerHTML = `<p class="text-xs text-cyan-300/60 italic">Vents are hidden until July 31.</p>`;
           return;
         }
         if (messages.length === 0) {
