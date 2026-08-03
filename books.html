@@ -1,599 +1,305 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book Reading & Reflection</title>
+    <title>40-Day Book Reading Tracker — Sambee's Growth Sprint 📚</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              eucalyptus: '#98AA9D',
+              mist: '#B3C9D6',
+              plaster: '#F2EFE2',
+              soot: {
+                DEFAULT: '#2D3536',
+                dark: '#1C2324',
+                card: '#242C2D',
+                hover: '#2F383A'
+              },
+              moss: {
+                DEFAULT: '#697C70',
+                light: '#7F9587',
+                dark: '#54645A'
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Outfit', 'sans-serif']
+            }
+          }
+        }
+      };
+    </script>
     <style>
+      :root {
+        --c-eucalyptus: #98AA9D;
+        --c-mist: #B3C9D6;
+        --c-plaster: #F2EFE2;
+        --c-soot: #2D3536;
+        --c-soot-dark: #1C2324;
+        --c-moss: #697C70;
+      }
+
       body {
-        background-color: #040f16;
-        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
       }
-      .glass-card {
-        background: rgba(10, 25, 47, 0.82);
-        backdrop-filter: blur(18px);
-        border: 1px solid rgba(56, 189, 248, 0.16);
+
+      .font-display {
+        font-family: 'Outfit', sans-serif;
       }
-      .custom-scrollbar::-webkit-scrollbar {
+
+      .dark .glass-card {
+        background: rgba(36, 44, 45, 0.85);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(152, 170, 157, 0.18);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+      }
+
+      .light .glass-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(105, 124, 112, 0.15);
+      }
+
+      .dark .glass-card-subtle {
+        background: rgba(28, 35, 36, 0.6);
+        border: 1px solid rgba(179, 201, 214, 0.12);
+      }
+
+      .light .glass-card-subtle {
+        background: rgba(242, 239, 226, 0.6);
+        border: 1px solid rgba(105, 124, 112, 0.12);
+      }
+
+      ::-webkit-scrollbar {
         width: 6px;
       }
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #38bdf8;
+      ::-webkit-scrollbar-thumb {
+        background: var(--c-eucalyptus);
         border-radius: 999px;
       }
     </style>
   </head>
-  <body
-    class="text-cyan-50 min-h-screen pb-16 selection:bg-sky-500 selection:text-white"
-  >
-    <div
-      class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none"
-    ></div>
-    <div
-      class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"
-    ></div>
+  <body class="bg-soot-dark dark:bg-soot-dark text-soot dark:text-plaster min-h-screen pb-20 selection:bg-moss selection:text-plaster">
+    
+    <!-- Background Glows -->
+    <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-moss/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] bg-mist/10 rounded-full blur-[140px] pointer-events-none"></div>
 
-    <header
-      class="max-w-6xl mx-auto pt-8 px-4 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8"
-    >
-      <div>
-        <div class="flex items-center gap-3">
-          <span class="text-2xl">📚</span>
-          <h1
-            class="text-3xl font-black tracking-wide bg-gradient-to-r from-sky-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent uppercase"
-          >
-            Reading & Reflection
-          </h1>
+    <header class="max-w-7xl mx-auto pt-8 px-4 sm:px-6 mb-8">
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 pb-6 border-b border-eucalyptus/15">
+        <div>
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">📖</span>
+            <div>
+              <h1 class="text-3xl font-black font-display tracking-tight text-plaster uppercase">
+                40-Day Reading Tracker
+              </h1>
+              <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
+                Target: 10+ pages per day across tech, backend engineering & personal mastery books (400+ pages goal)
+              </p>
+            </div>
+          </div>
         </div>
-        <p
-          class="text-cyan-300 font-bold text-sm mt-2 bg-cyan-950/30 border border-cyan-500/10 px-3 py-1 rounded-lg inline-block shadow-sm"
-        >
-          Track books, add daily reflections, attach images, and share your
-          insights.
-        </p>
-      </div>
-      <div class="flex gap-3">
-        <a
-          href="index.html"
-          class="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-cyan-100 hover:bg-cyan-500/20 transition"
-          >Home</a
-        >
+
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="index.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-plaster hover:border-eucalyptus transition">
+            🏠 Dashboard
+          </a>
+          <a href="days.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist hover:border-mist transition">
+            📅 40 Days Grid
+          </a>
+          <a href="korean-plan.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
+            🇰🇷 Korean Plan
+          </a>
+        </div>
       </div>
     </header>
 
-    <main
-      class="max-w-6xl mx-auto px-4 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]"
-    >
-      <section
-        class="glass-card rounded-3xl p-6 shadow-2xl border border-sky-500/10"
-      >
-        <div class="flex flex-col gap-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div
-              class="rounded-3xl border border-sky-500/10 bg-blue-950/40 p-5"
-            >
-              <div
-                class="text-xs uppercase tracking-widest text-sky-300 font-bold mb-3"
-              >
-                Books tracked
-              </div>
-              <div class="text-4xl font-black text-white" id="bookCount">0</div>
-              <div class="text-xs text-cyan-300/70 mt-2">
-                Books in your reading list
-              </div>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 grid gap-8 lg:grid-cols-12">
+      
+      <!-- LEFT PANEL: Reading Goal & Daily Log Stream (5 Cols) -->
+      <section class="lg:col-span-5 space-y-6">
+        
+        <!-- Total Pages Progress Card -->
+        <div class="glass-card rounded-3xl p-6 flex items-center justify-between">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-eucalyptus font-bold block mb-1">Sprint Pages Goal</span>
+            <div class="text-3xl font-black font-display text-plaster">
+              <span id="totalPagesLoggedDisplay">0</span> <span class="text-sm font-normal text-mist">/ 400 pages</span>
             </div>
-            <div
-              class="rounded-3xl border border-sky-500/10 bg-blue-950/40 p-5"
-            >
-              <div
-                class="text-xs uppercase tracking-widest text-teal-300 font-bold mb-3"
-              >
-                Reflections saved
-              </div>
-              <div class="text-4xl font-black text-white" id="reflectionCount">
-                0
-              </div>
-              <div class="text-xs text-cyan-300/70 mt-2">
-                Daily entries you can review anytime
-              </div>
-            </div>
+            <p class="text-xs text-moss-light font-medium mt-1">10+ pages logged daily</p>
           </div>
+          <div class="relative w-20 h-20">
+            <svg class="w-full h-full transform -rotate-90">
+              <circle cx="40" cy="40" r="32" stroke="rgba(152,170,157,0.15)" stroke-width="6" fill="transparent" />
+              <circle id="readingProgressCircle" cx="40" cy="40" r="32" stroke="#697C70" stroke-width="6" fill="transparent" stroke-dasharray="201" stroke-dashoffset="201" class="transition-all duration-700" />
+            </svg>
+            <span id="readingProgressPercent" class="absolute inset-0 flex items-center justify-center text-xs font-black font-display text-plaster">0%</span>
+          </div>
+        </div>
 
-          <div id="sidebarBookList" class="space-y-3"></div>
+        <!-- Log Reading Session Input -->
+        <div class="glass-card rounded-3xl p-6">
+          <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2 mb-4">
+            <span>✍️</span> Log Today's Reading
+          </h2>
 
-          <div class="rounded-3xl border border-sky-500/10 bg-blue-950/40 p-5">
-            <div class="flex items-center justify-between mb-4">
+          <div class="space-y-3">
+            <div>
+              <label class="text-[11px] font-bold text-eucalyptus uppercase block mb-1">Book Title</label>
+              <input type="text" id="bookTitleInput" placeholder="e.g. Designing Data-Intensive Applications / Atomic Habits" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
               <div>
-                <div
-                  class="text-xs uppercase tracking-widest text-sky-300 font-bold"
-                >
-                  Add a new book
-                </div>
-                <p class="text-sm text-cyan-100/80">
-                  Save the title and author first, then reflect on it daily.
-                </p>
+                <label class="text-[11px] font-bold text-eucalyptus uppercase block mb-1">Pages Read Today</label>
+                <input type="number" id="pagesReadInput" min="1" value="10" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss" />
+              </div>
+              <div>
+                <label class="text-[11px] font-bold text-eucalyptus uppercase block mb-1">Minutes Spent</label>
+                <input type="number" id="readMinutesInput" min="1" value="20" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss" />
               </div>
             </div>
-            <div class="grid gap-3">
-              <input
-                id="newBookTitle"
-                type="text"
-                placeholder="Book title"
-                class="rounded-2xl border border-blue-500/20 bg-blue-950/60 px-4 py-3 text-sm text-cyan-100 focus:outline-none focus:border-sky-400"
-              />
-              <input
-                id="newBookAuthor"
-                type="text"
-                placeholder="Author"
-                class="rounded-2xl border border-blue-500/20 bg-blue-950/60 px-4 py-3 text-sm text-cyan-100 focus:outline-none focus:border-sky-400"
-              />
-              <div class="flex gap-3">
-                <button
-                  onclick="addBook()"
-                  class="flex-1 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-500 px-4 py-3 text-xs font-bold uppercase tracking-wider text-slate-950 hover:brightness-110 transition"
-                >
-                  Add Book
-                </button>
-                <button
-                  onclick="clearBookForm()"
-                  class="rounded-2xl border border-sky-500/20 px-4 py-3 text-xs font-bold uppercase tracking-wider text-sky-100 hover:bg-sky-500/10 transition"
-                >
-                  Clear
-                </button>
-              </div>
+
+            <div>
+              <label class="text-[11px] font-bold text-eucalyptus uppercase block mb-1">Key Takeaway / Quote</label>
+              <textarea id="bookNotesInput" rows="3" placeholder="What key insight did you learn today?" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl p-3 text-xs text-plaster focus:outline-none focus:border-moss resize-none"></textarea>
             </div>
+
+            <button onclick="saveReadingLog()" class="w-full py-3 bg-moss hover:bg-moss-light text-plaster font-bold font-display text-xs rounded-xl shadow-md transition">
+              Log Session & Update Sprint 🚀
+            </button>
           </div>
         </div>
       </section>
 
-      <section
-        class="glass-card rounded-3xl p-6 shadow-2xl border border-sky-500/10"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <p class="text-xs uppercase tracking-widest text-sky-300 font-bold">
-              Selected book
-            </p>
-            <h2 id="selectedBookTitle" class="text-2xl font-black text-white">
-              No book selected
+      <!-- RIGHT PANEL: Book Log Stream & Bookshelf Vault (7 Cols) -->
+      <section class="lg:col-span-7 space-y-6">
+        
+        <!-- Log Stream Feed -->
+        <div class="glass-card rounded-3xl p-6">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-eucalyptus/15">
+            <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
+              <span>📚</span> 40-Day Reading Log History
             </h2>
-            <p id="selectedBookAuthor" class="text-sm text-cyan-300/80 mt-1">
-              Pick a book from the left.
-            </p>
+            <span id="logCountBadge" class="text-xs text-eucalyptus font-medium">0 sessions logged</span>
           </div>
-          <button
-            onclick="deleteSelectedBook()"
-            class="rounded-full border border-rose-400/20 px-4 py-2 text-xs font-bold uppercase tracking-wider text-rose-300 hover:bg-rose-500/10 transition"
-          >
-            Remove
-          </button>
-        </div>
-        <div
-          class="rounded-3xl border border-blue-500/10 bg-blue-950/40 p-5 mb-6"
-        >
-          <div class="flex items-center gap-4">
-            <div
-              class="text-xs uppercase tracking-widest text-teal-300 font-bold"
-            >
-              Reading Status
-            </div>
-            <select
-              id="selectedBookStatus"
-              onchange="updateBookStatus()"
-              class="rounded-2xl border border-blue-500/20 bg-blue-950/60 px-4 py-3 text-sm text-cyan-100 focus:outline-none focus:border-sky-400"
-            >
-              <option value="reading">Reading</option>
-              <option value="completed">Completed</option>
-              <option value="planning">Planning</option>
-            </select>
+
+          <div id="readingLogsFeed" class="space-y-3 max-h-[500px] overflow-y-auto pr-1">
+            <!-- Dynamically populated entries -->
           </div>
-          <div class="mt-4 text-sm text-cyan-200" id="selectedBookMeta">
-            No book selected yet.
-          </div>
-        </div>
-        <div class="mb-6">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <p
-                class="text-xs uppercase tracking-widest text-sky-300 font-bold"
-              >
-                Daily reflection
-              </p>
-              <p class="text-sm text-cyan-100/80">
-                Write about the book and upload a picture if you want.
-              </p>
-            </div>
-            <button
-              onclick="saveReflection()"
-              class="rounded-2xl bg-gradient-to-r from-sky-500 to-teal-500 px-4 py-3 text-xs font-bold uppercase tracking-wider text-slate-950 hover:brightness-110 transition"
-            >
-              Save Reflection
-            </button>
-          </div>
-          <textarea
-            id="reflectionInput"
-            rows="5"
-            class="w-full rounded-3xl border border-blue-500/20 bg-blue-950/60 px-4 py-4 text-sm text-cyan-100 focus:outline-none focus:border-sky-400"
-            placeholder="Write your daily thoughts about the book..."
-          ></textarea>
-          <div class="mt-4 grid gap-3 sm:grid-cols-2">
-            <input
-              id="reflectionImageInput"
-              type="file"
-              accept="image/*"
-              multiple
-              class="text-xs text-cyan-200"
-              onchange="handleImageUpload(event)"
-            />
-            <div
-              class="rounded-3xl border border-blue-500/10 bg-blue-950/30 p-3 min-h-[88px]"
-              id="imagePreviewArea"
-            >
-              <p class="text-xs text-cyan-300/70">
-                Image previews appear here.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="rounded-3xl border border-sky-500/10 bg-blue-950/40 p-5">
-          <div class="flex items-center justify-between mb-4">
-            <p class="text-xs uppercase tracking-widest text-sky-300 font-bold">
-              Reflections
-            </p>
-            <span
-              id="selectedReflectionCount"
-              class="text-xs uppercase tracking-widest text-slate-400"
-              >0 entries</span
-            >
-          </div>
-          <div
-            id="reflectionList"
-            class="space-y-4 custom-scrollbar max-h-[420px] overflow-y-auto"
-          ></div>
         </div>
       </section>
     </main>
 
     <script>
-      function getBooksKey() {
-        return "books_tracker_data";
-      }
+      const TARGET_PAGES = 400;
 
-      function loadBooks() {
-        const raw = localStorage.getItem(getBooksKey());
-        if (!raw) return [];
-        try {
-          return JSON.parse(raw);
-        } catch (err) {
-          return [];
-        }
-      }
-
-      function saveBooks(books) {
-        localStorage.setItem(getBooksKey(), JSON.stringify(books));
-      }
-
-      function createBook(title, author) {
-        return {
-          id: Date.now().toString(),
-          title: title.trim(),
-          author: author.trim(),
-          status: "reading",
-          reflections: [],
-          createdAt: new Date().toISOString(),
-        };
-      }
-
-      function renderSidebar() {
-        const books = loadBooks();
-        const list = document.getElementById("bookCount");
-        const reflectionCount = document.getElementById("reflectionCount");
-        list.innerText = books.length;
-        reflectionCount.innerText = books.reduce(
-          (sum, book) => sum + book.reflections.length,
-          0,
-        );
-
-        const sidebar = document.getElementById("sidebarBookList");
-        if (!sidebar) return;
-        sidebar.innerHTML = books
-          .map((book) => {
-            const reflections = book.reflections.length;
-            return `
-                    <button type="button" class="group w-full text-left rounded-3xl border border-blue-500/10 bg-blue-950/50 p-4 hover:border-sky-400 hover:bg-sky-500/10 transition" onclick="selectBook('${book.id}')">
-                        <div class="flex items-center justify-between gap-3">
-                            <div>
-                                <p class="text-sm font-bold text-white">${book.title}</p>
-                                <p class="text-xs text-cyan-300/70 mt-1">${book.author}</p>
-                            </div>
-                            <span class="text-xs uppercase tracking-widest text-sky-300">${book.status}</span>
-                        </div>
-                        <p class="mt-3 text-xs text-cyan-300/70">${reflections} reflection${reflections === 1 ? "" : "s"}</p>
-                    </button>
-                `;
-          })
-          .join("");
-      }
-
-      function selectBook(bookId) {
-        const books = loadBooks();
-        const book = books.find((item) => item.id === bookId);
-        if (!book) return;
-        localStorage.setItem("selected_book_id", bookId);
-        renderSelectedBook();
-      }
-
-      function getSelectedBookId() {
-        return localStorage.getItem("selected_book_id");
-      }
-
-      function getSelectedBook() {
-        const id = getSelectedBookId();
-        const books = loadBooks();
-        return books.find((book) => book.id === id) || null;
-      }
-
-      function renderSelectedBook() {
-        const book = getSelectedBook();
-        const title = document.getElementById("selectedBookTitle");
-        const author = document.getElementById("selectedBookAuthor");
-        const status = document.getElementById("selectedBookStatus");
-        const meta = document.getElementById("selectedBookMeta");
-        const reflectionsList = document.getElementById("reflectionList");
-        const reflectionCount = document.getElementById(
-          "selectedReflectionCount",
-        );
-
-        if (!book) {
-          title.innerText = "No book selected";
-          author.innerText =
-            "Pick a book from the reading list to add reflections.";
-          status.value = "reading";
-          meta.innerText = "Select a book first.";
-          reflectionsList.innerHTML =
-            '<p class="text-xs text-cyan-300/70 italic">Select a book to see your reflections.</p>';
-          reflectionCount.innerText = "0 entries";
-          return;
-        }
-
-        title.innerText = book.title;
-        author.innerText = book.author ? `by ${book.author}` : "Author not set";
-        status.value = book.status;
-        meta.innerText = `${book.reflections.length} reflection${book.reflections.length === 1 ? "" : "s"} · Added ${new Date(book.createdAt).toLocaleDateString()}`;
-        reflectionCount.innerText = `${book.reflections.length} entries`;
-
-        if (!book.reflections.length) {
-          reflectionsList.innerHTML =
-            '<p class="text-xs text-cyan-300/70 italic">No reflections yet. Save one to build your reading habit.</p>';
-          return;
-        }
-
-        reflectionsList.innerHTML = book.reflections
-          .slice()
-          .reverse()
-          .map((entry, index) => {
-            const imageHtml = (entry.images || [])
-              .map(
-                (src) =>
-                  `<img src="${src}" class="h-24 w-auto rounded-2xl border border-blue-500/20 object-cover" />`,
-              )
-              .join("");
-            return `
-                    <div class="rounded-3xl border border-blue-500/10 bg-blue-950/70 p-4">
-                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                            <div>
-                                <p class="text-xs uppercase tracking-widest text-sky-300 font-bold">${new Date(entry.date).toLocaleString()}</p>
-                                <p class="text-sm text-cyan-100/80 mt-2">${entry.text.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
-                            </div>
-                            <div class="flex gap-2">
-                                <button type="button" onclick="shareReflection('${book.id}','${entry.id}')" class="rounded-2xl bg-sky-500/20 px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-sky-200 hover:bg-sky-500/30 transition">Share</button>
-                                <button type="button" onclick="deleteReflection('${book.id}','${entry.id}')" class="rounded-2xl bg-rose-500/20 px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-rose-200 hover:bg-rose-500/30 transition">Delete</button>
-                            </div>
-                        </div>
-                        ${imageHtml ? `<div class="mt-4 grid grid-cols-2 gap-2">${imageHtml}</div>` : ""}
-                    </div>
-                `;
-          })
-          .join("");
-      }
-
-      function addBook() {
-        const titleInput = document.getElementById("newBookTitle");
-        const authorInput = document.getElementById("newBookAuthor");
-        const title = titleInput.value.trim();
-        const author = authorInput.value.trim();
-        if (!title) return;
-        const books = loadBooks();
-        books.push(createBook(title, author));
-        saveBooks(books);
-        titleInput.value = "";
-        authorInput.value = "";
-        renderSidebar();
-        selectBook(books[books.length - 1].id);
-      }
-
-      function clearBookForm() {
-        document.getElementById("newBookTitle").value = "";
-        document.getElementById("newBookAuthor").value = "";
-      }
-
-      function updateBookStatus() {
-        const book = getSelectedBook();
-        if (!book) return;
-        book.status = document.getElementById("selectedBookStatus").value;
-        const books = loadBooks().map((item) =>
-          item.id === book.id ? book : item,
-        );
-        saveBooks(books);
-        renderSidebar();
-        renderSelectedBook();
-      }
-
-      function handleImageUpload(event) {
-        const files = Array.from(event.target.files || []);
-        const preview = document.getElementById("imagePreviewArea");
-        preview.innerHTML = "";
-        files.forEach((file) => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const img = document.createElement("img");
-            img.src = reader.result;
-            img.className =
-              "h-24 w-auto rounded-2xl border border-blue-500/20 object-cover";
-            preview.appendChild(img);
-          };
-          reader.readAsDataURL(file);
-        });
-      }
-
-      function saveReflection() {
-        const book = getSelectedBook();
-        if (!book) return;
-        const text = document.getElementById("reflectionInput").value.trim();
-        if (!text) return;
-        const files = document.getElementById("reflectionImageInput").files;
-        const images = [];
-        const readerPromises = [];
-        for (const file of Array.from(files || [])) {
-          readerPromises.push(
-            new Promise((resolve) => {
-              const reader = new FileReader();
-              reader.onload = () => {
-                images.push(reader.result);
-                resolve();
-              };
-              reader.readAsDataURL(file);
-            }),
-          );
-        }
-        Promise.all(readerPromises).then(() => {
-          const entry = {
-            id: Date.now().toString(),
-            text,
-            date: new Date().toISOString(),
-            images,
-          };
-          book.reflections.push(entry);
-          const books = loadBooks().map((item) =>
-            item.id === book.id ? book : item,
-          );
-          saveBooks(books);
-          document.getElementById("reflectionInput").value = "";
-          document.getElementById("reflectionImageInput").value = "";
-          document.getElementById("imagePreviewArea").innerHTML =
-            '<p class="text-xs text-cyan-300/70 italic">Image previews appear here.</p>';
-          renderSidebar();
-          renderSelectedBook();
-        });
-      }
-
-      function deleteSelectedBook() {
-        const book = getSelectedBook();
-        if (!book) return;
-        const books = loadBooks().filter((item) => item.id !== book.id);
-        saveBooks(books);
-        localStorage.removeItem("selected_book_id");
-        renderSidebar();
-        renderSelectedBook();
-      }
-
-      function deleteReflection(bookId, reflectionId) {
-        const books = loadBooks();
-        const target = books.find((book) => book.id === bookId);
-        if (!target) return;
-        target.reflections = target.reflections.filter(
-          (ref) => ref.id !== reflectionId,
-        );
-        saveBooks(books);
-        renderSidebar();
-        renderSelectedBook();
-      }
-
-      function dataURLtoBlob(dataURL) {
-        const [meta, base64] = dataURL.split(",");
-        const mime = meta.match(/:(.*?);/)[1];
-        const binary = atob(base64);
-        const array = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i += 1) {
-          array[i] = binary.charCodeAt(i);
-        }
-        return new Blob([array], { type: mime });
-      }
-
-      async function shareReflection(bookId, reflectionId) {
-        const books = loadBooks();
-        const book = books.find((item) => item.id === bookId);
-        if (!book) return;
-        const entry = book.reflections.find((ref) => ref.id === reflectionId);
-        if (!entry) return;
-
-        const plainText = `Book: ${book.title}\nAuthor: ${book.author || "Unknown"}\nDate: ${new Date(entry.date).toLocaleDateString()}\n\n${entry.text}`;
-        const htmlText = `
-          <div style="font-family:Arial,Helvetica,sans-serif;color:#0f172a;line-height:1.5;">
-            <p><strong>Book:</strong> ${book.title}</p>
-            <p><strong>Author:</strong> ${book.author || "Unknown"}</p>
-            <p><strong>Date:</strong> ${new Date(entry.date).toLocaleDateString()}</p>
-            <p style="margin-top:16px;">${entry.text.replace(/\n/g, "<br/>")}</p>
-            ${
-              entry.images && entry.images.length
-                ? `<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;">${entry.images
-                    .map(
-                      (src) =>
-                        `<img src="${src}" style="max-width:240px;max-height:180px;border-radius:16px;border:1px solid #cbd5e1;object-fit:cover;" />`,
-                    )
-                    .join("")}</div>`
-                : ""
-            }
-          </div>
-        `;
-
-        if (navigator.clipboard && navigator.clipboard.write) {
-          try {
-            const clipboardItems = [
-              new ClipboardItem({
-                "text/plain": new Blob([plainText], { type: "text/plain" }),
-                "text/html": new Blob([htmlText], { type: "text/html" }),
-              }),
-            ];
-            if (entry.images && entry.images.length) {
-              entry.images.forEach((src) => {
-                const blob = dataURLtoBlob(src);
-                clipboardItems.push(
-                  new ClipboardItem({
-                    [blob.type]: blob,
-                  }),
-                );
-              });
-            }
-            await navigator.clipboard.write(clipboardItems);
-            alert(
-              "Reflection and images copied to clipboard. You can paste them into a compatible app.",
-            );
-            return;
-          } catch (error) {
-            // Fall back to text-only copy if HTML or image clipboard isn't supported.
-          }
-        }
-
-        navigator.clipboard
-          .writeText(plainText)
-          .then(() => {
-            alert(
-              "Reflection copied to clipboard. Share the text version. Image copy is not available in this browser.",
-            );
-          })
-          .catch(() => {
-            alert("Could not copy reflection. Please try again.");
-          });
-      }
-
-      window.onload = () => {
-        renderSidebar();
-        renderSelectedBook();
-        const selected = getSelectedBookId();
-        if (selected) selectBook(selected);
+      window.onload = function() {
+        loadReadingLogs();
       };
+
+      function saveReadingLog() {
+        const title = document.getElementById('bookTitleInput').value.trim();
+        const pages = parseInt(document.getElementById('pagesReadInput').value) || 0;
+        const mins = parseInt(document.getElementById('readMinutesInput').value) || 0;
+        const notes = document.getElementById('bookNotesInput').value.trim();
+
+        if (!title || pages <= 0) {
+          alert("Please enter a book title and number of pages read.");
+          return;
+        }
+
+        const logEntry = {
+          title,
+          pages,
+          mins,
+          notes,
+          timestamp: new Date().toLocaleString(),
+          dateKey: new Date().toISOString().slice(0, 10)
+        };
+
+        let logs = JSON.parse(localStorage.getItem('reading_logs_40sprint') || '[]');
+        logs.unshift(logEntry);
+        localStorage.setItem('reading_logs_40sprint', JSON.stringify(logs));
+
+        // Sync track reading for today if pages >= 10!
+        if (pages >= 10) {
+          const todayKey = new Date().toISOString().slice(0, 10);
+          localStorage.setItem(`track_${todayKey}_reading`, 'true');
+        }
+
+        document.getElementById('bookTitleInput').value = '';
+        document.getElementById('bookNotesInput').value = '';
+
+        loadReadingLogs();
+      }
+
+      function loadReadingLogs() {
+        const logs = JSON.parse(localStorage.getItem('reading_logs_40sprint') || '[]');
+        const feed = document.getElementById('readingLogsFeed');
+        const badge = document.getElementById('logCountBadge');
+
+        let totalPages = 0;
+        logs.forEach(l => totalPages += (l.pages || 0));
+
+        document.getElementById('totalPagesLoggedDisplay').innerText = totalPages;
+        if (badge) badge.innerText = `${logs.length} session${logs.length === 1 ? '' : 's'} logged`;
+
+        const pct = Math.min(100, Math.round((totalPages / TARGET_PAGES) * 100));
+        const circle = document.getElementById('readingProgressCircle');
+        const text = document.getElementById('readingProgressPercent');
+
+        if (circle) {
+          const totalLength = 2 * Math.PI * 32;
+          circle.style.strokeDashoffset = totalLength - (pct / 100) * totalLength;
+        }
+        if (text) text.innerText = `${pct}%`;
+
+        if (!feed) return;
+
+        if (logs.length === 0) {
+          feed.innerHTML = `<div class="p-6 rounded-2xl glass-card-subtle text-xs text-mist/60 italic text-center">No reading logs yet. Read 10+ pages today and log it above!</div>`;
+          return;
+        }
+
+        feed.innerHTML = logs.map((l, idx) => `
+          <div class="p-4 rounded-2xl glass-card-subtle space-y-2 border-l-2 border-moss">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-bold text-plaster">${l.title}</span>
+              <span class="text-[10px] text-eucalyptus font-semibold">${l.timestamp}</span>
+            </div>
+            <div class="flex gap-3 text-xs text-mist">
+              <span class="font-bold text-moss-light">📖 ${l.pages} pages</span>
+              <span>⏱️ ${l.mins} minutes</span>
+            </div>
+            ${l.notes ? `<p class="text-xs italic text-plaster/80 bg-soot/40 p-2.5 rounded-xl border border-eucalyptus/10">"${l.notes}"</p>` : ''}
+            <div class="text-right">
+              <button onclick="deleteLog(${idx})" class="text-[10px] text-red-400 hover:text-red-300">Delete</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function deleteLog(idx) {
+        let logs = JSON.parse(localStorage.getItem('reading_logs_40sprint') || '[]');
+        logs.splice(idx, 1);
+        localStorage.setItem('reading_logs_40sprint', JSON.stringify(logs));
+        loadReadingLogs();
+      }
     </script>
   </body>
 </html>

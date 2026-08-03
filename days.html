@@ -1,670 +1,470 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>30-Day Daily Scheduler</title>
+    <title>40-Day Daily Scheduler — Sambee's Growth Sprint 🚀</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              eucalyptus: '#98AA9D',
+              mist: '#B3C9D6',
+              plaster: '#F2EFE2',
+              soot: {
+                DEFAULT: '#2D3536',
+                dark: '#1C2324',
+                card: '#242C2D',
+                hover: '#2F383A'
+              },
+              moss: {
+                DEFAULT: '#697C70',
+                light: '#7F9587',
+                dark: '#54645A'
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Outfit', 'sans-serif']
+            }
+          }
+        }
+      };
+    </script>
     <style>
+      :root {
+        --c-eucalyptus: #98AA9D;
+        --c-mist: #B3C9D6;
+        --c-plaster: #F2EFE2;
+        --c-soot: #2D3536;
+        --c-soot-dark: #1C2324;
+        --c-moss: #697C70;
+      }
+
       body {
-        background-color: #040f16;
-        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
       }
-      .glass-card {
-        background: rgba(10, 25, 47, 0.78);
-        backdrop-filter: blur(18px);
-        border: 1px solid rgba(45, 212, 191, 0.16);
+
+      .font-display {
+        font-family: 'Outfit', sans-serif;
       }
-      .custom-scrollbar::-webkit-scrollbar {
+
+      .dark .glass-card {
+        background: rgba(36, 44, 45, 0.85);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(152, 170, 157, 0.18);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+      }
+
+      .light .glass-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(105, 124, 112, 0.15);
+      }
+
+      .dark .glass-card-subtle {
+        background: rgba(28, 35, 36, 0.6);
+        border: 1px solid rgba(179, 201, 214, 0.12);
+      }
+
+      .light .glass-card-subtle {
+        background: rgba(242, 239, 226, 0.6);
+        border: 1px solid rgba(105, 124, 112, 0.12);
+      }
+
+      ::-webkit-scrollbar {
         width: 6px;
       }
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #2dd4bf;
+      ::-webkit-scrollbar-thumb {
+        background: var(--c-eucalyptus);
         border-radius: 999px;
       }
     </style>
   </head>
-  <body
-    class="text-cyan-50 min-h-screen pb-16 selection:bg-teal-500 selection:text-white"
-  >
-    <div
-      class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"
-    ></div>
-    <div
-      class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"
-    ></div>
+  <body class="bg-soot-dark dark:bg-soot-dark text-soot dark:text-plaster min-h-screen pb-20 selection:bg-moss selection:text-plaster">
+    
+    <!-- Background Glows -->
+    <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-moss/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] bg-mist/10 rounded-full blur-[140px] pointer-events-none"></div>
 
-    <header
-      class="max-w-6xl mx-auto pt-8 px-4 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8"
-    >
-      <div>
-        <div class="flex items-center gap-3">
-          <span class="text-2xl">📆</span>
-          <h1
-            class="text-3xl font-black tracking-wide bg-gradient-to-r from-teal-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent uppercase"
-          >
-            30-Day Daily Scheduler
-          </h1>
-        </div>
-        <p
-          class="text-cyan-300 font-bold text-sm mt-2 bg-cyan-950/30 border border-cyan-500/10 px-3 py-1 rounded-lg inline-block shadow-sm"
-        >
-          Choose a day, set negotiables, build your schedule, and watch
-          weekly/monthly progress grow.
-        </p>
-      </div>
-      <div class="flex gap-3">
-        <a
-          href="index.html"
-          class="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-cyan-100 hover:bg-cyan-500/20 transition"
-          >Home</a
-        >
-        <button
-          id="currentSelectionButton"
-          class="rounded-full border border-sky-500/30 bg-sky-500/10 px-5 py-3 text-xs font-black uppercase tracking-wider text-sky-100 cursor-default"
-        >
-          Day 1
-        </button>
-      </div>
-    </header>
-
-    <main class="max-w-6xl mx-auto px-4 grid gap-8 lg:grid-cols-[1.1fr_0.7fr]">
-      <section
-        class="glass-card rounded-3xl p-6 shadow-2xl border border-teal-500/10"
-      >
-        <div class="flex flex-col gap-4">
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div
-              class="rounded-3xl border border-cyan-500/10 bg-blue-950/40 p-5"
-            >
-              <div
-                class="flex items-center gap-3 text-xs uppercase tracking-widest font-bold text-teal-400 mb-3"
-              >
-                Monthly Progress
-              </div>
-              <div class="relative w-28 h-28 mx-auto">
-                <svg class="w-full h-full transform -rotate-90">
-                  <circle
-                    cx="32"
-                    cy="32"
-                    r="28"
-                    stroke="rgba(45,212,191,0.05)"
-                    stroke-width="6"
-                    fill="transparent"
-                  />
-                  <circle
-                    id="monthCircle"
-                    cx="32"
-                    cy="32"
-                    r="28"
-                    stroke="#60a5fa"
-                    stroke-width="6"
-                    fill="transparent"
-                    stroke-dasharray="175"
-                    stroke-dashoffset="175"
-                    class="transition-all duration-500"
-                  />
-                </svg>
-                <span
-                  id="monthPercent"
-                  class="absolute inset-0 flex items-center justify-center text-sm font-black text-sky-300"
-                  >0%</span
-                >
-              </div>
-              <p
-                id="monthStatus"
-                class="text-xs text-cyan-300/70 text-center mt-3"
-              >
-                Track all 30 days in one place.
-              </p>
-            </div>
-            <div
-              class="rounded-3xl border border-cyan-500/10 bg-blue-950/40 p-5"
-            >
-              <div
-                class="flex items-center gap-3 text-xs uppercase tracking-widest font-bold text-amber-400 mb-3"
-              >
-                Week Progress
-              </div>
-              <div class="relative w-28 h-28 mx-auto">
-                <svg class="w-full h-full transform -rotate-90">
-                  <circle
-                    cx="32"
-                    cy="32"
-                    r="28"
-                    stroke="rgba(45,212,191,0.05)"
-                    stroke-width="6"
-                    fill="transparent"
-                  />
-                  <circle
-                    id="weekCircle"
-                    cx="32"
-                    cy="32"
-                    r="28"
-                    stroke="#f59e0b"
-                    stroke-width="6"
-                    fill="transparent"
-                    stroke-dasharray="175"
-                    stroke-dashoffset="175"
-                    class="transition-all duration-500"
-                  />
-                </svg>
-                <span
-                  id="weekPercent"
-                  class="absolute inset-0 flex items-center justify-center text-sm font-black text-amber-300"
-                  >0%</span
-                >
-              </div>
-              <p
-                id="weekStatus"
-                class="text-xs text-cyan-300/70 text-center mt-3"
-              >
-                Progress for the active week.
-              </p>
-            </div>
-            <div
-              class="rounded-3xl border border-cyan-500/10 bg-blue-950/40 p-5"
-            >
-              <div
-                class="flex items-center gap-3 text-xs uppercase tracking-widest font-bold text-emerald-400 mb-3"
-              >
-                Day Progress
-              </div>
-              <div class="relative w-28 h-28 mx-auto">
-                <svg class="w-full h-full transform -rotate-90">
-                  <circle
-                    cx="32"
-                    cy="32"
-                    r="28"
-                    stroke="rgba(45,212,191,0.05)"
-                    stroke-width="6"
-                    fill="transparent"
-                  />
-                  <circle
-                    id="dayCircle"
-                    cx="32"
-                    cy="32"
-                    r="28"
-                    stroke="#34d399"
-                    stroke-width="6"
-                    fill="transparent"
-                    stroke-dasharray="175"
-                    stroke-dashoffset="175"
-                    class="transition-all duration-500"
-                  />
-                </svg>
-                <span
-                  id="dayPercent"
-                  class="absolute inset-0 flex items-center justify-center text-sm font-black text-emerald-300"
-                  >0%</span
-                >
-              </div>
-              <p
-                id="dayStatus"
-                class="text-xs text-cyan-300/70 text-center mt-3"
-              >
-                Today's negotiables and todos.
+    <header class="max-w-7xl mx-auto pt-8 px-4 sm:px-6 mb-8">
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 pb-6 border-b border-eucalyptus/15">
+        <div>
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">📆</span>
+            <div>
+              <h1 class="text-3xl font-black font-display tracking-tight text-plaster uppercase">
+                40-Day Daily Scheduler
+              </h1>
+              <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
+                Select any day from 1 to 40, set negotiables, schedule focus blocks, and track your progress.
               </p>
             </div>
           </div>
-          <div class="rounded-3xl border border-blue-800/60 bg-blue-950/40 p-5">
-            <div
-              class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
-            >
-              <div>
-                <div
-                  class="text-xs uppercase tracking-widest text-sky-300 font-bold mb-2"
-                >
-                  Select a day
-                </div>
-                <p id="weekLabel" class="text-sm text-cyan-100/80">Week 1</p>
-              </div>
-              <button
-                onclick="resetCurrentDay()"
-                class="rounded-full bg-slate-900/80 px-4 py-2 text-xs font-bold uppercase tracking-wider text-cyan-100 hover:bg-slate-800 transition"
-              >
-                Clear selected day
-              </button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="index.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-plaster hover:border-eucalyptus transition">
+            🏠 Dashboard
+          </a>
+          <a href="korean-plan.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist hover:border-mist transition">
+            🇰🇷 Korean Plan
+          </a>
+          <a href="books.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
+            📚 Books Tracker
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 grid gap-8 lg:grid-cols-12">
+      
+      <!-- LEFT PANEL: 40 Days Grid & Progress Stats (5 Cols) -->
+      <section class="lg:col-span-5 space-y-6">
+        
+        <!-- Progress Summary Rings -->
+        <div class="glass-card rounded-3xl p-6 grid grid-cols-3 gap-3 text-center">
+          <div>
+            <div class="text-[10px] uppercase font-bold text-eucalyptus mb-2">Sprint (40D)</div>
+            <div class="relative w-16 h-16 mx-auto">
+              <svg class="w-full h-full transform -rotate-90">
+                <circle cx="32" cy="32" r="26" stroke="rgba(152,170,157,0.15)" stroke-width="5" fill="transparent" />
+                <circle id="sprintCircle" cx="32" cy="32" r="26" stroke="#98AA9D" stroke-width="5" fill="transparent" stroke-dasharray="163" stroke-dashoffset="163" class="transition-all duration-500" />
+              </svg>
+              <span id="sprintPercent" class="absolute inset-0 flex items-center justify-center text-xs font-black font-display text-plaster">0%</span>
             </div>
-            <div id="daysGrid" class="mt-5 grid grid-cols-5 gap-2"></div>
+          </div>
+
+          <div>
+            <div class="text-[10px] uppercase font-bold text-mist mb-2">Active Week</div>
+            <div class="relative w-16 h-16 mx-auto">
+              <svg class="w-full h-full transform -rotate-90">
+                <circle cx="32" cy="32" r="26" stroke="rgba(179,201,214,0.15)" stroke-width="5" fill="transparent" />
+                <circle id="weekCircle" cx="32" cy="32" r="26" stroke="#B3C9D6" stroke-width="5" fill="transparent" stroke-dasharray="163" stroke-dashoffset="163" class="transition-all duration-500" />
+              </svg>
+              <span id="weekPercent" class="absolute inset-0 flex items-center justify-center text-xs font-black font-display text-mist">0%</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-[10px] uppercase font-bold text-moss-light mb-2">Selected Day</div>
+            <div class="relative w-16 h-16 mx-auto">
+              <svg class="w-full h-full transform -rotate-90">
+                <circle cx="32" cy="32" r="26" stroke="rgba(105,124,112,0.15)" stroke-width="5" fill="transparent" />
+                <circle id="dayCircle" cx="32" cy="32" r="26" stroke="#697C70" stroke-width="5" fill="transparent" stroke-dasharray="163" stroke-dashoffset="163" class="transition-all duration-500" />
+              </svg>
+              <span id="dayPercent" class="absolute inset-0 flex items-center justify-center text-xs font-black font-display text-moss-light">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 40 Days Grid Button Selector -->
+        <div class="glass-card rounded-3xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <span class="text-xs uppercase tracking-widest text-eucalyptus font-bold block">Select Day</span>
+              <h2 id="currentWeekLabel" class="text-base font-bold font-display text-plaster">Week 1 (Days 1-7)</h2>
+            </div>
+            <button onclick="resetSelectedDay()" class="px-3 py-1.5 glass-card-subtle text-[11px] font-bold font-display uppercase text-mist hover:text-plaster rounded-xl transition">
+              Clear Day
+            </button>
+          </div>
+
+          <div id="daysButtonsGrid" class="grid grid-cols-5 gap-2.5">
+            <!-- Dynamically generated 40 buttons -->
           </div>
         </div>
       </section>
 
-      <section
-        class="glass-card rounded-3xl p-6 shadow-2xl border border-teal-500/10"
-      >
-        <div class="flex flex-col gap-4">
-          <div
-            class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3"
-          >
+      <!-- RIGHT PANEL: Selected Day Details & Task Lists (7 Cols) -->
+      <section class="lg:col-span-7 space-y-6">
+        
+        <div class="glass-card rounded-3xl p-6">
+          <div class="flex items-center justify-between mb-6 pb-4 border-b border-eucalyptus/15">
             <div>
-              <p
-                class="text-xs uppercase tracking-widest text-teal-400 font-bold"
-              >
-                Day
-              </p>
-              <h2 id="selectedDay" class="text-3xl font-black text-white">
-                Day 1
-              </h2>
-              <p id="selectedWeek" class="text-sm text-cyan-300/80 mt-1">
-                Week 1
-              </p>
+              <span id="selectedWeekTag" class="text-xs uppercase tracking-widest text-eucalyptus font-bold">Week 1</span>
+              <h2 id="selectedDayTitle" class="text-3xl font-black font-display text-plaster">Day 1</h2>
             </div>
-            <div
-              class="rounded-3xl bg-blue-950/40 border border-blue-500/20 p-4 text-sm text-cyan-100"
-            >
-              <span class="font-bold text-sky-300">Tip:</span> Each day has its
-              own negotiables, schedule, and todo list. Progress helps your
-              weekly/monthly tracker stay updated.
+            <div class="text-right">
+              <span id="selectedDayStatusText" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-moss/20 text-moss-light border border-moss/30">
+                0 / 10 Items Done
+              </span>
             </div>
           </div>
 
+          <!-- Section 1: Daily Non-Negotiables -->
           <div class="space-y-6">
-            <div
-              class="rounded-3xl border border-blue-500/20 bg-blue-950/40 p-5"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-bold text-cyan-200">
-                  Daily Negotiables
+            <div class="glass-card-subtle rounded-2xl p-5">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-bold font-display text-plaster flex items-center gap-2">
+                  <span>⚡</span> Day Non-Negotiables
                 </h3>
-                <span
-                  id="negotiableCount"
-                  class="text-xs uppercase tracking-widest text-slate-400"
-                  >5 items</span
-                >
+                <span id="negotiablesCountBadge" class="text-[11px] text-eucalyptus font-medium">8 items</span>
               </div>
-              <div id="dayNegotiables" class="space-y-3"></div>
+              <div id="dayNegotiablesList" class="space-y-2.5"></div>
             </div>
 
-            <div
-              class="rounded-3xl border border-blue-500/20 bg-blue-950/40 p-5"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-bold text-cyan-200">Daily Schedule</h3>
-                <span
-                  id="scheduleCount"
-                  class="text-xs uppercase tracking-widest text-slate-400"
-                  >5 blocks</span
-                >
+            <!-- Section 2: Daily Schedule Blocks -->
+            <div class="glass-card-subtle rounded-2xl p-5">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-bold font-display text-plaster flex items-center gap-2">
+                  <span>⏱️</span> Daily Schedule Blocks
+                </h3>
+                <span id="scheduleCountBadge" class="text-[11px] text-eucalyptus font-medium">5 blocks</span>
               </div>
-              <div id="daySchedule" class="space-y-3"></div>
+              <div id="dayScheduleList" class="space-y-2.5"></div>
             </div>
 
-            <div
-              class="rounded-3xl border border-blue-500/20 bg-blue-950/40 p-5"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-bold text-cyan-200">Daily To-Dos</h3>
-                <span
-                  id="todoCount"
-                  class="text-xs uppercase tracking-widest text-slate-400"
-                  >0 tasks</span
-                >
+            <!-- Section 3: Extra Day To-Dos -->
+            <div class="glass-card-subtle rounded-2xl p-5">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-bold font-display text-plaster flex items-center gap-2">
+                  <span>📝</span> Specific Tasks for Day <span id="dayTodoNum">1</span>
+                </h3>
               </div>
-              <div class="flex gap-2 mb-4">
-                <input
-                  id="dayTodoInput"
-                  type="text"
-                  placeholder="Add a task for this day"
-                  class="flex-1 rounded-2xl border border-blue-500/20 bg-blue-950/60 px-4 py-3 text-sm text-cyan-100 focus:outline-none focus:border-teal-400"
-                />
-                <button
-                  onclick="addDayTodo()"
-                  class="rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-950 hover:brightness-110 transition"
-                >
+              <div class="flex gap-2 mb-3">
+                <input type="text" id="addTodoInput" placeholder="Add specific task for this day..." class="flex-1 bg-soot/80 border border-eucalyptus/20 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss" />
+                <button onclick="addDayTodoItem()" class="px-4 py-2 bg-moss text-plaster text-xs font-bold font-display rounded-xl hover:bg-moss-light transition">
                   Add
                 </button>
               </div>
-              <div id="dayTodosList" class="space-y-3"></div>
+              <div id="dayTodosList" class="space-y-2"></div>
             </div>
           </div>
+
         </div>
       </section>
     </main>
 
     <script>
-      const totalDays = 30;
-      let currentDay = 1;
-
-      function getDayStateKey(day) {
-        return `day_${day}_state`;
-      }
+      const TOTAL_DAYS = 40;
+      let selectedDay = 1;
 
       function getWeekNumber(day) {
-        return Math.min(5, Math.ceil(day / 7));
+        if (day <= 7) return 1;
+        if (day <= 14) return 2;
+        if (day <= 21) return 3;
+        if (day <= 28) return 4;
+        if (day <= 35) return 5;
+        return 6;
       }
 
-      function defaultDayState(day) {
+      function defaultDayData(day) {
         return {
           negotiables: [
-            { label: "Morning ritual: prayer & planning", done: false, subtasks: [] },
-            { label: "Healthy movement or exercise", done: false, subtasks: [] },
-            { label: "Focused deep work session", done: false, subtasks: [] },
-            { label: "Language practice or review", done: false, subtasks: [] },
-            { label: "Reflection / journal entry", done: false, subtasks: [] },
+            { label: "Design: Figma & UI/UX fundamentals", done: false },
+            { label: "DSA: 1+ LeetCode problem in JS", done: false },
+            { label: "Backend: Node.js / Express / DB practice", done: false },
+            { label: "Internship: Output deliverables", done: false },
+            { label: "Book: Read 10+ pages", done: false },
+            { label: "Korean: 15-20 min Hangul / vocab", done: false },
+            { label: "English: 15-20 min fluency speaking", done: false },
+            { label: "Supporting: Prayer, Workout & Hydration", done: false }
           ],
           schedule: [
-            { label: "Morning routine & preparation", done: false, subtasks: [] },
-            { label: "Primary focus block", done: false, subtasks: [] },
-            { label: "Lunch + reset time", done: false, subtasks: [] },
-            { label: "Secondary focus block", done: false, subtasks: [] },
-            { label: "Evening review & rest", done: false, subtasks: [] },
+            { label: "6:30–8:00 AM: Prayer, Workout & Breakfast", done: false },
+            { label: "8:00–9:00 AM: Korean & English Fluency Push", done: false },
+            { label: "9:00 AM–5:00 PM: Internship Tasks & Output", done: false },
+            { label: "6:00–8:00 PM: Deep Work (Backend & DSA)", done: false },
+            { label: "8:00–9:30 PM: Design Skill-Building & Reading", done: false }
           ],
-          todos: [],
+          todos: []
         };
       }
 
-      function loadDayState(day) {
-        const saved = localStorage.getItem(getDayStateKey(day));
-        if (!saved) return defaultDayState(day);
+      function getDayStorageKey(day) {
+        return `day_${day}_40sprint_state`;
+      }
+
+      function loadDayData(day) {
+        const saved = localStorage.getItem(getDayStorageKey(day));
+        if (!saved) return defaultDayData(day);
         try {
           const parsed = JSON.parse(saved);
-          
-          const processItems = (items, defaultItems) => {
-              if (!Array.isArray(items)) return defaultItems;
-              return items.map((item, i) => ({
-                  label: item.label || (defaultItems[i] ? defaultItems[i].label : ""),
-                  done: item.done || false,
-                  subtasks: Array.isArray(item.subtasks) ? item.subtasks : []
-              }));
-          };
-
           return {
-            negotiables: processItems(parsed.negotiables, defaultDayState(day).negotiables),
-            schedule: processItems(parsed.schedule, defaultDayState(day).schedule),
-            todos: Array.isArray(parsed.todos) ? parsed.todos : [],
+            negotiables: Array.isArray(parsed.negotiables) ? parsed.negotiables : defaultDayData(day).negotiables,
+            schedule: Array.isArray(parsed.schedule) ? parsed.schedule : defaultDayData(day).schedule,
+            todos: Array.isArray(parsed.todos) ? parsed.todos : []
           };
-        } catch (error) {
-          return defaultDayState(day);
+        } catch(e) {
+          return defaultDayData(day);
         }
       }
 
-      function saveDayState(day, state) {
-        localStorage.setItem(getDayStateKey(day), JSON.stringify(state));
-        updateAllProgress();
+      function saveDayData(day, data) {
+        localStorage.setItem(getDayStorageKey(day), JSON.stringify(data));
+        updateAllProgressRings();
       }
 
-      function renderDayButton(day) {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.textContent = day;
-        button.className =
-          "rounded-2xl border border-blue-500/20 bg-blue-950/40 px-3 py-3 text-sm font-bold text-cyan-100 transition hover:bg-cyan-500/10";
-        button.onclick = () => selectDay(day);
-        button.id = `day-button-${day}`;
-        return button;
-      }
+      window.onload = function() {
+        renderDaysGrid();
+        selectDay(1);
+      };
 
-      function renderDayButtons() {
-        const container = document.getElementById("daysGrid");
-        container.innerHTML = "";
-        for (let day = 1; day <= totalDays; day++) {
-          container.appendChild(renderDayButton(day));
+      function renderDaysGrid() {
+        const container = document.getElementById('daysButtonsGrid');
+        if (!container) return;
+
+        let html = '';
+        for (let day = 1; day <= TOTAL_DAYS; day++) {
+          html += `
+            <button id="dayBtn-${day}" onclick="selectDay(${day})" class="h-11 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition">
+              ${day}
+            </button>
+          `;
         }
+        container.innerHTML = html;
       }
 
       function selectDay(day) {
-        currentDay = day;
-        document.querySelectorAll("#daysGrid button").forEach((button) => {
-          button.classList.remove(
-            "bg-cyan-500/20",
-            "text-white",
-            "border-cyan-500/40",
-          );
-          button.classList.add("bg-blue-950/40", "text-cyan-100");
+        selectedDay = day;
+        const weekNum = getWeekNumber(day);
+
+        document.querySelectorAll('#daysButtonsGrid button').forEach(b => {
+          b.className = "h-11 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition";
         });
-        const activeButton = document.getElementById(`day-button-${day}`);
-        if (activeButton) {
-          activeButton.classList.add(
-            "bg-cyan-500/20",
-            "text-white",
-            "border-cyan-500/40",
-          );
+
+        const activeBtn = document.getElementById(`dayBtn-${day}`);
+        if (activeBtn) {
+          activeBtn.className = "h-11 rounded-2xl bg-moss text-plaster font-bold font-display text-xs shadow-md border border-moss-light";
         }
-        document.getElementById("selectedDay").innerText = `Day ${day}`;
-        document.getElementById("selectedWeek").innerText =
-          `Week ${getWeekNumber(day)}`;
-        document.getElementById("currentSelectionButton").innerText =
-          `Day ${day}`;
-        document.getElementById("weekLabel").innerText =
-          `Week ${getWeekNumber(day)}`;
-        renderDayContent();
-        updateAllProgress();
+
+        document.getElementById('currentWeekLabel').innerText = `Week ${weekNum} (Days ${(weekNum-1)*7+1}-${Math.min(TOTAL_DAYS, weekNum*7)})`;
+        document.getElementById('selectedWeekTag').innerText = `Week ${weekNum}`;
+        document.getElementById('selectedDayTitle').innerText = `Day ${day}`;
+        document.getElementById('dayTodoNum').innerText = day;
+
+        renderDayDetails();
+        updateAllProgressRings();
       }
 
-      function renderItemWithSubtasks(section, item, index) {
-          const subtasksHtml = item.subtasks.map((sub, sIndex) => `
-              <div class="flex items-center gap-2 mt-2 ml-4">
-                  <input type="checkbox" ${sub.done ? "checked" : ""} onchange="toggleSubtask('${section}', ${index}, ${sIndex})" class="glow-aqua h-3 w-3 rounded-md border-cyan-800 bg-blue-950 text-teal-500">
-                  <input type="text" value="${sub.label.replace(/"/g, "&quot;")}" onchange="updateSubtaskLabel('${section}', ${index}, ${sIndex}, this.value)" class="flex-1 bg-transparent border-b border-blue-500/20 px-1 py-1 text-xs focus:outline-none focus:border-teal-400 ${sub.done ? 'line-through text-cyan-500/50' : 'text-cyan-100'}" />
-                  <button type="button" onclick="removeSubtask('${section}', ${index}, ${sIndex})" class="text-[10px] text-rose-400 hover:text-rose-300">✕</button>
-              </div>
-          `).join("");
+      function renderDayDetails() {
+        const data = loadDayData(selectedDay);
 
-          return `
-                <div class="rounded-2xl border border-blue-500/15 bg-blue-950/60 p-3">
-                    <label class="grid grid-cols-[auto_1fr] gap-3 items-start">
-                        <input type="checkbox" ${item.done ? "checked" : ""} onchange="toggleDayFlag('${section}', ${index})" class="glow-aqua mt-1 h-4 w-4 rounded-md border-cyan-800 bg-blue-950 text-teal-500">
-                        <div class="space-y-2">
-                            <div class="flex gap-2">
-                                <input type="text" value="${item.label.replace(/"/g, "&quot;")}" onchange="updateDayLabel('${section}', ${index}, this.value)" class="w-full bg-blue-950/70 border border-blue-500/20 rounded-xl px-3 py-2 text-sm text-cyan-100 focus:outline-none focus:border-teal-400" />
-                                <button type="button" onclick="addSubtask('${section}', ${index})" class="px-2 py-1 bg-blue-900/50 rounded-lg text-xs text-teal-300 hover:bg-blue-800/50" title="Add sub-task">+</button>
-                            </div>
-                        </div>
-                    </label>
-                    <div class="pl-6 space-y-1">
-                        ${subtasksHtml}
-                    </div>
-                </div>
-            `;
-      }
+        const negList = document.getElementById('dayNegotiablesList');
+        const schList = document.getElementById('dayScheduleList');
+        const todoList = document.getElementById('dayTodosList');
 
-      function renderDayContent() {
-        const state = loadDayState(currentDay);
-        const negotiables = document.getElementById("dayNegotiables");
-        const schedule = document.getElementById("daySchedule");
-        negotiables.innerHTML = state.negotiables.map((item, index) => renderItemWithSubtasks('negotiables', item, index)).join("");
-        schedule.innerHTML = state.schedule.map((item, index) => renderItemWithSubtasks('schedule', item, index)).join("");
-        renderDayTodos(state.todos);
-        document.getElementById("negotiableCount").innerText =
-          `${state.negotiables.length} items`;
-        document.getElementById("scheduleCount").innerText =
-          `${state.schedule.length} blocks`;
-        document.getElementById("todoCount").innerText =
-          `${state.todos.length} tasks`;
-        updateDayProgress();
-      }
+        negList.innerHTML = data.negotiables.map((item, idx) => `
+          <label class="flex items-center justify-between p-2.5 rounded-xl glass-card-subtle cursor-pointer hover:border-eucalyptus/30 transition">
+            <div class="flex items-center gap-3 text-xs text-plaster">
+              <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleFlag('negotiables', ${idx})" class="w-4 h-4 rounded border-eucalyptus bg-soot text-moss focus:ring-0" />
+              <span class="${item.done ? 'line-through opacity-60' : ''}">${item.label}</span>
+            </div>
+          </label>
+        `).join('');
 
-      function toggleDayFlag(section, index) {
-        const state = loadDayState(currentDay);
-        if (!state[section] || !state[section][index]) return;
-        state[section][index].done = !state[section][index].done;
-        saveDayState(currentDay, state);
-        renderDayContent();
-      }
+        schList.innerHTML = data.schedule.map((item, idx) => `
+          <label class="flex items-center justify-between p-2.5 rounded-xl glass-card-subtle cursor-pointer hover:border-eucalyptus/30 transition">
+            <div class="flex items-center gap-3 text-xs text-plaster">
+              <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleFlag('schedule', ${idx})" class="w-4 h-4 rounded border-eucalyptus bg-soot text-moss focus:ring-0" />
+              <span class="${item.done ? 'line-through opacity-60' : ''}">${item.label}</span>
+            </div>
+          </label>
+        `).join('');
 
-      function updateDayLabel(section, index, value) {
-        const state = loadDayState(currentDay);
-        if (!state[section] || !state[section][index]) return;
-        state[section][index].label =
-          value.trim() || defaultDayState(currentDay)[section][index].label;
-        saveDayState(currentDay, state);
-        renderDayContent();
-      }
-
-      function addSubtask(section, index) {
-          const state = loadDayState(currentDay);
-          if (!state[section] || !state[section][index]) return;
-          state[section][index].subtasks.push({ label: "New sub-task", done: false });
-          saveDayState(currentDay, state);
-          renderDayContent();
-      }
-
-      function toggleSubtask(section, index, sIndex) {
-          const state = loadDayState(currentDay);
-          if (!state[section] || !state[section][index] || !state[section][index].subtasks[sIndex]) return;
-          state[section][index].subtasks[sIndex].done = !state[section][index].subtasks[sIndex].done;
-          saveDayState(currentDay, state);
-          renderDayContent();
-      }
-
-      function updateSubtaskLabel(section, index, sIndex, value) {
-          const state = loadDayState(currentDay);
-          if (!state[section] || !state[section][index] || !state[section][index].subtasks[sIndex]) return;
-          state[section][index].subtasks[sIndex].label = value.trim() || "Sub-task";
-          saveDayState(currentDay, state);
-          renderDayContent();
-      }
-
-      function removeSubtask(section, index, sIndex) {
-          const state = loadDayState(currentDay);
-          if (!state[section] || !state[section][index] || !state[section][index].subtasks[sIndex]) return;
-          state[section][index].subtasks.splice(sIndex, 1);
-          saveDayState(currentDay, state);
-          renderDayContent();
-      }
-
-      function renderDayTodos(todos) {
-        const list = document.getElementById("dayTodosList");
-        if (!todos.length) {
-          list.innerHTML = `<p class="text-xs text-cyan-300/60 italic">No todos yet. Add one to track progress for this day.</p>`;
-          return;
+        if (data.todos.length === 0) {
+          todoList.innerHTML = `<span class="text-xs text-mist/60 italic">No custom tasks for Day ${selectedDay}.</span>`;
+        } else {
+          todoList.innerHTML = data.todos.map((item, idx) => `
+            <div class="flex items-center justify-between p-2 rounded-xl glass-card-subtle text-xs">
+              <label class="flex items-center gap-2 text-plaster flex-1 cursor-pointer">
+                <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleFlag('todos', ${idx})" class="w-4 h-4 rounded border-eucalyptus bg-soot text-moss" />
+                <span class="${item.done ? 'line-through opacity-60' : ''}">${item.label}</span>
+              </label>
+              <button onclick="removeTodo(${idx})" class="text-[10px] text-red-400 hover:text-red-300">Remove</button>
+            </div>
+          `).join('');
         }
-        list.innerHTML = todos
-          .map(
-            (todo, index) => `
-                <div class="flex items-center gap-3 rounded-2xl border border-blue-500/15 bg-blue-950/60 p-3">
-                    <input type="checkbox" ${todo.done ? "checked" : ""} onchange="toggleDayTodo(${index})" class="glow-aqua h-4 w-4 rounded-md border-cyan-800 bg-blue-950 text-teal-500">
-                    <div class="flex-1 ${todo.done ? "text-cyan-400 line-through" : "text-cyan-100"} text-sm">${todo.text.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
-                    <button type="button" onclick="removeDayTodo(${index})" class="text-xs text-rose-400 hover:text-rose-300">Remove</button>
-                </div>
-            `,
-          )
-          .join("");
       }
 
-      function addDayTodo() {
-        const input = document.getElementById("dayTodoInput");
+      function toggleFlag(section, idx) {
+        const data = loadDayData(selectedDay);
+        if (data[section] && data[section][idx]) {
+          data[section][idx].done = !data[section][idx].done;
+          saveDayData(selectedDay, data);
+          renderDayDetails();
+        }
+      }
+
+      function addDayTodoItem() {
+        const input = document.getElementById('addTodoInput');
         const text = input.value.trim();
         if (!text) return;
-        const state = loadDayState(currentDay);
-        state.todos.push({ text, done: false });
-        saveDayState(currentDay, state);
-        input.value = "";
-        renderDayContent();
+        const data = loadDayData(selectedDay);
+        data.todos.push({ label: text, done: false });
+        saveDayData(selectedDay, data);
+        input.value = '';
+        renderDayDetails();
       }
 
-      function toggleDayTodo(index) {
-        const state = loadDayState(currentDay);
-        if (!state.todos[index]) return;
-        state.todos[index].done = !state.todos[index].done;
-        saveDayState(currentDay, state);
-        renderDayContent();
+      function removeTodo(idx) {
+        const data = loadDayData(selectedDay);
+        data.todos.splice(idx, 1);
+        saveDayData(selectedDay, data);
+        renderDayDetails();
       }
 
-      function removeDayTodo(index) {
-        const state = loadDayState(currentDay);
-        state.todos.splice(index, 1);
-        saveDayState(currentDay, state);
-        renderDayContent();
+      function resetSelectedDay() {
+        localStorage.removeItem(getDayStorageKey(selectedDay));
+        renderDayDetails();
+        updateAllProgressRings();
       }
 
-      function resetCurrentDay() {
-        localStorage.removeItem(getDayStateKey(currentDay));
-        renderDayContent();
-        updateAllProgress();
+      function updateAllProgressRings() {
+        // Selected Day Progress
+        const dData = loadDayData(selectedDay);
+        const dTotal = dData.negotiables.length + dData.schedule.length + dData.todos.length;
+        const dDone = dData.negotiables.filter(i => i.done).length + dData.schedule.filter(i => i.done).length + dData.todos.filter(i => i.done).length;
+        const dPct = dTotal > 0 ? Math.round((dDone / dTotal) * 100) : 0;
+
+        setRingProgress('dayCircle', 'dayPercent', dPct);
+        document.getElementById('selectedDayStatusText').innerText = `${dDone} / ${dTotal} Done (${dPct}%)`;
+
+        // Active Week Progress
+        const weekNum = getWeekNumber(selectedDay);
+        const wStart = (weekNum - 1) * 7 + 1;
+        const wEnd = Math.min(TOTAL_DAYS, weekNum * 7);
+        let wTotal = 0, wDone = 0;
+
+        for (let day = wStart; day <= wEnd; day++) {
+          const data = loadDayData(day);
+          wTotal += data.negotiables.length + data.schedule.length + data.todos.length;
+          wDone += data.negotiables.filter(i => i.done).length + data.schedule.filter(i => i.done).length + data.todos.filter(i => i.done).length;
+        }
+        const wPct = wTotal > 0 ? Math.round((wDone / wTotal) * 100) : 0;
+        setRingProgress('weekCircle', 'weekPercent', wPct);
+
+        // Sprint Total (40 Days) Progress
+        let sTotal = 0, sDone = 0;
+        for (let day = 1; day <= TOTAL_DAYS; day++) {
+          const data = loadDayData(day);
+          sTotal += data.negotiables.length + data.schedule.length + data.todos.length;
+          sDone += data.negotiables.filter(i => i.done).length + data.schedule.filter(i => i.done).length + data.todos.filter(i => i.done).length;
+        }
+        const sPct = sTotal > 0 ? Math.round((sDone / sTotal) * 100) : 0;
+        setRingProgress('sprintCircle', 'sprintPercent', sPct);
       }
 
-      function setCircleProgress(circleId, textId, percent) {
+      function setRingProgress(circleId, textId, pct) {
         const circle = document.getElementById(circleId);
         const text = document.getElementById(textId);
         if (!circle || !text) return;
-        const total = 2 * Math.PI * 28;
-        const offset = total - (percent / 100) * total;
-        circle.style.strokeDashoffset = offset;
-        text.textContent = `${percent}%`;
+        const total = 2 * Math.PI * 26;
+        circle.style.strokeDashoffset = total - (pct / 100) * total;
+        text.innerText = `${pct}%`;
       }
-
-      function updateDayProgress() {
-        const state = loadDayState(currentDay);
-        const totalItems =
-          state.negotiables.length + state.schedule.length + state.todos.length;
-        const doneCount =
-          state.negotiables.filter((item) => item.done).length +
-          state.schedule.filter((item) => item.done).length +
-          state.todos.filter((item) => item.done).length;
-        const percent =
-          totalItems > 0 ? Math.round((doneCount / totalItems) * 100) : 0;
-        setCircleProgress("dayCircle", "dayPercent", percent);
-        document.getElementById("dayStatus").innerText =
-          percent === 100
-            ? "All today items are complete!"
-            : `Today: ${doneCount}/${totalItems} complete`;
-      }
-
-      function updateWeekProgress() {
-        const weekNumber = getWeekNumber(currentDay);
-        const startDay = (weekNumber - 1) * 7 + 1;
-        const endDay = Math.min(startDay + 6, totalDays);
-        let totalItems = 0;
-        let doneCount = 0;
-        for (let day = startDay; day <= endDay; day++) {
-          const state = loadDayState(day);
-          const dayItems =
-            state.negotiables.length +
-            state.schedule.length +
-            state.todos.length;
-          const dayDone =
-            state.negotiables.filter((item) => item.done).length +
-            state.schedule.filter((item) => item.done).length +
-            state.todos.filter((item) => item.done).length;
-          totalItems += dayItems;
-          doneCount += dayDone;
-        }
-        const percent =
-          totalItems > 0 ? Math.round((doneCount / totalItems) * 100) : 0;
-        setCircleProgress("weekCircle", "weekPercent", percent);
-        document.getElementById("weekStatus").innerText =
-          percent === 100
-            ? `Week ${weekNumber} fully complete`
-            : `Week ${weekNumber}: ${doneCount}/${totalItems}`;
-      }
-
-      function updateMonthProgress() {
-        let totalItems = 0;
-        let doneCount = 0;
-        for (let day = 1; day <= totalDays; day++) {
-          const state = loadDayState(day);
-          totalItems +=
-            state.negotiables.length +
-            state.schedule.length +
-            state.todos.length;
-          doneCount +=
-            state.negotiables.filter((item) => item.done).length +
-            state.schedule.filter((item) => item.done).length +
-            state.todos.filter((item) => item.done).length;
-        }
-        const percent =
-          totalItems > 0 ? Math.round((doneCount / totalItems) * 100) : 0;
-        setCircleProgress("monthCircle", "monthPercent", percent);
-        document.getElementById("monthStatus").innerText =
-          percent === 100
-            ? "Month complete — all days covered!"
-            : `Month: ${doneCount}/${totalItems}`;
-      }
-
-      function updateAllProgress() {
-        updateDayProgress();
-        updateWeekProgress();
-        updateMonthProgress();
-      }
-
-      window.onload = () => {
-        renderDayButtons();
-        selectDay(1);
-        updateAllProgress();
-      };
     </script>
   </body>
 </html>
