@@ -3,16 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>40-Day Korean Conversation Plan — Sambee's Growth Sprint 🇰🇷</title>
+    <title>33-Day Korean A1 Master Plan — Sambee's Summer Sprint 🇰🇷 (Aug 10 – Ethiopian Sep 1)</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="ethiopian-calendar.js"></script>
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -105,10 +106,10 @@
             <span class="text-3xl">🇰🇷</span>
             <div>
               <h1 class="text-3xl font-black font-display tracking-tight text-plaster uppercase">
-                40-Day Korean A1 Plan
+                33-Day Korean A1 Master Plan
               </h1>
               <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
-                Hangul → Vocabulary → Core Grammar → Daily Speaking & Shadowing (15–20 min/day)
+                Mon Aug 10 (ነሐሴ 4) → Fri Sep 11 (መስከረም 1 🌼 Enkutatash) • 15–20 min/day to A1 Mastery
               </p>
             </div>
           </div>
@@ -119,7 +120,7 @@
             🏠 Dashboard
           </a>
           <a href="days.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist hover:border-mist transition">
-            📅 40 Days Grid
+            📅 33 Days Grid
           </a>
           <a href="books.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
             📚 Books Tracker
@@ -130,13 +131,13 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 grid gap-8 lg:grid-cols-12">
       
-      <!-- LEFT PANEL: 40-Day Lessons Selector (5 Cols) -->
+      <!-- LEFT PANEL: 33-Day Lessons Selector (5 Cols) -->
       <section class="lg:col-span-5 space-y-6">
         
         <!-- Progress Summary Rings -->
         <div class="glass-card rounded-3xl p-6 grid grid-cols-2 gap-4 text-center">
           <div>
-            <div class="text-[10px] uppercase font-bold text-eucalyptus mb-2">Korean Master (40D)</div>
+            <div class="text-[10px] uppercase font-bold text-eucalyptus mb-2">Korean Master (33D)</div>
             <div class="relative w-16 h-16 mx-auto">
               <svg class="w-full h-full transform -rotate-90">
                 <circle cx="32" cy="32" r="26" stroke="rgba(152,170,157,0.15)" stroke-width="5" fill="transparent" />
@@ -158,20 +159,20 @@
           </div>
         </div>
 
-        <!-- 40 Lesson Day Buttons Grid -->
+        <!-- 33 Lesson Day Buttons Grid -->
         <div class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4">
             <div>
               <span class="text-xs uppercase tracking-widest text-eucalyptus font-bold block">Select Lesson</span>
-              <h2 id="lessonWeekLabel" class="text-base font-bold font-display text-plaster">Week 1 (Days 1-7)</h2>
+              <h2 id="lessonWeekLabel" class="text-base font-bold font-display text-plaster">Week 1 (Days 1–7)</h2>
             </div>
             <button onclick="resetCurrentLesson()" class="px-3 py-1.5 glass-card-subtle text-[11px] font-bold font-display uppercase text-mist hover:text-plaster rounded-xl transition">
               Reset Day
             </button>
           </div>
 
-          <div id="koreanGrid" class="grid grid-cols-5 gap-2.5">
-            <!-- 40 Buttons -->
+          <div id="koreanGrid" class="grid grid-cols-4 sm:grid-cols-5 gap-2">
+            <!-- 33 Buttons with Dual Calendar -->
           </div>
         </div>
       </section>
@@ -182,8 +183,13 @@
         <div class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4 pb-4 border-b border-eucalyptus/15">
             <div>
-              <span id="koreanLessonTag" class="text-xs uppercase tracking-widest text-eucalyptus font-bold">Week 1 • Hangul Basics</span>
-              <h2 id="koreanDayTitle" class="text-3xl font-black font-display text-plaster">Day 1</h2>
+              <div class="flex items-center gap-2">
+                <span id="koreanLessonTag" class="text-xs uppercase tracking-widest text-eucalyptus font-bold">Week 1 • Hangul Basics</span>
+                <span id="koreanEthBadge" class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-moss/20 text-moss-light border border-moss/30">
+                  ነሐሴ 4, 2018
+                </span>
+              </div>
+              <h2 id="koreanDayTitle" class="text-3xl font-black font-display text-plaster mt-1">Day 1 • Mon Aug 10</h2>
             </div>
             <span id="koreanDayStatusBadge" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-moss/20 text-moss-light border border-moss/30">
               0 / 4 Complete
@@ -225,10 +231,10 @@
     </main>
 
     <script>
-      const KOREAN_TOTAL_DAYS = 40;
+      const KOREAN_TOTAL_DAYS = 33; // Aug 10 to Ethiopian Sep 1 (Meskerem 1 / Sep 11)
       let currentKoreanDay = 1;
 
-      // 40-Day Curriculum Plan
+      // 33-Day Curriculum Plan for Sambee's Summer Sprint
       const KOREAN_CURRICULUM = {
         1: { subtitle: "Hangul Core Vowels & Survival Greetings", learn: "Vowels: ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ", vocab: "안녕하세요 (Hello), 감사합니다 (Thank you)", speaking: "Say greetings aloud 3x with proper intonation.", checklist: ["Learn vowels ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ", "Memorize 안녕하세요 & 감사합니다", "Say each greeting aloud 3 times", "Listen to audio pronunciation"] },
         2: { subtitle: "Remaining Vowels & Polite Responses", learn: "Complex Vowels: ㅐ ㅔ ㅘ ㅝ", vocab: "네 (Yes), 아니요 (No), 죄송합니다 (Sorry)", speaking: "Practice short Q&A replies.", checklist: ["Learn complex vowels ㅐ ㅔ ㅘ ㅝ", "Memorize 네, 아니요, 죄송합니다", "Practice short reply dialogue aloud", "Write vowels 5 times each"] },
@@ -257,23 +263,16 @@
         25: { subtitle: "Conversation Fillers & Reacting", learn: "Fillers: 진짜요? (Really?), 맞아요 (Right!), 음...", vocab: "진짜요?, 맞아요, 그래요?", speaking: "React naturally in a mock conversation.", checklist: ["Learn natural conversation reactions", "Practice saying 진짜요? with emphasis", "Practice saying 맞아요! out loud", "Combine fillers with replies"] },
         26: { subtitle: "Ordering Coffee & Food", learn: "Phrases: ___ 주세요 (Give me...), 얼마예요? (How much?)", vocab: "아메리카노 한 잔 주세요 (One Americano please)", speaking: "Order coffee at a Korean cafe.", checklist: ["Learn ___ 주세요 phrase", "Practice ordering Americano out loud", "Ask 이거 얼마예요? out loud", "Roleplay cafe transaction"] },
         27: { subtitle: "Location & Directions (어디에 있어요?)", learn: "Grammar: Place + 에 가요 / 어디예요?", vocab: "화장실 (Restroom), 식당 (Restaurant)", speaking: "Ask where places are located.", checklist: ["Learn place marker 에", "Ask 화장실이 어디예요? out loud", "Say 식당에 가요 (Go to restaurant)", "Practice location Q&A"] },
-        28: { subtitle: "Week 4 Review & 2-Min Conversation", learn: "Consolidate tenses, fillers & ordering", vocab: "Review Week 4 vocabulary", speaking: "Roleplay a 2-minute cafe & intro chat.", checklist: ["Review past/future tenses", "Review cafe phrases & fillers", "Roleplay 2-minute conversation", "Celebrate Week 4 completed!"] },
-        29: { subtitle: "Sino-Korean Numbers (1-100) & Prices", learn: "Numbers: 일, 이, 삼, 사, 오, 육, 칠, 팔, 구, 십", vocab: "천원 (1,000 won), 만원 (10,000 won)", speaking: "Say prices out loud.", checklist: ["Learn Sino-Korean numbers 1-10", "Learn 10, 100, 1000 (십, 백, 천)", "Practice stating price tags", "Compare native vs Sino numbers"] },
-        30: { subtitle: "Shopping & Asking for Discounts", learn: "Phrases: 조금 깎아주세요 (Discount please), 이거 살게요", vocab: "이거 살게요 (I'll buy this)", speaking: "Bargain and purchase items.", checklist: ["Learn shopping expressions", "Say 이거 살게요 out loud", "Practice slightly asking for discount", "Roleplay market scene"] },
-        31: { subtitle: "Transportation & Directions (택시, 버스)", learn: "Nouns: 택시 (Taxi), 버스 (Bus), 지하철 (Subway)", vocab: "___(으)로 가주세요 (Please go to...)", speaking: "Tell a taxi driver where to go.", checklist: ["Learn direction marker (으)로", "Say 에티오피아 대사관으로 가주세요", "Ask 버스 정류장이 어디예요?", "Roleplay taxi ride"] },
-        32: { subtitle: "Expressing Wants (Verb + 하고 싶어요)", learn: "Grammar: Verb stem + 하고 싶어요 (Want to do)", vocab: "한국에 가고 싶어요 (Want to go to Korea)", speaking: "Share your goals & wishes.", checklist: ["Learn -하고 싶어요 structure", "Say 개발자가 되고 싶어요 (Want to be dev)", "Say 한국에 가고 싶어요 out loud", "Write 3 personal wishes"] },
-        33: { subtitle: "Expressing Ability (can / cannot)", learn: "Grammar: -(으)ㄹ 수 있어요 / 없어요", vocab: "한국어 할 수 있어요 (I can speak Korean)", speaking: "State what skills you possess.", checklist: ["Learn -(으)ㄹ 수 있어요", "Say 코딩 할 수 있어요 out loud", "Say 한국어 조금 할 수 있어요 out loud", "Practice confidence in speaking"] },
-        34: { subtitle: "Asking Favor & Assistance (도와주세요)", learn: "Phrases: 도와주세요 (Help me), 다시 말씀해 주세요", vocab: "천천히 말해 주세요 (Please speak slowly)", speaking: "Ask native speakers to speak slowly.", checklist: ["Learn 천천히 말해 주세요", "Learn 다시 말해 주세요 (Say again)", "Practice asking for help politely", "Roleplay clarification scene"] },
-        35: { subtitle: "Week 5 Review & Comprehensive Solo Mock", learn: "Synthesize all A1 grammar structures", vocab: "Review Week 5 vocabulary", speaking: "Conduct a 3-minute solo monologue.", checklist: ["Review wants, ability & shopping", "Prepare 3-minute comprehensive speech", "Deliver speech out loud", "Celebrate Week 5 completed!"] },
-        36: { subtitle: "Tech & Software Terms in Korean", learn: "Nouns: 컴퓨터 (Computer), 코딩 (Coding), 백엔드 (Backend)", vocab: "저는 개발자입니다 (I am a developer)", speaking: "Explain your CS major in Korean.", checklist: ["Learn tech vocabulary", "Say 컴퓨터 공학을 공부해요 (CS major)", "Say 백엔드 개발자 (Backend dev)", "Practice explaining your work"] },
-        37: { subtitle: "Hopes for the 40-Day Sprint Completion", learn: "Grammar: Combine future + hopes", vocab: "성공할 거예요 (Will succeed)", speaking: "Talk about finishing your 40-day sprint.", checklist: ["Say 40일 스프린트를 완료할 거예요", "Express your determination", "Say 나는 끝까지 갑니다 (I go to the end)", "Record an encouraging clip"] },
-        38: { subtitle: "Listening & Shadowing Mastery", learn: "Listen to native A1 conversation podcast", vocab: "Catch fast natural phrasing", speaking: "Shadow sentence by sentence.", checklist: ["Listen to A1 dialogue clip 3 times", "Shadow aloud matching speed", "Focus on natural intonation", "Self-assess pronunciation"] },
-        39: { subtitle: "Full A1 Mock Interview Roleplay", learn: "Cover all 40 days of questions & answers", vocab: "Complete A1 vocabulary pool", speaking: "Answer 10 random Korean questions.", checklist: ["Answer '이름이 뭐예요?'", "Answer '취미가 뭐예요?'", "Answer '왜 한국어를 공부해요?'", "Roleplay complete interview"] },
-        40: { subtitle: "Final 5-Minute Continuous Speaking Mastery 🏆", learn: "A1 Fluency Peak & Sprint Celebration", vocab: "All learned structures", speaking: "Speak continuously for 5 minutes without stopping!", checklist: ["Deliver final 5-minute Korean speech", "Cover intro, CS study, Addis Ababa, goals", "Record final video or audio clip", "CONGRATULATIONS! A1 KOREAN MASTERED 🏆"] }
+        28: { subtitle: "Pagume 1: Expressing Wants (Verb + 하고 싶어요)", learn: "Grammar: Verb stem + 하고 싶어요 (Want to do)", vocab: "한국에 가고 싶어요 (Want to go to Korea)", speaking: "Share your goals & wishes on Pagume 1.", checklist: ["Learn -하고 싶어요 structure", "Say 개발자가 되고 싶어요 (Want to be dev)", "Say 한국에 가고 싶어요 out loud", "Write 3 personal wishes"] },
+        29: { subtitle: "Pagume 2: Expressing Ability (can / cannot)", learn: "Grammar: -(으)ㄹ 수 있어요 / 없어요", vocab: "한국어 할 수 있어요 (I can speak Korean)", speaking: "State what skills you possess.", checklist: ["Learn -(으)ㄹ 수 있어요", "Say 코딩 할 수 있어요 out loud", "Say 한국어 조금 할 수 있어요 out loud", "Practice confidence in speaking"] },
+        30: { subtitle: "Pagume 3: Asking Favor & Assistance (도와주세요)", learn: "Phrases: 도와주세요 (Help me), 다시 말씀해 주세요", vocab: "천천히 말해 주세요 (Please speak slowly)", speaking: "Ask native speakers to speak slowly.", checklist: ["Learn 천천히 말해 주세요", "Learn 다시 말해 주세요 (Say again)", "Practice asking for help politely", "Roleplay clarification scene"] },
+        31: { subtitle: "Pagume 4: Tech & Software Terms in Korean", learn: "Nouns: 컴퓨터 (Computer), 코딩 (Coding), 백엔드 (Backend)", vocab: "저는 개발자입니다 (I am a developer)", speaking: "Explain your CS major in Korean.", checklist: ["Learn tech vocabulary", "Say 컴퓨터 공학을 공부해요 (CS major)", "Say 백엔드 개발자 (Backend dev)", "Practice explaining your work"] },
+        32: { subtitle: "Pagume 5: Ethiopian New Year's Eve Shadowing", learn: "Shadowing native A1 dialogues & New Year greetings", vocab: "새해 복 많이 받으세요 (Happy New Year)", speaking: "Practice natural conversational speed.", checklist: ["Say 새해 복 많이 받으세요", "Shadow 2-minute dialogue", "Polish pronunciation & intonation", "Prepare for Day 33 Grand Finale!"] },
+        33: { subtitle: "Meskerem 1 (እንቁጣጣሽ 🌼): Final 5-Min Speaking Victory 🏆", learn: "A1 Korean Fluency Peak & Enkutatash Celebration", vocab: "Complete A1 vocabulary synthesis", speaking: "Deliver 5-minute continuous Korean monologue on your summer journey & goals!", checklist: ["Deliver final 5-minute Korean speech", "Cover intro, CS major, Addis Ababa, and dreams", "Record video/audio clip of your victory", "CONGRATULATIONS! A1 KOREAN MASTERED 🏆"] }
       };
 
       function getKoreanStorageKey(day) {
-        return `korean_day_${day}_40sprint_state`;
+        return `korean_day_${day}_summer33sprint_state`;
       }
 
       function loadKoreanDayData(day) {
@@ -306,9 +305,19 @@
 
         let html = '';
         for (let day = 1; day <= KOREAN_TOTAL_DAYS; day++) {
+          const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { gDate: `D${day}`, ethEn: '' };
+          const isFinale = (day === 33);
+          const isPagume = (day >= 28 && day <= 32);
+
+          let badgeIcon = '';
+          if (isFinale) badgeIcon = '🌼';
+          else if (isPagume) badgeIcon = '🌟';
+
           html += `
-            <button id="korBtn-${day}" onclick="selectKoreanDay(${day})" class="h-11 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition">
-              ${day}
+            <button id="korBtn-${day}" onclick="selectKoreanDay(${day})" class="h-14 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-center justify-center p-1 relative ${isFinale ? 'border-yellow-400/60' : ''}">
+              <span class="leading-tight flex items-center gap-0.5">D${day} ${badgeIcon}</span>
+              <span class="text-[9px] opacity-75 font-normal text-mist">${info.gDate}</span>
+              <span class="text-[8px] text-eucalyptus font-mono">${info.ethEn || ''}</span>
             </button>
           `;
         }
@@ -317,20 +326,30 @@
 
       function selectKoreanDay(day) {
         currentKoreanDay = day;
-        const weekNum = Math.min(6, Math.ceil(day / 7));
+        const weekNum = day <= 7 ? 1 : day <= 14 ? 2 : day <= 21 ? 3 : day <= 28 ? 4 : 5;
+        const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { gDate: 'Aug 10', ethMonth: 'ነሐሴ', ethDay: 4, ethYear: 2018 };
 
         document.querySelectorAll('#koreanGrid button').forEach(b => {
-          b.className = "h-11 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition";
+          b.className = "h-14 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-center justify-center p-1 relative";
         });
 
         const activeBtn = document.getElementById(`korBtn-${day}`);
         if (activeBtn) {
-          activeBtn.className = "h-11 rounded-2xl bg-moss text-plaster font-bold font-display text-xs shadow-md border border-moss-light";
+          activeBtn.className = "h-14 rounded-2xl bg-moss text-plaster font-bold font-display text-xs shadow-md border border-moss-light flex flex-col items-center justify-center p-1 relative";
         }
 
-        document.getElementById('lessonWeekLabel').innerText = `Week ${weekNum} (Days ${(weekNum-1)*7+1}-${Math.min(KOREAN_TOTAL_DAYS, weekNum*7)})`;
+        const weekTitles = {
+          1: "Week 1 (Days 1–7 • Aug 10–16)",
+          2: "Week 2 (Days 8–14 • Aug 17–23)",
+          3: "Week 3 (Days 15–21 • Aug 24–30)",
+          4: "Week 4 (Days 22–28 • Aug 31–Sep 6)",
+          5: "Week 5 (Days 29–33 • Sep 7–11 🌼)"
+        };
+
+        document.getElementById('lessonWeekLabel').innerText = weekTitles[weekNum] || `Week ${weekNum}`;
         document.getElementById('koreanLessonTag').innerText = `Week ${weekNum} • Lesson ${day}`;
-        document.getElementById('koreanDayTitle').innerText = `Day ${day}`;
+        document.getElementById('koreanEthBadge').innerText = `${info.ethMonth} ${info.ethDay}, ${info.ethYear} ዓ.ም.`;
+        document.getElementById('koreanDayTitle').innerText = `Day ${day} • ${info.dayName || 'Day'} ${info.gDate} ${day === 33 ? '🌼 (እንቁጣጣሽ)' : ''}`;
 
         renderKoreanLessonDetails();
         updateKoreanProgressRings();

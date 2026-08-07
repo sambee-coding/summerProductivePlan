@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>40-Day Daily Scheduler — Sambee's Growth Sprint 🚀</title>
+    <title>33-Day Summer Scheduler — Sambee's Growth Sprint 🚀 (Aug 10 – Ethiopian Sep 1)</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,6 +13,7 @@
     />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="ethiopian-calendar.js"></script>
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -105,10 +106,10 @@
             <span class="text-3xl">📆</span>
             <div>
               <h1 class="text-3xl font-black font-display tracking-tight text-plaster uppercase">
-                40-Day Daily Scheduler
+                33-Day Summer Scheduler
               </h1>
               <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
-                Select any day from 1 to 40, set negotiables, schedule focus blocks, and track your progress.
+                Mon Aug 10 (ነሐሴ 4) → Fri Sep 11 (መስከረም 1 🌼 Enkutatash) • 33 Powerhouse Focus Days
               </p>
             </div>
           </div>
@@ -119,7 +120,7 @@
             🏠 Dashboard
           </a>
           <a href="korean-plan.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist hover:border-mist transition">
-            🇰🇷 Korean Plan
+            🇰🇷 Korean Plan (33D)
           </a>
           <a href="books.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
             📚 Books Tracker
@@ -130,13 +131,13 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 grid gap-8 lg:grid-cols-12">
       
-      <!-- LEFT PANEL: 40 Days Grid & Progress Stats (5 Cols) -->
+      <!-- LEFT PANEL: 33 Days Grid & Progress Stats (5 Cols) -->
       <section class="lg:col-span-5 space-y-6">
         
         <!-- Progress Summary Rings -->
         <div class="glass-card rounded-3xl p-6 grid grid-cols-3 gap-3 text-center">
           <div>
-            <div class="text-[10px] uppercase font-bold text-eucalyptus mb-2">Sprint (40D)</div>
+            <div class="text-[10px] uppercase font-bold text-eucalyptus mb-2">Summer (33D)</div>
             <div class="relative w-16 h-16 mx-auto">
               <svg class="w-full h-full transform -rotate-90">
                 <circle cx="32" cy="32" r="26" stroke="rgba(152,170,157,0.15)" stroke-width="5" fill="transparent" />
@@ -169,20 +170,20 @@
           </div>
         </div>
 
-        <!-- 40 Days Grid Button Selector -->
+        <!-- 33 Days Grid Button Selector -->
         <div class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4">
             <div>
               <span class="text-xs uppercase tracking-widest text-eucalyptus font-bold block">Select Day</span>
-              <h2 id="currentWeekLabel" class="text-base font-bold font-display text-plaster">Week 1 (Days 1-7)</h2>
+              <h2 id="currentWeekLabel" class="text-base font-bold font-display text-plaster">Week 1 (Days 1–7)</h2>
             </div>
             <button onclick="resetSelectedDay()" class="px-3 py-1.5 glass-card-subtle text-[11px] font-bold font-display uppercase text-mist hover:text-plaster rounded-xl transition">
               Clear Day
             </button>
           </div>
 
-          <div id="daysButtonsGrid" class="grid grid-cols-5 gap-2.5">
-            <!-- Dynamically generated 40 buttons -->
+          <div id="daysButtonsGrid" class="grid grid-cols-4 sm:grid-cols-5 gap-2">
+            <!-- Dynamically generated 33 buttons with dual calendar tags -->
           </div>
         </div>
       </section>
@@ -193,12 +194,17 @@
         <div class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-eucalyptus/15">
             <div>
-              <span id="selectedWeekTag" class="text-xs uppercase tracking-widest text-eucalyptus font-bold">Week 1</span>
-              <h2 id="selectedDayTitle" class="text-3xl font-black font-display text-plaster">Day 1</h2>
+              <div class="flex items-center gap-2">
+                <span id="selectedWeekTag" class="text-xs uppercase tracking-widest text-eucalyptus font-bold">Week 1</span>
+                <span id="selectedEthDateBadge" class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-moss/20 text-moss-light border border-moss/30">
+                  ነሐሴ 4, 2018
+                </span>
+              </div>
+              <h2 id="selectedDayTitle" class="text-3xl font-black font-display text-plaster mt-1">Day 1 • Mon Aug 10</h2>
             </div>
             <div class="text-right">
               <span id="selectedDayStatusText" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-moss/20 text-moss-light border border-moss/30">
-                0 / 10 Items Done
+                0 / 13 Items Done
               </span>
             </div>
           </div>
@@ -248,7 +254,7 @@
     </main>
 
     <script>
-      const TOTAL_DAYS = 40;
+      const TOTAL_DAYS = 33; // Aug 10 to Ethiopian Sep 1 (Meskerem 1 / Sep 11)
       let selectedDay = 1;
 
       function getWeekNumber(day) {
@@ -256,11 +262,30 @@
         if (day <= 14) return 2;
         if (day <= 21) return 3;
         if (day <= 28) return 4;
-        if (day <= 35) return 5;
-        return 6;
+        return 5; // Days 29..33 (Pagume & Meskerem 1 Finale)
       }
 
       function defaultDayData(day) {
+        const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { label: 'Focus Day' };
+        
+        let specialSchedule = [
+          { label: "6:30–8:00 AM: Prayer, Workout & Breakfast", done: false },
+          { label: "8:00–9:00 AM: Korean & English Fluency Push", done: false },
+          { label: "9:00 AM–5:00 PM: Internship Tasks & Output (Addis Ababa)", done: false },
+          { label: "6:00–8:00 PM: Deep Work (Backend & DSA)", done: false },
+          { label: "8:00–9:30 PM: Design Skill-Building & Reading", done: false }
+        ];
+
+        if (day === 33) {
+          specialSchedule = [
+            { label: "Morning: 🌼 Enkutatash Ethiopian New Year Celebration with Family", done: false },
+            { label: "10:00 AM: Review 33-Day Summer Productive Sprint Milestones", done: false },
+            { label: "2:00 PM: 5-Minute Korean Conversation Victory Pitch & Recording", done: false },
+            { label: "4:00 PM: 330+ Pages Reading Summary & Key Insights Consolidation", done: false },
+            { label: "Evening: Unlock Day 33 Secret Vault & Set New Academic Year Goals! 🏆", done: false }
+          ];
+        }
+
         return {
           negotiables: [
             { label: "Design: Figma & UI/UX fundamentals", done: false },
@@ -272,19 +297,13 @@
             { label: "English: 15-20 min fluency speaking", done: false },
             { label: "Supporting: Prayer, Workout & Hydration", done: false }
           ],
-          schedule: [
-            { label: "6:30–8:00 AM: Prayer, Workout & Breakfast", done: false },
-            { label: "8:00–9:00 AM: Korean & English Fluency Push", done: false },
-            { label: "9:00 AM–5:00 PM: Internship Tasks & Output", done: false },
-            { label: "6:00–8:00 PM: Deep Work (Backend & DSA)", done: false },
-            { label: "8:00–9:30 PM: Design Skill-Building & Reading", done: false }
-          ],
+          schedule: specialSchedule,
           todos: []
         };
       }
 
       function getDayStorageKey(day) {
-        return `day_${day}_40sprint_state`;
+        return `day_${day}_summer33sprint_state`;
       }
 
       function loadDayData(day) {
@@ -318,9 +337,19 @@
 
         let html = '';
         for (let day = 1; day <= TOTAL_DAYS; day++) {
+          const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { gDate: `D${day}`, ethEn: '' };
+          const isFinale = (day === 33);
+          const isPagume = (day >= 28 && day <= 32);
+
+          let badgeIcon = '';
+          if (isFinale) badgeIcon = '🌼';
+          else if (isPagume) badgeIcon = '🌟';
+
           html += `
-            <button id="dayBtn-${day}" onclick="selectDay(${day})" class="h-11 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition">
-              ${day}
+            <button id="dayBtn-${day}" onclick="selectDay(${day})" class="h-14 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-center justify-center p-1 relative ${isFinale ? 'border-yellow-400/60' : ''}">
+              <span class="leading-tight flex items-center gap-0.5">D${day} ${badgeIcon}</span>
+              <span class="text-[9px] opacity-75 font-normal text-mist">${info.gDate}</span>
+              <span class="text-[8px] text-eucalyptus font-mono">${info.ethEn || ''}</span>
             </button>
           `;
         }
@@ -330,19 +359,29 @@
       function selectDay(day) {
         selectedDay = day;
         const weekNum = getWeekNumber(day);
+        const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { gDate: 'Aug 10', ethMonth: 'ነሐሴ', ethDay: 4, ethYear: 2018 };
 
         document.querySelectorAll('#daysButtonsGrid button').forEach(b => {
-          b.className = "h-11 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition";
+          b.className = "h-14 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-center justify-center p-1 relative";
         });
 
         const activeBtn = document.getElementById(`dayBtn-${day}`);
         if (activeBtn) {
-          activeBtn.className = "h-11 rounded-2xl bg-moss text-plaster font-bold font-display text-xs shadow-md border border-moss-light";
+          activeBtn.className = "h-14 rounded-2xl bg-moss text-plaster font-bold font-display text-xs shadow-md border border-moss-light flex flex-col items-center justify-center p-1 relative";
         }
 
-        document.getElementById('currentWeekLabel').innerText = `Week ${weekNum} (Days ${(weekNum-1)*7+1}-${Math.min(TOTAL_DAYS, weekNum*7)})`;
+        const weekLabelMap = {
+          1: "Week 1: Foundations (Days 1–7 • Aug 10–16)",
+          2: "Week 2: Deep Focus (Days 8–14 • Aug 17–23)",
+          3: "Week 3: High Velocity (Days 15–21 • Aug 24–30)",
+          4: "Week 4: August Push (Days 22–28 • Aug 31–Sep 6)",
+          5: "Week 5: Pagume & Enkutatash (Days 29–33 • Sep 7–11 🌼)"
+        };
+
+        document.getElementById('currentWeekLabel').innerText = weekLabelMap[weekNum] || `Week ${weekNum}`;
         document.getElementById('selectedWeekTag').innerText = `Week ${weekNum}`;
-        document.getElementById('selectedDayTitle').innerText = `Day ${day}`;
+        document.getElementById('selectedEthDateBadge').innerText = `${info.ethMonth} ${info.ethDay}, ${info.ethYear} ዓ.ም.`;
+        document.getElementById('selectedDayTitle').innerText = `Day ${day} • ${info.dayName || 'Day'} ${info.gDate} ${day === 33 ? '🌼 (እንቁጣጣሽ)' : ''}`;
         document.getElementById('dayTodoNum').innerText = day;
 
         renderDayDetails();
@@ -435,7 +474,7 @@
         // Active Week Progress
         const weekNum = getWeekNumber(selectedDay);
         const wStart = (weekNum - 1) * 7 + 1;
-        const wEnd = Math.min(TOTAL_DAYS, weekNum * 7);
+        const wEnd = Math.min(TOTAL_DAYS, weekNum === 5 ? 33 : weekNum * 7);
         let wTotal = 0, wDone = 0;
 
         for (let day = wStart; day <= wEnd; day++) {
@@ -446,7 +485,7 @@
         const wPct = wTotal > 0 ? Math.round((wDone / wTotal) * 100) : 0;
         setRingProgress('weekCircle', 'weekPercent', wPct);
 
-        // Sprint Total (40 Days) Progress
+        // Sprint Total (33 Days) Progress
         let sTotal = 0, sDone = 0;
         for (let day = 1; day <= TOTAL_DAYS; day++) {
           const data = loadDayData(day);

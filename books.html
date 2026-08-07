@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>40-Day Book Reading Tracker — Sambee's Growth Sprint 📚</title>
+    <title>33-Day Book Reading Tracker — Sambee's Summer Sprint 📚 (Aug 10 – Ethiopian Sep 1)</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,6 +13,7 @@
     />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="ethiopian-calendar.js"></script>
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -105,10 +106,10 @@
             <span class="text-3xl">📖</span>
             <div>
               <h1 class="text-3xl font-black font-display tracking-tight text-plaster uppercase">
-                40-Day Reading Tracker
+                33-Day Reading Tracker
               </h1>
               <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
-                Target: 10+ pages per day across tech, backend engineering & personal mastery books (400+ pages goal)
+                Mon Aug 10 (ነሐሴ 4) → Fri Sep 11 (መስከረም 1 🌼 Enkutatash) • 10+ pages/day (330+ pages goal)
               </p>
             </div>
           </div>
@@ -119,10 +120,10 @@
             🏠 Dashboard
           </a>
           <a href="days.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist hover:border-mist transition">
-            📅 40 Days Grid
+            📅 33 Days Grid
           </a>
           <a href="korean-plan.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
-            🇰🇷 Korean Plan
+            🇰🇷 Korean Plan (33D)
           </a>
         </div>
       </div>
@@ -138,9 +139,9 @@
           <div>
             <span class="text-xs uppercase tracking-widest text-eucalyptus font-bold block mb-1">Sprint Pages Goal</span>
             <div class="text-3xl font-black font-display text-plaster">
-              <span id="totalPagesLoggedDisplay">0</span> <span class="text-sm font-normal text-mist">/ 400 pages</span>
+              <span id="totalPagesLoggedDisplay">0</span> <span class="text-sm font-normal text-mist">/ 330 pages</span>
             </div>
-            <p class="text-xs text-moss-light font-medium mt-1">10+ pages logged daily</p>
+            <p class="text-xs text-moss-light font-medium mt-1">10+ pages logged daily (33 Days)</p>
           </div>
           <div class="relative w-20 h-20">
             <svg class="w-full h-full transform -rotate-90">
@@ -193,7 +194,7 @@
         <div class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4 pb-3 border-b border-eucalyptus/15">
             <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
-              <span>📚</span> 40-Day Reading Log History
+              <span>📚</span> 33-Day Reading Log History
             </h2>
             <span id="logCountBadge" class="text-xs text-eucalyptus font-medium">0 sessions logged</span>
           </div>
@@ -206,7 +207,7 @@
     </main>
 
     <script>
-      const TARGET_PAGES = 400;
+      const TARGET_PAGES = 330; // 10 pages/day * 33 days
 
       window.onload = function() {
         loadReadingLogs();
@@ -232,9 +233,9 @@
           dateKey: new Date().toISOString().slice(0, 10)
         };
 
-        let logs = JSON.parse(localStorage.getItem('reading_logs_40sprint') || '[]');
+        let logs = JSON.parse(localStorage.getItem('reading_logs_summer33sprint') || '[]');
         logs.unshift(logEntry);
-        localStorage.setItem('reading_logs_40sprint', JSON.stringify(logs));
+        localStorage.setItem('reading_logs_summer33sprint', JSON.stringify(logs));
 
         // Sync track reading for today if pages >= 10!
         if (pages >= 10) {
@@ -249,7 +250,7 @@
       }
 
       function loadReadingLogs() {
-        const logs = JSON.parse(localStorage.getItem('reading_logs_40sprint') || '[]');
+        const logs = JSON.parse(localStorage.getItem('reading_logs_summer33sprint') || '[]');
         const feed = document.getElementById('readingLogsFeed');
         const badge = document.getElementById('logCountBadge');
 
@@ -295,9 +296,9 @@
       }
 
       function deleteLog(idx) {
-        let logs = JSON.parse(localStorage.getItem('reading_logs_40sprint') || '[]');
+        let logs = JSON.parse(localStorage.getItem('reading_logs_summer33sprint') || '[]');
         logs.splice(idx, 1);
-        localStorage.setItem('reading_logs_40sprint', JSON.stringify(logs));
+        localStorage.setItem('reading_logs_summer33sprint', JSON.stringify(logs));
         loadReadingLogs();
       }
     </script>

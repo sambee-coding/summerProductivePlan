@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sambee's 40-Day Growth Sprint 🚀</title>
+    <title>Sambee's Summer Growth Sprint 🚀 (Aug 10 – Ethiopian Sep 1 / Meskerem 1)</title>
     <!-- Modern Typography: Outfit for headers, Inter for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,6 +13,7 @@
     />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="ethiopian-calendar.js"></script>
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -203,8 +204,8 @@
             <span class="text-3xl">🐝</span>
             <div>
               <div class="flex items-center gap-2">
-                <h1 class="text-3xl sm:text-4xl font-black font-display tracking-tight text-plaster uppercase">
-                  Sambee's <span class="text-mist">40-Day</span> Growth Sprint
+                <h1 class="text-2xl sm:text-4xl font-black font-display tracking-tight text-plaster uppercase">
+                  Sambee's <span class="text-mist">Summer</span> Growth Sprint
                 </h1>
                 <button onclick="toggleTheme()" class="ml-2 p-2 rounded-xl glass-card-subtle text-xs hover:bg-soot-hover transition" title="Toggle Light/Dark Theme">
                   <span id="themeToggleIcon">🌙</span>
@@ -213,6 +214,15 @@
               <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
                 Third-Year CS & Founder @ Sambee • Intern in Addis Ababa • Fintech/Backend Grind
               </p>
+              <!-- Dual Calendar Badge -->
+              <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
+                <span class="px-2.5 py-1 rounded-lg bg-moss/20 text-moss-light border border-moss/30 font-bold font-display">
+                  🗓️ Mon, Aug 10 → Fri, Sep 11, 2026 (33 Days)
+                </span>
+                <span class="px-2.5 py-1 rounded-lg bg-soot/60 text-eucalyptus border border-eucalyptus/20 font-medium">
+                  🇪🇹 ነሐሴ 4, 2018 → መስከረም 1, 2019 ዓ.ም. (እንቁጣጣሽ 🌼)
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -220,10 +230,10 @@
         <!-- Header Action Controls -->
         <div class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
           <a href="days.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-plaster hover:border-eucalyptus transition">
-            📅 40 Days Grid
+            📅 33 Days Grid
           </a>
           <a href="korean-plan.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist hover:border-mist transition">
-            🇰🇷 Korean Plan
+            🇰🇷 Korean Plan (33D)
           </a>
           <a href="books.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
             📚 Books Tracker
@@ -240,7 +250,7 @@
 
       <!-- Hero Command Stats Bar -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
-        <!-- 40-Day Sprint Countdown Card -->
+        <!-- 33-Day Sprint Countdown Card -->
         <div class="glass-card rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden">
           <div class="relative w-16 h-16 flex items-center justify-center flex-shrink-0">
             <svg class="w-full h-full transform -rotate-90">
@@ -250,9 +260,9 @@
             <span id="sprintDayDisplay" class="absolute text-xs font-black font-display text-plaster">D1</span>
           </div>
           <div>
-            <div class="text-[11px] uppercase tracking-widest text-eucalyptus font-bold">Sprint Countdown</div>
-            <div id="sprintCountdownText" class="text-lg font-black font-display text-plaster mt-0.5">Day 1 of 40</div>
-            <div id="sprintDaysLeftText" class="text-xs text-mist font-medium">39 days remaining</div>
+            <div class="text-[11px] uppercase tracking-widest text-eucalyptus font-bold">Summer Sprint</div>
+            <div id="sprintCountdownText" class="text-lg font-black font-display text-plaster mt-0.5">Day 1 of 33</div>
+            <div id="sprintDaysLeftText" class="text-xs text-mist font-medium">32 days to Ethiopian Sep 1</div>
           </div>
         </div>
 
@@ -268,7 +278,7 @@
           <div>
             <div class="text-[11px] uppercase tracking-widest text-mist font-bold">Today's Grind</div>
             <div id="dailyProgressStatus" class="text-sm font-bold font-display text-plaster mt-0.5">0 / 7 Tracks</div>
-            <div class="text-xs text-eucalyptus">Grind hard, stay humble 🌊</div>
+            <div id="todayDateDetail" class="text-xs text-eucalyptus">Mon, Aug 10 (ነሐሴ 4) 🌊</div>
           </div>
         </div>
 
@@ -480,12 +490,15 @@
           </div>
         </section>
 
-        <!-- 40-Day Heatmap Visualization Section -->
+        <!-- 33-Day Summer Sprint Heatmap -->
         <section class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4">
-            <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
-              <span>📊</span> 40-Day Sprint Heatmap
-            </h2>
+            <div>
+              <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
+                <span>📊</span> 33-Day Summer Sprint Heatmap
+              </h2>
+              <p class="text-xs text-mist mt-0.5">Mon Aug 10 (ነሐሴ 4) → Fri Sep 11 (መስከረም 1 🌼 Enkutatash)</p>
+            </div>
             <div class="flex items-center gap-1.5 text-[10px] text-mist">
               <span>Less</span>
               <div class="w-3.5 h-3.5 rounded bg-soot/80 border border-eucalyptus/10"></div>
@@ -497,25 +510,24 @@
             </div>
           </div>
 
-          <!-- 40 Cells Grid (8 cols x 5 rows) -->
-          <div id="heatmapGrid" class="grid grid-cols-8 gap-2">
-            <!-- Dynamically populated 40 days -->
+          <!-- 33 Cells Grid (11 cols x 3 rows) with Pagume & Meskerem 1 Accents -->
+          <div id="heatmapGrid" class="grid grid-cols-7 sm:grid-cols-11 gap-2">
+            <!-- Dynamically populated 33 days -->
           </div>
         </section>
 
-        <!-- Auto-Generating Weekly Recap Card (Every 7 Days) -->
+        <!-- Auto-Generating Weekly Recap Card (5 Sprint Cycles) -->
         <section class="glass-card rounded-3xl p-6 border-l-4 border-moss">
-          <div class="flex justify-between items-center mb-3">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
             <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
-              <span>📈</span> 7-Day Weekly Performance Recap
+              <span>📈</span> 7-Day Performance Recap (5 Cycles)
             </h2>
             <select id="weeklyRecapSelect" onchange="renderWeeklyRecap()" class="bg-soot border border-eucalyptus/20 rounded-xl px-2.5 py-1 text-xs text-mist focus:outline-none focus:border-moss">
-              <option value="week1">Week 1 (Days 1-7)</option>
-              <option value="week2">Week 2 (Days 8-14)</option>
-              <option value="week3">Week 3 (Days 15-21)</option>
-              <option value="week4">Week 4 (Days 22-28)</option>
-              <option value="week5">Week 5 (Days 29-35)</option>
-              <option value="week6">Final Push (Days 36-40)</option>
+              <option value="week1">Week 1: Days 1–7 (Aug 10–16 • ነሐሴ 4–10)</option>
+              <option value="week2">Week 2: Days 8–14 (Aug 17–23 • ነሐሴ 11–17)</option>
+              <option value="week3">Week 3: Days 15–21 (Aug 24–30 • ነሐሴ 18–24)</option>
+              <option value="week4">Week 4: Days 22–28 (Aug 31–Sep 6 • ነሐሴ 25–ጳጉሜ 1)</option>
+              <option value="week5">Week 5: Days 29–33 (Sep 7–11 • ጳጉሜ 2–መስከረም 1 🌼)</option>
             </select>
           </div>
 
@@ -692,15 +704,15 @@
           </div>
         </section>
 
-        <!-- Day 40 Secret Letter Locked Vault -->
+        <!-- Day 33 Secret Letter Locked Vault (Enkutatash / Meskerem 1) -->
         <section class="glass-card rounded-3xl p-6 border-l-4 border-mist">
           <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2 mb-1">
-            <span>🔐</span> Day 40 Secret Letter Vault
+            <span>🔐</span> Day 33 Secret Letter Vault (መስከረም 1 🌼)
           </h2>
           <p id="vaultHintText" class="text-xs text-mist mb-3">
-            Write your thoughts & predictions. Content will remain sealed until Day 40 of your sprint.
+            Write your thoughts & predictions. Encrypted until Friday, September 11 (Ethiopian September 1 / መስከረም 1).
           </p>
-          <textarea id="vaultTextarea" rows="3" placeholder="Write your letter to your future self on Day 40..." class="w-full text-xs bg-soot/80 border border-eucalyptus/20 rounded-2xl p-3 text-plaster focus:outline-none focus:border-moss placeholder-eucalyptus/50 resize-none mb-2"></textarea>
+          <textarea id="vaultTextarea" rows="3" placeholder="Write your letter to your future self on Ethiopian New Year (Meskerem 1)..." class="w-full text-xs bg-soot/80 border border-eucalyptus/20 rounded-2xl p-3 text-plaster focus:outline-none focus:border-moss placeholder-eucalyptus/50 resize-none mb-2"></textarea>
           <div class="flex justify-between items-center">
             <button onclick="storeSecretLetter()" class="px-4 py-2 bg-moss hover:bg-moss-light text-plaster text-xs font-bold font-display rounded-xl transition">
               Seal in Vault 🔒
@@ -718,7 +730,7 @@
     <!-- Main JavaScript Application Logic -->
     <script>
       // ===== STATE MANAGEMENT & STORAGE KEYS =====
-      const SPRINT_TOTAL_DAYS = 40;
+      const SPRINT_TOTAL_DAYS = 33; // Aug 10 to Ethiopian Sep 1 (Meskerem 1 / Sep 11)
       
       const TRACKS = [
         { id: 'design', name: 'Design', icon: '🎨' },
@@ -735,13 +747,13 @@
       const QUOTES_POOL = [
         { text: "Discipline is choosing between what you want now and what you want most.", author: "Abraham Lincoln" },
         { text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", author: "Aristotle" },
-        { text: "Small daily improvements over 40 days compound into life-changing results.", author: "Robin Sharma" },
+        { text: "33 days of summer consistency will transform your engineering career before Meskerem 1.", author: "Sambee Maxim" },
         { text: "Hard work beats talent when talent doesn't work hard.", author: "Tim Notke" },
         { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
         { text: "You don't have to be great to start, but you have to start to be great.", author: "Zig Ziglar" },
         { text: "Your future is created by what you do today, not tomorrow.", author: "Robert Kiyosaki" },
         { text: "Consistency is the bridge between goals and accomplishment.", author: "Jim Rohn" },
-        { text: "Focus on process over outcome. The code gets written line by line.", author: "Sambee Grind Maxim" }
+        { text: "Focus on process over outcome. The code gets written line by line.", author: "Fintech Engine" }
       ];
 
       let currentQuoteIndex = 0;
@@ -792,7 +804,7 @@
       function getSprintStartDate() {
         let start = localStorage.getItem('sprint_start_date');
         if (!start) {
-          start = new Date().toISOString().slice(0, 10);
+          start = '2026-08-10'; // Monday, August 10, 2026
           localStorage.setItem('sprint_start_date', start);
         }
         return new Date(start);
@@ -812,9 +824,16 @@
         const daysLeft = Math.max(0, SPRINT_TOTAL_DAYS - currentDay);
         const pct = Math.round((currentDay / SPRINT_TOTAL_DAYS) * 100);
 
+        const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(currentDay) : { gDate: 'Aug 10', ethEn: 'Nehase 4' };
+
         document.getElementById('sprintDayDisplay').innerText = `D${currentDay}`;
         document.getElementById('sprintCountdownText').innerText = `Day ${currentDay} of ${SPRINT_TOTAL_DAYS}`;
-        document.getElementById('sprintDaysLeftText').innerText = `${daysLeft} days remaining`;
+        document.getElementById('sprintDaysLeftText').innerText = `${daysLeft} days to Ethiopian Sep 1 (Meskerem 1 🌼)`;
+        
+        const dateDetailEl = document.getElementById('todayDateDetail');
+        if (dateDetailEl) {
+          dateDetailEl.innerText = `${info.dayName || 'Day'}, ${info.gDate} (${info.ethMonth || 'ነሐሴ'} ${info.ethDay || 4}) 🌊`;
+        }
 
         const circle = document.getElementById('sprintProgressCircle');
         if (circle) {
@@ -1148,7 +1167,8 @@
           { title: "🎨 UI Craftsman", icon: "🎨" },
           { title: "🇰🇷 Hangul Master", icon: "🇰🇷" },
           { title: "📖 Knowledge Seeker", icon: "📖" },
-          { title: "🌊 Momentum King", icon: "🌊" }
+          { title: "🌊 Momentum King", icon: "🌊" },
+          { title: "🌼 Enkutatash Champion", icon: "🌼" }
         ];
 
         let unlocked = JSON.parse(localStorage.getItem('unlocked_rewards') || '[]');
@@ -1181,7 +1201,7 @@
         `).join('');
       }
 
-      // ===== 40-DAY HEATMAP =====
+      // ===== 33-DAY HEATMAP =====
       function loadHeatmap() {
         const grid = document.getElementById('heatmapGrid');
         if (!grid) return;
@@ -1200,6 +1220,7 @@
           });
 
           const pct = doneCount / TRACKS.length;
+          const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { gDate: `D${day}`, ethEn: '' };
 
           let colorStyle = 'bg-soot/80 border border-eucalyptus/10 text-mist/50';
           if (pct > 0 && pct <= 0.3) colorStyle = 'bg-moss/30 text-plaster';
@@ -1207,9 +1228,17 @@
           else if (pct > 0.6 && pct < 1) colorStyle = 'bg-moss text-plaster shadow';
           else if (pct === 1) colorStyle = 'bg-eucalyptus text-soot font-black shadow-[0_0_8px_#98AA9D]';
 
+          const isFinale = (day === 33);
+          const isPagume = (day >= 28 && day <= 32);
+
+          let badgeIcon = '';
+          if (isFinale) badgeIcon = '🌼';
+          else if (isPagume) badgeIcon = '🌟';
+
           html += `
-            <div class="heatmap-cell h-9 rounded-xl ${colorStyle} flex flex-col items-center justify-center text-[10px] font-bold cursor-default" title="Day ${day} (${key}): ${doneCount}/7 tracks">
-              <span>D${day}</span>
+            <div class="heatmap-cell h-11 rounded-xl ${colorStyle} ${isFinale ? 'border-2 border-yellow-400/80 ring-2 ring-yellow-400/30' : ''} flex flex-col items-center justify-center text-[10px] font-bold cursor-default relative p-1" title="Day ${day} (${info.gDate} / ${info.ethEn || ''}): ${doneCount}/7 tracks">
+              <span class="leading-none flex items-center gap-0.5">D${day} ${badgeIcon}</span>
+              <span class="text-[8px] opacity-75 font-mono mt-0.5">${info.gDate}</span>
             </div>
           `;
         }
@@ -1217,19 +1246,18 @@
         grid.innerHTML = html;
       }
 
-      // ===== AUTO-GENERATING WEEKLY RECAP CARD =====
+      // ===== AUTO-GENERATING WEEKLY RECAP CARD (5 SPRINT CYCLES) =====
       function renderWeeklyRecap() {
         const weekVal = document.getElementById('weeklyRecapSelect').value;
         const container = document.getElementById('weeklyRecapContent');
         if (!container) return;
 
         const weekMap = {
-          week1: { start: 1, end: 7 },
-          week2: { start: 8, end: 14 },
-          week3: { start: 15, end: 21 },
-          week4: { start: 22, end: 28 },
-          week5: { start: 29, end: 35 },
-          week6: { start: 36, end: 40 }
+          week1: { start: 1, end: 7, title: "Week 1: Foundations Kickoff (Aug 10–16 • ነሐሴ 4–10)" },
+          week2: { start: 8, end: 14, title: "Week 2: Deep Build & Velocity (Aug 17–23 • ነሐሴ 11–17)" },
+          week3: { start: 15, end: 21, title: "Week 3: High-Velocity DSA & Backend (Aug 24–30 • ነሐሴ 18–24)" },
+          week4: { start: 22, end: 28, title: "Week 4: August Push & Pagume Start (Aug 31–Sep 6 • ነሐሴ 25–ጳጉሜ 1)" },
+          week5: { start: 29, end: 33, title: "Week 5: Pagume Mastery & Enkutatash Finale (Sep 7–11 • ጳጉሜ 2–መስከረም 1 🌼)" }
         };
 
         const range = weekMap[weekVal] || weekMap.week1;
@@ -1268,8 +1296,8 @@
         const worstTrack = TRACKS.find(t => t.id === worstTrackId);
 
         let honestLine = trackCounts[worstTrackId] < (range.end - range.start + 1) / 2
-          ? `You skipped ${worstTrack.name} ${ (range.end - range.start + 1) - trackCounts[worstTrackId] } times this cycle. Time to lock in!`
-          : `Great work across the board, keep pushing!`;
+          ? `You skipped ${worstTrack.name} ${ (range.end - range.start + 1) - trackCounts[worstTrackId] } times this cycle. Lock back in!`
+          : `Great work across the board, keep pushing towards Ethiopian September 1!`;
 
         container.innerHTML = `
           <div class="grid grid-cols-3 gap-3 text-center">
@@ -1287,7 +1315,7 @@
             </div>
           </div>
           <div class="glass-card-subtle p-3.5 rounded-2xl text-xs space-y-1">
-            <p class="text-moss-light font-bold">✨ Encouragement: Your consistency in ${bestTrack.name} shows real discipline.</p>
+            <p class="text-moss-light font-bold">✨ Encouragement: Your consistency in ${bestTrack.name} shows real engineering discipline.</p>
             <p class="text-mist">⚠️ Coaching: ${honestLine}</p>
           </div>
         `;
@@ -1683,7 +1711,7 @@
         }
       }
 
-      // ===== DAY 40 SECRET LETTER VAULT =====
+      // ===== DAY 33 SECRET LETTER VAULT (MESKEREM 1) =====
       function storeSecretLetter() {
         const ta = document.getElementById('vaultTextarea');
         if (!ta) return;
@@ -1704,12 +1732,12 @@
 
         if (countBadge) countBadge.innerText = `${letters.length} sealed entries`;
 
-        const isUnlocked = getCurrentSprintDay() >= 40;
+        const isUnlocked = getCurrentSprintDay() >= SPRINT_TOTAL_DAYS;
 
         if (!feed) return;
 
         if (!isUnlocked) {
-          feed.innerHTML = `<div class="p-3 rounded-2xl glass-card-subtle text-xs text-mist/70 italic text-center">🔒 Vents remain encrypted until Day 40. Keep pushing!</div>`;
+          feed.innerHTML = `<div class="p-3 rounded-2xl glass-card-subtle text-xs text-mist/70 italic text-center">🔒 Entries remain encrypted until Day 33 (Friday, Sep 11 / መስከረም 1 🌼). Keep pushing!</div>`;
           return;
         }
 
@@ -1732,7 +1760,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `sambee-40day-growth-backup-${new Date().toISOString().slice(0,10)}.json`;
+        a.download = `sambee-summer-sprint-backup-${new Date().toISOString().slice(0,10)}.json`;
         a.click();
         URL.revokeObjectURL(url);
       }
