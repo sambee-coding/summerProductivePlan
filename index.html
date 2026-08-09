@@ -184,7 +184,7 @@
         <div class="text-6xl mb-3 animate-bounce">🔥</div>
         <span class="text-xs uppercase tracking-widest font-bold text-eucalyptus">Sprint Ritual Achieved</span>
         <h2 class="text-3xl font-black font-display text-plaster mt-1 mb-2">Day Complete! 🎉</h2>
-        <p id="celebrationSubtext" class="text-sm text-mist mb-6">You dominated all 7 grind tracks today. Consistency is your superpower, Sambee!</p>
+        <p id="celebrationSubtext" class="text-sm text-mist mb-6">You dominated all 6 grind tracks today. Consistency is your superpower, Sambee!</p>
         
         <div id="celebrationTracksSummary" class="glass-card-subtle rounded-2xl p-4 text-left space-y-2 mb-6 text-xs text-plaster font-medium">
           <!-- Dynamically populated completed tracks summary -->
@@ -212,7 +212,7 @@
                 </button>
               </div>
               <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
-                Third-Year CS & Founder @ Sambee • Intern in Addis Ababa • Fintech/Backend Grind
+                Third-Year CS & Founder @ Sambee • Addis Ababa • Fintech/Backend Grind
               </p>
               <!-- Dual Calendar Badge -->
               <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
@@ -277,7 +277,7 @@
           </div>
           <div>
             <div class="text-[11px] uppercase tracking-widest text-mist font-bold">Today's Grind</div>
-            <div id="dailyProgressStatus" class="text-sm font-bold font-display text-plaster mt-0.5">0 / 7 Tracks</div>
+            <div id="dailyProgressStatus" class="text-sm font-bold font-display text-plaster mt-0.5">0 / 6 Tracks</div>
             <div id="todayDateDetail" class="text-xs text-eucalyptus">Mon, Aug 10 (ነሐሴ 4) 🌊</div>
           </div>
         </div>
@@ -310,24 +310,24 @@
     <!-- Main Grid Dashboard Layout -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
       
-      <!-- LEFT COLUMN: 8 Tracks & Daily Checklist (7 Cols) -->
+      <!-- LEFT COLUMN: 6 Tracks & Daily Checklist (7 Cols) -->
       <div class="lg:col-span-7 space-y-6">
         
-        <!-- Daily 8 Tracks Non-Negotiables Section -->
+        <!-- Daily 6 Tracks Non-Negotiables Section -->
         <section class="glass-card rounded-3xl p-6 relative">
           <div class="flex items-center justify-between mb-5 pb-3 border-b border-eucalyptus/15">
             <div>
               <h2 class="text-xl font-bold font-display text-plaster flex items-center gap-2">
-                <span>⚡</span> Today's 8 Tracks & Grind
+                <span>⚡</span> Today's 6 Tracks & Grind
               </h2>
-              <p class="text-xs text-mist mt-0.5">Complete all 7 main tracks to trigger your daily completion ritual.</p>
+              <p class="text-xs text-mist mt-0.5">Complete all 6 main tracks to trigger your daily completion ritual.</p>
             </div>
             <span id="completedTracksBadge" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-moss/20 text-moss-light border border-moss/30">
-              0 / 7 Completed
+              0 / 6 Completed
             </span>
           </div>
 
-          <!-- 7 Grind Tracks Checklist -->
+          <!-- 6 Grind Tracks Checklist -->
           <div class="space-y-3" id="grindTracksContainer">
             <!-- Track 1: Design -->
             <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
@@ -383,25 +383,7 @@
               </div>
             </div>
 
-            <!-- Track 4: Internship -->
-            <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
-              <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
-                <input type="checkbox" id="track-internship" onchange="toggleTrack('internship')" class="track-checkbox" />
-                <div>
-                  <div class="text-sm font-bold text-plaster flex items-center gap-2">
-                    <span>💼</span> Internship Work
-                  </div>
-                  <div class="text-xs text-mist/80">Daily company tasks & deliverables in Addis Ababa</div>
-                </div>
-              </label>
-              <div class="text-right flex-shrink-0 ml-2">
-                <span id="streak-internship" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-eucalyptus border border-eucalyptus/20">
-                  🔥 0d
-                </span>
-              </div>
-            </div>
-
-            <!-- Track 5: Book Reading -->
+            <!-- Track 4: Book Reading -->
             <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
               <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
                 <input type="checkbox" id="track-reading" onchange="toggleTrack('reading')" class="track-checkbox" />
@@ -419,7 +401,7 @@
               </div>
             </div>
 
-            <!-- Track 6: Korean Learning -->
+            <!-- Track 5: Korean Learning -->
             <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
               <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
                 <input type="checkbox" id="track-korean" onchange="toggleTrack('korean')" class="track-checkbox" />
@@ -437,7 +419,7 @@
               </div>
             </div>
 
-            <!-- Track 7: English Practice -->
+            <!-- Track 6: English Practice -->
             <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
               <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
                 <input type="checkbox" id="track-english" onchange="toggleTrack('english')" class="track-checkbox" />
@@ -576,7 +558,6 @@
               <option value="design">🎨 Design (Figma, UI/UX)</option>
               <option value="dsa">🧠 DSA (LeetCode, JS)</option>
               <option value="backend">⚙️ Backend (Node.js, Express, DB)</option>
-              <option value="internship">💼 Internship Work (Addis Ababa)</option>
               <option value="reading">📖 Book Reading</option>
               <option value="korean">🇰🇷 Korean Practice</option>
               <option value="english">🗣️ English Fluency</option>
@@ -698,7 +679,7 @@
           <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2 mb-2">
             <span>🎁</span> Variable Sprint Rewards
           </h2>
-          <p class="text-xs text-mist mb-3">Complete all 7 tracks today for a chance to unlock exclusive badges and theme tokens!</p>
+          <p class="text-xs text-mist mb-3">Complete all 6 tracks today for a chance to unlock exclusive badges and theme tokens!</p>
           <div id="unlockedBadgesContainer" class="flex flex-wrap gap-2">
             <!-- Dynamically rendered unlocked badges -->
           </div>
@@ -736,7 +717,6 @@
         { id: 'design', name: 'Design', icon: '🎨' },
         { id: 'dsa', name: 'DSA', icon: '🧠' },
         { id: 'backend', name: 'Backend', icon: '⚙️' },
-        { id: 'internship', name: 'Internship', icon: '💼' },
         { id: 'reading', name: 'Book Reading', icon: '📖' },
         { id: 'korean', name: 'Korean (A1)', icon: '🇰🇷' },
         { id: 'english', name: 'English Fluency', icon: '🗣️' }
@@ -1189,7 +1169,7 @@
         if (!container) return;
 
         if (unlocked.length === 0) {
-          container.innerHTML = `<span class="text-xs text-mist/60 italic">No rewards unlocked yet. Complete all 7 tracks today!</span>`;
+          container.innerHTML = `<span class="text-xs text-mist/60 italic">No rewards unlocked yet. Complete all 6 tracks today!</span>`;
           return;
         }
 
