@@ -1525,6 +1525,175 @@
               pomoState.sessionCount = 0; // Midnight reset!
             }
 
+            if (saved.isRunning && saved.targetEndTime) {
+              const now = Date.now();
+              if (saved.targetEndTime > now) {
+                pomoState.isRunning = true;
+                pomoState.targetEndTime = saved.targetEndTime;
+                pomoState.remainingSec = Math.ceil((saved.targetEndTime - now) / 1000);
+                pomoInterval = setInterval(tickPomodoro, 500);
+              } else {
+                pomoState.isRunning = false;
+                pomoState.remainingSec = pomoState.workSec;
+              }
+            } else {
+              pomoState.remainingSec = saved.remainingSec || pomoState.workSec;
+            }
+          } catch(e) {}
+        }
+
+        const trackSelect = document.getElementById('pomoTrackSelect');
+        if (trackSelect) trackSelect.value = pomoState.categoryTag;
+
+        updatePomoClockDisplay();
+        updatePomoToggleBtn();
+        renderPomoCategorySummary();
+      }
+
+      function togglePomoSettings() {
+        const panel = document.getElementById('pomoSettingsPanel');
+        if (panel) panel.classList.toggle('hidden');
+      }
+
+      function applyPomoSettings() {
+        const workM = parseInt(document.getElementById('cfgWorkMin').value) || 25;
+        const shortM = parseInt(document.getElementById('cfgShortMin').value) || 5;
+        const longM = parseInt(document.getElementById('cfgLongMin').value) || 15;
+
+        pomoState.workSec = workM * 60;
+        pomoState.shortSec = shortM * 60;
+        pomoState.longSec = longM * 60;
+
+        resetPomodoroTimer();
+        togglePomoSettings();
+      }
+
+      function toggleAudioMute() {
+        pomoState.isMuted = !pomoState.isMuted;
+        const muteBtn = document.getElementById('pomoMuteBtn');
+        if (muteBtn) {
+          muteBtn.innerText = pomoState.isMuted ? '🔇' : '🔊';
+        }
+        savePomodoroState();
+      }
+
+      // ===== WEB AUDIO SYNTHESIZERS =====
+      function initAudio() {
+        try {
+          if (!pomoAudioCtx) {
+            pomoAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (pomoAudioCtx.state === 'suspended') pomoAudioCtx.resume();
+        } catch(e) {}
+      }
+
+      function playChime(freq = 520, duration = 0.15) {
+        if (pomoState.isMuted) return;
+        try {
+          initAudio();
+          const osc = pomoAudioCtx.createOscillator();
+          const gain = pomoAudioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.15, pomoAudioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, pomoAudioCtx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(pomoAudioCtx.destination);
+          osc.start();
+          osc.stop(pomoAudioCtx.currentTime + duration);
+        } catch(e) {}
+      }
+
+      function playPomoAlarmSound() {
+        if (pomoState.isMuted) return;
+        try {
+          initAudio();
+          const freqs = [523.25, 659.25, 783.99, 1046.5];
+          freqs.forEach((f, i) => {
+            setTimeout(() => playChime(f, 0.3), i * 150);
+          });
+        } catch(e) {}
+      }
+
+      // ===== HYDRATION TRACKER WITH MULTI-DAY STREAK =====
+      function calculateWaterStreak() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        let streak = 0;
+        let broken = false;
+        let lastStreak = 0;
+
+        for (let i = 0; i < SPRINT_TOTAL_DAYS; i++) {
+          const checkDate = new Date(today);
+          checkDate.setDate(today.getDate() - i);
+          const key = checkDate.toISOString().slice(0, 10);
+          const waterCount = parseInt(localStorage.getItem(`water_${key}`)) || 0;
+          const supportHydration = localStorage.getItem(`support_${key}_hydration`) === 'true';
+          const isDone = (waterCount >= 8) || supportHydration;
+
+          if (isDone) {
+            streak++;
+          } else if (i === 0) {
+            // Today is still in progress; don't break streak if today isn't 8 yet
+            continue;
+          } else {
+            if (streak === 0 && i === 1) {
+              const prevDate = new Date(today);
+              prevDate.setDate(today.getDate() - 2);
+              const prevKey = prevDate.toISOString().slice(0, 10);
+              const prevWater = parseInt(localStorage.getItem(`water_${prevKey}`)) || 0;
+              const prevSupport = localStorage.getItem(`support_${prevKey}_hydration`) === 'true';
+              if (prevWater >= 8 || prevSupport) {
+                broken = true;
+                lastStreak = 1;
+              }
+            }
+            break;
+          }
+        }
+        return { streak, broken, lastStreak };
+      }
+
+      function loadHydration() {
+        const todayKey = getTodayKey();
+        const count = parseInt(localStorage.getItem(`water_${todayKey}`)) || 0;
+        const container = document.getElementById('waterGlassesContainer');
+        if (container) {
+          container.innerHTML = Array.from({ length: 8 }).map((_, i) => `
+            <button onclick="toggleWaterGlass(${i})" class="w-9 h-9 rounded-xl flex items-center justify-center transition transform active:scale-90 ${i < count ? 'bg-mist text-soot shadow-[0_0_10px_#B3C9D6]' : 'glass-card-subtle text-mist/30 hover:bg-soot-hover'}" title="Glass ${i + 1} of 8">
+              <span class="text-base">${i < count ? '💧' : '🥛'}</span>
+            </button>
+          `).join('');
+        }
+
+        const subtextEl = document.getElementById('waterProgressSubtext');
+        if (subtextEl) {
+          const pct = Math.round((count / 8) * 100);
+          subtextEl.innerText = `${count} / 8 Glasses (${pct}%) ${count >= 8 ? '🎯 Target Hit!' : ''}`;
+        }
+
+        const streakInfo = calculateWaterStreak();
+        const streakEl = document.getElementById('waterStreakBadge');
+        if (streakEl) {
+          if (streakInfo.broken && streakInfo.streak === 0) {
+            streakEl.innerHTML = `<span class="line-through opacity-60">~${streakInfo.lastStreak}~</span> Broken 💔`;
+            streakEl.className = "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-red-950/40 text-red-400 border border-red-500/30";
+          } else if (streakInfo.streak > 0) {
+            streakEl.innerText = `💧 ${streakInfo.streak}d Streak`;
+            streakEl.className = streakInfo.streak >= 3 
+              ? "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-mist/25 text-mist border border-mist/40 shadow-sm"
+              : "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-mist border border-mist/20";
+          } else {
+            streakEl.innerText = `Streak: 0d`;
+            streakEl.className = "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-mist/70 border border-eucalyptus/20";
+          }
+        }
+
+        // Sync support-hydration checkbox in Foundation habits
+        const hydCheckbox = document.getElementById('support-hydration');
+        if (hydCheckbox) {
+          hydCheckbox.checked = (count >= 8);
+        }
       }
 
       function toggleWaterGlass(idx) {
@@ -1536,7 +1705,34 @@
         else count = idx + 1;
 
         localStorage.setItem(`water_${todayKey}`, count);
+        localStorage.setItem(`support_${todayKey}_hydration`, count >= 8 ? 'true' : 'false');
+        
+        playChime(360 + count * 40, 0.12);
+
+        if (count === 8) {
+          setTimeout(() => playChime(784, 0.25), 120);
+        }
+
         loadHydration();
+      }
+
+      function toggleDesktopNotifications() {
+        if (Notification.permission === "granted") {
+          pomoState.desktopNotif = !pomoState.desktopNotif;
+        } else {
+          Notification.requestPermission().then(p => {
+            pomoState.desktopNotif = (p === "granted");
+            const btn = document.getElementById('desktopNotifBtn');
+            if (btn) {
+              btn.innerText = pomoState.desktopNotif ? 'Enabled' : 'Disabled';
+            }
+          });
+        }
+        const btn = document.getElementById('desktopNotifBtn');
+        if (btn) {
+          btn.innerText = pomoState.desktopNotif ? 'Enabled' : 'Disabled';
+        }
+        savePomodoroState();
       }
 
       // ===== MOOD & SLEEP LOGS =====
