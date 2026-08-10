@@ -245,8 +245,11 @@
             📤 Import
             <input type="file" accept=".json" onchange="importData(event)" class="hidden" />
           </label>
-          <button onclick="resetTodayLogs()" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-red-400/95 hover:border-red-500 transition">
+          <button onclick="resetTodayLogs()" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-red-400/80 hover:border-red-500 transition" title="Clear logs for today only">
             🗑️ Reset Today
+          </button>
+          <button onclick="resetWholeSprint()" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-red-500 hover:border-red-600 transition" title="Clear all logs and start fresh from Day 1 today">
+            🔥 Reset Sprint
           </button>
         </div>
       </div>
@@ -1855,6 +1858,12 @@
           }
         };
         reader.readAsText(file);
+      }
+
+      function resetWholeSprint() {
+        if (!confirm("Are you sure you want to completely reset the sprint? This will clear ALL progress, habits, water logs, and reset your start date to today.")) return;
+        localStorage.clear();
+        location.reload();
       }
 
       function resetTodayLogs() {
