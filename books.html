@@ -3,14 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>33-Day Book Reading Tracker — Sambee's Summer Sprint 📚 (Aug 10 – Ethiopian Sep 1)</title>
+    <title>Aesthetic Reading Sanctuary — Sambee's Summer Sprint 📚 (Aug 10 – Ethiopian Sep 1)</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Outfit:wght@500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="ethiopian-calendar.js"></script>
@@ -37,6 +39,7 @@
             },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
+              serif: ['Newsreader', 'Georgia', 'serif'],
               display: ['Outfit', 'sans-serif']
             }
           }
@@ -61,6 +64,10 @@
         font-family: 'Outfit', sans-serif;
       }
 
+      .font-serif-aesthetic {
+        font-family: 'Newsreader', Georgia, serif;
+      }
+
       .dark .glass-card {
         background: rgba(36, 44, 45, 0.85);
         backdrop-filter: blur(16px);
@@ -68,21 +75,28 @@
         box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
       }
 
-      .light .glass-card {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(105, 124, 112, 0.15);
-      }
-
       .dark .glass-card-subtle {
         background: rgba(28, 35, 36, 0.6);
         border: 1px solid rgba(179, 201, 214, 0.12);
       }
 
-      .light .glass-card-subtle {
-        background: rgba(242, 239, 226, 0.6);
-        border: 1px solid rgba(105, 124, 112, 0.12);
+      /* 3D Book Spine Effect */
+      .book-card-3d {
+        perspective: 1000px;
+        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
       }
+      .book-card-3d:hover {
+        transform: translateY(-6px) scale(1.02);
+      }
+
+      /* Ambient sound pulse animation */
+      @keyframes soundWave {
+        0%, 100% { transform: scaleY(0.4); }
+        50% { transform: scaleY(1); }
+      }
+      .animate-wave-1 { animation: soundWave 1.2s ease-in-out infinite; }
+      .animate-wave-2 { animation: soundWave 0.9s ease-in-out infinite 0.2s; }
+      .animate-wave-3 { animation: soundWave 1.4s ease-in-out infinite 0.4s; }
 
       ::-webkit-scrollbar {
         width: 6px;
@@ -93,7 +107,7 @@
       }
     </style>
   </head>
-  <body class="bg-soot-dark dark:bg-soot-dark text-soot dark:text-plaster min-h-screen pb-20 selection:bg-moss selection:text-plaster">
+  <body class="bg-soot-dark text-soot dark:text-plaster min-h-screen pb-20 selection:bg-moss selection:text-plaster">
     
     <!-- Background Glows -->
     <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-moss/10 rounded-full blur-[140px] pointer-events-none"></div>
@@ -103,13 +117,18 @@
       <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 pb-6 border-b border-eucalyptus/15">
         <div>
           <div class="flex items-center gap-3">
-            <span class="text-3xl">📖</span>
+            <span class="text-3xl">☕</span>
             <div>
-              <h1 class="text-3xl font-black font-display tracking-tight text-plaster uppercase">
-                33-Day Reading Tracker
-              </h1>
+              <div class="flex items-center gap-2">
+                <h1 class="text-2xl sm:text-3xl font-black font-display tracking-tight text-plaster uppercase">
+                  Aesthetic Reading Sanctuary
+                </h1>
+                <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-lg bg-yellow-400/20 text-yellow-300 border border-yellow-400/30">
+                  ✨ Cozy Flow State
+                </span>
+              </div>
               <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
-                Mon Aug 10 (ነሐሴ 4) → Fri Sep 11 (መስከረም 1 🌼 Enkutatash) • 10+ pages/day (330+ pages goal)
+                Mon Aug 10 (ነሐሴ 4) → Fri Sep 11 (መስከረም 1 🌼 Enkutatash) • 10+ Pages Daily (330+ Pages Milestone)
               </p>
             </div>
           </div>
@@ -123,7 +142,7 @@
             📅 33 Days Grid
           </a>
           <a href="korean-plan.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
-            🇰🇷 Korean Plan (33D)
+            🇰🇷 Korean Plan (Weekend)
           </a>
         </div>
       </div>
@@ -131,37 +150,120 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 grid gap-8 lg:grid-cols-12">
       
-      <!-- LEFT PANEL: Reading Goal & Daily Log Stream (5 Cols) -->
+      <!-- LEFT PANEL: Ambient Soundscapes, Focus Timer & Log Input (5 Cols) -->
       <section class="lg:col-span-5 space-y-6">
         
-        <!-- Total Pages Progress Card -->
-        <div class="glass-card rounded-3xl p-6 flex items-center justify-between">
-          <div>
-            <span class="text-xs uppercase tracking-widest text-eucalyptus font-bold block mb-1">Sprint Pages Goal</span>
-            <div class="text-3xl font-black font-display text-plaster">
-              <span id="totalPagesLoggedDisplay">0</span> <span class="text-sm font-normal text-mist">/ 330 pages</span>
+        <!-- Ambient Soundscapes Generator Card -->
+        <div class="glass-card rounded-3xl p-6 relative overflow-hidden border border-emerald-500/20 shadow-xl">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <span class="text-[10px] uppercase font-bold text-moss-light tracking-widest block">Sound Sanctuary</span>
+              <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
+                <span>🎧</span> Ambient Audio Generator
+              </h2>
             </div>
-            <p class="text-xs text-moss-light font-medium mt-1">10+ pages logged daily (33 Days)</p>
+            <button id="masterSoundToggle" onclick="toggleMasterSoundscape()" class="px-3.5 py-1.5 rounded-xl bg-moss hover:bg-moss-light text-plaster text-xs font-bold font-display shadow transition flex items-center gap-1.5">
+              <span id="soundPlayIcon">▶️</span> <span id="soundPlayText">Play Sanctuary</span>
+            </button>
           </div>
-          <div class="relative w-20 h-20">
-            <svg class="w-full h-full transform -rotate-90">
-              <circle cx="40" cy="40" r="32" stroke="rgba(152,170,157,0.15)" stroke-width="6" fill="transparent" />
-              <circle id="readingProgressCircle" cx="40" cy="40" r="32" stroke="#697C70" stroke-width="6" fill="transparent" stroke-dasharray="201" stroke-dashoffset="201" class="transition-all duration-700" />
-            </svg>
-            <span id="readingProgressPercent" class="absolute inset-0 flex items-center justify-center text-xs font-black font-display text-plaster">0%</span>
+
+          <p class="text-xs text-mist/80 mb-4">Select an organic ambient soundscape synthesised natively to slip instantly into deep reading flow:</p>
+
+          <div class="grid grid-cols-2 gap-2.5 mb-4">
+            <button id="soundBtn-rain" onclick="selectSoundscape('rain')" class="p-3 rounded-2xl glass-card-subtle text-left border border-eucalyptus/20 hover:border-moss transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl">🌧️</span>
+                <div>
+                  <div class="text-xs font-bold text-plaster group-hover:text-yellow-300 transition">Cozy Rain</div>
+                  <div class="text-[10px] text-mist">Gentle raindrops</div>
+                </div>
+              </div>
+              <div class="w-2 h-2 rounded-full bg-mist/30" id="soundDot-rain"></div>
+            </button>
+
+            <button id="soundBtn-fire" onclick="selectSoundscape('fire')" class="p-3 rounded-2xl glass-card-subtle text-left border border-eucalyptus/20 hover:border-moss transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl">🔥</span>
+                <div>
+                  <div class="text-xs font-bold text-plaster group-hover:text-yellow-300 transition">Fireplace</div>
+                  <div class="text-[10px] text-mist">Warm hearth crackle</div>
+                </div>
+              </div>
+              <div class="w-2 h-2 rounded-full bg-mist/30" id="soundDot-fire"></div>
+            </button>
+
+            <button id="soundBtn-coffee" onclick="selectSoundscape('coffee')" class="p-3 rounded-2xl glass-card-subtle text-left border border-eucalyptus/20 hover:border-moss transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl">☕</span>
+                <div>
+                  <div class="text-xs font-bold text-plaster group-hover:text-yellow-300 transition">Addis Cafe</div>
+                  <div class="text-[10px] text-mist">Acoustic murmur</div>
+                </div>
+              </div>
+              <div class="w-2 h-2 rounded-full bg-mist/30" id="soundDot-coffee"></div>
+            </button>
+
+            <button id="soundBtn-forest" onclick="selectSoundscape('forest')" class="p-3 rounded-2xl glass-card-subtle text-left border border-eucalyptus/20 hover:border-moss transition flex items-center justify-between group">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl">🍃</span>
+                <div>
+                  <div class="text-xs font-bold text-plaster group-hover:text-yellow-300 transition">Night Forest</div>
+                  <div class="text-[10px] text-mist">Pine breeze hum</div>
+                </div>
+              </div>
+              <div class="w-2 h-2 rounded-full bg-mist/30" id="soundDot-forest"></div>
+            </button>
+          </div>
+
+          <!-- Volume Slider -->
+          <div class="flex items-center gap-3 bg-soot/70 px-3.5 py-2 rounded-xl border border-eucalyptus/10">
+            <span class="text-xs text-mist">🔈</span>
+            <input type="range" id="soundVolumeSlider" min="0" max="100" value="40" oninput="setSoundVolume(this.value)" class="w-full accent-moss cursor-pointer" />
+            <span id="soundVolLabel" class="text-[10px] font-mono text-eucalyptus w-7 text-right">40%</span>
+          </div>
+        </div>
+
+        <!-- Sprint Pages Goal & Velocity Card -->
+        <div class="glass-card rounded-3xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <span class="text-xs uppercase tracking-widest text-eucalyptus font-bold block mb-1">Sprint Pages Goal</span>
+              <div class="text-3xl font-black font-display text-plaster">
+                <span id="totalPagesLoggedDisplay">0</span> <span class="text-sm font-normal text-mist">/ 330 pages</span>
+              </div>
+              <p id="velocityTextDisplay" class="text-xs text-moss-light font-medium mt-1">Velocity: 0.0 pages/day</p>
+            </div>
+            <div class="relative w-20 h-20">
+              <svg class="w-full h-full transform -rotate-90">
+                <circle cx="40" cy="40" r="32" stroke="rgba(152,170,157,0.15)" stroke-width="6" fill="transparent" />
+                <circle id="readingProgressCircle" cx="40" cy="40" r="32" stroke="#697C70" stroke-width="6" fill="transparent" stroke-dasharray="201" stroke-dashoffset="201" class="transition-all duration-700" />
+              </svg>
+              <span id="readingProgressPercent" class="absolute inset-0 flex items-center justify-center text-xs font-black font-display text-plaster">0%</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-center text-xs">
+            <div class="glass-card-subtle p-2.5 rounded-xl">
+              <span class="text-[10px] text-eucalyptus font-bold block">Enkutatash Target</span>
+              <span id="daysLeftEnkutatashDisplay" class="font-bold text-plaster">33 Days left</span>
+            </div>
+            <div class="glass-card-subtle p-2.5 rounded-xl">
+              <span class="text-[10px] text-yellow-300 font-bold block">Reward Level</span>
+              <span class="font-bold text-plaster">+50 XP / 10p 🌟</span>
+            </div>
           </div>
         </div>
 
         <!-- Log Reading Session Input -->
         <div class="glass-card rounded-3xl p-6">
           <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2 mb-4">
-            <span>✍️</span> Log Today's Reading
+            <span>✍️</span> Log Today's Reading Session
           </h2>
 
           <div class="space-y-3">
             <div>
               <label class="text-[11px] font-bold text-eucalyptus uppercase block mb-1">Book Title</label>
-              <input type="text" id="bookTitleInput" placeholder="e.g. Designing Data-Intensive Applications / Atomic Habits" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss" />
+              <input type="text" id="bookTitleInput" placeholder="e.g. Designing Data-Intensive Applications" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss" />
             </div>
 
             <div class="grid grid-cols-2 gap-3">
@@ -171,47 +273,314 @@
               </div>
               <div>
                 <label class="text-[11px] font-bold text-eucalyptus uppercase block mb-1">Minutes Spent</label>
-                <input type="number" id="readMinutesInput" min="1" value="20" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss" />
+                <input type="number" id="readMinutesInput" min="1" value="25" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss" />
               </div>
             </div>
 
             <div>
-              <label class="text-[11px] font-bold text-eucalyptus uppercase block mb-1">Key Takeaway / Quote</label>
-              <textarea id="bookNotesInput" rows="3" placeholder="What key insight did you learn today?" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl p-3 text-xs text-plaster focus:outline-none focus:border-moss resize-none"></textarea>
+              <label class="text-[11px] font-bold text-eucalyptus uppercase block mb-1">Key Insight / Memorable Quote</label>
+              <textarea id="bookNotesInput" rows="3" placeholder="What profound idea or architectural principle resonated with you today?" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl p-3 text-xs text-plaster focus:outline-none focus:border-moss resize-none"></textarea>
             </div>
 
-            <button onclick="saveReadingLog()" class="w-full py-3 bg-moss hover:bg-moss-light text-plaster font-bold font-display text-xs rounded-xl shadow-md transition">
-              Log Session & Update Sprint 🚀
+            <button onclick="saveReadingLog()" class="w-full py-3 bg-moss hover:bg-moss-light text-plaster font-bold font-display text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
+              <span>📖</span> <span>Log Session & Claim +50 XP 🚀</span>
             </button>
           </div>
         </div>
       </section>
 
-      <!-- RIGHT PANEL: Book Log Stream & Bookshelf Vault (7 Cols) -->
+      <!-- RIGHT PANEL: 3D Bookshelf, Aesthetic Quote Card Studio & History Feed (7 Cols) -->
       <section class="lg:col-span-7 space-y-6">
         
+        <!-- 3D Interactive Bookshelf Showcase -->
+        <div class="glass-card rounded-3xl p-6">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-eucalyptus/15">
+            <div>
+              <span class="text-[10px] uppercase font-bold text-eucalyptus tracking-widest block">Summer Collection</span>
+              <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
+                <span>📚</span> 3D Interactive Bookshelf
+              </h2>
+            </div>
+            <span class="text-xs text-mist font-medium">4 Core Pillars</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <!-- Book 1: DDIA -->
+            <div class="book-card-3d bg-gradient-to-br from-[#2D3A34] to-[#1E2723] p-3.5 rounded-2xl border border-emerald-500/30 flex flex-col justify-between h-44 shadow-lg cursor-pointer" onclick="quickFillBook('Designing Data-Intensive Applications', 10)">
+              <div>
+                <div class="text-[9px] font-bold text-emerald-300 uppercase tracking-wider mb-1">Architecture</div>
+                <h3 class="text-xs font-bold text-plaster font-display leading-tight">Designing Data-Intensive Apps</h3>
+                <p class="text-[10px] text-mist/70 mt-1">Martin Kleppmann</p>
+              </div>
+              <div>
+                <div class="text-[9px] text-emerald-400 font-bold mb-1">10p/day • Core</div>
+                <div class="w-full bg-soot/90 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-emerald-400 h-full w-[45%]"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Book 2: Atomic Habits -->
+            <div class="book-card-3d bg-gradient-to-br from-[#38312A] to-[#25201A] p-3.5 rounded-2xl border border-yellow-500/30 flex flex-col justify-between h-44 shadow-lg cursor-pointer" onclick="quickFillBook('Atomic Habits', 10)">
+              <div>
+                <div class="text-[9px] font-bold text-yellow-300 uppercase tracking-wider mb-1">Mindset</div>
+                <h3 class="text-xs font-bold text-plaster font-display leading-tight">Atomic Habits</h3>
+                <p class="text-[10px] text-mist/70 mt-1">James Clear</p>
+              </div>
+              <div>
+                <div class="text-[9px] text-yellow-300 font-bold mb-1">1% Better Daily</div>
+                <div class="w-full bg-soot/90 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-yellow-400 h-full w-[65%]"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Book 3: Pragmatic Programmer -->
+            <div class="book-card-3d bg-gradient-to-br from-[#2B353E] to-[#1C2329] p-3.5 rounded-2xl border border-sky-500/30 flex flex-col justify-between h-44 shadow-lg cursor-pointer" onclick="quickFillBook('The Pragmatic Programmer', 10)">
+              <div>
+                <div class="text-[9px] font-bold text-sky-300 uppercase tracking-wider mb-1">Engineering</div>
+                <h3 class="text-xs font-bold text-plaster font-display leading-tight">The Pragmatic Programmer</h3>
+                <p class="text-[10px] text-mist/70 mt-1">David Thomas</p>
+              </div>
+              <div>
+                <div class="text-[9px] text-sky-300 font-bold mb-1">Craftsmanship</div>
+                <div class="w-full bg-soot/90 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-sky-400 h-full w-[30%]"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Book 4: System Design Interview -->
+            <div class="book-card-3d bg-gradient-to-br from-[#352B3E] to-[#221B28] p-3.5 rounded-2xl border border-purple-500/30 flex flex-col justify-between h-44 shadow-lg cursor-pointer" onclick="quickFillBook('System Design Interview', 10)">
+              <div>
+                <div class="text-[9px] font-bold text-purple-300 uppercase tracking-wider mb-1">Fintech & Scale</div>
+                <h3 class="text-xs font-bold text-plaster font-display leading-tight">System Design Interview</h3>
+                <p class="text-[10px] text-mist/70 mt-1">Alex Xu</p>
+              </div>
+              <div>
+                <div class="text-[9px] text-purple-300 font-bold mb-1">Distributed Scale</div>
+                <div class="w-full bg-soot/90 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-purple-400 h-full w-[50%]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aesthetic Quote Card Studio -->
+        <div class="glass-card rounded-3xl p-6 border border-yellow-400/20 bg-gradient-to-br from-soot via-soot-card to-[#1F2728]">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] uppercase font-bold text-yellow-300 tracking-widest block">Daily Reflection Studio</span>
+            <button onclick="copyAestheticQuoteCard()" class="px-3 py-1 rounded-xl bg-yellow-400/20 hover:bg-yellow-400/30 text-yellow-300 text-xs font-bold font-display border border-yellow-400/30 transition flex items-center gap-1.5">
+              <span>📋</span> <span>Copy Quote Card</span>
+            </button>
+          </div>
+
+          <div id="quoteCardStudio" class="p-5 rounded-2xl bg-soot/90 border border-eucalyptus/20 relative shadow-inner">
+            <span class="text-3xl font-serif text-yellow-400/40 absolute top-2 left-3">“</span>
+            <p id="featuredQuoteText" class="font-serif-aesthetic text-base sm:text-lg italic text-plaster/95 leading-relaxed pl-6 pr-4 mb-3">
+              You do not rise to the level of your goals. You fall to the level of your systems.
+            </p>
+            <div class="flex items-center justify-between pl-6 pt-2 border-t border-eucalyptus/10">
+              <span id="featuredQuoteAuthor" class="text-xs font-bold text-moss-light">— James Clear, Atomic Habits</span>
+              <span id="quoteSprintTag" class="text-[10px] text-mist/60 font-mono">Sambee Summer Sprint • ነሐሴ 2018</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Log Stream Feed -->
         <div class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4 pb-3 border-b border-eucalyptus/15">
             <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
-              <span>📚</span> 33-Day Reading Log History
+              <span>📖</span> 33-Day Reading Sanctuary Journal
             </h2>
             <span id="logCountBadge" class="text-xs text-eucalyptus font-medium">0 sessions logged</span>
           </div>
 
-          <div id="readingLogsFeed" class="space-y-3 max-h-[500px] overflow-y-auto pr-1">
+          <div id="readingLogsFeed" class="space-y-3 max-h-[420px] overflow-y-auto pr-1">
             <!-- Dynamically populated entries -->
           </div>
         </div>
+
       </section>
     </main>
 
     <script>
       const TARGET_PAGES = 330; // 10 pages/day * 33 days
 
-      window.onload = function() {
-        loadReadingLogs();
-      };
+      // ===== WEB AUDIO AMBIENT SOUNDSCAPE SYNTHESIZER =====
+      let audioCtx = null;
+      let isSoundPlaying = false;
+      let currentSoundscape = 'rain'; // 'rain', 'fire', 'coffee', 'forest'
+      let soundGainNode = null;
+      let soundSourceNode = null;
+      let soundFilterNode = null;
+      let ambientInterval = null;
+
+      function initReadingAudio() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            audioCtx = new AudioContext();
+          }
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function toggleMasterSoundscape() {
+        initReadingAudio();
+        if (!audioCtx) {
+          alert("Audio synthesis is not supported on this browser.");
+          return;
+        }
+
+        if (isSoundPlaying) {
+          stopSoundscape();
+        } else {
+          startSoundscape(currentSoundscape);
+        }
+      }
+
+      function selectSoundscape(type) {
+        currentSoundscape = type;
+        updateSoundscapeUI();
+        if (isSoundPlaying) {
+          stopSoundscape();
+          startSoundscape(type);
+        }
+      }
+
+      function updateSoundscapeUI() {
+        ['rain', 'fire', 'coffee', 'forest'].forEach(t => {
+          const btn = document.getElementById(`soundBtn-${t}`);
+          const dot = document.getElementById(`soundDot-${t}`);
+          if (btn && dot) {
+            if (t === currentSoundscape && isSoundPlaying) {
+              btn.className = "p-3 rounded-2xl bg-moss text-left border border-moss-light shadow transition flex items-center justify-between group";
+              dot.className = "w-2.5 h-2.5 rounded-full bg-yellow-300 animate-ping";
+            } else if (t === currentSoundscape) {
+              btn.className = "p-3 rounded-2xl glass-card-subtle text-left border border-moss shadow transition flex items-center justify-between group";
+              dot.className = "w-2 h-2 rounded-full bg-emerald-400";
+            } else {
+              btn.className = "p-3 rounded-2xl glass-card-subtle text-left border border-eucalyptus/20 hover:border-moss transition flex items-center justify-between group";
+              dot.className = "w-2 h-2 rounded-full bg-mist/30";
+            }
+          }
+        });
+
+        const icon = document.getElementById('soundPlayIcon');
+        const txt = document.getElementById('soundPlayText');
+        const masterBtn = document.getElementById('masterSoundToggle');
+
+        if (isSoundPlaying) {
+          if (icon) icon.innerText = "⏸️";
+          if (txt) txt.innerText = "Pause Sanctuary";
+          if (masterBtn) masterBtn.className = "px-3.5 py-1.5 rounded-xl bg-red-900/80 hover:bg-red-800 text-plaster text-xs font-bold font-display shadow transition flex items-center gap-1.5 border border-red-500/30";
+        } else {
+          if (icon) icon.innerText = "▶️";
+          if (txt) txt.innerText = "Play Sanctuary";
+          if (masterBtn) masterBtn.className = "px-3.5 py-1.5 rounded-xl bg-moss hover:bg-moss-light text-plaster text-xs font-bold font-display shadow transition flex items-center gap-1.5";
+        }
+      }
+
+      function startSoundscape(type) {
+        initReadingAudio();
+        stopSoundscape();
+
+        isSoundPlaying = true;
+        updateSoundscapeUI();
+
+        const bufferSize = audioCtx.sampleRate * 2;
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+
+        // Synthesize textured noise based on type
+        for (let i = 0; i < bufferSize; i++) {
+          if (type === 'rain') {
+            data[i] = (Math.random() * 2 - 1) * 0.4;
+          } else if (type === 'fire') {
+            // Noise with random crackle spikes
+            const isCrackle = Math.random() < 0.003;
+            data[i] = isCrackle ? (Math.random() * 2 - 1) * 0.9 : (Math.random() * 2 - 1) * 0.25;
+          } else if (type === 'coffee') {
+            data[i] = (Math.random() * 2 - 1) * 0.2 + Math.sin(i / 100) * 0.05;
+          } else {
+            // Forest breeze
+            data[i] = (Math.random() * 2 - 1) * 0.3 * Math.sin(i / 5000);
+          }
+        }
+
+        soundSourceNode = audioCtx.createBufferSource();
+        soundSourceNode.buffer = buffer;
+        soundSourceNode.loop = true;
+
+        soundFilterNode = audioCtx.createBiquadFilter();
+        if (type === 'rain') {
+          soundFilterNode.type = 'lowpass';
+          soundFilterNode.frequency.setValueAtTime(800, audioCtx.currentTime);
+        } else if (type === 'fire') {
+          soundFilterNode.type = 'bandpass';
+          soundFilterNode.frequency.setValueAtTime(450, audioCtx.currentTime);
+          soundFilterNode.Q.setValueAtTime(1.5, audioCtx.currentTime);
+        } else if (type === 'coffee') {
+          soundFilterNode.type = 'lowpass';
+          soundFilterNode.frequency.setValueAtTime(550, audioCtx.currentTime);
+        } else {
+          soundFilterNode.type = 'lowpass';
+          soundFilterNode.frequency.setValueAtTime(650, audioCtx.currentTime);
+        }
+
+        soundGainNode = audioCtx.createGain();
+        const volVal = parseInt(document.getElementById('soundVolumeSlider').value) / 100;
+        soundGainNode.gain.setValueAtTime(volVal * 0.3, audioCtx.currentTime);
+
+        soundSourceNode.connect(soundFilterNode);
+        soundFilterNode.connect(soundGainNode);
+        soundGainNode.connect(audioCtx.destination);
+
+        soundSourceNode.start();
+      }
+
+      function stopSoundscape() {
+        if (soundSourceNode) {
+          try { soundSourceNode.stop(); } catch(e) {}
+          soundSourceNode.disconnect();
+          soundSourceNode = null;
+        }
+        isSoundPlaying = false;
+        updateSoundscapeUI();
+      }
+
+      function setSoundVolume(val) {
+        document.getElementById('soundVolLabel').innerText = `${val}%`;
+        if (soundGainNode && audioCtx) {
+          soundGainNode.gain.setValueAtTime((val / 100) * 0.3, audioCtx.currentTime);
+        }
+      }
+
+      // ===== READING REWARDS & XP INTEGRATION =====
+      function awardReadingXP() {
+        const currentXP = parseInt(localStorage.getItem('sprint_total_xp') || '0');
+        const newXP = currentXP + 50;
+        localStorage.setItem('sprint_total_xp', newXP.toString());
+
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 50,
+            spread: 60,
+            origin: { y: 0.7 },
+            colors: ['#98AA9D', '#B3C9D6', '#E5C158']
+          });
+        }
+      }
+
+      function quickFillBook(title, defaultPages) {
+        document.getElementById('bookTitleInput').value = title;
+        document.getElementById('pagesReadInput').value = defaultPages;
+        document.getElementById('bookTitleInput').focus();
+      }
 
       function saveReadingLog() {
         const title = document.getElementById('bookTitleInput').value.trim();
@@ -241,12 +610,28 @@
         if (pages >= 10) {
           const todayKey = new Date().toISOString().slice(0, 10);
           localStorage.setItem(`track_${todayKey}_reading`, 'true');
+          awardReadingXP();
+        }
+
+        if (notes) {
+          document.getElementById('featuredQuoteText').innerText = notes;
+          document.getElementById('featuredQuoteAuthor').innerText = `— ${title}`;
         }
 
         document.getElementById('bookTitleInput').value = '';
         document.getElementById('bookNotesInput').value = '';
 
         loadReadingLogs();
+      }
+
+      function copyAestheticQuoteCard() {
+        const text = document.getElementById('featuredQuoteText').innerText;
+        const author = document.getElementById('featuredQuoteAuthor').innerText;
+        const copyContent = `“${text}”\n${author}\n✨ Sambee Summer Sprint 2026`;
+
+        navigator.clipboard.writeText(copyContent).then(() => {
+          alert("Aesthetic quote card copied to clipboard! ✨");
+        });
       }
 
       function loadReadingLogs() {
@@ -260,6 +645,16 @@
         document.getElementById('totalPagesLoggedDisplay').innerText = totalPages;
         if (badge) badge.innerText = `${logs.length} session${logs.length === 1 ? '' : 's'} logged`;
 
+        // Calculate velocity & progress
+        const currentSprintDay = (typeof getCurrentSprintDay === 'function') ? getCurrentSprintDay() : 1;
+        const velocity = (totalPages / Math.max(1, currentSprintDay)).toFixed(1);
+        const velEl = document.getElementById('velocityTextDisplay');
+        if (velEl) velEl.innerText = `Velocity: ${velocity} pages/day (Avg)`;
+
+        const daysLeft = Math.max(0, 33 - currentSprintDay);
+        const daysLeftEl = document.getElementById('daysLeftEnkutatashDisplay');
+        if (daysLeftEl) daysLeftEl.innerText = `${daysLeft} Days to 🌼`;
+
         const pct = Math.min(100, Math.round((totalPages / TARGET_PAGES) * 100));
         const circle = document.getElementById('readingProgressCircle');
         const text = document.getElementById('readingProgressPercent');
@@ -270,10 +665,17 @@
         }
         if (text) text.innerText = `${pct}%`;
 
+        // Update featured quote with the latest note if available
+        const latestWithNotes = logs.find(l => l.notes && l.notes.length > 5);
+        if (latestWithNotes) {
+          document.getElementById('featuredQuoteText').innerText = latestWithNotes.notes;
+          document.getElementById('featuredQuoteAuthor').innerText = `— ${latestWithNotes.title}`;
+        }
+
         if (!feed) return;
 
         if (logs.length === 0) {
-          feed.innerHTML = `<div class="p-6 rounded-2xl glass-card-subtle text-xs text-mist/60 italic text-center">No reading logs yet. Read 10+ pages today and log it above!</div>`;
+          feed.innerHTML = `<div class="p-6 rounded-2xl glass-card-subtle text-xs text-mist/60 italic text-center">No reading logs yet. Read 10+ pages today, listen to cozy ambient soundscapes, and log above!</div>`;
           return;
         }
 
@@ -287,7 +689,7 @@
               <span class="font-bold text-moss-light">📖 ${l.pages} pages</span>
               <span>⏱️ ${l.mins} minutes</span>
             </div>
-            ${l.notes ? `<p class="text-xs italic text-plaster/80 bg-soot/40 p-2.5 rounded-xl border border-eucalyptus/10">"${l.notes}"</p>` : ''}
+            ${l.notes ? `<p class="text-xs font-serif-aesthetic italic text-plaster/90 bg-soot/40 p-2.5 rounded-xl border border-eucalyptus/10">“${l.notes}”</p>` : ''}
             <div class="text-right">
               <button onclick="deleteLog(${idx})" class="text-[10px] text-red-400 hover:text-red-300">Delete</button>
             </div>
@@ -301,6 +703,11 @@
         localStorage.setItem('reading_logs_summer33sprint', JSON.stringify(logs));
         loadReadingLogs();
       }
+
+      window.onload = function() {
+        loadReadingLogs();
+        updateSoundscapeUI();
+      };
     </script>
   </body>
 </html>

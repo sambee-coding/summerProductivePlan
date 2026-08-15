@@ -177,6 +177,28 @@
     <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-moss/10 rounded-full blur-[140px] pointer-events-none"></div>
     <div class="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] bg-mist/10 rounded-full blur-[140px] pointer-events-none"></div>
 
+    <!-- Level Up Celebration Modal -->
+    <div id="levelUpModal" class="fixed inset-0 bg-soot-dark/85 backdrop-blur-md z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4">
+      <div class="glass-card max-w-md w-full rounded-3xl p-8 text-center border-2 border-yellow-400/60 shadow-[0_0_50px_rgba(229,193,88,0.25)] transform scale-95 transition-transform duration-300 relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-36 h-36 bg-yellow-400/20 rounded-full blur-3xl"></div>
+        <div class="text-6xl mb-2 animate-bounce">🏆</div>
+        <span class="text-xs uppercase tracking-widest font-black text-yellow-400">Level Up Achieved!</span>
+        <h2 id="levelUpTitle" class="text-3xl font-black font-display text-plaster mt-1 mb-2">Level 2 Unlocked!</h2>
+        <p id="levelUpRankText" class="text-sm font-bold text-mist mb-4">You are now a <span class="text-yellow-300">Syntax Explorer</span></p>
+        <div class="glass-card-subtle rounded-2xl p-4 text-xs text-plaster/90 space-y-2 mb-6 border border-yellow-400/20 text-left">
+          <div class="flex items-center gap-2">
+            <span>✨</span> <span><strong>Perk Unlocked:</strong> +5% Focus Momentum Boost</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>🛡️</span> <span><strong>Streak Shield:</strong> Active Protection Equipped</span>
+          </div>
+        </div>
+        <button onclick="closeLevelUpModal()" class="w-full py-3.5 bg-gradient-to-r from-moss to-moss-light text-plaster font-black font-display rounded-2xl shadow-lg transition transform active:scale-95">
+          Claim Rewards & Keep Grinding 🚀
+        </button>
+      </div>
+    </div>
+
     <!-- Celebration Modal (Full Screen Ritual) -->
     <div id="celebrationModal" class="fixed inset-0 bg-soot-dark/80 backdrop-blur-md z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4">
       <div class="glass-card max-w-md w-full rounded-3xl p-8 text-center border-2 border-moss/40 shadow-2xl transform scale-95 transition-transform duration-300 relative overflow-hidden">
@@ -184,7 +206,7 @@
         <div class="text-6xl mb-3 animate-bounce">🔥</div>
         <span class="text-xs uppercase tracking-widest font-bold text-eucalyptus">Sprint Ritual Achieved</span>
         <h2 class="text-3xl font-black font-display text-plaster mt-1 mb-2">Day Complete! 🎉</h2>
-        <p id="celebrationSubtext" class="text-sm text-mist mb-6">You dominated all 6 grind tracks today. Consistency is your superpower, Sambee!</p>
+        <p id="celebrationSubtext" class="text-sm text-mist mb-6">You dominated all core grind tracks today. Consistency is your superpower, Sambee!</p>
         
         <div id="celebrationTracksSummary" class="glass-card-subtle rounded-2xl p-4 text-left space-y-2 mb-6 text-xs text-plaster font-medium">
           <!-- Dynamically populated completed tracks summary -->
@@ -233,10 +255,10 @@
             📅 33 Days Grid
           </a>
           <a href="korean-plan.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist hover:border-mist transition">
-            🇰🇷 Korean Plan (33D)
+            🇰🇷 Korean Plan (Weekend)
           </a>
           <a href="books.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
-            📚 Books Tracker
+            📚 Books Sanctuary
           </a>
           <button onclick="exportData()" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-moss-light hover:border-moss transition">
             📥 Export
@@ -311,22 +333,129 @@
           <span id="dailyQuoteAuthor" class="text-[10px] text-eucalyptus font-semibold text-right">— Abraham Lincoln</span>
         </div>
       </div>
+
+      <!-- Player RPG Gamification Status Bar (Addictive XP & Leveling Engine) -->
+      <div class="glass-card rounded-3xl p-4 mt-4 border border-moss/30 shadow-lg bg-gradient-to-r from-soot-card via-soot to-soot-card">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <!-- Level Badge & Rank -->
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-moss/30 border border-moss/50 flex items-center justify-center text-xl font-black font-display text-yellow-300 shadow-[0_0_12px_rgba(229,193,88,0.2)]">
+              <span id="playerLevelBadge">L1</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span id="playerRankTitle" class="text-sm font-black font-display text-plaster uppercase tracking-wide">Novice Engineer</span>
+                <span id="playerMultiplierBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-yellow-400/20 text-yellow-300 border border-yellow-400/30">1.0x XP</span>
+              </div>
+              <div class="text-[11px] text-mist flex items-center gap-2 mt-0.5">
+                <span id="playerXpNumbers">0 / 500 XP</span>
+                <span>•</span>
+                <span id="playerShieldStatus" class="text-eucalyptus font-semibold">🛡️ Shield: 0/1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- XP Progress Bar -->
+          <div class="flex-1 w-full md:max-w-md">
+            <div class="flex justify-between items-center text-[10px] uppercase font-bold text-eucalyptus mb-1">
+              <span>Sprint Level Progress</span>
+              <span id="playerXpPercent">0%</span>
+            </div>
+            <div class="w-full h-3 rounded-full bg-soot/80 border border-eucalyptus/20 p-0.5 overflow-hidden">
+              <div id="playerXpProgressBar" class="h-full rounded-full bg-gradient-to-r from-moss via-eucalyptus to-yellow-400 transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Lifetime Stats -->
+          <div class="flex items-center gap-3 text-right">
+            <div class="glass-card-subtle px-3 py-1.5 rounded-xl border border-eucalyptus/20">
+              <span class="text-[9px] uppercase font-bold text-eucalyptus block">Total Earned</span>
+              <span id="totalLifetimeXp" class="text-xs font-black font-display text-plaster">0 XP ✨</span>
+            </div>
+            <button onclick="showGamificationInfo()" class="p-2 rounded-xl glass-card-subtle text-xs text-mist hover:text-plaster transition" title="View Gamification Rules & Perks">
+              ℹ️ Perks
+            </button>
+          </div>
+        </div>
+      </div>
     </header>
 
     <!-- Main Grid Dashboard Layout -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
       
-      <!-- LEFT COLUMN: 6 Tracks & Daily Checklist (7 Cols) -->
+      <!-- LEFT COLUMN: Morning Frog Block, 6 Tracks & Daily Checklist (7 Cols) -->
       <div class="lg:col-span-7 space-y-6">
         
+        <!-- 🌅 MORNING POWER BLOCK: TACKLE THE HARDEST THING FIRST ("EAT THE FROG") -->
+        <section id="morningFrogSection" class="glass-card rounded-3xl p-6 border-2 border-emerald-500/30 relative overflow-hidden bg-gradient-to-br from-soot-card via-soot-dark to-soot-card shadow-[0_10px_30px_rgba(16,185,129,0.08)]">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-emerald-500/20">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs uppercase tracking-widest font-black text-emerald-400 flex items-center gap-1">
+                  <span>🌅</span> MORNING HIGH-COGNITIVE PEAK (7:00 AM – 9:30 AM)
+                </span>
+              </div>
+              <h2 class="text-lg font-black font-display text-plaster mt-0.5 flex items-center gap-2">
+                <span>🐸</span> Tackle The Hardest Thing First
+              </h2>
+            </div>
+            <div id="frogStatusBadge" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-emerald-950/40 text-emerald-400 border border-emerald-500/30">
+              Pending First Action (+100 XP)
+            </div>
+          </div>
+
+          <p class="text-xs text-mist/90 mb-3">
+            Crush your highest-friction engineering challenge <strong>first thing in the morning</strong> before opening social media or easy tasks.
+          </p>
+
+          <!-- Quick Preset Chips -->
+          <div class="mb-3">
+            <span class="text-[10px] uppercase font-bold text-eucalyptus block mb-1.5">Quick Presets:</span>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="setFrogPreset('🧠 Hard DSA Problem (LeetCode Graphs/DP/Trees)')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-plaster transition">🧠 Hard DSA (DP/Graphs)</button>
+              <button onclick="setFrogPreset('⚙️ Core Backend Architecture & DB Concurrency')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-plaster transition">⚙️ Backend Concurrency</button>
+              <button onclick="setFrogPreset('🏗️ System Design & Distributed Pipelines')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-plaster transition">🏗️ System Design</button>
+              <button onclick="setFrogPreset('⚡ Complex Refactoring & API Architecture')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-plaster transition">⚡ API Refactor</button>
+            </div>
+          </div>
+
+          <!-- Task Input Field -->
+          <div class="mb-4">
+            <input type="text" id="morningFrogInput" placeholder="What is your #1 hardest cognitive task this morning?" class="w-full bg-soot/90 border border-emerald-500/30 rounded-2xl px-4 py-2.5 text-xs text-plaster focus:outline-none focus:border-emerald-400 transition placeholder-mist/40" />
+          </div>
+
+          <!-- Action Controls -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <button id="btnCrushFrog" onclick="toggleMorningFrog()" class="flex-1 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-plaster font-black font-display text-xs rounded-2xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2">
+              <span>🐸</span> <span>CRUSH MORNING FROG (+100 XP)</span>
+            </button>
+            <button onclick="startFrogPomoSession()" class="px-4 py-3 glass-card-subtle text-xs font-bold font-display text-mist hover:text-plaster rounded-2xl transition flex items-center justify-center gap-1.5" title="Launch 45m Pomodoro Focus session for this task">
+              <span>⏱️</span> <span>Launch 45m Focus</span>
+            </button>
+          </div>
+
+          <!-- Completed State Banner (Revealed on crush) -->
+          <div id="frogCompletedBanner" class="hidden mt-3 p-3 rounded-2xl bg-emerald-950/30 border border-emerald-500/40 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2 text-emerald-300 font-bold">
+              <span>🔥</span> <span id="frogCompletedText">Morning Frog Crushed at 08:30 AM! +100 XP Claimed!</span>
+            </div>
+            <button onclick="resetMorningFrog()" class="text-[10px] text-mist/60 hover:text-mist">Edit Task</button>
+          </div>
+        </section>
+
         <!-- Daily 6 Tracks Non-Negotiables Section -->
         <section class="glass-card rounded-3xl p-6 relative">
-          <div class="flex items-center justify-between mb-5 pb-3 border-b border-eucalyptus/15">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-eucalyptus/15">
             <div>
-              <h2 class="text-xl font-bold font-display text-plaster flex items-center gap-2">
-                <span>⚡</span> Today's 6 Tracks & Grind
-              </h2>
-              <p class="text-xs text-mist mt-0.5">Complete all 6 main tracks to trigger your daily completion ritual.</p>
+              <div class="flex items-center gap-2">
+                <h2 class="text-xl font-bold font-display text-plaster flex items-center gap-2">
+                  <span>⚡</span> Today's 6 Tracks & Non-Negotiables
+                </h2>
+                <span id="dayTypeBadge" class="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-moss/20 text-moss-light border border-moss/30">Weekday Mode</span>
+              </div>
+              <p class="text-xs text-mist mt-0.5">Complete all core tracks to trigger your daily completion ritual & bonus XP.</p>
             </div>
             <span id="completedTracksBadge" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-moss/20 text-moss-light border border-moss/30">
               0 / 6 Completed
@@ -395,7 +524,7 @@
                 <input type="checkbox" id="track-reading" onchange="toggleTrack('reading')" class="track-checkbox" />
                 <div>
                   <div class="text-sm font-bold text-plaster flex items-center gap-2">
-                    <span>📖</span> Book Reading
+                    <span>📖</span> Book Reading (10+ pages)
                   </div>
                   <div class="text-xs text-mist/80">10+ pages per day from tech or growth books</div>
                 </div>
@@ -407,15 +536,16 @@
               </div>
             </div>
 
-            <!-- Track 5: Korean Learning -->
-            <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
+            <!-- Track 5: Korean Learning (Smart Weekend Masterclass Adaptation) -->
+            <div id="trackCard-korean" class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
               <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
                 <input type="checkbox" id="track-korean" onchange="toggleTrack('korean')" class="track-checkbox" />
                 <div>
                   <div class="text-sm font-bold text-plaster flex items-center gap-2">
-                    <span>🇰🇷</span> Korean Learning (A1)
+                    <span>🇰🇷</span> <span id="koreanTrackTitle">Korean (Weekend Sprint)</span>
+                    <span id="koreanWeekendBadge" class="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-mist/20 text-mist border border-mist/30">Weekend Active</span>
                   </div>
-                  <div class="text-xs text-mist/80">Hangul → vocab & sentence practice (15–20 min)</div>
+                  <div id="koreanTrackDesc" class="text-xs text-mist/80">Saturdays & Sundays deep focus: Hangul, vocab & speaking masterclass (15–20m)</div>
                 </div>
               </label>
               <div class="text-right flex-shrink-0 ml-2">
@@ -447,31 +577,31 @@
           <!-- Supporting Habits Grid Accordion / Sub-Section -->
           <div class="mt-6 pt-5 border-t border-eucalyptus/15">
             <h3 class="text-xs font-bold font-display uppercase tracking-widest text-eucalyptus mb-3 flex items-center gap-1.5">
-              <span>🌱</span> Supporting Foundation Habits
+              <span>🌱</span> Supporting Foundation Habits (+20 XP each)
             </h3>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs">
               <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
-                <input type="checkbox" id="support-prayer" onchange="saveSupportHabits()" class="track-checkbox" />
+                <input type="checkbox" id="support-prayer" onchange="saveSupportHabits('prayer')" class="track-checkbox" />
                 <span class="text-plaster font-medium">🙏 Prayer</span>
               </label>
               <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
-                <input type="checkbox" id="support-workout" onchange="saveSupportHabits()" class="track-checkbox" />
+                <input type="checkbox" id="support-workout" onchange="saveSupportHabits('workout')" class="track-checkbox" />
                 <span class="text-plaster font-medium">🏋️ Workout</span>
               </label>
               <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
-                <input type="checkbox" id="support-journal" onchange="saveSupportHabits()" class="track-checkbox" />
+                <input type="checkbox" id="support-journal" onchange="saveSupportHabits('journal')" class="track-checkbox" />
                 <span class="text-plaster font-medium">✍️ Journal</span>
               </label>
               <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
-                <input type="checkbox" id="support-hydration" onchange="saveSupportHabits()" class="track-checkbox" />
+                <input type="checkbox" id="support-hydration" onchange="saveSupportHabits('hydration')" class="track-checkbox" />
                 <span class="text-plaster font-medium">💧 Hydration (8g)</span>
               </label>
               <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
-                <input type="checkbox" id="support-mood" onchange="saveSupportHabits()" class="track-checkbox" />
+                <input type="checkbox" id="support-mood" onchange="saveSupportHabits('mood')" class="track-checkbox" />
                 <span class="text-plaster font-medium">😊 Mood Check</span>
               </label>
               <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
-                <input type="checkbox" id="support-social" onchange="saveSupportHabits()" class="track-checkbox" />
+                <input type="checkbox" id="support-social" onchange="saveSupportHabits('social')" class="track-checkbox" />
                 <span class="text-plaster font-medium">📱 Social Limit</span>
               </label>
             </div>
@@ -525,8 +655,59 @@
         </section>
       </div>
 
-      <!-- RIGHT COLUMN: Pomodoro Timer, Habit Logs & Rewards (5 Cols) -->
+      <!-- RIGHT COLUMN: Daily Quests, Pomodoro Timer, Habit Logs & Rewards (5 Cols) -->
       <div class="lg:col-span-5 space-y-6">
+
+        <!-- 🎯 DAILY DOPAMINE QUESTS MATRIX -->
+        <section class="glass-card rounded-3xl p-6 border-t-4 border-yellow-400/80 relative overflow-hidden">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
+              <span>🎯</span> Daily Dopamine Quests
+            </h2>
+            <span id="questsCompletedBadge" class="text-[11px] font-bold font-display px-2.5 py-0.5 rounded-full bg-yellow-400/20 text-yellow-300 border border-yellow-400/30">
+              0 / 3 Done
+            </span>
+          </div>
+          <p class="text-xs text-mist mb-4">Complete daily quests for high-yield XP surges and streak protection.</p>
+
+          <div class="space-y-2.5" id="dailyQuestsContainer">
+            <!-- Quest 1: Morning Frog -->
+            <div id="questItem-frog" class="glass-card-subtle p-3 rounded-2xl flex items-center justify-between transition">
+              <div class="flex items-center gap-3">
+                <span class="text-lg">🐸</span>
+                <div>
+                  <div class="text-xs font-bold text-plaster">Morning Warrior</div>
+                  <div class="text-[11px] text-mist/80">Crush Morning Hard Challenge first (+100 XP)</div>
+                </div>
+              </div>
+              <span id="questBadge-frog" class="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20">Pending</span>
+            </div>
+
+            <!-- Quest 2: Deep Pomodoro -->
+            <div id="questItem-pomo" class="glass-card-subtle p-3 rounded-2xl flex items-center justify-between transition">
+              <div class="flex items-center gap-3">
+                <span class="text-lg">🍅</span>
+                <div>
+                  <div class="text-xs font-bold text-plaster">Deep Flow Master</div>
+                  <div class="text-[11px] text-mist/80">Complete 2+ Focus Pomodoro sessions (+75 XP)</div>
+                </div>
+              </div>
+              <span id="questBadge-pomo" class="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20">0 / 2 Done</span>
+            </div>
+
+            <!-- Quest 3: Perfect Day -->
+            <div id="questItem-grind" class="glass-card-subtle p-3 rounded-2xl flex items-center justify-between transition">
+              <div class="flex items-center gap-3">
+                <span class="text-lg">⚡</span>
+                <div>
+                  <div class="text-xs font-bold text-plaster">Unstoppable Discipline</div>
+                  <div class="text-[11px] text-mist/80">Complete 100% of Today's Core Tracks (+150 XP)</div>
+                </div>
+              </div>
+              <span id="questBadge-grind" class="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20">Pending</span>
+            </div>
+          </div>
+        </section>
 
         <!-- Rock-Solid Rebuilt Timestamp Pomodoro Timer -->
         <section class="glass-card rounded-3xl p-6 border-t-4 border-moss relative overflow-hidden">
@@ -561,13 +742,14 @@
           <div class="mb-4">
             <label class="text-[11px] uppercase tracking-wider text-eucalyptus font-bold block mb-1">Tag Focus Track</label>
             <select id="pomoTrackSelect" onchange="setPomoCategoryTag(this.value)" class="w-full bg-soot/80 border border-eucalyptus/25 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss font-medium">
-              <option value="design">🎨 Design (Figma, UI/UX)</option>
+              <option value="frog">🐸 Morning Hard Frog</option>
               <option value="dsa">🧠 DSA (LeetCode, JS)</option>
               <option value="backend">⚙️ Backend (Node.js, Express, DB)</option>
+              <option value="design">🎨 Design (Figma, UI/UX)</option>
               <option value="reading">📖 Book Reading</option>
-              <option value="korean">🇰🇷 Korean Practice</option>
+              <option value="korean">🇰🇷 Korean Practice (Weekend)</option>
               <option value="english">🗣️ English Fluency</option>
-              <option value="other">⚡ General Focus</option>
+              <option value="other">⚡ General Deep Flow</option>
             </select>
           </div>
 
@@ -690,7 +872,7 @@
           <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2 mb-2">
             <span>🎁</span> Variable Sprint Rewards
           </h2>
-          <p class="text-xs text-mist mb-3">Complete all 6 tracks today for a chance to unlock exclusive badges and theme tokens!</p>
+          <p class="text-xs text-mist mb-3">Complete all tracks today for a chance to unlock exclusive badges and tokens!</p>
           <div id="unlockedBadgesContainer" class="flex flex-wrap gap-2">
             <!-- Dynamically rendered unlocked badges -->
           </div>
@@ -722,20 +904,32 @@
     <!-- Main JavaScript Application Logic -->
     <script>
       // ===== STATE MANAGEMENT & STORAGE KEYS =====
-
-      
       const TRACKS = [
-        { id: 'design', name: 'Design', icon: '🎨' },
-        { id: 'dsa', name: 'DSA', icon: '🧠' },
-        { id: 'backend', name: 'Backend', icon: '⚙️' },
-        { id: 'reading', name: 'Book Reading', icon: '📖' },
-        { id: 'korean', name: 'Korean (A1)', icon: '🇰🇷' },
-        { id: 'english', name: 'English Fluency', icon: '🗣️' }
+        { id: 'design', name: 'Design Skill-building', icon: '🎨', xp: 50 },
+        { id: 'dsa', name: 'DSA Practice', icon: '🧠', xp: 50 },
+        { id: 'backend', name: 'Backend Strengthening', icon: '⚙️', xp: 50 },
+        { id: 'reading', name: 'Book Reading (10+ pgs)', icon: '📖', xp: 50 },
+        { id: 'korean', name: 'Korean (Weekend Sprint)', icon: '🇰🇷', xp: 75 },
+        { id: 'english', name: 'English Fluency', icon: '🗣️', xp: 50 }
       ];
 
       const SUPPORT_HABITS = ['prayer', 'workout', 'journal', 'hydration', 'mood', 'social'];
 
+      const RANK_TITLES = {
+        1: "Novice Engineer",
+        2: "Syntax Explorer",
+        3: "Algorithm Grinder",
+        4: "Backend Builder",
+        5: "Systems Architect",
+        6: "Fintech Engineer",
+        7: "Deep Flow Titan",
+        8: "Velocity Master",
+        9: "Peak Performer",
+        10: "Enkutatash Grandmaster 🌼"
+      };
+
       const QUOTES_POOL = [
+        { text: "Eat a live frog first thing in the morning and nothing worse will happen to you the rest of the day.", author: "Mark Twain" },
         { text: "Discipline is choosing between what you want now and what you want most.", author: "Abraham Lincoln" },
         { text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", author: "Aristotle" },
         { text: "33 days of summer consistency will transform your engineering career before Meskerem 1.", author: "Sambee Maxim" },
@@ -773,6 +967,8 @@
         initLiveClock();
         loadSprintDates();
         loadDailyQuote();
+        updateWeekendWeekdayMode();
+        loadMorningFrog();
         loadTrackStates();
         loadSupportHabits();
         loadHeatmap();
@@ -782,6 +978,8 @@
         renderWeeklyRecap();
         loadUnlockedBadges();
         loadSecretLetters();
+        loadGamificationState();
+        renderDailyQuests();
         checkGlobalAndPerCategoryStreaks();
         
         // Window focus listener to sync timestamp Pomodoro accurately!
@@ -808,6 +1006,44 @@
         today.setHours(0, 0, 0, 0);
         const diffDays = Math.floor((today - start) / (1000 * 60 * 60 * 24)) + 1;
         return Math.max(1, Math.min(SPRINT_TOTAL_DAYS, diffDays));
+      }
+
+      function isTodayWeekend() {
+        const today = new Date();
+        const dayOfWeek = today.getDay(); // 0 = Sun, 6 = Sat
+        return (dayOfWeek === 0 || dayOfWeek === 6);
+      }
+
+      function updateWeekendWeekdayMode() {
+        const isWeekend = isTodayWeekend();
+        const badge = document.getElementById('dayTypeBadge');
+        const koreanBadge = document.getElementById('koreanWeekendBadge');
+        const koreanDesc = document.getElementById('koreanTrackDesc');
+        const koreanTitle = document.getElementById('koreanTrackTitle');
+
+        if (badge) {
+          badge.innerText = isWeekend ? "🏖️ Weekend Sprint Mode" : "💼 Weekday Tech Grind";
+          badge.className = isWeekend 
+            ? "text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-yellow-400/20 text-yellow-300 border border-yellow-400/30"
+            : "text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-moss/20 text-moss-light border border-moss/30";
+        }
+
+        if (koreanBadge) {
+          koreanBadge.innerText = isWeekend ? "🔥 Weekend Active (+75 XP)" : "🏖️ Weekend Focus (Sat/Sun)";
+          koreanBadge.className = isWeekend
+            ? "text-[9px] font-black uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+            : "text-[9px] font-black uppercase px-2 py-0.5 rounded bg-mist/20 text-mist border border-mist/30";
+        }
+
+        if (koreanTitle) {
+          koreanTitle.innerText = isWeekend ? "Korean Weekend Masterclass" : "Korean (Weekend Sprint)";
+        }
+
+        if (koreanDesc) {
+          koreanDesc.innerText = isWeekend
+            ? "Saturday & Sunday Intensive: Hangul, vocab & speaking practice (15–20 min)"
+            : "Scheduled for Weekends (Sat/Sun). Weekday review optional (+75 XP on weekend)";
+        }
       }
 
       function loadSprintDates() {
@@ -893,11 +1129,271 @@
         document.getElementById('dailyQuoteAuthor').innerText = `— ${q.author}`;
       }
 
-      // ===== TRACKS & DAILY CHECKLIST =====
+      // ===== MORNING FROG ENGINE ("EAT THE FROG FIRST") =====
       function getTodayKey() {
         return new Date().toISOString().slice(0, 10);
       }
 
+      function setFrogPreset(taskText) {
+        const input = document.getElementById('morningFrogInput');
+        if (input) {
+          input.value = taskText;
+          saveMorningFrogTask(taskText);
+        }
+      }
+
+      function saveMorningFrogTask(taskText) {
+        const todayKey = getTodayKey();
+        localStorage.setItem(`frog_task_${todayKey}`, taskText);
+      }
+
+      function loadMorningFrog() {
+        const todayKey = getTodayKey();
+        const savedTask = localStorage.getItem(`frog_task_${todayKey}`) || '';
+        const isCrushed = localStorage.getItem(`frog_crushed_${todayKey}`) === 'true';
+        const crushedTime = localStorage.getItem(`frog_time_${todayKey}`) || '';
+
+        const input = document.getElementById('morningFrogInput');
+        const btn = document.getElementById('btnCrushFrog');
+        const badge = document.getElementById('frogStatusBadge');
+        const banner = document.getElementById('frogCompletedBanner');
+        const bannerText = document.getElementById('frogCompletedText');
+
+        if (input) input.value = savedTask;
+
+        if (isCrushed) {
+          if (btn) {
+            btn.innerHTML = `<span>🐸</span> <span>FROG CRUSHED! 🎉 (+100 XP CLAIMED)</span>`;
+            btn.className = "flex-1 py-3 bg-moss text-plaster font-black font-display text-xs rounded-2xl shadow-lg border border-emerald-400/40 opacity-90 cursor-default";
+          }
+          if (badge) {
+            badge.innerText = "CRUSHED! 🐸🔥 (+100 XP)";
+            badge.className = "text-xs font-bold font-display px-3 py-1 rounded-full bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 shadow-sm";
+          }
+          if (banner) {
+            banner.classList.remove('hidden');
+            if (bannerText) bannerText.innerText = `Morning Frog "${savedTask || 'Hard Challenge'}" crushed at ${crushedTime}! (+100 XP)`;
+          }
+        } else {
+          if (btn) {
+            btn.innerHTML = `<span>🐸</span> <span>CRUSH MORNING FROG (+100 XP)</span>`;
+            btn.className = "flex-1 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-plaster font-black font-display text-xs rounded-2xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2";
+          }
+          if (badge) {
+            badge.innerText = "Pending Morning Action (+100 XP)";
+            badge.className = "text-xs font-bold font-display px-3 py-1 rounded-full bg-emerald-950/40 text-emerald-400 border border-emerald-500/30";
+          }
+          if (banner) banner.classList.add('hidden');
+        }
+      }
+
+      function toggleMorningFrog() {
+        initAudio();
+        const todayKey = getTodayKey();
+        const isCrushed = localStorage.getItem(`frog_crushed_${todayKey}`) === 'true';
+
+        if (!isCrushed) {
+          const taskVal = document.getElementById('morningFrogInput').value.trim() || 'Core Hard Challenge';
+          const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          localStorage.setItem(`frog_task_${todayKey}`, taskVal);
+          localStorage.setItem(`frog_crushed_${todayKey}`, 'true');
+          localStorage.setItem(`frog_time_${todayKey}`, timeStr);
+
+          playFrogCrushSound();
+          triggerConfetti();
+          addXP(100, "Morning Frog Victory");
+          loadMorningFrog();
+          renderDailyQuests();
+        }
+      }
+
+      function resetMorningFrog() {
+        const todayKey = getTodayKey();
+        localStorage.removeItem(`frog_crushed_${todayKey}`);
+        localStorage.removeItem(`frog_time_${todayKey}`);
+        loadMorningFrog();
+        renderDailyQuests();
+      }
+
+      function startFrogPomoSession() {
+        const taskVal = document.getElementById('morningFrogInput').value.trim() || 'Morning Hard Frog Challenge';
+        saveMorningFrogTask(taskVal);
+        setPomoCategoryTag('frog');
+        setPomoMode('work');
+        togglePomodoroTimer();
+        alert(`Started 25-min Deep Focus Pomodoro session for: "${taskVal}"! Lock in 🚀`);
+      }
+
+      // ===== RPG XP & LEVELING SYSTEM =====
+      function getXPForLevel(lvl) {
+        return lvl * 500;
+      }
+
+      function loadGamificationState() {
+        const totalXp = parseInt(localStorage.getItem('sprint_total_xp')) || 0;
+        let currentLevel = parseInt(localStorage.getItem('sprint_player_level')) || 1;
+
+        // Calculate level dynamically based on totalXp
+        let calcLevel = 1;
+        let xpAccum = 0;
+        while (calcLevel < 10 && totalXp >= xpAccum + getXPForLevel(calcLevel)) {
+          xpAccum += getXPForLevel(calcLevel);
+          calcLevel++;
+        }
+
+        if (calcLevel > currentLevel) {
+          triggerLevelUpModal(calcLevel);
+        }
+
+        currentLevel = calcLevel;
+        localStorage.setItem('sprint_player_level', currentLevel);
+
+        const currentLvlXpNeed = getXPForLevel(currentLevel);
+        const xpInCurrentLvl = totalXp - xpAccum;
+        const pct = Math.min(100, Math.round((xpInCurrentLvl / currentLvlXpNeed) * 100));
+
+        // Streaks multiplier
+        const streakCount = parseInt(document.getElementById('globalStreakCount')?.innerText) || 0;
+        const multiplier = streakCount >= 3 ? 1.5 : 1.0;
+
+        document.getElementById('playerLevelBadge').innerText = `L${currentLevel}`;
+        document.getElementById('playerRankTitle').innerText = RANK_TITLES[currentLevel] || "Master Builder";
+        document.getElementById('playerXpNumbers').innerText = `${xpInCurrentLvl} / ${currentLvlXpNeed} XP`;
+        document.getElementById('playerXpPercent').innerText = `${pct}%`;
+        document.getElementById('playerXpProgressBar').style.width = `${pct}%`;
+        document.getElementById('totalLifetimeXp').innerText = `${totalXp.toLocaleString()} XP ✨`;
+        document.getElementById('playerMultiplierBadge').innerText = `${multiplier.toFixed(1)}x XP`;
+
+        const shieldStatus = streakCount >= 3 ? "🛡️ Shield: Active" : "🛡️ Shield: 0/1";
+        document.getElementById('playerShieldStatus').innerText = shieldStatus;
+      }
+
+      function addXP(baseAmount, reason) {
+        const streakCount = parseInt(document.getElementById('globalStreakCount')?.innerText) || 0;
+        const multiplier = streakCount >= 3 ? 1.5 : 1.0;
+        const awardedXP = Math.round(baseAmount * multiplier);
+
+        let currentXP = parseInt(localStorage.getItem('sprint_total_xp')) || 0;
+        currentXP += awardedXP;
+        localStorage.setItem('sprint_total_xp', currentXP);
+
+        playXpGainSound();
+        loadGamificationState();
+      }
+
+      function triggerLevelUpModal(newLevel) {
+        playLevelUpSound();
+        triggerConfetti();
+        const modal = document.getElementById('levelUpModal');
+        const title = document.getElementById('levelUpTitle');
+        const rankText = document.getElementById('levelUpRankText');
+
+        if (title) title.innerText = `Level ${newLevel} Unlocked!`;
+        if (rankText) rankText.innerHTML = `You have achieved the rank of <span class="text-yellow-300">${RANK_TITLES[newLevel] || 'Grandmaster'}</span>`;
+
+        if (modal) {
+          modal.classList.remove('hidden');
+          setTimeout(() => modal.classList.add('opacity-100'), 10);
+        }
+      }
+
+      function closeLevelUpModal() {
+        const modal = document.getElementById('levelUpModal');
+        if (modal) {
+          modal.classList.remove('opacity-100');
+          setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+      }
+
+      function showGamificationInfo() {
+        alert(
+          "🎮 SAMBEE SPRINT RPG GAMIFICATION:\n\n" +
+          "• Non-Negotiable Tracks: +50 XP each (+75 XP on Weekends for Korean)\n" +
+          "• Morning Frog First: +100 XP\n" +
+          "• Focus Pomodoro Sessions: +30 XP per session\n" +
+          "• Hydration (8 Glasses): +40 XP\n" +
+          "• 100% Daily Completion: +150 XP Bonus!\n" +
+          "• 3+ Day Streak Multiplier: 1.5x XP Boost active across all actions!\n" +
+          "• Streak Shield: Protects your streak from accidental breaks."
+        );
+      }
+
+      // ===== DAILY DOPAMINE QUESTS MATRIX =====
+      function renderDailyQuests() {
+        const todayKey = getTodayKey();
+        const frogCrushed = localStorage.getItem(`frog_crushed_${todayKey}`) === 'true';
+        const pomoSessions = pomoState.sessionCount || 0;
+        
+        let completedTracks = 0;
+        TRACKS.forEach(t => {
+          if (localStorage.getItem(`track_${todayKey}_${t.id}`) === 'true') completedTracks++;
+        });
+        const grindCompleted = (completedTracks === TRACKS.length);
+
+        let questsDone = 0;
+
+        // Quest 1: Frog
+        const qFrogItem = document.getElementById('questItem-frog');
+        const qFrogBadge = document.getElementById('questBadge-frog');
+        if (frogCrushed) {
+          questsDone++;
+          if (qFrogItem) qFrogItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between border-l-4 border-emerald-500 bg-emerald-950/20";
+          if (qFrogBadge) {
+            qFrogBadge.innerText = "Completed ✅";
+            qFrogBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+          }
+        } else {
+          if (qFrogItem) qFrogItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between";
+          if (qFrogBadge) {
+            qFrogBadge.innerText = "Pending";
+            qFrogBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20";
+          }
+        }
+
+        // Quest 2: Pomodoro (2+)
+        const qPomoItem = document.getElementById('questItem-pomo');
+        const qPomoBadge = document.getElementById('questBadge-pomo');
+        if (pomoSessions >= 2) {
+          questsDone++;
+          if (qPomoItem) qPomoItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between border-l-4 border-moss bg-moss/20";
+          if (qPomoBadge) {
+            qPomoBadge.innerText = `${pomoSessions} / 2 Completed ✅`;
+            qPomoBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-moss/30 text-moss-light border border-moss/40";
+          }
+        } else {
+          if (qPomoItem) qPomoItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between";
+          if (qPomoBadge) {
+            qPomoBadge.innerText = `${pomoSessions} / 2 Done`;
+            qPomoBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20";
+          }
+        }
+
+        // Quest 3: 100% Core Tracks
+        const qGrindItem = document.getElementById('questItem-grind');
+        const qGrindBadge = document.getElementById('questBadge-grind');
+        if (grindCompleted) {
+          questsDone++;
+          if (qGrindItem) qGrindItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between border-l-4 border-yellow-400 bg-yellow-950/20";
+          if (qGrindBadge) {
+            qGrindBadge.innerText = "Completed ✅";
+            qGrindBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-yellow-400/20 text-yellow-300 border border-yellow-400/30";
+          }
+        } else {
+          if (qGrindItem) qGrindItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between";
+          if (qGrindBadge) {
+            qGrindBadge.innerText = `${completedTracks} / ${TRACKS.length} Done`;
+            qGrindBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20";
+          }
+        }
+
+        const badge = document.getElementById('questsCompletedBadge');
+        if (badge) {
+          badge.innerText = `${questsDone} / 3 Done ${questsDone === 3 ? '🏆 (Triple Crown Bonus!)' : ''}`;
+        }
+      }
+
+      // ===== TRACKS & DAILY CHECKLIST =====
       function loadTrackStates() {
         const todayKey = getTodayKey();
         let completedCount = 0;
@@ -919,7 +1415,13 @@
         const checked = checkbox ? checkbox.checked : false;
         
         localStorage.setItem(`track_${todayKey}_${trackId}`, checked);
-        playChime(checked ? 600 : 300, 0.1);
+        
+        if (checked) {
+          const track = TRACKS.find(t => t.id === trackId) || { xp: 50 };
+          addXP(track.xp, `Track: ${track.name}`);
+        } else {
+          playChime(300, 0.1);
+        }
 
         let completedCount = 0;
         TRACKS.forEach(t => {
@@ -930,8 +1432,9 @@
         checkGlobalAndPerCategoryStreaks();
         loadHeatmap();
         renderWeeklyRecap();
+        renderDailyQuests();
 
-        // Trigger ritual if ALL 6 tracks complete!
+        // Trigger ritual if ALL tracks complete!
         if (completedCount === TRACKS.length && checked) {
           triggerDailyCompletionRitual();
         }
@@ -966,16 +1469,20 @@
         });
       }
 
-      function saveSupportHabits() {
+      function saveSupportHabits(habitKey) {
         initAudio();
         const todayKey = getTodayKey();
-        SUPPORT_HABITS.forEach(h => {
-          const el = document.getElementById(`support-${h}`);
-          if (el) localStorage.setItem(`support_${todayKey}_${h}`, el.checked);
-        });
+        const el = document.getElementById(`support-${habitKey}`);
+        if (el) {
+          const isChecked = el.checked;
+          localStorage.setItem(`support_${todayKey}_${habitKey}`, isChecked);
+          if (isChecked) {
+            addXP(20, `Supporting Habit: ${habitKey}`);
+          }
+        }
       }
 
-      // ===== STREAK SYSTEM WITH STAKES =====
+      // ===== STREAK SYSTEM WITH STAKES & SHIELD =====
       function checkGlobalAndPerCategoryStreaks() {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -996,12 +1503,9 @@
             if (isDone) {
               streak++;
             } else if (i === 0) {
-              // Today untouched yet, don't break streak yet
               continue;
             } else {
-              // Missed a day in the past!
               if (streak === 0 && i === 1) {
-                // Was there a streak before this miss?
                 const prevDate = new Date(today);
                 prevDate.setDate(today.getDate() - 2);
                 const prevKey = prevDate.toISOString().slice(0, 10);
@@ -1028,10 +1532,9 @@
           }
         });
 
-        // Global Streak (All 6 tracks done on a day)
+        // Global Streak
         let globalStreak = 0;
         let globalBroken = false;
-        let lastGlobalCount = 0;
 
         for (let i = 0; i < SPRINT_TOTAL_DAYS; i++) {
           const checkDate = new Date(today);
@@ -1046,7 +1549,7 @@
           if (allDone) {
             globalStreak++;
           } else if (i === 0) {
-            continue; // Today in progress
+            continue;
           } else {
             if (globalStreak === 0 && i === 1) {
               globalBroken = true;
@@ -1081,6 +1584,7 @@
       function triggerDailyCompletionRitual() {
         triggerConfetti();
         grantRandomVariableReward();
+        addXP(150, "Daily 100% Sprint Ritual Complete");
 
         const modal = document.getElementById('celebrationModal');
         const summary = document.getElementById('celebrationTracksSummary');
@@ -1116,7 +1620,7 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const colors = ['#98AA9D', '#B3C9D6', '#F2EFE2', '#697C70', '#E5C158'];
+        const colors = ['#98AA9D', '#B3C9D6', '#F2EFE2', '#697C70', '#E5C158', '#10B981'];
         const particles = Array.from({ length: 90 }).map(() => ({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height - canvas.height,
@@ -1348,15 +1852,12 @@
         initAudio();
 
         if (pomoState.isRunning) {
-          // Pause Timer
           clearInterval(pomoInterval);
           pomoState.isRunning = false;
           pomoState.targetEndTime = null;
         } else {
-          // Start Timer using Timestamp Delta!
           pomoState.isRunning = true;
           pomoState.targetEndTime = Date.now() + pomoState.remainingSec * 1000;
-
           pomoInterval = setInterval(tickPomodoro, 500);
         }
 
@@ -1394,7 +1895,9 @@
         if (pomoState.mode === 'work') {
           pomoState.sessionCount++;
           logPomoCategoryMinutes(pomoState.categoryTag, Math.round(pomoState.workSec / 60));
-          
+          addXP(30, "Pomodoro Focus Session Completed");
+          renderDailyQuests();
+
           if (pomoState.desktopNotif && Notification.permission === "granted") {
             new Notification("Pomodoro Complete! 🍅", { body: "Great work! Take a short break." });
           }
@@ -1456,6 +1959,7 @@
         pomoState.sessionCount = Math.max(0, pomoState.sessionCount + amt);
         savePomodoroState();
         updatePomoClockDisplay();
+        renderDailyQuests();
       }
 
       function logPomoCategoryMinutes(cat, mins) {
@@ -1480,7 +1984,7 @@
         }
 
         container.innerHTML = keys.map(k => {
-          const track = TRACKS.find(t => t.id === k) || { name: k, icon: '⚡' };
+          const track = TRACKS.find(t => t.id === k) || { name: k === 'frog' ? 'Morning Frog' : k, icon: k === 'frog' ? '🐸' : '⚡' };
           const mins = data[k];
           return `
             <div class="flex items-center justify-between text-xs">
@@ -1528,7 +2032,7 @@
             if (saved.savedDayKey === todayKey) {
               pomoState.sessionCount = saved.sessionCount || 0;
             } else {
-              pomoState.sessionCount = 0; // Midnight reset!
+              pomoState.sessionCount = 0;
             }
 
             if (saved.isRunning && saved.targetEndTime) {
@@ -1583,7 +2087,7 @@
         savePomodoroState();
       }
 
-      // ===== WEB AUDIO SYNTHESIZERS =====
+      // ===== HIGH-DOPAMINE WEB AUDIO SYNTHESIZERS =====
       function initAudio() {
         try {
           if (!pomoAudioCtx) {
@@ -1607,6 +2111,75 @@
           gain.connect(pomoAudioCtx.destination);
           osc.start();
           osc.stop(pomoAudioCtx.currentTime + duration);
+        } catch(e) {}
+      }
+
+      function playXpGainSound() {
+        if (pomoState.isMuted) return;
+        try {
+          initAudio();
+          const notes = [587.33, 880]; // D5, A5 crystal ping
+          notes.forEach((freq, i) => {
+            const osc = pomoAudioCtx.createOscillator();
+            const gain = pomoAudioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.value = freq;
+            const startTime = pomoAudioCtx.currentTime + i * 0.08;
+            gain.gain.setValueAtTime(0.18, startTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+            osc.connect(gain);
+            gain.connect(pomoAudioCtx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.26);
+          });
+        } catch(e) {}
+      }
+
+      function playFrogCrushSound() {
+        if (pomoState.isMuted) return;
+        try {
+          initAudio();
+          const notes = [440, 554.37, 659.25, 880]; // A major triumphant arpeggio
+          notes.forEach((freq, i) => {
+            const osc = pomoAudioCtx.createOscillator();
+            const gain = pomoAudioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            const startTime = pomoAudioCtx.currentTime + i * 0.09;
+            gain.gain.setValueAtTime(0.2, startTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.4);
+            osc.connect(gain);
+            gain.connect(pomoAudioCtx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.42);
+          });
+        } catch(e) {}
+      }
+
+      function playLevelUpSound() {
+        if (pomoState.isMuted) return;
+        try {
+          initAudio();
+          const chords = [
+            [523.25, 659.25, 783.99],       // C Major
+            [587.33, 739.99, 880.00],       // D Major
+            [659.25, 830.61, 987.77, 1318.5]// E Major Grand Victory
+          ];
+          chords.forEach((chord, ci) => {
+            chord.forEach(freq => {
+              const osc = pomoAudioCtx.createOscillator();
+              const gain = pomoAudioCtx.createGain();
+              osc.type = 'triangle';
+              osc.frequency.value = freq;
+              const startTime = pomoAudioCtx.currentTime + ci * 0.16;
+              gain.gain.setValueAtTime(0.15, startTime);
+              gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.6);
+              osc.connect(gain);
+              gain.connect(pomoAudioCtx.destination);
+              osc.start(startTime);
+              osc.stop(startTime + 0.65);
+            });
+          });
         } catch(e) {}
       }
 
@@ -1640,7 +2213,6 @@
           if (isDone) {
             streak++;
           } else if (i === 0) {
-            // Today is still in progress; don't break streak if today isn't 8 yet
             continue;
           } else {
             if (streak === 0 && i === 1) {
@@ -1695,7 +2267,6 @@
           }
         }
 
-        // Sync support-hydration checkbox in Foundation habits
         const hydCheckbox = document.getElementById('support-hydration');
         if (hydCheckbox) {
           hydCheckbox.checked = (count >= 8);
@@ -1717,6 +2288,7 @@
 
         if (count === 8) {
           setTimeout(() => playChime(784, 0.25), 120);
+          addXP(40, "Hydration Target Achieved (8 Glasses)");
         }
 
         loadHydration();
@@ -1746,6 +2318,7 @@
         initAudio();
         const todayKey = getTodayKey();
         localStorage.setItem(`mood_${todayKey}`, emoji);
+        addXP(15, "Mood Check-in");
         loadMoodAndSleep();
       }
 
@@ -1800,6 +2373,7 @@
         letters.push({ text, date: new Date().toLocaleString() });
         localStorage.setItem('secret_letters_vault', JSON.stringify(letters));
         ta.value = '';
+        addXP(50, "Sealed Secret Future Letter");
         loadSecretLetters();
       }
 
@@ -1872,6 +2446,10 @@
         
         // Remove track logs
         TRACKS.forEach(t => localStorage.removeItem(`track_${todayKey}_${t.id}`));
+        
+        // Remove morning frog
+        localStorage.removeItem(`frog_crushed_${todayKey}`);
+        localStorage.removeItem(`frog_time_${todayKey}`);
         
         // Remove support habits
         SUPPORT_HABITS.forEach(h => localStorage.removeItem(`support_${todayKey}_${h}`));

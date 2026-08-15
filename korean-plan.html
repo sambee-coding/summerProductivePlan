@@ -105,11 +105,16 @@
           <div class="flex items-center gap-3">
             <span class="text-3xl">🇰🇷</span>
             <div>
-              <h1 class="text-3xl font-black font-display tracking-tight text-plaster uppercase">
-                33-Day Korean A1 Master Plan
-              </h1>
+              <div class="flex items-center gap-2">
+                <h1 class="text-2xl sm:text-3xl font-black font-display tracking-tight text-plaster uppercase">
+                  Weekend Korean A1 Master Plan
+                </h1>
+                <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-lg bg-yellow-400/20 text-yellow-300 border border-yellow-400/30">
+                  🏖️ Weekend Sprint Focus
+                </span>
+              </div>
               <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
-                Mon Aug 10 (ነሐሴ 4) → Fri Sep 11 (መስከረም 1 🌼 Enkutatash) • 15–20 min/day to A1 Mastery
+                Saturdays & Sundays Intensive (Aug 10 → Ethiopian Sep 1 / Meskerem 1 🌼) • 10 Power Sessions to A1 Conversational Mastery
               </p>
             </div>
           </div>
@@ -123,7 +128,7 @@
             📅 33 Days Grid
           </a>
           <a href="books.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
-            📚 Books Tracker
+            📚 Books Sanctuary
           </a>
         </div>
       </div>
@@ -131,13 +136,13 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 grid gap-8 lg:grid-cols-12">
       
-      <!-- LEFT PANEL: 33-Day Lessons Selector (5 Cols) -->
+      <!-- LEFT PANEL: Weekend Masterclasses / 33-Day Lessons Selector (5 Cols) -->
       <section class="lg:col-span-5 space-y-6">
         
         <!-- Progress Summary Rings -->
         <div class="glass-card rounded-3xl p-6 grid grid-cols-2 gap-4 text-center">
           <div>
-            <div class="text-[10px] uppercase font-bold text-eucalyptus mb-2">Korean Master (33D)</div>
+            <div class="text-[10px] uppercase font-bold text-eucalyptus mb-2">Weekend Masterplan</div>
             <div class="relative w-16 h-16 mx-auto">
               <svg class="w-full h-full transform -rotate-90">
                 <circle cx="32" cy="32" r="26" stroke="rgba(152,170,157,0.15)" stroke-width="5" fill="transparent" />
@@ -148,7 +153,7 @@
           </div>
 
           <div>
-            <div class="text-[10px] uppercase font-bold text-moss-light mb-2">Selected Lesson</div>
+            <div class="text-[10px] uppercase font-bold text-moss-light mb-2">Selected Session</div>
             <div class="relative w-16 h-16 mx-auto">
               <svg class="w-full h-full transform -rotate-90">
                 <circle cx="32" cy="32" r="26" stroke="rgba(105,124,112,0.15)" stroke-width="5" fill="transparent" />
@@ -159,70 +164,101 @@
           </div>
         </div>
 
-        <!-- 33 Lesson Day Buttons Grid -->
+        <!-- Filter View Toggle Tabs -->
+        <div class="flex gap-2 bg-soot/60 p-1.5 rounded-2xl border border-eucalyptus/15 text-xs">
+          <button id="tabView-weekend" onclick="setKoreanViewMode('weekend')" class="flex-1 py-2 rounded-xl font-bold font-display bg-moss text-plaster shadow transition">
+            ✨ Weekend Sprint (10)
+          </button>
+          <button id="tabView-all" onclick="setKoreanViewMode('all')" class="flex-1 py-2 rounded-xl font-bold font-display text-mist hover:text-plaster transition">
+            📚 Full Archive (33)
+          </button>
+        </div>
+
+        <!-- Lesson Day Buttons Grid -->
         <div class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <span class="text-xs uppercase tracking-widest text-eucalyptus font-bold block">Select Lesson</span>
-              <h2 id="lessonWeekLabel" class="text-base font-bold font-display text-plaster">Week 1 (Days 1–7)</h2>
+              <span id="lessonSelectorSubtitle" class="text-xs uppercase tracking-widest text-eucalyptus font-bold block">Weekend Masterclasses</span>
+              <h2 id="lessonWeekLabel" class="text-base font-bold font-display text-plaster">Weekend 1 (Aug 15 & 16)</h2>
             </div>
             <button onclick="resetCurrentLesson()" class="px-3 py-1.5 glass-card-subtle text-[11px] font-bold font-display uppercase text-mist hover:text-plaster rounded-xl transition">
-              Reset Day
+              Reset Session
             </button>
           </div>
 
-          <div id="koreanGrid" class="grid grid-cols-4 sm:grid-cols-5 gap-2">
-            <!-- 33 Buttons with Dual Calendar -->
+          <div id="koreanGrid" class="grid grid-cols-2 sm:grid-cols-2 gap-2.5">
+            <!-- Dynamically populated buttons -->
           </div>
         </div>
       </section>
 
-      <!-- RIGHT PANEL: Lesson Detail View (7 Cols) -->
+      <!-- RIGHT PANEL: Lesson Detail View & Audio Pronunciation (7 Cols) -->
       <section class="lg:col-span-7 space-y-6">
         
         <div class="glass-card rounded-3xl p-6">
-          <div class="flex items-center justify-between mb-4 pb-4 border-b border-eucalyptus/15">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-4 border-b border-eucalyptus/15">
             <div>
               <div class="flex items-center gap-2">
-                <span id="koreanLessonTag" class="text-xs uppercase tracking-widest text-eucalyptus font-bold">Week 1 • Hangul Basics</span>
+                <span id="koreanLessonTag" class="text-xs uppercase tracking-widest text-eucalyptus font-bold">Weekend 1 • Saturday Deep Dive</span>
                 <span id="koreanEthBadge" class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-moss/20 text-moss-light border border-moss/30">
-                  ነሐሴ 4, 2018
+                  ነሐሴ 9, 2018
                 </span>
               </div>
-              <h2 id="koreanDayTitle" class="text-3xl font-black font-display text-plaster mt-1">Day 1 • Mon Aug 10</h2>
+              <h2 id="koreanDayTitle" class="text-2xl sm:text-3xl font-black font-display text-plaster mt-1">Weekend 1 • Sat Aug 15</h2>
             </div>
-            <span id="koreanDayStatusBadge" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-moss/20 text-moss-light border border-moss/30">
+            <span id="koreanDayStatusBadge" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-moss/20 text-moss-light border border-moss/30 self-start sm:self-auto">
               0 / 4 Complete
             </span>
           </div>
 
           <!-- Subtitle / Focus -->
-          <div class="glass-card-subtle rounded-2xl p-4 mb-6">
-            <h3 class="text-xs uppercase font-bold text-mist mb-1">Today's Focus Topic</h3>
-            <p id="koreanSubtitle" class="text-sm font-semibold text-plaster">Hangul Vowels & Basic Greetings</p>
+          <div class="glass-card-subtle rounded-2xl p-4 mb-6 flex items-center justify-between gap-4">
+            <div>
+              <h3 class="text-xs uppercase font-bold text-mist mb-1">Session Focus Topic</h3>
+              <p id="koreanSubtitle" class="text-sm font-bold text-plaster">Hangul Core Vowels & Survival Greetings</p>
+            </div>
+            <button onclick="speakCurrentKorean()" class="px-3.5 py-2 rounded-xl bg-moss/30 hover:bg-moss text-plaster border border-moss/40 text-xs font-bold font-display flex items-center gap-1.5 transition flex-shrink-0" title="Listen to Native Korean Audio Pronunciation">
+              <span>🔊</span> <span>Listen Audio</span>
+            </button>
           </div>
 
           <!-- Learn, Vocab, Speaking Cards -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
             <div class="glass-card-subtle p-4 rounded-2xl border-l-2 border-eucalyptus">
               <span class="text-[10px] font-bold uppercase text-eucalyptus block mb-1">📖 Grammar / Concept</span>
-              <p id="koreanLearn" class="text-xs text-plaster/90">Vowels: ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ</p>
+              <p id="koreanLearn" class="text-xs text-plaster/90 font-medium">Vowels: ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ</p>
             </div>
             <div class="glass-card-subtle p-4 rounded-2xl border-l-2 border-mist">
-              <span class="text-[10px] font-bold uppercase text-mist block mb-1">🗣️ Vocab & Sentences</span>
-              <p id="koreanVocab" class="text-xs text-plaster/90">안녕하세요, 감사합니다</p>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[10px] font-bold uppercase text-mist block">🗣️ Vocab & Sentences</span>
+                <button onclick="speakText(document.getElementById('koreanVocab').innerText)" class="text-[10px] text-mist hover:text-plaster" title="Speak Vocab">🔊</button>
+              </div>
+              <p id="koreanVocab" class="text-xs text-plaster/90 font-medium">안녕하세요, 감사합니다</p>
             </div>
             <div class="glass-card-subtle p-4 rounded-2xl border-l-2 border-moss-light">
               <span class="text-[10px] font-bold uppercase text-moss-light block mb-1">🎙️ Speaking Practice</span>
-              <p id="koreanSpeaking" class="text-xs text-plaster/90">Say greetings out loud 3 times</p>
+              <p id="koreanSpeaking" class="text-xs text-plaster/90 font-medium">Say greetings out loud 3 times</p>
             </div>
           </div>
 
           <!-- Daily Lesson Checklist -->
-          <div class="glass-card-subtle rounded-2xl p-5">
-            <h3 class="text-sm font-bold font-display text-plaster mb-3">Daily Task Checklist</h3>
+          <div class="glass-card-subtle rounded-2xl p-5 mb-6">
+            <h3 class="text-sm font-bold font-display text-plaster mb-3 flex items-center gap-2">
+              <span>✅</span> Masterclass Checklist & Drills
+            </h3>
             <div id="koreanChecklist" class="space-y-2.5">
               <!-- Checkbox items -->
+            </div>
+          </div>
+
+          <!-- Speaking Studio / Pronunciation Shadowing Drill -->
+          <div class="glass-card-subtle rounded-2xl p-5 border border-yellow-400/20 bg-gradient-to-r from-soot via-soot-card to-soot">
+            <h3 class="text-xs font-bold font-display uppercase tracking-widest text-yellow-300 mb-2 flex items-center gap-1.5">
+              <span>🎙️</span> Speaking Drill & Native Pronunciation Studio
+            </h3>
+            <p class="text-xs text-mist/80 mb-3">Click on any core phrase below to hear realistic Korean pronunciation and shadow aloud 3 times:</p>
+            <div class="flex flex-wrap gap-2" id="koreanAudioChips">
+              <!-- Audio chips populated by JS -->
             </div>
           </div>
 
@@ -231,45 +267,59 @@
     </main>
 
     <script>
-      const KOREAN_TOTAL_DAYS = 33; // Aug 10 to Ethiopian Sep 1 (Meskerem 1 / Sep 11)
-      let currentKoreanDay = 1;
+      const KOREAN_TOTAL_DAYS = 33;
+      let currentKoreanDay = 6; // Start on Weekend 1 (Day 6 - Saturday Aug 15)
+      let koreanViewMode = 'weekend'; // 'weekend' or 'all'
 
-      // 33-Day Curriculum Plan for Sambee's Summer Sprint
+      // 10 Key Weekend Sprint Sessions mapping
+      const WEEKEND_DAYS = [6, 7, 13, 14, 20, 21, 27, 28, 32, 33];
+
+      // 33-Day Curriculum Plan for Sambee's Summer Sprint (Optimized for Weekend Depth)
       const KOREAN_CURRICULUM = {
         1: { subtitle: "Hangul Core Vowels & Survival Greetings", learn: "Vowels: ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ", vocab: "안녕하세요 (Hello), 감사합니다 (Thank you)", speaking: "Say greetings aloud 3x with proper intonation.", checklist: ["Learn vowels ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ", "Memorize 안녕하세요 & 감사합니다", "Say each greeting aloud 3 times", "Listen to audio pronunciation"] },
         2: { subtitle: "Remaining Vowels & Polite Responses", learn: "Complex Vowels: ㅐ ㅔ ㅘ ㅝ", vocab: "네 (Yes), 아니요 (No), 죄송합니다 (Sorry)", speaking: "Practice short Q&A replies.", checklist: ["Learn complex vowels ㅐ ㅔ ㅘ ㅝ", "Memorize 네, 아니요, 죄송합니다", "Practice short reply dialogue aloud", "Write vowels 5 times each"] },
         3: { subtitle: "Basic Consonants & Core Nouns", learn: "Consonants: ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ", vocab: "이름 (Name), 사람 (Person), 친구 (Friend)", speaking: "Say each noun slowly.", checklist: ["Learn consonants ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ", "Write each consonant with correct stroke order", "Memorize 이름, 사람, 친구", "Read words aloud clearly"] },
         4: { subtitle: "Combining Syllables (가 나 다 라)", learn: "Syllable blocks: Initial + Vowel", vocab: "가, 나, 다, 라, 마, 바, 사", speaking: "Read syllables aloud at natural speed.", checklist: ["Practice block formation (ㄱ + ㅏ = 가)", "Read 가 나 다 라 마 바 사 aloud", "Combine consonants with ㅓ and ㅗ", "Shadow native speaker audio"] },
         5: { subtitle: "Batchim Basics (Final Consonants)", learn: "Batchim ending sounds: ㄱ, ㄴ, ㄷ, ㄹ, ㅁ, ㅂ, ㅇ", vocab: "한국 (Korea), 한국어 (Korean language), 학생 (Student)", speaking: "Read batchim words clearly.", checklist: ["Understand batchim position", "Read 한국, 한국어, 학생 aloud", "Write 5 batchim syllables", "Practice ending nasal sounds"] },
-        6: { subtitle: "Self-Introduction Pattern (저는 ___ 입니다)", learn: "Grammar: Noun + 입니다 (I am...)", vocab: "저는 Samrawit입니다 (I am Samrawit)", speaking: "Introduce yourself in Korean.", checklist: ["Learn Noun + 입니다 pattern", "Say 저는 학생입니다 aloud", "Say 저는 Samrawit입니다 aloud", "Record yourself speaking"] },
-        7: { subtitle: "Week 1 Review & 30-Sec Self Intro", learn: "Consolidate Week 1 Hangul & Greetings", vocab: "Review all Week 1 vocab", speaking: "Deliver a 30-second self-introduction.", checklist: ["Review vowels and consonants", "Review batchim sounds", "Deliver 30-sec self-intro without notes", "Celebrate Week 1 completed!"] },
+        6: { subtitle: "Weekend 1 (Sat): Hangul Full Foundations & Pronunciation", learn: "Hangul Vowels + Consonants + Syllable Assembly", vocab: "안녕하세요 (Hello), 감사합니다 (Thank you), 저는 Samrawit입니다", speaking: "Introduce yourself smoothly: '안녕하세요! 저는 Samrawit입니다.'", checklist: ["Master core vowels & consonants (ㄱ~ㅎ, ㅏ~ㅣ)", "Assemble syllable blocks 가, 나, 다, 라", "Speak survival greeting 안녕하세요 & 감사합니다", "Deliver first full Korean self-intro phrase!"] },
+        7: { subtitle: "Weekend 1 (Sun): Batchim & 30-Sec Self Intro Masterclass", learn: "Batchim (final consonants) + Noun + 입니다 structure", vocab: "에티오피아 (Ethiopia), 개발자 (Developer), 학생 (Student)", speaking: "Say: '저는 에티오피아 사람입니다. 개발자입니다.' aloud 3x.", checklist: ["Master batchim ending sounds (ㄱ, ㄴ, ㄹ, ㅁ, ㅇ)", "Say 저는 에티오피아 사람입니다 out loud", "Say 저는 개발자입니다 out loud", "Deliver a 30-second continuous self-intro!"] },
         8: { subtitle: "Topic Marker (은 / 는)", learn: "Grammar: Topic marker 은 (consonant) / 는 (vowel)", vocab: "저는 (As for me), 학생은 (As for the student)", speaking: "Use 은/는 in simple statements.", checklist: ["Learn when to use 은 vs 는", "Say 저는 에티오피아 사람입니다", "Write 3 topic marker sentences", "Repeat aloud 3 times"] },
         9: { subtitle: "Subject Marker (이 / 가)", learn: "Grammar: Subject marker 이 / 가", vocab: "친구가 (Friend), 시간이 (Time)", speaking: "Say 'I have time' / 'Friend comes'.", checklist: ["Learn when to use 이 vs 가", "Practice 친구가 있어요", "Practice 시간이 있어요", "Compare 은/는 vs 이/가"] },
         10: { subtitle: "Polite Ending (이에요 / 예요)", learn: "Grammar: Noun + 이에요 / 예요 (to be)", vocab: "학생이에요 (I'm a student), 의사예요 (I'm a doctor)", speaking: "Use informal polite endings.", checklist: ["Learn 이에요 (consonant) vs 예요 (vowel)", "Say 학생이에요 aloud", "Say 개발자예요 (I'm a developer)", "Write 3 examples"] },
         11: { subtitle: "Korean Native Numbers (1-20)", learn: "Native Numbers: 하나, 둘, 셋, 넷, 다섯...", vocab: "하나 (1), 둘 (2), 셋 (3), 넷 (4), 다섯 (5)", speaking: "Count objects 1 to 10 out loud.", checklist: ["Memorize native numbers 1-10", "Say 하나 둘 셋 넷 다섯 aloud", "Count 5 items in your room", "Practice native number pronunciation"] },
         12: { subtitle: "Expressing Possession & Presence (있어요 / 없어요)", learn: "Grammar: Noun + 이/가 있어요 (have) / 없어요 (don't have)", vocab: "돈이 없어요 (No money), 시간 있어요 (Have time)", speaking: "State what you have or don't have.", checklist: ["Learn 있어요 vs 없어요", "Say 시간이 있어요 out loud", "Say 돈이 없어요 out loud", "Write 2 personal sentences"] },
-        13: { subtitle: "Family & Loved Ones Vocab", learn: "Family Nouns: 엄마, 아빠, 형, 누나, 동생", vocab: "엄마 (Mom), 아빠 (Dad), 친구 (Friend)", speaking: "Talk about your family members.", checklist: ["Memorize family words", "Say 엄마, 아빠 aloud", "Combine with 있어요 (엄마가 있어요)", "Practice natural rhythm"] },
-        14: { subtitle: "Week 2 Review & 1-Min Speaking Challenge", learn: "Combine topic markers, possession & greetings", vocab: "Review Week 2 vocabulary", speaking: "Speak continuously for 1 minute in Korean.", checklist: ["Review 은/는, 이/가, 있어요/없어요", "Prepare 1-minute intro", "Speak for 60 seconds", "Celebrate Week 2 completed!"] },
+        13: { subtitle: "Weekend 2 (Sat): Particles (은/는, 이/가) & Polite Endings", learn: "Topic marker (은/는), Subject marker (이/가) & 이에요/예요", vocab: "시간이 있어요 (Have time), 코딩이 재미있어요 (Coding is fun)", speaking: "Explain your passion: '저는 개발자예요. 코딩이 재미있어요.'", checklist: ["Distinguish topic marker (은/는) vs subject (이/가)", "Conjugate Noun + 이에요 / 예요", "Say 시간이 있어요 & 돈이 없어요 out loud", "Construct 3 compound sentences"] },
+        14: { subtitle: "Weekend 2 (Sun): Korean Numbers & 1-Min Speaking Challenge", learn: "Native & Sino numbers + Count words + Possession", vocab: "하나, 둘, 셋 (1, 2, 3), 일, 이, 삼, 아메리카노 한 잔 (1 coffee)", speaking: "Order coffee & count objects aloud.", checklist: ["Count 1 to 10 in Native numbers", "Count 1 to 10 in Sino-Korean", "Practice '아메리카노 한 잔 주세요'", "Deliver 1-minute continuous Korean monologue!"] },
         15: { subtitle: "Core Question Words (뭐, 어디, 누구, 언제)", learn: "Question words: 뭐 (what), 어디 (where), 누구 (who), 언제 (when)", vocab: "이거 뭐예요? (What is this?)", speaking: "Ask simple questions aloud.", checklist: ["Learn 4 core question words", "Ask 이거 뭐예요? out loud", "Ask 어디예요? (Where is it?)", "Practice rising intonation"] },
         16: { subtitle: "Polite Verb Endings (아요 / 어요)", learn: "Grammar: Present tense verb conjugation", vocab: "가요 (Go), 먹어요 (Eat), 공부해요 (Study)", speaking: "State what actions you do daily.", checklist: ["Learn verb stem + 아요/어요 rule", "Conjugate 가다 → 가요", "Conjugate 먹다 → 먹어요", "Say 공부해요 out loud"] },
         17: { subtitle: "Daily Activity Verbs", learn: "Verbs: 일하다 (Work), 자다 (Sleep), 읽다 (Read)", vocab: "책을 읽어요 (Read a book), 일해요 (Work)", speaking: "Describe your daily routine.", checklist: ["Learn 3 new activity verbs", "Say 책을 읽어요 out loud", "Say 코딩해요 (I code) out loud", "Write 3 daily activity lines"] },
         18: { subtitle: "Time Expressions (오늘, 내일, 어제)", learn: "Time words: 오늘 (Today), 내일 (Tomorrow), 어제 (Yesterday)", vocab: "오늘 공부해요 (Study today)", speaking: "Combine time words with verbs.", checklist: ["Memorize 오늘, 내일, 어제", "Say 오늘 일해요 out loud", "Say 내일 봐요 (See you tomorrow)", "Practice time placement in sentence"] },
         19: { subtitle: "Likes & Dislikes (좋아해요 / 싫어해요)", learn: "Grammar: Object + 을/를 좋아해요", vocab: "커피를 좋아해요 (I like coffee)", speaking: "Share what you love or dislike.", checklist: ["Learn object marker 을/를", "Say 커피를 좋아해요 out loud", "Say 야채를 싫어해요 out loud", "Name 3 favorite things in Korean"] },
-        20: { subtitle: "Week 3 Review & Daily Routine Pitch", learn: "Combine verbs, time words & preferences", vocab: "Review Week 3 vocabulary", speaking: "Describe your entire daily routine.", checklist: ["Review present tense verb endings", "Review time words & likes", "Deliver 90-sec routine summary", "Celebrate Week 3 completed!"] },
-        21: { subtitle: "Future Tense (-(으)ㄹ 거예요)", learn: "Grammar: Verb + (으)ㄹ 거예요 (will do)", vocab: "공부할 거예요 (Will study), 갈 거예요 (Will go)", speaking: "State your future plans for tomorrow.", checklist: ["Learn future tense structure", "Say 내일 공부할 거예요 out loud", "Say 내일 운동할 거예요 (Will workout)", "Write 2 future goal sentences"] },
+        20: { subtitle: "Weekend 3 (Sat): Verb Conjugations (아요/어요) & Questions", learn: "Present tense conjugation (가요, 먹어요, 공부해요) + Question words", vocab: "뭐 해요? (What are you doing?), 어디 가요? (Where are you going?)", speaking: "Answer: '지금 코딩 공부해요. 그리고 책을 읽어요.'", checklist: ["Conjugate regular verbs into 아요/어요", "Ask '지금 뭐 해요?' out loud with natural rhythm", "Ask '어디예요?' (Where is it?)", "Roleplay daily activity questions"] },
+        21: { subtitle: "Weekend 3 (Sun): Daily Routine & Preferences Pitch", learn: "Object marker (을/를) + 좋아해요/싫어해요 + Routine flow", vocab: "커피를 좋아해요, 오늘 코딩해요, 내일 친구를 만나요", speaking: "Deliver full 90-second routine description in Korean.", checklist: ["Use object particle 을/를 accurately", "Say 커피를 좋아해요 & 코딩을 좋아해요", "Combine time expressions (오늘, 내일, 아침)", "Deliver 90-second daily life monologue!"] },
         22: { subtitle: "Past Tense (-았어요 / -었어요)", learn: "Grammar: Verb + 았어요 / 었어요 (did)", vocab: "먹었어요 (Ate), 공부했어요 (Studied)", speaking: "State what you accomplished today.", checklist: ["Learn past tense conjugation", "Say 오늘 공부했어요 out loud", "Say 운동했어요 out loud", "Reflect on today's grind in past tense"] },
         23: { subtitle: "Connecting Sentences (그리고 / 하지만)", learn: "Conjunctions: 그리고 (And), 하지만 (But)", vocab: "어려워요 하지만 재미있어요 (Hard but fun)", speaking: "Connect two thoughts together.", checklist: ["Learn 그리고 & 하지만", "Say 한국어는 어려워요. 하지만 재미있어요.", "Connect two routine sentences", "Practice smooth transition"] },
         24: { subtitle: "Sharing Simple Opinions", learn: "Adjectives: 재미있어요 (Fun), 어렵다 (Hard), 좋다 (Good)", vocab: "코딩이 재미있어요 (Coding is fun)", speaking: "Give opinions on CS & learning.", checklist: ["Learn 3 core descriptive adjectives", "Say 코딩이 재미있어요 out loud", "Say 한국어가 좋아요 out loud", "Write 2 opinion sentences"] },
         25: { subtitle: "Conversation Fillers & Reacting", learn: "Fillers: 진짜요? (Really?), 맞아요 (Right!), 음...", vocab: "진짜요?, 맞아요, 그래요?", speaking: "React naturally in a mock conversation.", checklist: ["Learn natural conversation reactions", "Practice saying 진짜요? with emphasis", "Practice saying 맞아요! out loud", "Combine fillers with replies"] },
         26: { subtitle: "Ordering Coffee & Food", learn: "Phrases: ___ 주세요 (Give me...), 얼마예요? (How much?)", vocab: "아메리카노 한 잔 주세요 (One Americano please)", speaking: "Order coffee at a Korean cafe.", checklist: ["Learn ___ 주세요 phrase", "Practice ordering Americano out loud", "Ask 이거 얼마예요? out loud", "Roleplay cafe transaction"] },
-        27: { subtitle: "Location & Directions (어디에 있어요?)", learn: "Grammar: Place + 에 가요 / 어디예요?", vocab: "화장실 (Restroom), 식당 (Restaurant)", speaking: "Ask where places are located.", checklist: ["Learn place marker 에", "Ask 화장실이 어디예요? out loud", "Say 식당에 가요 (Go to restaurant)", "Practice location Q&A"] },
-        28: { subtitle: "Pagume 1: Expressing Wants (Verb + 하고 싶어요)", learn: "Grammar: Verb stem + 하고 싶어요 (Want to do)", vocab: "한국에 가고 싶어요 (Want to go to Korea)", speaking: "Share your goals & wishes on Pagume 1.", checklist: ["Learn -하고 싶어요 structure", "Say 개발자가 되고 싶어요 (Want to be dev)", "Say 한국에 가고 싶어요 out loud", "Write 3 personal wishes"] },
+        27: { subtitle: "Weekend 4 (Sat): Tenses & Conjunctions (Past, Future & But)", learn: "Past (-았/었어요) + Future (-(으)ㄹ 거예요) + 하지만/그리고", vocab: "공부했어요 (Studied), 개발자가 될 거예요 (Will be developer)", speaking: "Say: '한국어는 어려워요. 하지만 정말 재미있어요!'", checklist: ["Conjugate past tense (공부했어요, 일했어요)", "Conjugate future tense (공부할 거예요)", "Connect contrasting sentences with 하지만", "Share your engineering dreams in future tense"] },
+        28: { subtitle: "Weekend 4 (Sun - Pagume 1): Tech Terms, Ordering & Cafe Roleplay", learn: "Tech terms (컴퓨터, 코딩, 백엔드) + ___ 주세요 + 하고 싶어요", vocab: "한국에 가고 싶어요, 백엔드 개발자, 이거 얼마예요?", speaking: "Explain your CS major and order coffee like a pro.", checklist: ["Learn CS terms (컴퓨터 공학, 백엔드)", "Express wants: '한국에 가고 싶어요'", "Practice Ordering: '따뜻한 아메리카노 한 잔 주세요'", "Deliver 2-minute dialogue on Pagume 1!"] },
         29: { subtitle: "Pagume 2: Expressing Ability (can / cannot)", learn: "Grammar: -(으)ㄹ 수 있어요 / 없어요", vocab: "한국어 할 수 있어요 (I can speak Korean)", speaking: "State what skills you possess.", checklist: ["Learn -(으)ㄹ 수 있어요", "Say 코딩 할 수 있어요 out loud", "Say 한국어 조금 할 수 있어요 out loud", "Practice confidence in speaking"] },
         30: { subtitle: "Pagume 3: Asking Favor & Assistance (도와주세요)", learn: "Phrases: 도와주세요 (Help me), 다시 말씀해 주세요", vocab: "천천히 말해 주세요 (Please speak slowly)", speaking: "Ask native speakers to speak slowly.", checklist: ["Learn 천천히 말해 주세요", "Learn 다시 말해 주세요 (Say again)", "Practice asking for help politely", "Roleplay clarification scene"] },
         31: { subtitle: "Pagume 4: Tech & Software Terms in Korean", learn: "Nouns: 컴퓨터 (Computer), 코딩 (Coding), 백엔드 (Backend)", vocab: "저는 개발자입니다 (I am a developer)", speaking: "Explain your CS major in Korean.", checklist: ["Learn tech vocabulary", "Say 컴퓨터 공학을 공부해요 (CS major)", "Say 백엔드 개발자 (Backend dev)", "Practice explaining your work"] },
-        32: { subtitle: "Pagume 5: Ethiopian New Year's Eve Shadowing", learn: "Shadowing native A1 dialogues & New Year greetings", vocab: "새해 복 많이 받으세요 (Happy New Year)", speaking: "Practice natural conversational speed.", checklist: ["Say 새해 복 많이 받으세요", "Shadow 2-minute dialogue", "Polish pronunciation & intonation", "Prepare for Day 33 Grand Finale!"] },
-        33: { subtitle: "Meskerem 1 (እንቁጣጣሽ 🌼): Final 5-Min Speaking Victory 🏆", learn: "A1 Korean Fluency Peak & Enkutatash Celebration", vocab: "Complete A1 vocabulary synthesis", speaking: "Deliver 5-minute continuous Korean monologue on your summer journey & goals!", checklist: ["Deliver final 5-minute Korean speech", "Cover intro, CS major, Addis Ababa, and dreams", "Record video/audio clip of your victory", "CONGRATULATIONS! A1 KOREAN MASTERED 🏆"] }
+        32: { subtitle: "Weekend 5 (Eve - Pagume 5): Shadowing & New Year Greetings", learn: "Shadowing native A1 dialogues & New Year greetings", vocab: "새해 복 많이 받으세요 (Happy New Year), 반갑습니다", speaking: "Deliver Ethiopian New Year's Eve greeting in Korean.", checklist: ["Say 새해 복 많이 받으세요 with perfect pitch", "Shadow native conversation clips", "Fine-tune pronunciation & intonation", "Rehearse Day 33 Grand Victory Monologue!"] },
+        33: { subtitle: "Meskerem 1 (እንቁጣጣሽ 🌼): Grand Finale 5-Min Monologue Victory 🏆", learn: "A1 Korean Fluency Peak & Enkutatash Celebration", vocab: "Complete A1 vocabulary synthesis", speaking: "Deliver 5-minute continuous Korean monologue on your summer journey & goals!", checklist: ["Deliver final 5-minute Korean speech without notes", "Cover intro, CS major, Addis Ababa, and dreams", "Record video/audio clip of your victory", "CONGRATULATIONS! A1 KOREAN MASTERED 🏆"] }
       };
+
+      const AUDIO_DRILL_PHRASES = [
+        { kor: "안녕하세요", en: "Hello", desc: "Standard polite greeting" },
+        { kor: "감사합니다", en: "Thank you", desc: "Polite gratitude" },
+        { kor: "저는 Samrawit입니다", en: "I am Samrawit", desc: "Self introduction" },
+        { kor: "저는 개발자예요", en: "I am a developer", desc: "Occupation statement" },
+        { kor: "코딩이 재미있어요", en: "Coding is fun", desc: "Expressing opinions" },
+        { kor: "아메리카노 한 잔 주세요", en: "One Americano please", desc: "Cafe ordering" },
+        { kor: "새해 복 많이 받으세요", en: "Happy New Year!", desc: "Enkutatash greeting 🌼" }
+      ];
 
       function getKoreanStorageKey(day) {
         return `korean_day_${day}_summer33sprint_state`;
@@ -277,7 +327,7 @@
 
       function loadKoreanDayData(day) {
         const saved = localStorage.getItem(getKoreanStorageKey(day));
-        const lesson = KOREAN_CURRICULUM[day] || KOREAN_CURRICULUM[1];
+        const lesson = KOREAN_CURRICULUM[day] || KOREAN_CURRICULUM[6];
         if (!saved) {
           return { checklist: lesson.checklist.map(label => ({ label, done: false })) };
         }
@@ -296,15 +346,42 @@
 
       window.onload = function() {
         renderKoreanGrid();
-        selectKoreanDay(1);
+        renderAudioDrillChips();
+        selectKoreanDay(6); // Default to Weekend 1 (Day 6)
       };
+
+      function setKoreanViewMode(mode) {
+        koreanViewMode = mode;
+        const btnW = document.getElementById('tabView-weekend');
+        const btnA = document.getElementById('tabView-all');
+        const sub = document.getElementById('lessonSelectorSubtitle');
+
+        if (mode === 'weekend') {
+          btnW.className = "flex-1 py-2 rounded-xl font-bold font-display bg-moss text-plaster shadow transition";
+          btnA.className = "flex-1 py-2 rounded-xl font-bold font-display text-mist hover:text-plaster transition";
+          if (sub) sub.innerText = "Weekend Masterclasses (10 Sessions)";
+        } else {
+          btnA.className = "flex-1 py-2 rounded-xl font-bold font-display bg-moss text-plaster shadow transition";
+          btnW.className = "flex-1 py-2 rounded-xl font-bold font-display text-mist hover:text-plaster transition";
+          if (sub) sub.innerText = "Full 33-Day Curriculum Archive";
+        }
+        renderKoreanGrid();
+      }
 
       function renderKoreanGrid() {
         const container = document.getElementById('koreanGrid');
         if (!container) return;
 
         let html = '';
-        for (let day = 1; day <= KOREAN_TOTAL_DAYS; day++) {
+        const dayList = (koreanViewMode === 'weekend') ? WEEKEND_DAYS : Array.from({ length: KOREAN_TOTAL_DAYS }, (_, i) => i + 1);
+
+        if (koreanViewMode === 'weekend') {
+          container.className = "grid grid-cols-2 gap-2.5";
+        } else {
+          container.className = "grid grid-cols-4 sm:grid-cols-5 gap-2";
+        }
+
+        dayList.forEach((day, idx) => {
           const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { gDate: `D${day}`, ethEn: '' };
           const isFinale = (day === 33);
           const isPagume = (day >= 28 && day <= 32);
@@ -313,15 +390,60 @@
           if (isFinale) badgeIcon = '🌼';
           else if (isPagume) badgeIcon = '🌟';
 
-          html += `
-            <button id="korBtn-${day}" onclick="selectKoreanDay(${day})" class="h-14 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-center justify-center p-1 relative ${isFinale ? 'border-yellow-400/60' : ''}">
-              <span class="leading-tight flex items-center gap-0.5">D${day} ${badgeIcon}</span>
-              <span class="text-[9px] opacity-75 font-normal text-mist">${info.gDate}</span>
-              <span class="text-[8px] text-eucalyptus font-mono">${info.ethEn || ''}</span>
-            </button>
-          `;
-        }
+          let weekendLabel = '';
+          if (day === 6) weekendLabel = 'W1 Sat';
+          else if (day === 7) weekendLabel = 'W1 Sun';
+          else if (day === 13) weekendLabel = 'W2 Sat';
+          else if (day === 14) weekendLabel = 'W2 Sun';
+          else if (day === 20) weekendLabel = 'W3 Sat';
+          else if (day === 21) weekendLabel = 'W3 Sun';
+          else if (day === 27) weekendLabel = 'W4 Sat';
+          else if (day === 28) weekendLabel = 'W4 Sun (ጳጉሜ 1)';
+          else if (day === 32) weekendLabel = 'W5 Eve (ጳጉሜ 5)';
+          else if (day === 33) weekendLabel = 'W5 Finale 🌼';
+
+          if (koreanViewMode === 'weekend') {
+            html += `
+              <button id="korBtn-${day}" onclick="selectKoreanDay(${day})" class="h-16 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-start justify-center p-3 relative ${isFinale ? 'border-yellow-400/70 shadow-[0_0_12px_rgba(229,193,88,0.2)]' : ''}">
+                <div class="flex items-center justify-between w-full">
+                  <span class="text-xs text-yellow-300 font-black font-display">${weekendLabel}</span>
+                  <span class="text-[10px] text-moss-light">D${day} ${badgeIcon}</span>
+                </div>
+                <span class="text-[10px] opacity-75 font-normal text-mist mt-0.5">${info.dayName} ${info.gDate} (${info.ethEn || ''})</span>
+              </button>
+            `;
+          } else {
+            html += `
+              <button id="korBtn-${day}" onclick="selectKoreanDay(${day})" class="h-14 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-center justify-center p-1 relative ${isFinale ? 'border-yellow-400/60' : ''}">
+                <span class="leading-tight flex items-center gap-0.5">D${day} ${badgeIcon}</span>
+                <span class="text-[9px] opacity-75 font-normal text-mist">${info.gDate}</span>
+                <span class="text-[8px] text-eucalyptus font-mono">${info.ethEn || ''}</span>
+              </button>
+            `;
+          }
+        });
+
         container.innerHTML = html;
+        highlightActiveDayButton();
+      }
+
+      function highlightActiveDayButton() {
+        document.querySelectorAll('#koreanGrid button').forEach(b => {
+          if (koreanViewMode === 'weekend') {
+            b.className = "h-16 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-start justify-center p-3 relative";
+          } else {
+            b.className = "h-14 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-center justify-center p-1 relative";
+          }
+        });
+
+        const activeBtn = document.getElementById(`korBtn-${currentKoreanDay}`);
+        if (activeBtn) {
+          if (koreanViewMode === 'weekend') {
+            activeBtn.className = "h-16 rounded-2xl bg-moss text-plaster font-bold font-display text-xs shadow-md border border-moss-light flex flex-col items-start justify-center p-3 relative";
+          } else {
+            activeBtn.className = "h-14 rounded-2xl bg-moss text-plaster font-bold font-display text-xs shadow-md border border-moss-light flex flex-col items-center justify-center p-1 relative";
+          }
+        }
       }
 
       function selectKoreanDay(day) {
@@ -329,25 +451,21 @@
         const weekNum = day <= 7 ? 1 : day <= 14 ? 2 : day <= 21 ? 3 : day <= 28 ? 4 : 5;
         const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { gDate: 'Aug 10', ethMonth: 'ነሐሴ', ethDay: 4, ethYear: 2018 };
 
-        document.querySelectorAll('#koreanGrid button').forEach(b => {
-          b.className = "h-14 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-center justify-center p-1 relative";
-        });
-
-        const activeBtn = document.getElementById(`korBtn-${day}`);
-        if (activeBtn) {
-          activeBtn.className = "h-14 rounded-2xl bg-moss text-plaster font-bold font-display text-xs shadow-md border border-moss-light flex flex-col items-center justify-center p-1 relative";
-        }
+        highlightActiveDayButton();
 
         const weekTitles = {
-          1: "Week 1 (Days 1–7 • Aug 10–16)",
-          2: "Week 2 (Days 8–14 • Aug 17–23)",
-          3: "Week 3 (Days 15–21 • Aug 24–30)",
-          4: "Week 4 (Days 22–28 • Aug 31–Sep 6)",
-          5: "Week 5 (Days 29–33 • Sep 7–11 🌼)"
+          1: "Weekend 1 (Days 6 & 7 • Aug 15–16)",
+          2: "Weekend 2 (Days 13 & 14 • Aug 22–23)",
+          3: "Weekend 3 (Days 20 & 21 • Aug 29–30)",
+          4: "Weekend 4 (Days 27 & 28 • Sep 5–6 / ጳጉሜ 1)",
+          5: "Weekend 5 (Days 32 & 33 • Sep 10–11 / መስከረም 1 🌼)"
         };
 
+        const isWeekendDay = WEEKEND_DAYS.includes(day);
+        const sessionLabel = isWeekendDay ? `Weekend Masterclass • Session ${WEEKEND_DAYS.indexOf(day) + 1}` : `Curriculum Archive • Day ${day}`;
+
         document.getElementById('lessonWeekLabel').innerText = weekTitles[weekNum] || `Week ${weekNum}`;
-        document.getElementById('koreanLessonTag').innerText = `Week ${weekNum} • Lesson ${day}`;
+        document.getElementById('koreanLessonTag').innerText = `${sessionLabel}`;
         document.getElementById('koreanEthBadge').innerText = `${info.ethMonth} ${info.ethDay}, ${info.ethYear} ዓ.ም.`;
         document.getElementById('koreanDayTitle').innerText = `Day ${day} • ${info.dayName || 'Day'} ${info.gDate} ${day === 33 ? '🌼 (እንቁጣጣሽ)' : ''}`;
 
@@ -356,7 +474,7 @@
       }
 
       function renderKoreanLessonDetails() {
-        const lesson = KOREAN_CURRICULUM[currentKoreanDay] || KOREAN_CURRICULUM[1];
+        const lesson = KOREAN_CURRICULUM[currentKoreanDay] || KOREAN_CURRICULUM[6];
         const data = loadKoreanDayData(currentKoreanDay);
 
         document.getElementById('koreanSubtitle').innerText = lesson.subtitle;
@@ -400,11 +518,14 @@
         document.getElementById('koreanDayStatusBadge').innerText = `${dDone} / ${dTotal} Complete (${dPct}%)`;
 
         let tTotal = 0, tDone = 0;
-        for (let day = 1; day <= KOREAN_TOTAL_DAYS; day++) {
+        const targetDays = (koreanViewMode === 'weekend') ? WEEKEND_DAYS : Array.from({ length: KOREAN_TOTAL_DAYS }, (_, i) => i + 1);
+
+        targetDays.forEach(day => {
           const d = loadKoreanDayData(day);
           tTotal += d.checklist.length;
           tDone += d.checklist.filter(i => i.done).length;
-        }
+        });
+
         const tPct = tTotal > 0 ? Math.round((tDone / tTotal) * 100) : 0;
         setRingProgress('koreanTotalCircle', 'koreanTotalPercent', tPct);
       }
@@ -416,6 +537,39 @@
         const total = 2 * Math.PI * 26;
         circle.style.strokeDashoffset = total - (pct / 100) * total;
         text.innerText = `${pct}%`;
+      }
+
+      // ===== NATIVE AUDIO SYNTHESIS PRONUNCIATION (WEB SPEECH API) =====
+      function speakText(text) {
+        if (!window.speechSynthesis) {
+          alert("Speech Synthesis not supported in this browser.");
+          return;
+        }
+        window.speechSynthesis.cancel();
+        // Strip English explanations if in parenthesis
+        const cleanText = text.replace(/\([^)]*\)/g, '').trim();
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'ko-KR';
+        utterance.rate = 0.85; // Slightly slower for crisp clear learning
+        window.speechSynthesis.speak(utterance);
+      }
+
+      function speakCurrentKorean() {
+        const lesson = KOREAN_CURRICULUM[currentKoreanDay] || KOREAN_CURRICULUM[6];
+        speakText(lesson.vocab);
+      }
+
+      function renderAudioDrillChips() {
+        const container = document.getElementById('koreanAudioChips');
+        if (!container) return;
+
+        container.innerHTML = AUDIO_DRILL_PHRASES.map(p => `
+          <button onclick="speakText('${p.kor}')" class="px-3 py-1.5 rounded-xl glass-card-subtle hover:border-moss text-left flex items-center gap-2 transition group" title="${p.desc}">
+            <span class="text-xs font-bold text-plaster group-hover:text-yellow-300 transition">${p.kor}</span>
+            <span class="text-[10px] text-mist font-medium">(${p.en})</span>
+            <span class="text-xs opacity-75">🔊</span>
+          </button>
+        `).join('');
       }
     </script>
   </body>

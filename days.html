@@ -120,10 +120,10 @@
             🏠 Dashboard
           </a>
           <a href="korean-plan.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist hover:border-mist transition">
-            🇰🇷 Korean Plan (33D)
+            🇰🇷 Korean Plan (Weekend)
           </a>
           <a href="books.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
-            📚 Books Tracker
+            📚 Books Sanctuary
           </a>
         </div>
       </div>
@@ -199,6 +199,9 @@
                 <span id="selectedEthDateBadge" class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-moss/20 text-moss-light border border-moss/30">
                   ነሐሴ 4, 2018
                 </span>
+                <span id="selectedDayTypeBadge" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-soot/80 text-mist border border-eucalyptus/20">
+                  Weekday
+                </span>
               </div>
               <h2 id="selectedDayTitle" class="text-3xl font-black font-display text-plaster mt-1">Day 1 • Mon Aug 10</h2>
             </div>
@@ -221,13 +224,13 @@
               <div id="dayNegotiablesList" class="space-y-2.5"></div>
             </div>
 
-            <!-- Section 2: Daily Schedule Blocks -->
+            <!-- Section 2: Daily Schedule Blocks (Morning Hard Things First) -->
             <div class="glass-card-subtle rounded-2xl p-5">
               <div class="flex items-center justify-between mb-3">
                 <h3 class="text-sm font-bold font-display text-plaster flex items-center gap-2">
-                  <span>⏱️</span> Daily Schedule Blocks
+                  <span>⏱️</span> Daily Schedule Blocks (Morning Hard Focus)
                 </h3>
-                <span id="scheduleCountBadge" class="text-[11px] text-eucalyptus font-medium">5 blocks</span>
+                <span id="scheduleCountBadge" class="text-[11px] text-eucalyptus font-medium">6 blocks</span>
               </div>
               <div id="dayScheduleList" class="space-y-2.5"></div>
             </div>
@@ -265,38 +268,76 @@
         return 5; // Days 29..33 (Pagume & Meskerem 1 Finale)
       }
 
+      function isSprintDayWeekend(day) {
+        const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { dayName: 'Mon' };
+        return (info.dayName === 'Sat' || info.dayName === 'Sun');
+      }
+
       function defaultDayData(day) {
-        const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { label: 'Focus Day' };
+        const isWeekend = isSprintDayWeekend(day);
         
-        let specialSchedule = [
-          { label: "6:30–8:00 AM: Prayer, Workout & Breakfast", done: false },
-          { label: "8:00–9:00 AM: Korean & English Fluency Push", done: false },
-          { label: "9:00 AM–5:00 PM: Deep Focus & Project Build", done: false },
-          { label: "6:00–8:00 PM: Deep Work (Backend & DSA)", done: false },
-          { label: "8:00–9:30 PM: Design Skill-Building & Reading", done: false }
-        ];
+        let scheduleBlocks = [];
+        let nonNegotiables = [];
 
         if (day === 33) {
-          specialSchedule = [
-            { label: "Morning: 🌼 Enkutatash Ethiopian New Year Celebration with Family", done: false },
-            { label: "10:00 AM: Review 33-Day Summer Productive Sprint Milestones", done: false },
-            { label: "2:00 PM: 5-Minute Korean Conversation Victory Pitch & Recording", done: false },
-            { label: "4:00 PM: 330+ Pages Reading Summary & Key Insights Consolidation", done: false },
-            { label: "Evening: Unlock Day 33 Secret Vault & Set New Academic Year Goals! 🏆", done: false }
+          // Grand Finale Day 33 (Enkutatash / Meskerem 1)
+          scheduleBlocks = [
+            { label: "🌅 Morning: Enkutatash Ethiopian New Year Celebration with Family 🌼", done: false },
+            { label: "🏆 10:00 AM: Review 33-Day Summer Productive Sprint Milestones & XP Rank", done: false },
+            { label: "🎙️ 2:00 PM: Final 5-Minute Korean Conversation Victory Monologue Recording", done: false },
+            { label: "📖 4:00 PM: 330+ Pages Reading Summary & Key Growth Insights Consolidation", done: false },
+            { label: "🔐 Evening: Unlock Day 33 Secret Vault & Set New Academic Year Goals! 🌟", done: false }
+          ];
+          nonNegotiables = [
+            { label: "🌼 Enkutatash Celebration & Family Time", done: false },
+            { label: "🏆 Deliver Final 5-Min Korean A1 Speech", done: false },
+            { label: "📖 Complete 330+ Pages Book Sprint Milestone", done: false },
+            { label: "🔐 Unlock Secret Future Letter Vault", done: false },
+            { label: "🌱 Gratitude Prayer & New Year Mindset", done: false }
+          ];
+        } else if (isWeekend) {
+          // Weekend Schedule (Sat & Sun: Korean Intensive Masterclass + Systems Review)
+          scheduleBlocks = [
+            { label: "🌅 7:00–8:00 AM: Weekend Mindset, Prayer & Fuel", done: false },
+            { label: "🐸 8:00–10:00 AM: MORNING POWER BLOCK: Tackle Hardest Challenge (DSA / Backend Architecture)", done: false },
+            { label: "🇰🇷 10:00 AM–12:00 PM: KOREAN INTENSIVE MASTERCLASS (Hangul, Vocab Mastery & Sentence Drills)", done: false },
+            { label: "🗣️ 2:00–3:30 PM: English Fluency Dialogue & Project Walkthrough", done: false },
+            { label: "📖 4:30–6:00 PM: Book Reading (10+ pages) & Aesthetic Notes in Sanctuary", done: false },
+            { label: "🎙️ 7:30–8:30 PM: Korean Speaking Practice (Shadowing audio out loud 3x)", done: false }
+          ];
+          nonNegotiables = [
+            { label: "🐸 Morning Frog: Crushed Hardest Challenge First", done: false },
+            { label: "🇰🇷 Korean Sprint: Hangul, Vocab & Grammar Masterclass (15–20m)", done: false },
+            { label: "🇰🇷 Korean Speaking: Pronunciation & Dialogue Shadowing", done: false },
+            { label: "🧠 DSA / Backend: Weekly Challenge & LeetCode Practice", done: false },
+            { label: "📖 Book Reading: Read 10+ pages", done: false },
+            { label: "🗣️ English Practice: 15–20 min speaking drills", done: false },
+            { label: "🌱 Supporting: Prayer, Workout & Hydration (8g)", done: false }
+          ];
+        } else {
+          // Weekday Schedule (Mon-Fri: Morning Hard Things First + Core Tech Grind)
+          scheduleBlocks = [
+            { label: "🌅 6:30–7:30 AM: Morning Fuel, Mindset & Prayer", done: false },
+            { label: "🐸 7:30–9:30 AM: MORNING POWER BLOCK: Tackle The Hardest Thing First (Hard DSA / Core Backend System)", done: false },
+            { label: "⚙️ 9:30 AM–1:00 PM: Deep Focus & Engineering Project Build (Fintech/Backend)", done: false },
+            { label: "🗣️ 2:00–3:30 PM: English Fluency Practice & Explaining Concepts (B1 → C1)", done: false },
+            { label: "🎨 4:00–6:00 PM: Design Skill-Building (Figma, UI/UX & Visual Architecture)", done: false },
+            { label: "📖 7:30–9:00 PM: Book Reading (10+ pages) & Evening Reflection", done: false }
+          ];
+          nonNegotiables = [
+            { label: "🐸 Morning Frog: Crushed Hardest Cognitive Challenge First", done: false },
+            { label: "🧠 DSA: 1+ LeetCode Problem in JS (Graph/Tree/DP)", done: false },
+            { label: "⚙️ Backend: Node.js / Express / DB System Strengthening", done: false },
+            { label: "🎨 Design: Figma & UI/UX Design System Building", done: false },
+            { label: "📖 Book Reading: 10+ pages in Tech/Growth Book", done: false },
+            { label: "🗣️ English Fluency: 15–20 min Explainer / Speaking", done: false },
+            { label: "🌱 Supporting: Prayer, Workout & Hydration (8g)", done: false }
           ];
         }
 
         return {
-          negotiables: [
-            { label: "Design: Figma & UI/UX fundamentals", done: false },
-            { label: "DSA: 1+ LeetCode problem in JS", done: false },
-            { label: "Backend: Node.js / Express / DB practice", done: false },
-            { label: "Book: Read 10+ pages", done: false },
-            { label: "Korean: 15-20 min Hangul / vocab", done: false },
-            { label: "English: 15-20 min fluency speaking", done: false },
-            { label: "Supporting: Prayer, Workout & Hydration", done: false }
-          ],
-          schedule: specialSchedule,
+          negotiables: nonNegotiables,
+          schedule: scheduleBlocks,
           todos: []
         };
       }
@@ -376,6 +417,21 @@
           4: "Week 4: August Push (Days 22–28 • Aug 31–Sep 6)",
           5: "Week 5: Pagume & Enkutatash (Days 29–33 • Sep 7–11 🌼)"
         };
+
+        const isWeekend = isSprintDayWeekend(day);
+        const dayTypeBadge = document.getElementById('selectedDayTypeBadge');
+        if (dayTypeBadge) {
+          if (day === 33) {
+            dayTypeBadge.innerText = "Enkutatash Finale 🌼";
+            dayTypeBadge.className = "text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-yellow-400/20 text-yellow-300 border border-yellow-400/40";
+          } else if (isWeekend) {
+            dayTypeBadge.innerText = "Weekend Sprint (Korean Active 🇰🇷)";
+            dayTypeBadge.className = "text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+          } else {
+            dayTypeBadge.innerText = "Weekday Tech Grind (Morning Frog 🐸)";
+            dayTypeBadge.className = "text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-soot/80 text-mist border border-eucalyptus/20";
+          }
+        }
 
         document.getElementById('currentWeekLabel').innerText = weekLabelMap[weekNum] || `Week ${weekNum}`;
         document.getElementById('selectedWeekTag').innerText = `Week ${weekNum}`;
