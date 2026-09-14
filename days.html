@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>33-Day Summer Scheduler — Sambee's Growth Sprint 🚀 (Aug 10 – Ethiopian Sep 1)</title>
+    <title>360-Day New Year Scheduler — Sambee's Growth Sprint 🚀 </title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,9 +20,11 @@
         theme: {
           extend: {
             colors: {
-              eucalyptus: '#98AA9D',
-              mist: '#B3C9D6',
-              plaster: '#F2EFE2',
+              veranda: '#6BB1AD',
+              cloud: '#A7BCBD',
+              lychee: '#EDECDB',
+              melon: '#E5A9A9',
+              cupid: '#E6748E',
               soot: {
                 DEFAULT: '#2D3536',
                 dark: '#1C2324',
@@ -45,12 +47,12 @@
     </script>
     <style>
       :root {
-        --c-eucalyptus: #98AA9D;
-        --c-mist: #B3C9D6;
-        --c-plaster: #F2EFE2;
-        --c-soot: #2D3536;
-        --c-soot-dark: #1C2324;
-        --c-moss: #697C70;
+        --c-veranda: #6BB1AD;
+        --c-cloud: #A7BCBD;
+        --c-lychee: #EDECDB;
+        --c-soot: #EDECDB;
+        --c-soot-dark: #E2979F;
+        --c-moss: #E6748E;
       }
 
       body {
@@ -62,25 +64,25 @@
       }
 
       .dark .glass-card {
-        background: rgba(36, 44, 45, 0.85);
+        background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(16px);
         border: 1px solid rgba(152, 170, 157, 0.18);
         box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
       }
 
       .light .glass-card {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.6);
         backdrop-filter: blur(16px);
         border: 1px solid rgba(105, 124, 112, 0.15);
       }
 
       .dark .glass-card-subtle {
-        background: rgba(28, 35, 36, 0.6);
+        background: rgba(255, 255, 255, 0.4);
         border: 1px solid rgba(179, 201, 214, 0.12);
       }
 
       .light .glass-card-subtle {
-        background: rgba(242, 239, 226, 0.6);
+        background: rgba(255, 255, 255, 0.4);
         border: 1px solid rgba(105, 124, 112, 0.12);
       }
 
@@ -88,44 +90,44 @@
         width: 6px;
       }
       ::-webkit-scrollbar-thumb {
-        background: var(--c-eucalyptus);
+        background: var(--c-veranda);
         border-radius: 999px;
       }
     </style>
   </head>
-  <body class="bg-soot-dark dark:bg-soot-dark text-soot dark:text-plaster min-h-screen pb-20 selection:bg-moss selection:text-plaster">
+  <body class="bg-lychee text-gray-900 font-medium text-gray-900 font-semibold min-h-screen pb-20 selection:bg-gradient-to-r from-cupid to-melon selection:text-gray-900 font-semibold">
     
     <!-- Background Glows -->
-    <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-moss/10 rounded-full blur-[140px] pointer-events-none"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] bg-mist/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-gradient-to-r from-cupid to-melon/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] bg-cloud/10 rounded-full blur-[140px] pointer-events-none"></div>
 
     <header class="max-w-7xl mx-auto pt-8 px-4 sm:px-6 mb-8">
-      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 pb-6 border-b border-eucalyptus/15">
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 pb-6 shadow-[0_2px_10px_rgba(229,169,169,0.1)]">
         <div>
           <div class="flex items-center gap-3">
             <span class="text-3xl">📆</span>
             <div>
-              <h1 class="text-3xl font-black font-display tracking-tight text-plaster uppercase">
-                33-Day Summer Scheduler
+              <h1 class="text-3xl font-black font-display tracking-tight text-gray-900 font-semibold uppercase">
+                360-Day New Year Scheduler
               </h1>
-              <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
-                Mon Aug 10 (ነሐሴ 4) → Fri Sep 11 (መስከረም 1 🌼 Enkutatash) • 33 Powerhouse Focus Days
+              <p class="text-xs sm:text-sm text-veranda font-medium mt-1">
+                Sep 16, 2026 → Sep 10, 2027 (Meskerem 6 - Pagume 5) • 360 Powerhouse Focus Days
               </p>
             </div>
           </div>
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
-          <a href="index.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-plaster hover:border-eucalyptus transition">
+          <a href="index.html" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-gray-900 font-semibold hover:border-veranda transition">
             🏠 Dashboard
           </a>
-          <a href="design.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-violet-300 hover:border-violet-400 transition">
+          <a href="design.html" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-violet-300 hover:border-violet-400 transition">
             🎨 Design Studio
           </a>
-          <a href="korean-plan.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist hover:border-mist transition">
+          <a href="korean-plan.html" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-gray-900 font-medium hover:border-cloud transition">
             🇰🇷 Korean Plan (Weekend)
           </a>
-          <a href="books.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
+          <a href="books.html" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-veranda hover:border-veranda transition">
             📚 Books Sanctuary
           </a>
         </div>
@@ -134,30 +136,30 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 grid gap-8 lg:grid-cols-12">
       
-      <!-- LEFT PANEL: 33 Days Grid & Progress Stats (5 Cols) -->
+      <!-- LEFT PANEL: 360 Days Grid & Progress Stats (5 Cols) -->
       <section class="lg:col-span-5 space-y-6">
         
         <!-- Progress Summary Rings -->
         <div class="glass-card rounded-3xl p-6 grid grid-cols-3 gap-3 text-center">
           <div>
-            <div class="text-[10px] uppercase font-bold text-eucalyptus mb-2">Summer (33D)</div>
+            <div class="text-[10px] uppercase font-bold text-veranda mb-2">Autumn (365D)</div>
             <div class="relative w-16 h-16 mx-auto">
               <svg class="w-full h-full transform -rotate-90">
                 <circle cx="32" cy="32" r="26" stroke="rgba(152,170,157,0.15)" stroke-width="5" fill="transparent" />
-                <circle id="sprintCircle" cx="32" cy="32" r="26" stroke="#98AA9D" stroke-width="5" fill="transparent" stroke-dasharray="163" stroke-dashoffset="163" class="transition-all duration-500" />
+                <circle id="sprintCircle" cx="32" cy="32" r="26" stroke="#6BB1AD" stroke-width="5" fill="transparent" stroke-dasharray="163" stroke-dashoffset="163" class="transition-all duration-500" />
               </svg>
-              <span id="sprintPercent" class="absolute inset-0 flex items-center justify-center text-xs font-black font-display text-plaster">0%</span>
+              <span id="sprintPercent" class="absolute inset-0 flex items-center justify-center text-xs font-black font-display text-gray-900 font-semibold">0%</span>
             </div>
           </div>
 
           <div>
-            <div class="text-[10px] uppercase font-bold text-mist mb-2">Active Week</div>
+            <div class="text-[10px] uppercase font-bold text-gray-900 font-medium mb-2">Active Week</div>
             <div class="relative w-16 h-16 mx-auto">
               <svg class="w-full h-full transform -rotate-90">
                 <circle cx="32" cy="32" r="26" stroke="rgba(179,201,214,0.15)" stroke-width="5" fill="transparent" />
-                <circle id="weekCircle" cx="32" cy="32" r="26" stroke="#B3C9D6" stroke-width="5" fill="transparent" stroke-dasharray="163" stroke-dashoffset="163" class="transition-all duration-500" />
+                <circle id="weekCircle" cx="32" cy="32" r="26" stroke="#A7BCBD" stroke-width="5" fill="transparent" stroke-dasharray="163" stroke-dashoffset="163" class="transition-all duration-500" />
               </svg>
-              <span id="weekPercent" class="absolute inset-0 flex items-center justify-center text-xs font-black font-display text-mist">0%</span>
+              <span id="weekPercent" class="absolute inset-0 flex items-center justify-center text-xs font-black font-display text-gray-900 font-medium">0%</span>
             </div>
           </div>
 
@@ -173,20 +175,20 @@
           </div>
         </div>
 
-        <!-- 33 Days Grid Button Selector -->
+        <!-- 360 Days Grid Button Selector -->
         <div class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <span class="text-xs uppercase tracking-widest text-eucalyptus font-bold block">Select Day</span>
-              <h2 id="currentWeekLabel" class="text-base font-bold font-display text-plaster">Week 1 (Days 1–7)</h2>
+              <span class="text-xs uppercase tracking-widest text-veranda font-bold block">Select Day</span>
+              <h2 id="currentWeekLabel" class="text-base font-bold font-display text-gray-900 font-semibold">Week 1 (Days 1–7)</h2>
             </div>
-            <button onclick="resetSelectedDay()" class="px-3 py-1.5 glass-card-subtle text-[11px] font-bold font-display uppercase text-mist hover:text-plaster rounded-xl transition">
+            <button onclick="resetSelectedDay()" class="px-3 py-1.5 glass-card-subtle text-[11px] font-bold font-display uppercase text-gray-900 font-medium hover:text-gray-900 font-semibold rounded-3xl transition">
               Clear Day
             </button>
           </div>
 
           <div id="daysButtonsGrid" class="grid grid-cols-4 sm:grid-cols-5 gap-2">
-            <!-- Dynamically generated 33 buttons with dual calendar tags -->
+            <!-- Dynamically generated 360 buttons with dual calendar tags -->
           </div>
         </div>
       </section>
@@ -195,21 +197,21 @@
       <section class="lg:col-span-7 space-y-6">
         
         <div class="glass-card rounded-3xl p-6">
-          <div class="flex items-center justify-between mb-6 pb-4 border-b border-eucalyptus/15">
+          <div class="flex items-center justify-between mb-6 pb-4 shadow-[0_2px_10px_rgba(229,169,169,0.1)]">
             <div>
               <div class="flex items-center gap-2">
-                <span id="selectedWeekTag" class="text-xs uppercase tracking-widest text-eucalyptus font-bold">Week 1</span>
-                <span id="selectedEthDateBadge" class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-moss/20 text-moss-light border border-moss/30">
-                  ነሐሴ 4, 2018
+                <span id="selectedWeekTag" class="text-xs uppercase tracking-widest text-veranda font-bold">Week 1</span>
+                <span id="selectedEthDateBadge" class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-gradient-to-r from-cupid to-melon/20 text-moss-light border border-moss/30">
+                  መስከረም 6, 2019
                 </span>
-                <span id="selectedDayTypeBadge" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-soot/80 text-mist border border-eucalyptus/20">
+                <span id="selectedDayTypeBadge" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 text-gray-900 font-medium border border-veranda/20">
                   Weekday
                 </span>
               </div>
-              <h2 id="selectedDayTitle" class="text-3xl font-black font-display text-plaster mt-1">Day 1 • Mon Aug 10</h2>
+              <h2 id="selectedDayTitle" class="text-3xl font-black font-display text-gray-900 font-semibold mt-1">Day 1 • Wed Sep 16</h2>
             </div>
             <div class="text-right">
-              <span id="selectedDayStatusText" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-moss/20 text-moss-light border border-moss/30">
+              <span id="selectedDayStatusText" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-gradient-to-r from-cupid to-melon/20 text-moss-light border border-moss/30">
                 0 / 12 Items Done
               </span>
             </div>
@@ -217,37 +219,37 @@
 
           <!-- Section 1: Daily Non-Negotiables -->
           <div class="space-y-6">
-            <div class="glass-card-subtle rounded-2xl p-5">
+            <div class="glass-card-subtle rounded-3xl p-5">
               <div class="flex items-center justify-between mb-3">
-                <h3 class="text-sm font-bold font-display text-plaster flex items-center gap-2">
+                <h3 class="text-sm font-bold font-display text-gray-900 font-semibold flex items-center gap-2">
                   <span>⚡</span> Day Non-Negotiables
                 </h3>
-                <span id="negotiablesCountBadge" class="text-[11px] text-eucalyptus font-medium">7 items</span>
+                <span id="negotiablesCountBadge" class="text-[11px] text-veranda font-medium">7 items</span>
               </div>
               <div id="dayNegotiablesList" class="space-y-2.5"></div>
             </div>
 
             <!-- Section 2: Daily Schedule Blocks (Morning Hard Things First) -->
-            <div class="glass-card-subtle rounded-2xl p-5">
+            <div class="glass-card-subtle rounded-3xl p-5">
               <div class="flex items-center justify-between mb-3">
-                <h3 class="text-sm font-bold font-display text-plaster flex items-center gap-2">
+                <h3 class="text-sm font-bold font-display text-gray-900 font-semibold flex items-center gap-2">
                   <span>⏱️</span> Daily Schedule Blocks (Morning Hard Focus)
                 </h3>
-                <span id="scheduleCountBadge" class="text-[11px] text-eucalyptus font-medium">6 blocks</span>
+                <span id="scheduleCountBadge" class="text-[11px] text-veranda font-medium">6 blocks</span>
               </div>
               <div id="dayScheduleList" class="space-y-2.5"></div>
             </div>
 
             <!-- Section 3: Extra Day To-Dos -->
-            <div class="glass-card-subtle rounded-2xl p-5">
+            <div class="glass-card-subtle rounded-3xl p-5">
               <div class="flex items-center justify-between mb-3">
-                <h3 class="text-sm font-bold font-display text-plaster flex items-center gap-2">
+                <h3 class="text-sm font-bold font-display text-gray-900 font-semibold flex items-center gap-2">
                   <span>📝</span> Specific Tasks for Day <span id="dayTodoNum">1</span>
                 </h3>
               </div>
               <div class="flex gap-2 mb-3">
-                <input type="text" id="addTodoInput" placeholder="Add specific task for this day..." class="flex-1 bg-soot/80 border border-eucalyptus/20 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss" />
-                <button onclick="addDayTodoItem()" class="px-4 py-2 bg-moss text-plaster text-xs font-bold font-display rounded-xl hover:bg-moss-light transition">
+                <input type="text" id="addTodoInput" placeholder="Add specific task for this day..." class="flex-1 bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 border border-veranda/20 rounded-3xl px-3 py-2 text-xs text-gray-900 font-semibold focus:outline-none focus:border-moss" />
+                <button onclick="addDayTodoItem()" class="px-4 py-2 bg-gradient-to-r from-cupid to-melon text-gray-900 font-semibold text-xs font-bold font-display rounded-3xl hover:bg-gradient-to-r from-cupid to-melon-light transition">
                   Add
                 </button>
               </div>
@@ -260,7 +262,7 @@
     </main>
 
     <script>
-      const TOTAL_DAYS = 33; // Aug 10 to Ethiopian Sep 1 (Meskerem 1 / Sep 11)
+      const TOTAL_DAYS = 360; // Sep 16 to Sep 10
       let selectedDay = 1;
 
       function getWeekNumber(day) {
@@ -282,11 +284,11 @@
         let scheduleBlocks = [];
         let nonNegotiables = [];
 
-        if (day === 33) {
+        if (day === 360) {
           // Grand Finale Day 33 (Enkutatash / Meskerem 1)
           scheduleBlocks = [
             { label: "🌅 Morning: Enkutatash Ethiopian New Year Celebration with Family 🌼", done: false },
-            { label: "🏆 10:00 AM: Review 33-Day Summer Productive Sprint Milestones & XP Rank", done: false },
+            { label: "🏆 10:00 AM: Review 360-Day New Year Productive Sprint Milestones & XP Rank", done: false },
             { label: "🎙️ 2:00 PM: Final 5-Minute Korean Conversation Victory Monologue Recording", done: false },
             { label: "📖 4:00 PM: 330+ Pages Reading Summary & Key Growth Insights Consolidation", done: false },
             { label: "🔐 Evening: Unlock Day 33 Secret Vault & Set New Academic Year Goals! 🌟", done: false }
@@ -389,10 +391,10 @@
           else if (isPagume) badgeIcon = '🌟';
 
           html += `
-            <button id="dayBtn-${day}" onclick="selectDay(${day})" class="h-14 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-center justify-center p-1 relative ${isFinale ? 'border-yellow-400/60' : ''}">
+            <button id="dayBtn-${day}" onclick="selectDay(${day})" class="h-14 rounded-3xl glass-card-subtle font-bold font-display text-xs text-gray-900 font-semibold hover:border-moss transition flex flex-col items-center justify-center p-1 relative ${isFinale ? 'border-yellow-400/60' : ''}">
               <span class="leading-tight flex items-center gap-0.5">D${day} ${badgeIcon}</span>
-              <span class="text-[9px] opacity-75 font-normal text-mist">${info.gDate}</span>
-              <span class="text-[8px] text-eucalyptus font-mono">${info.ethEn || ''}</span>
+              <span class="text-[9px] opacity-75 font-normal text-gray-900 font-medium">${info.gDate}</span>
+              <span class="text-[8px] text-veranda font-mono">${info.ethEn || ''}</span>
             </button>
           `;
         }
@@ -402,44 +404,41 @@
       function selectDay(day) {
         selectedDay = day;
         const weekNum = getWeekNumber(day);
-        const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { gDate: 'Aug 10', ethMonth: 'ነሐሴ', ethDay: 4, ethYear: 2018 };
+        const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { gDate: 'Sep 16', ethMonth: 'መስከረም', ethDay: 6, ethYear: 2019 };
 
         document.querySelectorAll('#daysButtonsGrid button').forEach(b => {
-          b.className = "h-14 rounded-2xl glass-card-subtle font-bold font-display text-xs text-plaster hover:border-moss transition flex flex-col items-center justify-center p-1 relative";
+          b.className = "h-14 rounded-3xl glass-card-subtle font-bold font-display text-xs text-gray-900 font-semibold hover:border-moss transition flex flex-col items-center justify-center p-1 relative";
         });
 
         const activeBtn = document.getElementById(`dayBtn-${day}`);
         if (activeBtn) {
-          activeBtn.className = "h-14 rounded-2xl bg-moss text-plaster font-bold font-display text-xs shadow-md border border-moss-light flex flex-col items-center justify-center p-1 relative";
+          activeBtn.className = "h-14 rounded-3xl bg-gradient-to-r from-cupid to-melon text-gray-900 font-semibold font-bold font-display text-xs shadow-md border border-moss-light flex flex-col items-center justify-center p-1 relative";
         }
 
-        const weekLabelMap = {
-          1: "Week 1: Foundations (Days 1–7 • Aug 10–16)",
-          2: "Week 2: Deep Focus (Days 8–14 • Aug 17–23)",
-          3: "Week 3: High Velocity (Days 15–21 • Aug 24–30)",
-          4: "Week 4: August Push (Days 22–28 • Aug 31–Sep 6)",
-          5: "Week 5: Pagume & Enkutatash (Days 29–33 • Sep 7–11 🌼)"
-        };
+        const weekLabelMap = {}; // dynamic fallback
+        const startDay = (weekNum - 1) * 7 + 1;
+        const endDay = Math.min(TOTAL_DAYS, weekNum * 7);
+        const defaultWeekLabel = "Week " + weekNum + ": Growth & Consistency (Days " + startDay + "–" + endDay + ")";
 
         const isWeekend = isSprintDayWeekend(day);
         const dayTypeBadge = document.getElementById('selectedDayTypeBadge');
         if (dayTypeBadge) {
-          if (day === 33) {
+          if (day === 360) {
             dayTypeBadge.innerText = "Enkutatash Finale 🌼";
             dayTypeBadge.className = "text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-yellow-400/20 text-yellow-300 border border-yellow-400/40";
           } else if (isWeekend) {
             dayTypeBadge.innerText = "Weekend Sprint (Korean Active 🇰🇷)";
-            dayTypeBadge.className = "text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+            dayTypeBadge.className = "text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-veranda/20 text-veranda border border-veranda/30";
           } else {
             dayTypeBadge.innerText = "Weekday Tech Grind (Morning Frog 🐸)";
-            dayTypeBadge.className = "text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-soot/80 text-mist border border-eucalyptus/20";
+            dayTypeBadge.className = "text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 text-gray-900 font-medium border border-veranda/20";
           }
         }
 
-        document.getElementById('currentWeekLabel').innerText = weekLabelMap[weekNum] || `Week ${weekNum}`;
+        document.getElementById('currentWeekLabel').innerText = weekLabelMap[weekNum] || defaultWeekLabel;
         document.getElementById('selectedWeekTag').innerText = `Week ${weekNum}`;
         document.getElementById('selectedEthDateBadge').innerText = `${info.ethMonth} ${info.ethDay}, ${info.ethYear} ዓ.ም.`;
-        document.getElementById('selectedDayTitle').innerText = `Day ${day} • ${info.dayName || 'Day'} ${info.gDate} ${day === 33 ? '🌼 (እንቁጣጣሽ)' : ''}`;
+        document.getElementById('selectedDayTitle').innerText = `Day ${day} • ${info.dayName || 'Day'} ${info.gDate} ${day === 360 ? '🌼 (እንቁጣጣሽ)' : ''}`;
         document.getElementById('dayTodoNum').innerText = day;
 
         renderDayDetails();
@@ -454,30 +453,30 @@
         const todoList = document.getElementById('dayTodosList');
 
         negList.innerHTML = data.negotiables.map((item, idx) => `
-          <label class="flex items-center justify-between p-2.5 rounded-xl glass-card-subtle cursor-pointer hover:border-eucalyptus/30 transition">
-            <div class="flex items-center gap-3 text-xs text-plaster">
-              <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleFlag('negotiables', ${idx})" class="w-4 h-4 rounded border-eucalyptus bg-soot text-moss focus:ring-0" />
+          <label class="flex items-center justify-between p-2.5 rounded-3xl glass-card-subtle cursor-pointer hover:border-veranda/30 transition">
+            <div class="flex items-center gap-3 text-xs text-gray-900 font-semibold">
+              <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleFlag('negotiables', ${idx})" class="w-4 h-4 rounded border-veranda bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md text-moss focus:ring-0" />
               <span class="${item.done ? 'line-through opacity-60' : ''}">${item.label}</span>
             </div>
           </label>
         `).join('');
 
         schList.innerHTML = data.schedule.map((item, idx) => `
-          <label class="flex items-center justify-between p-2.5 rounded-xl glass-card-subtle cursor-pointer hover:border-eucalyptus/30 transition">
-            <div class="flex items-center gap-3 text-xs text-plaster">
-              <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleFlag('schedule', ${idx})" class="w-4 h-4 rounded border-eucalyptus bg-soot text-moss focus:ring-0" />
+          <label class="flex items-center justify-between p-2.5 rounded-3xl glass-card-subtle cursor-pointer hover:border-veranda/30 transition">
+            <div class="flex items-center gap-3 text-xs text-gray-900 font-semibold">
+              <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleFlag('schedule', ${idx})" class="w-4 h-4 rounded border-veranda bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md text-moss focus:ring-0" />
               <span class="${item.done ? 'line-through opacity-60' : ''}">${item.label}</span>
             </div>
           </label>
         `).join('');
 
         if (data.todos.length === 0) {
-          todoList.innerHTML = `<span class="text-xs text-mist/60 italic">No custom tasks for Day ${selectedDay}.</span>`;
+          todoList.innerHTML = `<span class="text-xs text-gray-900 font-medium/60 italic">No custom tasks for Day ${selectedDay}.</span>`;
         } else {
           todoList.innerHTML = data.todos.map((item, idx) => `
-            <div class="flex items-center justify-between p-2 rounded-xl glass-card-subtle text-xs">
-              <label class="flex items-center gap-2 text-plaster flex-1 cursor-pointer">
-                <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleFlag('todos', ${idx})" class="w-4 h-4 rounded border-eucalyptus bg-soot text-moss" />
+            <div class="flex items-center justify-between p-2 rounded-3xl glass-card-subtle text-xs">
+              <label class="flex items-center gap-2 text-gray-900 font-semibold flex-1 cursor-pointer">
+                <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleFlag('todos', ${idx})" class="w-4 h-4 rounded border-veranda bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md text-moss" />
                 <span class="${item.done ? 'line-through opacity-60' : ''}">${item.label}</span>
               </label>
               <button onclick="removeTodo(${idx})" class="text-[10px] text-red-400 hover:text-red-300">Remove</button>
@@ -532,7 +531,7 @@
         // Active Week Progress
         const weekNum = getWeekNumber(selectedDay);
         const wStart = (weekNum - 1) * 7 + 1;
-        const wEnd = Math.min(TOTAL_DAYS, weekNum === 5 ? 33 : weekNum * 7);
+        const wEnd = Math.min(TOTAL_DAYS, weekNum * 7);
         let wTotal = 0, wDone = 0;
 
         for (let day = wStart; day <= wEnd; day++) {

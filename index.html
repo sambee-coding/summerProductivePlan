@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sambee's Summer Growth Sprint 🚀 (Aug 10 – Ethiopian Sep 1 / Meskerem 1)</title>
+    <title>Sambee's New Year Growth Sprint 🚀 </title>
     <!-- Modern Typography: Outfit for headers, Inter for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,9 +20,11 @@
         theme: {
           extend: {
             colors: {
-              eucalyptus: '#98AA9D',
-              mist: '#B3C9D6',
-              plaster: '#F2EFE2',
+              veranda: '#6BB1AD',
+              cloud: '#A7BCBD',
+              lychee: '#EDECDB',
+              melon: '#E5A9A9',
+              cupid: '#E6748E',
               soot: {
                 DEFAULT: '#2D3536',
                 dark: '#1C2324',
@@ -45,12 +47,12 @@
     </script>
     <style>
       :root {
-        --c-eucalyptus: #98AA9D;
-        --c-mist: #B3C9D6;
-        --c-plaster: #F2EFE2;
-        --c-soot: #2D3536;
-        --c-soot-dark: #1C2324;
-        --c-moss: #697C70;
+        --c-veranda: #6BB1AD;
+        --c-cloud: #A7BCBD;
+        --c-lychee: #EDECDB;
+        --c-soot: #EDECDB;
+        --c-soot-dark: #E2979F;
+        --c-moss: #E6748E;
       }
 
       body {
@@ -64,26 +66,26 @@
 
       /* Custom Glassmorphism styling adhering to palette */
       .dark .glass-card {
-        background: rgba(36, 44, 45, 0.85);
+        background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(16px);
         border: 1px solid rgba(152, 170, 157, 0.18);
         box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
       }
 
       .light .glass-card {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.6);
         backdrop-filter: blur(16px);
         border: 1px solid rgba(105, 124, 112, 0.15);
         box-shadow: 0 10px 30px -10px rgba(45, 53, 54, 0.08);
       }
 
       .dark .glass-card-subtle {
-        background: rgba(28, 35, 36, 0.6);
+        background: rgba(255, 255, 255, 0.4);
         border: 1px solid rgba(179, 201, 214, 0.12);
       }
 
       .light .glass-card-subtle {
-        background: rgba(242, 239, 226, 0.6);
+        background: rgba(255, 255, 255, 0.4);
         border: 1px solid rgba(105, 124, 112, 0.12);
       }
 
@@ -103,7 +105,7 @@
         width: 1.25rem;
         height: 1.25rem;
         border-radius: 0.375rem;
-        border: 2px solid var(--c-eucalyptus);
+        border: 2px solid var(--c-veranda);
         background-color: transparent;
         cursor: pointer;
         display: grid;
@@ -117,7 +119,7 @@
         height: 0.65rem;
         transform: scale(0);
         transition: 120ms transform ease-in-out;
-        box-shadow: inset 1em 1em var(--c-plaster);
+        box-shadow: inset 1em 1em var(--c-lychee);
         transform-origin: center;
         clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
       }
@@ -133,7 +135,7 @@
 
       .track-checkbox:hover {
         transform: scale(1.1);
-        border-color: var(--c-mist);
+        border-color: var(--c-cloud);
       }
 
       /* Smooth Heatmap Cell Hover */
@@ -154,7 +156,7 @@
         background: rgba(0, 0, 0, 0.05);
       }
       ::-webkit-scrollbar-thumb {
-        background: var(--c-eucalyptus);
+        background: var(--c-veranda);
         border-radius: 999px;
       }
 
@@ -170,22 +172,22 @@
       }
     </style>
   </head>
-  <body class="bg-soot-dark dark:bg-soot-dark text-soot dark:text-plaster min-h-screen pb-20 selection:bg-moss selection:text-plaster transition-colors duration-300">
+  <body class="bg-lychee text-gray-900 font-medium text-gray-900 font-semibold min-h-screen pb-20 selection:bg-gradient-to-r from-cupid to-melon selection:text-gray-900 font-semibold transition-colors duration-300">
     <canvas id="confettiCanvas"></canvas>
 
     <!-- Background Atmospheric Glows -->
-    <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-moss/10 rounded-full blur-[140px] pointer-events-none"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] bg-mist/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-gradient-to-r from-cupid to-melon/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] bg-cloud/10 rounded-full blur-[140px] pointer-events-none"></div>
 
     <!-- Level Up Celebration Modal -->
-    <div id="levelUpModal" class="fixed inset-0 bg-soot-dark/85 backdrop-blur-md z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4">
+    <div id="levelUpModal" class="fixed inset-0 bg-lychee/85 backdrop-blur-md z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4">
       <div class="glass-card max-w-md w-full rounded-3xl p-8 text-center border-2 border-yellow-400/60 shadow-[0_0_50px_rgba(229,193,88,0.25)] transform scale-95 transition-transform duration-300 relative overflow-hidden">
         <div class="absolute -top-12 -right-12 w-36 h-36 bg-yellow-400/20 rounded-full blur-3xl"></div>
         <div class="text-6xl mb-2 animate-bounce">🏆</div>
         <span class="text-xs uppercase tracking-widest font-black text-yellow-400">Level Up Achieved!</span>
-        <h2 id="levelUpTitle" class="text-3xl font-black font-display text-plaster mt-1 mb-2">Level 2 Unlocked!</h2>
-        <p id="levelUpRankText" class="text-sm font-bold text-mist mb-4">You are now a <span class="text-yellow-300">Syntax Explorer</span></p>
-        <div class="glass-card-subtle rounded-2xl p-4 text-xs text-plaster/90 space-y-2 mb-6 border border-yellow-400/20 text-left">
+        <h2 id="levelUpTitle" class="text-3xl font-black font-display text-gray-900 font-semibold mt-1 mb-2">Level 2 Unlocked!</h2>
+        <p id="levelUpRankText" class="text-sm font-bold text-gray-900 font-medium mb-4">You are now a <span class="text-yellow-300">Syntax Explorer</span></p>
+        <div class="glass-card-subtle rounded-3xl p-4 text-xs text-gray-900 font-semibold/90 space-y-2 mb-6 shadow-[0_4px_15px_rgba(107,177,173,0.15)] text-left">
           <div class="flex items-center gap-2">
             <span>✨</span> <span><strong>Perk Unlocked:</strong> +5% Focus Momentum Boost</span>
           </div>
@@ -193,26 +195,26 @@
             <span>🛡️</span> <span><strong>Streak Shield:</strong> Active Protection Equipped</span>
           </div>
         </div>
-        <button onclick="closeLevelUpModal()" class="w-full py-3.5 bg-gradient-to-r from-moss to-moss-light text-plaster font-black font-display rounded-2xl shadow-lg transition transform active:scale-95">
+        <button onclick="closeLevelUpModal()" class="w-full py-3.5 bg-gradient-to-r from-moss to-moss-light text-gray-900 font-semibold font-black font-display rounded-3xl shadow-lg transition transform active:scale-95">
           Claim Rewards & Keep Grinding 🚀
         </button>
       </div>
     </div>
 
     <!-- Celebration Modal (Full Screen Ritual) -->
-    <div id="celebrationModal" class="fixed inset-0 bg-soot-dark/80 backdrop-blur-md z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4">
+    <div id="celebrationModal" class="fixed inset-0 bg-lychee/80 backdrop-blur-md z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4">
       <div class="glass-card max-w-md w-full rounded-3xl p-8 text-center border-2 border-moss/40 shadow-2xl transform scale-95 transition-transform duration-300 relative overflow-hidden">
-        <div class="absolute -top-12 -right-12 w-32 h-32 bg-moss/20 rounded-full blur-2xl"></div>
+        <div class="absolute -top-12 -right-12 w-32 h-32 bg-gradient-to-r from-cupid to-melon/20 rounded-full blur-2xl"></div>
         <div class="text-6xl mb-3 animate-bounce">🔥</div>
-        <span class="text-xs uppercase tracking-widest font-bold text-eucalyptus">Sprint Ritual Achieved</span>
-        <h2 class="text-3xl font-black font-display text-plaster mt-1 mb-2">Day Complete! 🎉</h2>
-        <p id="celebrationSubtext" class="text-sm text-mist mb-6">You dominated all core grind tracks today. Consistency is your superpower, Sambee!</p>
+        <span class="text-xs uppercase tracking-widest font-bold text-veranda">Sprint Ritual Achieved</span>
+        <h2 class="text-3xl font-black font-display text-gray-900 font-semibold mt-1 mb-2">Day Complete! 🎉</h2>
+        <p id="celebrationSubtext" class="text-sm text-gray-900 font-medium mb-6">You dominated all core grind tracks today. Consistency is your superpower, Sambee!</p>
         
-        <div id="celebrationTracksSummary" class="glass-card-subtle rounded-2xl p-4 text-left space-y-2 mb-6 text-xs text-plaster font-medium">
+        <div id="celebrationTracksSummary" class="glass-card-subtle rounded-3xl p-4 text-left space-y-2 mb-6 text-xs text-gray-900 font-semibold font-medium">
           <!-- Dynamically populated completed tracks summary -->
         </div>
 
-        <button onclick="closeCelebrationModal()" class="w-full py-3.5 bg-moss hover:bg-moss-light text-plaster font-bold font-display rounded-2xl shadow-lg transition transform active:scale-95">
+        <button onclick="closeCelebrationModal()" class="w-full py-3.5 bg-gradient-to-r from-cupid to-melon hover:bg-gradient-to-r from-cupid to-melon-light text-gray-900 font-semibold font-bold font-display rounded-3xl shadow-lg transition transform active:scale-95">
           Keep Building Momentum 🌊
         </button>
       </div>
@@ -220,29 +222,29 @@
 
     <!-- Header / Hero Section -->
     <header class="max-w-7xl mx-auto pt-8 px-4 sm:px-6 mb-8">
-      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 pb-6 border-b border-eucalyptus/15">
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 pb-6 shadow-[0_2px_10px_rgba(229,169,169,0.1)]">
         <div>
           <div class="flex items-center gap-3">
             <span class="text-3xl">🐝</span>
             <div>
               <div class="flex items-center gap-2">
-                <h1 class="text-2xl sm:text-4xl font-black font-display tracking-tight text-plaster uppercase">
-                  Sambee's <span class="text-mist">Summer</span> Growth Sprint
+                <h1 class="text-2xl sm:text-4xl font-black font-display tracking-tight text-gray-900 font-semibold uppercase">
+                  Sambee's <span class="text-gray-900 font-medium">Autumn</span> Growth Sprint
                 </h1>
-                <button onclick="toggleTheme()" class="ml-2 p-2 rounded-xl glass-card-subtle text-xs hover:bg-soot-hover transition" title="Toggle Light/Dark Theme">
+                <button onclick="toggleTheme()" class="ml-2 p-2 rounded-3xl glass-card-subtle text-xs hover:bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md-hover transition" title="Toggle Light/Dark Theme">
                   <span id="themeToggleIcon">🌙</span>
                 </button>
               </div>
-              <p class="text-xs sm:text-sm text-eucalyptus font-medium mt-1">
+              <p class="text-xs sm:text-sm text-veranda font-medium mt-1">
                 Third-Year CS & Founder @ Sambee • Addis Ababa • Fintech/Backend Grind
               </p>
               <!-- Dual Calendar Badge -->
               <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
-                <span class="px-2.5 py-1 rounded-lg bg-moss/20 text-moss-light border border-moss/30 font-bold font-display">
-                  🗓️ Mon, Aug 10 → Fri, Sep 11, 2026 (33 Days)
+                <span class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-cupid to-melon/20 text-moss-light border border-moss/30 font-bold font-display">
+                  🗓️ Sep 16, 2026 → Sep 10, 2027 (Meskerem 6 - Pagume 5)
                 </span>
-                <span class="px-2.5 py-1 rounded-lg bg-soot/60 text-eucalyptus border border-eucalyptus/20 font-medium">
-                  🇪🇹 ነሐሴ 4, 2018 → መስከረም 1, 2019 ዓ.ም. (እንቁጣጣሽ 🌼)
+                <span class="px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-veranda border border-veranda/20 font-medium">
+                  🇪🇹 መስከረም 6, 2019 → መስከረም 5, 2020 ዓ.ም. (አዲስ አመት 🌼)
                 </span>
               </div>
             </div>
@@ -251,29 +253,29 @@
 
         <!-- Header Action Controls -->
         <div class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
-          <a href="days.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-plaster hover:border-eucalyptus transition">
-            📅 33 Days Grid
+          <a href="days.html" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-gray-900 font-semibold hover:border-veranda transition">
+            📅 360 Days Grid
           </a>
-          <a href="design.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-violet-300 hover:border-violet-400 transition">
+          <a href="design.html" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-violet-300 hover:border-violet-400 transition">
             🎨 Design Studio
           </a>
-          <a href="korean-plan.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist hover:border-mist transition">
+          <a href="korean-plan.html" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-gray-900 font-medium hover:border-cloud transition">
             🇰🇷 Korean Plan (Weekend)
           </a>
-          <a href="books.html" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-eucalyptus hover:border-eucalyptus transition">
+          <a href="books.html" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-veranda hover:border-veranda transition">
             📚 Books Sanctuary
           </a>
-          <button onclick="exportData()" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-moss-light hover:border-moss transition">
+          <button onclick="exportData()" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-moss-light hover:border-moss transition">
             📥 Export
           </button>
-          <label class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-mist cursor-pointer hover:border-mist transition">
+          <label class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-gray-900 font-medium cursor-pointer hover:border-cloud transition">
             📤 Import
             <input type="file" accept=".json" onchange="importData(event)" class="hidden" />
           </label>
-          <button onclick="resetTodayLogs()" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-red-400/80 hover:border-red-500 transition" title="Clear logs for today only">
+          <button onclick="resetTodayLogs()" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-red-400/80 hover:border-red-500 transition" title="Clear logs for today only">
             🗑️ Reset Today
           </button>
-          <button onclick="resetWholeSprint()" class="glass-card rounded-xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-red-500 hover:border-red-600 transition" title="Clear all logs and start fresh from Day 1 today">
+          <button onclick="resetWholeSprint()" class="glass-card rounded-3xl px-4 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-red-500 hover:border-red-600 transition" title="Clear all logs and start fresh from Day 1 today">
             🔥 Reset Sprint
           </button>
         </div>
@@ -281,19 +283,19 @@
 
       <!-- Hero Command Stats Bar -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
-        <!-- 33-Day Sprint Countdown Card -->
+        <!-- 360-Day Sprint Countdown Card -->
         <div class="glass-card rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden">
           <div class="relative w-16 h-16 flex items-center justify-center flex-shrink-0">
             <svg class="w-full h-full transform -rotate-90">
               <circle cx="32" cy="32" r="28" stroke="rgba(152,170,157,0.15)" stroke-width="6" fill="transparent" />
               <circle id="sprintProgressCircle" cx="32" cy="32" r="28" stroke="#697C70" stroke-width="6" fill="transparent" stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-700 ease-out" />
             </svg>
-            <span id="sprintDayDisplay" class="absolute text-xs font-black font-display text-plaster">D1</span>
+            <span id="sprintDayDisplay" class="absolute text-xs font-black font-display text-gray-900 font-semibold">D1</span>
           </div>
           <div>
-            <div class="text-[11px] uppercase tracking-widest text-eucalyptus font-bold">Summer Sprint</div>
-            <div id="sprintCountdownText" class="text-lg font-black font-display text-plaster mt-0.5">Day 1 of 33</div>
-            <div id="sprintDaysLeftText" class="text-xs text-mist font-medium">32 days to Ethiopian Sep 1</div>
+            <div class="text-[11px] uppercase tracking-widest text-veranda font-bold">New Year Sprint</div>
+            <div id="sprintCountdownText" class="text-lg font-black font-display text-gray-900 font-semibold mt-0.5">Day 1 of 360</div>
+            <div id="sprintDaysLeftText" class="text-xs text-gray-900 font-medium font-medium">359 days to end of year (ጳጉሜ 5)</div>
           </div>
         </div>
 
@@ -302,14 +304,14 @@
           <div class="relative w-16 h-16 flex items-center justify-center flex-shrink-0">
             <svg class="w-full h-full transform -rotate-90">
               <circle cx="32" cy="32" r="28" stroke="rgba(179,201,214,0.15)" stroke-width="6" fill="transparent" />
-              <circle id="dailyProgressCircle" cx="32" cy="32" r="28" stroke="#B3C9D6" stroke-width="6" fill="transparent" stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-700 ease-out" />
+              <circle id="dailyProgressCircle" cx="32" cy="32" r="28" stroke="#A7BCBD" stroke-width="6" fill="transparent" stroke-dasharray="175" stroke-dashoffset="175" class="transition-all duration-700 ease-out" />
             </svg>
-            <span id="dailyProgressText" class="absolute text-xs font-black font-display text-mist">0%</span>
+            <span id="dailyProgressText" class="absolute text-xs font-black font-display text-gray-900 font-medium">0%</span>
           </div>
           <div>
-            <div class="text-[11px] uppercase tracking-widest text-mist font-bold">Today's Grind</div>
-            <div id="dailyProgressStatus" class="text-sm font-bold font-display text-plaster mt-0.5">0 / 6 Tracks</div>
-            <div id="todayDateDetail" class="text-xs text-eucalyptus">Mon, Aug 10 (ነሐሴ 4) 🌊</div>
+            <div class="text-[11px] uppercase tracking-widest text-gray-900 font-medium font-bold">Today's Grind</div>
+            <div id="dailyProgressStatus" class="text-sm font-bold font-display text-gray-900 font-semibold mt-0.5">0 / 6 Tracks</div>
+            <div id="todayDateDetail" class="text-xs text-veranda">Wed, Sep 16 (መስከረም 6) 🌼</div>
           </div>
         </div>
 
@@ -317,65 +319,65 @@
         <div id="globalStreakCard" class="glass-card rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden">
           <div id="streakFlameIcon" class="text-3xl flex-shrink-0">🔥</div>
           <div>
-            <div class="text-[11px] uppercase tracking-widest text-eucalyptus font-bold">Global Streak</div>
+            <div class="text-[11px] uppercase tracking-widest text-veranda font-bold">Global Streak</div>
             <div class="flex items-baseline gap-2">
-              <span id="globalStreakCount" class="text-2xl font-black font-display text-plaster">0</span>
-              <span class="text-xs text-mist font-medium">consecutive days</span>
+              <span id="globalStreakCount" class="text-2xl font-black font-display text-gray-900 font-semibold">0</span>
+              <span class="text-xs text-gray-900 font-medium font-medium">consecutive days</span>
             </div>
-            <div id="streakStatusSubtitle" class="text-[11px] text-eucalyptus mt-0.5">Keep the fire burning!</div>
+            <div id="streakStatusSubtitle" class="text-[11px] text-veranda mt-0.5">Keep the fire burning!</div>
           </div>
         </div>
 
         <!-- Live Addis Ababa Time & Rotating Quote -->
         <div class="glass-card rounded-3xl p-5 flex flex-col justify-between">
           <div class="flex justify-between items-center mb-1">
-            <span id="liveClockDisplay" class="text-xs font-mono font-bold text-mist">Addis Ababa • --:--:--</span>
-            <button onclick="nextQuote()" class="text-[10px] uppercase font-bold text-eucalyptus hover:text-plaster transition" title="Next Motivational Quote">🔄 Quote</button>
+            <span id="liveClockDisplay" class="text-xs font-mono font-bold text-gray-900 font-medium">Addis Ababa • --:--:--</span>
+            <button onclick="nextQuote()" class="text-[10px] uppercase font-bold text-veranda hover:text-gray-900 font-semibold transition" title="Next Motivational Quote">🔄 Quote</button>
           </div>
-          <p id="dailyQuoteText" class="text-xs italic text-plaster/90 line-clamp-2">"Discipline is choosing between what you want now and what you want most."</p>
-          <span id="dailyQuoteAuthor" class="text-[10px] text-eucalyptus font-semibold text-right">— Abraham Lincoln</span>
+          <p id="dailyQuoteText" class="text-xs italic text-gray-900 font-semibold/90 line-clamp-2">"Discipline is choosing between what you want now and what you want most."</p>
+          <span id="dailyQuoteAuthor" class="text-[10px] text-veranda font-semibold text-right">— Abraham Lincoln</span>
         </div>
       </div>
 
       <!-- Player RPG Gamification Status Bar (Addictive XP & Leveling Engine) -->
-      <div class="glass-card rounded-3xl p-4 mt-4 border border-moss/30 shadow-lg bg-gradient-to-r from-soot-card via-soot to-soot-card">
+      <div class="glass-card rounded-3xl p-4 mt-4 border border-moss/30 shadow-lg bg-gradient-to-r from-white/60 via-lychee/80 to-white/40">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <!-- Level Badge & Rank -->
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-moss/30 border border-moss/50 flex items-center justify-center text-xl font-black font-display text-yellow-300 shadow-[0_0_12px_rgba(229,193,88,0.2)]">
+            <div class="w-12 h-12 rounded-3xl bg-gradient-to-r from-cupid to-melon/30 border border-moss/50 flex items-center justify-center text-xl font-black font-display text-yellow-300 shadow-[0_0_12px_rgba(229,193,88,0.2)]">
               <span id="playerLevelBadge">L1</span>
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <span id="playerRankTitle" class="text-sm font-black font-display text-plaster uppercase tracking-wide">Novice Engineer</span>
-                <span id="playerMultiplierBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-yellow-400/20 text-yellow-300 border border-yellow-400/30">1.0x XP</span>
+                <span id="playerRankTitle" class="text-sm font-black font-display text-gray-900 font-semibold uppercase tracking-wide">Novice Engineer</span>
+                <span id="playerMultiplierBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-yellow-400/20 text-yellow-300 shadow-[0_4px_15px_rgba(230,116,142,0.15)]">1.0x XP</span>
               </div>
-              <div class="text-[11px] text-mist flex items-center gap-2 mt-0.5">
+              <div class="text-[11px] text-gray-900 font-medium flex items-center gap-2 mt-0.5">
                 <span id="playerXpNumbers">0 / 500 XP</span>
                 <span>•</span>
-                <span id="playerShieldStatus" class="text-eucalyptus font-semibold">🛡️ Shield: 0/1</span>
+                <span id="playerShieldStatus" class="text-veranda font-semibold">🛡️ Shield: 0/1</span>
               </div>
             </div>
           </div>
 
           <!-- XP Progress Bar -->
           <div class="flex-1 w-full md:max-w-md">
-            <div class="flex justify-between items-center text-[10px] uppercase font-bold text-eucalyptus mb-1">
+            <div class="flex justify-between items-center text-[10px] uppercase font-bold text-veranda mb-1">
               <span>Sprint Level Progress</span>
               <span id="playerXpPercent">0%</span>
             </div>
-            <div class="w-full h-3 rounded-full bg-soot/80 border border-eucalyptus/20 p-0.5 overflow-hidden">
-              <div id="playerXpProgressBar" class="h-full rounded-full bg-gradient-to-r from-moss via-eucalyptus to-yellow-400 transition-all duration-500" style="width: 0%"></div>
+            <div class="w-full h-3 rounded-full bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 border border-veranda/20 p-0.5 overflow-hidden">
+              <div id="playerXpProgressBar" class="h-full rounded-full bg-gradient-to-r from-moss via-veranda to-yellow-400 transition-all duration-500" style="width: 0%"></div>
             </div>
           </div>
 
           <!-- Lifetime Stats -->
           <div class="flex items-center gap-3 text-right">
-            <div class="glass-card-subtle px-3 py-1.5 rounded-xl border border-eucalyptus/20">
-              <span class="text-[9px] uppercase font-bold text-eucalyptus block">Total Earned</span>
-              <span id="totalLifetimeXp" class="text-xs font-black font-display text-plaster">0 XP ✨</span>
+            <div class="glass-card-subtle px-3 py-1.5 rounded-3xl border border-veranda/20">
+              <span class="text-[9px] uppercase font-bold text-veranda block">Total Earned</span>
+              <span id="totalLifetimeXp" class="text-xs font-black font-display text-gray-900 font-semibold">0 XP ✨</span>
             </div>
-            <button onclick="showGamificationInfo()" class="p-2 rounded-xl glass-card-subtle text-xs text-mist hover:text-plaster transition" title="View Gamification Rules & Perks">
+            <button onclick="showGamificationInfo()" class="p-2 rounded-3xl glass-card-subtle text-xs text-gray-900 font-medium hover:text-gray-900 font-semibold transition" title="View Gamification Rules & Perks">
               ℹ️ Perks
             </button>
           </div>
@@ -390,77 +392,77 @@
       <div class="lg:col-span-7 space-y-6">
         
         <!-- 🌅 MORNING POWER BLOCK: TACKLE THE HARDEST THING FIRST ("EAT THE FROG") -->
-        <section id="morningFrogSection" class="glass-card rounded-3xl p-6 border-2 border-emerald-500/30 relative overflow-hidden bg-gradient-to-br from-soot-card via-soot-dark to-soot-card shadow-[0_10px_30px_rgba(16,185,129,0.08)]">
-          <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <section id="morningFrogSection" class="glass-card rounded-3xl p-6 border-2 border-veranda/30 relative overflow-hidden bg-gradient-to-br from-white/60 via-lychee/80 to-white/40 shadow-[0_10px_30px_rgba(16,185,129,0.08)]">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-veranda/10 rounded-full blur-3xl pointer-events-none"></div>
           
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-emerald-500/20">
             <div>
               <div class="flex items-center gap-2">
-                <span class="text-xs uppercase tracking-widest font-black text-emerald-400 flex items-center gap-1">
+                <span class="text-xs uppercase tracking-widest font-black text-veranda flex items-center gap-1">
                   <span>🌅</span> MORNING HIGH-COGNITIVE PEAK (7:00 AM – 9:30 AM)
                 </span>
               </div>
-              <h2 class="text-lg font-black font-display text-plaster mt-0.5 flex items-center gap-2">
+              <h2 class="text-lg font-black font-display text-gray-900 font-semibold mt-0.5 flex items-center gap-2">
                 <span>🐸</span> Tackle The Hardest Thing First
               </h2>
             </div>
-            <div id="frogStatusBadge" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-emerald-950/40 text-emerald-400 border border-emerald-500/30">
+            <div id="frogStatusBadge" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-veranda/20 text-veranda border border-veranda/30">
               Pending First Action (+100 XP)
             </div>
           </div>
 
-          <p class="text-xs text-mist/90 mb-3">
+          <p class="text-xs text-gray-900 font-medium/90 mb-3">
             Crush your highest-friction engineering challenge <strong>first thing in the morning</strong> before opening social media or easy tasks.
           </p>
 
           <!-- Quick Preset Chips -->
           <div class="mb-3">
-            <span class="text-[10px] uppercase font-bold text-eucalyptus block mb-1.5">Quick Presets:</span>
+            <span class="text-[10px] uppercase font-bold text-veranda block mb-1.5">Quick Presets:</span>
             <div class="flex flex-wrap gap-1.5">
-              <button onclick="setFrogPreset('🧠 Hard DSA Problem (LeetCode Graphs/DP/Trees)')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-plaster transition">🧠 Hard DSA (DP/Graphs)</button>
-              <button onclick="setFrogPreset('⚙️ Core Backend Architecture & DB Concurrency')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-plaster transition">⚙️ Backend Concurrency</button>
-              <button onclick="setFrogPreset('🏗️ System Design & Distributed Pipelines')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-plaster transition">🏗️ System Design</button>
-              <button onclick="setFrogPreset('⚡ Complex Refactoring & API Architecture')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-plaster transition">⚡ API Refactor</button>
+              <button onclick="setFrogPreset('🧠 Hard DSA Problem (LeetCode Graphs/DP/Trees)')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-gray-900 font-semibold transition">🧠 Hard DSA (DP/Graphs)</button>
+              <button onclick="setFrogPreset('⚙️ Core Backend Architecture & DB Concurrency')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-gray-900 font-semibold transition">⚙️ Backend Concurrency</button>
+              <button onclick="setFrogPreset('🏗️ System Design & Distributed Pipelines')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-gray-900 font-semibold transition">🏗️ System Design</button>
+              <button onclick="setFrogPreset('⚡ Complex Refactoring & API Architecture')" class="preset-chip text-[11px] px-2.5 py-1 rounded-lg glass-card-subtle hover:border-emerald-400/50 text-gray-900 font-semibold transition">⚡ API Refactor</button>
             </div>
           </div>
 
           <!-- Task Input Field -->
           <div class="mb-4">
-            <input type="text" id="morningFrogInput" placeholder="What is your #1 hardest cognitive task this morning?" class="w-full bg-soot/90 border border-emerald-500/30 rounded-2xl px-4 py-2.5 text-xs text-plaster focus:outline-none focus:border-emerald-400 transition placeholder-mist/40" />
+            <input type="text" id="morningFrogInput" placeholder="What is your #1 hardest cognitive task this morning?" class="w-full bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/90 border border-veranda/30 rounded-3xl px-4 py-2.5 text-xs text-gray-900 font-semibold focus:outline-none focus:border-emerald-400 transition placeholder-cloud/40" />
           </div>
 
           <!-- Action Controls -->
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <button id="btnCrushFrog" onclick="toggleMorningFrog()" class="flex-1 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-plaster font-black font-display text-xs rounded-2xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2">
+            <button id="btnCrushFrog" onclick="toggleMorningFrog()" class="flex-1 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-gray-900 font-semibold font-black font-display text-xs rounded-3xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2">
               <span>🐸</span> <span>CRUSH MORNING FROG (+100 XP)</span>
             </button>
-            <button onclick="startFrogPomoSession()" class="px-4 py-3 glass-card-subtle text-xs font-bold font-display text-mist hover:text-plaster rounded-2xl transition flex items-center justify-center gap-1.5" title="Launch 45m Pomodoro Focus session for this task">
+            <button onclick="startFrogPomoSession()" class="px-4 py-3 glass-card-subtle text-xs font-bold font-display text-gray-900 font-medium hover:text-gray-900 font-semibold rounded-3xl transition flex items-center justify-center gap-1.5" title="Launch 45m Pomodoro Focus session for this task">
               <span>⏱️</span> <span>Launch 45m Focus</span>
             </button>
           </div>
 
           <!-- Completed State Banner (Revealed on crush) -->
-          <div id="frogCompletedBanner" class="hidden mt-3 p-3 rounded-2xl bg-emerald-950/30 border border-emerald-500/40 flex items-center justify-between text-xs">
-            <div class="flex items-center gap-2 text-emerald-300 font-bold">
+          <div id="frogCompletedBanner" class="hidden mt-3 p-3 rounded-3xl bg-veranda/20 border border-veranda/30 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2 text-veranda font-bold">
               <span>🔥</span> <span id="frogCompletedText">Morning Frog Crushed at 08:30 AM! +100 XP Claimed!</span>
             </div>
-            <button onclick="resetMorningFrog()" class="text-[10px] text-mist/60 hover:text-mist">Edit Task</button>
+            <button onclick="resetMorningFrog()" class="text-[10px] text-gray-900 font-medium/60 hover:text-gray-900 font-medium">Edit Task</button>
           </div>
         </section>
 
         <!-- Daily 6 Tracks Non-Negotiables Section -->
         <section class="glass-card rounded-3xl p-6 relative">
-          <div class="flex items-center justify-between mb-4 pb-3 border-b border-eucalyptus/15">
+          <div class="flex items-center justify-between mb-4 pb-3 shadow-[0_2px_10px_rgba(229,169,169,0.1)]">
             <div>
               <div class="flex items-center gap-2">
-                <h2 class="text-xl font-bold font-display text-plaster flex items-center gap-2">
+                <h2 class="text-xl font-bold font-display text-gray-900 font-semibold flex items-center gap-2">
                   <span>⚡</span> Today's 6 Tracks & Non-Negotiables
                 </h2>
-                <span id="dayTypeBadge" class="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-moss/20 text-moss-light border border-moss/30">Weekday Mode</span>
+                <span id="dayTypeBadge" class="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-gradient-to-r from-cupid to-melon/20 text-moss-light border border-moss/30">Weekday Mode</span>
               </div>
-              <p class="text-xs text-mist mt-0.5">Complete all core tracks to trigger your daily completion ritual & bonus XP.</p>
+              <p class="text-xs text-gray-900 font-medium mt-0.5">Complete all core tracks to trigger your daily completion ritual & bonus XP.</p>
             </div>
-            <span id="completedTracksBadge" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-moss/20 text-moss-light border border-moss/30">
+            <span id="completedTracksBadge" class="text-xs font-bold font-display px-3 py-1 rounded-full bg-gradient-to-r from-cupid to-melon/20 text-moss-light border border-moss/30">
               0 / 6 Completed
             </span>
           </div>
@@ -468,109 +470,109 @@
           <!-- 6 Grind Tracks Checklist -->
           <div class="space-y-3" id="grindTracksContainer">
             <!-- Track 1: Design -->
-            <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
+            <div class="glass-card-subtle rounded-3xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
               <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
                 <input type="checkbox" id="track-design" onchange="toggleTrack('design')" class="track-checkbox" />
                 <div>
-                  <div class="text-sm font-bold text-plaster flex items-center gap-2">
+                  <div class="text-sm font-bold text-gray-900 font-semibold flex items-center gap-2">
                     <span>🎨</span> Design Skill-building
                   </div>
-                  <div class="text-xs text-mist/80">Figma, UI/UX fundamentals, visual design & branding</div>
+                  <div class="text-xs text-gray-900 font-medium/80">Figma, UI/UX fundamentals, visual design & branding</div>
                 </div>
               </label>
               <div class="text-right flex-shrink-0 ml-2">
-                <span id="streak-design" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-eucalyptus border border-eucalyptus/20">
+                <span id="streak-design" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-veranda border border-veranda/20">
                   🔥 0d
                 </span>
               </div>
             </div>
 
             <!-- Track 2: DSA -->
-            <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
+            <div class="glass-card-subtle rounded-3xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
               <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
                 <input type="checkbox" id="track-dsa" onchange="toggleTrack('dsa')" class="track-checkbox" />
                 <div>
-                  <div class="text-sm font-bold text-plaster flex items-center gap-2">
+                  <div class="text-sm font-bold text-gray-900 font-semibold flex items-center gap-2">
                     <span>🧠</span> DSA Practice
                   </div>
-                  <div class="text-xs text-mist/80">LeetCode-style problems in JavaScript</div>
+                  <div class="text-xs text-gray-900 font-medium/80">LeetCode-style problems in JavaScript</div>
                 </div>
               </label>
               <div class="text-right flex-shrink-0 ml-2">
-                <span id="streak-dsa" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-eucalyptus border border-eucalyptus/20">
+                <span id="streak-dsa" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-veranda border border-veranda/20">
                   🔥 0d
                 </span>
               </div>
             </div>
 
             <!-- Track 3: Backend -->
-            <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
+            <div class="glass-card-subtle rounded-3xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
               <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
                 <input type="checkbox" id="track-backend" onchange="toggleTrack('backend')" class="track-checkbox" />
                 <div>
-                  <div class="text-sm font-bold text-plaster flex items-center gap-2">
+                  <div class="text-sm font-bold text-gray-900 font-semibold flex items-center gap-2">
                     <span>⚙️</span> Backend Strengthening
                   </div>
-                  <div class="text-xs text-mist/80">Node.js, Express, Databases & System Design</div>
+                  <div class="text-xs text-gray-900 font-medium/80">Node.js, Express, Databases & System Design</div>
                 </div>
               </label>
               <div class="text-right flex-shrink-0 ml-2">
-                <span id="streak-backend" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-eucalyptus border border-eucalyptus/20">
+                <span id="streak-backend" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-veranda border border-veranda/20">
                   🔥 0d
                 </span>
               </div>
             </div>
 
             <!-- Track 4: Book Reading -->
-            <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
+            <div class="glass-card-subtle rounded-3xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
               <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
                 <input type="checkbox" id="track-reading" onchange="toggleTrack('reading')" class="track-checkbox" />
                 <div>
-                  <div class="text-sm font-bold text-plaster flex items-center gap-2">
+                  <div class="text-sm font-bold text-gray-900 font-semibold flex items-center gap-2">
                     <span>📖</span> Book Reading (10+ pages)
                   </div>
-                  <div class="text-xs text-mist/80">10+ pages per day from tech or growth books</div>
+                  <div class="text-xs text-gray-900 font-medium/80">10+ pages per day from tech or growth books</div>
                 </div>
               </label>
               <div class="text-right flex-shrink-0 ml-2">
-                <span id="streak-reading" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-eucalyptus border border-eucalyptus/20">
+                <span id="streak-reading" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-veranda border border-veranda/20">
                   🔥 0d
                 </span>
               </div>
             </div>
 
             <!-- Track 5: Korean Learning (Smart Weekend Masterclass Adaptation) -->
-            <div id="trackCard-korean" class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
+            <div id="trackCard-korean" class="glass-card-subtle rounded-3xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
               <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
                 <input type="checkbox" id="track-korean" onchange="toggleTrack('korean')" class="track-checkbox" />
                 <div>
-                  <div class="text-sm font-bold text-plaster flex items-center gap-2">
+                  <div class="text-sm font-bold text-gray-900 font-semibold flex items-center gap-2">
                     <span>🇰🇷</span> <span id="koreanTrackTitle">Korean (Weekend Sprint)</span>
-                    <span id="koreanWeekendBadge" class="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-mist/20 text-mist border border-mist/30">Weekend Active</span>
+                    <span id="koreanWeekendBadge" class="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-cloud/20 text-gray-900 font-medium border border-cloud/30">Weekend Active</span>
                   </div>
-                  <div id="koreanTrackDesc" class="text-xs text-mist/80">Saturdays & Sundays deep focus: Hangul, vocab & speaking masterclass (15–20m)</div>
+                  <div id="koreanTrackDesc" class="text-xs text-gray-900 font-medium/80">Saturdays & Sundays deep focus: Hangul, vocab & speaking masterclass (15–20m)</div>
                 </div>
               </label>
               <div class="text-right flex-shrink-0 ml-2">
-                <span id="streak-korean" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-eucalyptus border border-eucalyptus/20">
+                <span id="streak-korean" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-veranda border border-veranda/20">
                   🔥 0d
                 </span>
               </div>
             </div>
 
             <!-- Track 6: English Practice -->
-            <div class="glass-card-subtle rounded-2xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
+            <div class="glass-card-subtle rounded-3xl p-3.5 flex items-center justify-between hover:border-moss/40 transition">
               <label class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
                 <input type="checkbox" id="track-english" onchange="toggleTrack('english')" class="track-checkbox" />
                 <div>
-                  <div class="text-sm font-bold text-plaster flex items-center gap-2">
+                  <div class="text-sm font-bold text-gray-900 font-semibold flex items-center gap-2">
                     <span>🗣️</span> English Fluency Push
                   </div>
-                  <div class="text-xs text-mist/80">B1 → C1 speaking practice & explainers (15–20 min)</div>
+                  <div class="text-xs text-gray-900 font-medium/80">B1 → C1 speaking practice & explainers (15–20 min)</div>
                 </div>
               </label>
               <div class="text-right flex-shrink-0 ml-2">
-                <span id="streak-english" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-eucalyptus border border-eucalyptus/20">
+                <span id="streak-english" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-veranda border border-veranda/20">
                   🔥 0d
                 </span>
               </div>
@@ -578,60 +580,60 @@
           </div>
 
           <!-- Supporting Habits Grid Accordion / Sub-Section -->
-          <div class="mt-6 pt-5 border-t border-eucalyptus/15">
-            <h3 class="text-xs font-bold font-display uppercase tracking-widest text-eucalyptus mb-3 flex items-center gap-1.5">
+          <div class="mt-6 pt-5 border-t border-veranda/15">
+            <h3 class="text-xs font-bold font-display uppercase tracking-widest text-veranda mb-3 flex items-center gap-1.5">
               <span>🌱</span> Supporting Foundation Habits (+20 XP each)
             </h3>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs">
-              <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
+              <label class="glass-card-subtle p-2.5 rounded-3xl flex items-center gap-2.5 cursor-pointer hover:border-cloud/30 transition">
                 <input type="checkbox" id="support-prayer" onchange="saveSupportHabits('prayer')" class="track-checkbox" />
-                <span class="text-plaster font-medium">🙏 Prayer</span>
+                <span class="text-gray-900 font-semibold font-medium">🙏 Prayer</span>
               </label>
-              <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
+              <label class="glass-card-subtle p-2.5 rounded-3xl flex items-center gap-2.5 cursor-pointer hover:border-cloud/30 transition">
                 <input type="checkbox" id="support-workout" onchange="saveSupportHabits('workout')" class="track-checkbox" />
-                <span class="text-plaster font-medium">🏋️ Workout</span>
+                <span class="text-gray-900 font-semibold font-medium">🏋️ Workout</span>
               </label>
-              <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
+              <label class="glass-card-subtle p-2.5 rounded-3xl flex items-center gap-2.5 cursor-pointer hover:border-cloud/30 transition">
                 <input type="checkbox" id="support-journal" onchange="saveSupportHabits('journal')" class="track-checkbox" />
-                <span class="text-plaster font-medium">✍️ Journal</span>
+                <span class="text-gray-900 font-semibold font-medium">✍️ Journal</span>
               </label>
-              <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
+              <label class="glass-card-subtle p-2.5 rounded-3xl flex items-center gap-2.5 cursor-pointer hover:border-cloud/30 transition">
                 <input type="checkbox" id="support-hydration" onchange="saveSupportHabits('hydration')" class="track-checkbox" />
-                <span class="text-plaster font-medium">💧 Hydration (8g)</span>
+                <span class="text-gray-900 font-semibold font-medium">💧 Hydration (8g)</span>
               </label>
-              <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
+              <label class="glass-card-subtle p-2.5 rounded-3xl flex items-center gap-2.5 cursor-pointer hover:border-cloud/30 transition">
                 <input type="checkbox" id="support-mood" onchange="saveSupportHabits('mood')" class="track-checkbox" />
-                <span class="text-plaster font-medium">😊 Mood Check</span>
+                <span class="text-gray-900 font-semibold font-medium">😊 Mood Check</span>
               </label>
-              <label class="glass-card-subtle p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer hover:border-mist/30 transition">
+              <label class="glass-card-subtle p-2.5 rounded-3xl flex items-center gap-2.5 cursor-pointer hover:border-cloud/30 transition">
                 <input type="checkbox" id="support-social" onchange="saveSupportHabits('social')" class="track-checkbox" />
-                <span class="text-plaster font-medium">📱 Social Limit</span>
+                <span class="text-gray-900 font-semibold font-medium">📱 Social Limit</span>
               </label>
             </div>
           </div>
         </section>
 
-        <!-- 33-Day Summer Sprint Heatmap -->
+        <!-- 360-Day Yearly Tracker -->
         <section class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
-                <span>📊</span> 33-Day Summer Sprint Heatmap
+              <h2 class="text-base font-bold font-display text-gray-900 font-semibold flex items-center gap-2">
+                <span>📊</span> 360-Day Yearly Tracker
               </h2>
-              <p class="text-xs text-mist mt-0.5">Mon Aug 10 (ነሐሴ 4) → Fri Sep 11 (መስከረም 1 🌼 Enkutatash)</p>
+              <p class="text-xs text-gray-900 font-medium mt-0.5">Sep 16, 2026 → Sep 10, 2027 (Meskerem 6 - Pagume 5)</p>
             </div>
-            <div class="flex items-center gap-1.5 text-[10px] text-mist">
+            <div class="flex items-center gap-1.5 text-[10px] text-gray-900 font-medium">
               <span>Less</span>
-              <div class="w-3.5 h-3.5 rounded bg-soot/80 border border-eucalyptus/10"></div>
-              <div class="w-3.5 h-3.5 rounded bg-moss/30"></div>
-              <div class="w-3.5 h-3.5 rounded bg-moss/60"></div>
-              <div class="w-3.5 h-3.5 rounded bg-moss"></div>
-              <div class="w-3.5 h-3.5 rounded bg-eucalyptus shadow-[0_0_6px_#98AA9D]"></div>
+              <div class="w-3.5 h-3.5 rounded bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 border border-veranda/10"></div>
+              <div class="w-3.5 h-3.5 rounded bg-gradient-to-r from-cupid to-melon/30"></div>
+              <div class="w-3.5 h-3.5 rounded bg-gradient-to-r from-cupid to-melon/60"></div>
+              <div class="w-3.5 h-3.5 rounded bg-gradient-to-r from-cupid to-melon"></div>
+              <div class="w-3.5 h-3.5 rounded bg-veranda shadow-[0_0_6px_#6BB1AD]"></div>
               <span>More</span>
             </div>
           </div>
 
-          <!-- 33 Cells Grid (11 cols x 3 rows) with Pagume & Meskerem 1 Accents -->
+          <!-- 360 Cells Grid (11 cols x 3 rows) with Pagume & Meskerem 6 Accents -->
           <div id="heatmapGrid" class="grid grid-cols-7 sm:grid-cols-11 gap-2">
             <!-- Dynamically populated 33 days -->
           </div>
@@ -640,16 +642,10 @@
         <!-- Auto-Generating Weekly Recap Card (5 Sprint Cycles) -->
         <section class="glass-card rounded-3xl p-6 border-l-4 border-moss">
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
-            <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
+            <h2 class="text-base font-bold font-display text-gray-900 font-semibold flex items-center gap-2">
               <span>📈</span> 7-Day Performance Recap (5 Cycles)
             </h2>
-            <select id="weeklyRecapSelect" onchange="renderWeeklyRecap()" class="bg-soot border border-eucalyptus/20 rounded-xl px-2.5 py-1 text-xs text-mist focus:outline-none focus:border-moss">
-              <option value="week1">Week 1: Days 1–7 (Aug 10–16 • ነሐሴ 4–10)</option>
-              <option value="week2">Week 2: Days 8–14 (Aug 17–23 • ነሐሴ 11–17)</option>
-              <option value="week3">Week 3: Days 15–21 (Aug 24–30 • ነሐሴ 18–24)</option>
-              <option value="week4">Week 4: Days 22–28 (Aug 31–Sep 6 • ነሐሴ 25–ጳጉሜ 1)</option>
-              <option value="week5">Week 5: Days 29–33 (Sep 7–11 • ጳጉሜ 2–መስከረም 1 🌼)</option>
-            </select>
+            <select id="weeklyRecapSelect" onchange="renderWeeklyRecap()" class="bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md border border-veranda/20 rounded-3xl px-2.5 py-1 text-xs text-gray-900 font-medium focus:outline-none focus:border-moss"></select>
           </div>
 
           <div id="weeklyRecapContent" class="space-y-4">
@@ -664,50 +660,50 @@
         <!-- 🎯 DAILY DOPAMINE QUESTS MATRIX -->
         <section class="glass-card rounded-3xl p-6 border-t-4 border-yellow-400/80 relative overflow-hidden">
           <div class="flex items-center justify-between mb-3">
-            <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
+            <h2 class="text-base font-bold font-display text-gray-900 font-semibold flex items-center gap-2">
               <span>🎯</span> Daily Dopamine Quests
             </h2>
-            <span id="questsCompletedBadge" class="text-[11px] font-bold font-display px-2.5 py-0.5 rounded-full bg-yellow-400/20 text-yellow-300 border border-yellow-400/30">
+            <span id="questsCompletedBadge" class="text-[11px] font-bold font-display px-2.5 py-0.5 rounded-full bg-yellow-400/20 text-yellow-300 shadow-[0_4px_15px_rgba(230,116,142,0.15)]">
               0 / 3 Done
             </span>
           </div>
-          <p class="text-xs text-mist mb-4">Complete daily quests for high-yield XP surges and streak protection.</p>
+          <p class="text-xs text-gray-900 font-medium mb-4">Complete daily quests for high-yield XP surges and streak protection.</p>
 
           <div class="space-y-2.5" id="dailyQuestsContainer">
             <!-- Quest 1: Morning Frog -->
-            <div id="questItem-frog" class="glass-card-subtle p-3 rounded-2xl flex items-center justify-between transition">
+            <div id="questItem-frog" class="glass-card-subtle p-3 rounded-3xl flex items-center justify-between transition">
               <div class="flex items-center gap-3">
                 <span class="text-lg">🐸</span>
                 <div>
-                  <div class="text-xs font-bold text-plaster">Morning Warrior</div>
-                  <div class="text-[11px] text-mist/80">Crush Morning Hard Challenge first (+100 XP)</div>
+                  <div class="text-xs font-bold text-gray-900 font-semibold">Morning Warrior</div>
+                  <div class="text-[11px] text-gray-900 font-medium/80">Crush Morning Hard Challenge first (+100 XP)</div>
                 </div>
               </div>
-              <span id="questBadge-frog" class="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20">Pending</span>
+              <span id="questBadge-frog" class="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 text-gray-900 font-medium border border-veranda/20">Pending</span>
             </div>
 
             <!-- Quest 2: Deep Pomodoro -->
-            <div id="questItem-pomo" class="glass-card-subtle p-3 rounded-2xl flex items-center justify-between transition">
+            <div id="questItem-pomo" class="glass-card-subtle p-3 rounded-3xl flex items-center justify-between transition">
               <div class="flex items-center gap-3">
                 <span class="text-lg">🍅</span>
                 <div>
-                  <div class="text-xs font-bold text-plaster">Deep Flow Master</div>
-                  <div class="text-[11px] text-mist/80">Complete 2+ Focus Pomodoro sessions (+75 XP)</div>
+                  <div class="text-xs font-bold text-gray-900 font-semibold">Deep Flow Master</div>
+                  <div class="text-[11px] text-gray-900 font-medium/80">Complete 2+ Focus Pomodoro sessions (+75 XP)</div>
                 </div>
               </div>
-              <span id="questBadge-pomo" class="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20">0 / 2 Done</span>
+              <span id="questBadge-pomo" class="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 text-gray-900 font-medium border border-veranda/20">0 / 2 Done</span>
             </div>
 
             <!-- Quest 3: Perfect Day -->
-            <div id="questItem-grind" class="glass-card-subtle p-3 rounded-2xl flex items-center justify-between transition">
+            <div id="questItem-grind" class="glass-card-subtle p-3 rounded-3xl flex items-center justify-between transition">
               <div class="flex items-center gap-3">
                 <span class="text-lg">⚡</span>
                 <div>
-                  <div class="text-xs font-bold text-plaster">Unstoppable Discipline</div>
-                  <div class="text-[11px] text-mist/80">Complete 100% of Today's Core Tracks (+150 XP)</div>
+                  <div class="text-xs font-bold text-gray-900 font-semibold">Unstoppable Discipline</div>
+                  <div class="text-[11px] text-gray-900 font-medium/80">Complete 100% of Today's Core Tracks (+150 XP)</div>
                 </div>
               </div>
-              <span id="questBadge-grind" class="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20">Pending</span>
+              <span id="questBadge-grind" class="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 text-gray-900 font-medium border border-veranda/20">Pending</span>
             </div>
           </div>
         </section>
@@ -715,36 +711,36 @@
         <!-- Rock-Solid Rebuilt Timestamp Pomodoro Timer -->
         <section class="glass-card rounded-3xl p-6 border-t-4 border-moss relative overflow-hidden">
           <div class="flex items-center justify-between mb-4">
-            <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
+            <h2 class="text-base font-bold font-display text-gray-900 font-semibold flex items-center gap-2">
               <span>⏱️</span> Pomodoro Command Timer
             </h2>
             <div class="flex items-center gap-1.5">
-              <button onclick="toggleAudioMute()" id="pomoMuteBtn" class="p-1.5 rounded-lg glass-card-subtle text-xs hover:bg-soot-hover transition" title="Mute/Unmute Sounds">
+              <button onclick="toggleAudioMute()" id="pomoMuteBtn" class="p-1.5 rounded-lg glass-card-subtle text-xs hover:bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md-hover transition" title="Mute/Unmute Sounds">
                 🔊
               </button>
-              <button onclick="togglePomoSettings()" class="p-1.5 rounded-lg glass-card-subtle text-xs hover:bg-soot-hover transition" title="Customize Durations">
+              <button onclick="togglePomoSettings()" class="p-1.5 rounded-lg glass-card-subtle text-xs hover:bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md-hover transition" title="Customize Durations">
                 ⚙️
               </button>
             </div>
           </div>
 
           <!-- Pomodoro Mode Tabs -->
-          <div class="flex gap-1.5 mb-4 bg-soot/60 p-1 rounded-2xl border border-eucalyptus/15 text-xs">
-            <button onclick="setPomoMode('work')" id="pomoTab-work" class="flex-1 py-1.5 font-bold font-display rounded-xl transition bg-moss text-plaster shadow">
+          <div class="flex gap-1.5 mb-4 bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 p-1 rounded-3xl border border-veranda/15 text-xs">
+            <button onclick="setPomoMode('work')" id="pomoTab-work" class="flex-1 py-1.5 font-bold font-display rounded-3xl transition bg-gradient-to-r from-cupid to-melon text-gray-900 font-semibold shadow">
               Focus (25m)
             </button>
-            <button onclick="setPomoMode('shortBreak')" id="pomoTab-shortBreak" class="flex-1 py-1.5 font-bold font-display rounded-xl transition text-mist hover:text-plaster">
+            <button onclick="setPomoMode('shortBreak')" id="pomoTab-shortBreak" class="flex-1 py-1.5 font-bold font-display rounded-3xl transition text-gray-900 font-medium hover:text-gray-900 font-semibold">
               Short (5m)
             </button>
-            <button onclick="setPomoMode('longBreak')" id="pomoTab-longBreak" class="flex-1 py-1.5 font-bold font-display rounded-xl transition text-mist hover:text-plaster">
+            <button onclick="setPomoMode('longBreak')" id="pomoTab-longBreak" class="flex-1 py-1.5 font-bold font-display rounded-3xl transition text-gray-900 font-medium hover:text-gray-900 font-semibold">
               Long (15m)
             </button>
           </div>
 
           <!-- Session Tagging Selector (Crucial Feature!) -->
           <div class="mb-4">
-            <label class="text-[11px] uppercase tracking-wider text-eucalyptus font-bold block mb-1">Tag Focus Track</label>
-            <select id="pomoTrackSelect" onchange="setPomoCategoryTag(this.value)" class="w-full bg-soot/80 border border-eucalyptus/25 rounded-xl px-3 py-2 text-xs text-plaster focus:outline-none focus:border-moss font-medium">
+            <label class="text-[11px] uppercase tracking-wider text-veranda font-bold block mb-1">Tag Focus Track</label>
+            <select id="pomoTrackSelect" onchange="setPomoCategoryTag(this.value)" class="w-full bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 border border-veranda/25 rounded-3xl px-3 py-2 text-xs text-gray-900 font-semibold focus:outline-none focus:border-moss font-medium">
               <option value="frog">🐸 Morning Hard Frog</option>
               <option value="dsa">🧠 DSA (LeetCode, JS)</option>
               <option value="backend">⚙️ Backend (Node.js, Express, DB)</option>
@@ -758,65 +754,65 @@
 
           <!-- Timer Clock Display & Controls -->
           <div class="flex flex-col items-center justify-center py-3">
-            <div id="pomoClockDisplay" class="text-5xl font-black font-mono tracking-widest text-plaster mb-3">
+            <div id="pomoClockDisplay" class="text-5xl font-black font-mono tracking-widest text-gray-900 font-semibold mb-3">
               25:00
             </div>
 
             <!-- Session Count Badge -->
             <div class="flex items-center gap-2 mb-5">
-              <button onclick="adjustPomoCount(-1)" class="w-6 h-6 rounded-full bg-soot/60 border border-eucalyptus/20 text-mist text-xs flex items-center justify-center font-bold hover:bg-soot-hover transition">-</button>
-              <span class="text-xs font-bold font-display px-3 py-1 rounded-full bg-moss/20 text-moss-light border border-moss/30 flex items-center gap-1.5">
+              <button onclick="adjustPomoCount(-1)" class="w-6 h-6 rounded-full bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 border border-veranda/20 text-gray-900 font-medium text-xs flex items-center justify-center font-bold hover:bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md-hover transition">-</button>
+              <span class="text-xs font-bold font-display px-3 py-1 rounded-full bg-gradient-to-r from-cupid to-melon/20 text-moss-light border border-moss/30 flex items-center gap-1.5">
                 <span>🍅</span> <span id="pomoSessionsCountDisplay">0</span> sessions completed today
               </span>
-              <button onclick="adjustPomoCount(1)" class="w-6 h-6 rounded-full bg-soot/60 border border-eucalyptus/20 text-mist text-xs flex items-center justify-center font-bold hover:bg-soot-hover transition">+</button>
+              <button onclick="adjustPomoCount(1)" class="w-6 h-6 rounded-full bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 border border-veranda/20 text-gray-900 font-medium text-xs flex items-center justify-center font-bold hover:bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md-hover transition">+</button>
             </div>
 
             <!-- Unambiguous Action Buttons -->
             <div class="flex gap-3 w-full">
-              <button onclick="togglePomodoroTimer()" id="pomoToggleBtn" class="flex-1 py-3 bg-moss hover:bg-moss-light text-plaster font-bold font-display rounded-2xl shadow-lg transition transform active:scale-95 text-sm">
+              <button onclick="togglePomodoroTimer()" id="pomoToggleBtn" class="flex-1 py-3 bg-gradient-to-r from-cupid to-melon hover:bg-gradient-to-r from-cupid to-melon-light text-gray-900 font-semibold font-bold font-display rounded-3xl shadow-lg transition transform active:scale-95 text-sm">
                 Start Session
               </button>
-              <button onclick="resetPomodoroTimer()" class="px-5 py-3 glass-card-subtle text-mist hover:text-plaster font-bold font-display text-sm rounded-2xl transition">
+              <button onclick="resetPomodoroTimer()" class="px-5 py-3 glass-card-subtle text-gray-900 font-medium hover:text-gray-900 font-semibold font-bold font-display text-sm rounded-3xl transition">
                 Reset
               </button>
             </div>
           </div>
 
           <!-- Settings Panel (Hidden by default) -->
-          <div id="pomoSettingsPanel" class="hidden mt-4 pt-4 border-t border-eucalyptus/15 space-y-3 text-xs">
+          <div id="pomoSettingsPanel" class="hidden mt-4 pt-4 border-t border-veranda/15 space-y-3 text-xs">
             <div class="grid grid-cols-3 gap-2">
               <div>
-                <label class="text-[10px] text-eucalyptus font-bold block mb-1 text-center">Work (min)</label>
-                <input type="number" id="cfgWorkMin" value="25" min="1" max="180" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl py-1 text-center text-plaster" />
+                <label class="text-[10px] text-veranda font-bold block mb-1 text-center">Work (min)</label>
+                <input type="number" id="cfgWorkMin" value="25" min="1" max="180" class="w-full bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 border border-veranda/20 rounded-3xl py-1 text-center text-gray-900 font-semibold" />
               </div>
               <div>
-                <label class="text-[10px] text-eucalyptus font-bold block mb-1 text-center">Short (min)</label>
-                <input type="number" id="cfgShortMin" value="5" min="1" max="60" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl py-1 text-center text-plaster" />
+                <label class="text-[10px] text-veranda font-bold block mb-1 text-center">Short (min)</label>
+                <input type="number" id="cfgShortMin" value="5" min="1" max="60" class="w-full bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 border border-veranda/20 rounded-3xl py-1 text-center text-gray-900 font-semibold" />
               </div>
               <div>
-                <label class="text-[10px] text-eucalyptus font-bold block mb-1 text-center">Long (min)</label>
-                <input type="number" id="cfgLongMin" value="15" min="1" max="60" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl py-1 text-center text-plaster" />
+                <label class="text-[10px] text-veranda font-bold block mb-1 text-center">Long (min)</label>
+                <input type="number" id="cfgLongMin" value="15" min="1" max="60" class="w-full bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 border border-veranda/20 rounded-3xl py-1 text-center text-gray-900 font-semibold" />
               </div>
             </div>
             
             <div class="flex justify-between items-center">
-              <span class="text-mist">Desktop Alerts</span>
-              <button onclick="toggleDesktopNotifications()" id="desktopNotifBtn" class="px-3 py-1 rounded-xl text-[10px] font-bold border border-eucalyptus/30 bg-soot/60 text-eucalyptus">
+              <span class="text-gray-900 font-medium">Desktop Alerts</span>
+              <button onclick="toggleDesktopNotifications()" id="desktopNotifBtn" class="px-3 py-1 rounded-3xl text-[10px] font-bold border border-veranda/30 bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-veranda">
                 Disabled
               </button>
             </div>
 
-            <button onclick="applyPomoSettings()" class="w-full py-2 bg-moss text-plaster font-bold rounded-xl transition">
+            <button onclick="applyPomoSettings()" class="w-full py-2 bg-gradient-to-r from-cupid to-melon text-gray-900 font-semibold font-bold rounded-3xl transition">
               Apply & Save Settings
             </button>
           </div>
 
           <!-- Today's Time Invested Per Category Widget -->
-          <div class="mt-5 pt-4 border-t border-eucalyptus/15">
-            <div class="text-[11px] font-bold font-display uppercase tracking-widest text-eucalyptus mb-2">
+          <div class="mt-5 pt-4 border-t border-veranda/15">
+            <div class="text-[11px] font-bold font-display uppercase tracking-widest text-veranda mb-2">
               Time Invested Today (By Track)
             </div>
-            <div id="pomoCategoryTimeSummary" class="space-y-1.5 text-xs text-mist">
+            <div id="pomoCategoryTimeSummary" class="space-y-1.5 text-xs text-gray-900 font-medium">
               <!-- Dynamically populated bars -->
             </div>
           </div>
@@ -826,12 +822,12 @@
         <section class="glass-card rounded-3xl p-6">
           <div class="flex items-center justify-between mb-3">
             <div>
-              <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2">
+              <h2 class="text-base font-bold font-display text-gray-900 font-semibold flex items-center gap-2">
                 <span>💧</span> Hydration Goal (8 Glasses)
               </h2>
-              <span id="waterProgressSubtext" class="text-xs text-mist font-medium">0 / 8 Glasses (0%)</span>
+              <span id="waterProgressSubtext" class="text-xs text-gray-900 font-medium font-medium">0 / 8 Glasses (0%)</span>
             </div>
-            <span id="waterStreakBadge" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-mist border border-mist/20">
+            <span id="waterStreakBadge" class="text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-gray-900 font-medium border border-cloud/20">
               💧 0d Streak
             </span>
           </div>
@@ -844,26 +840,26 @@
         <section class="glass-card rounded-3xl p-6 space-y-4">
           <!-- Mood -->
           <div>
-            <h3 class="text-xs font-bold font-display uppercase tracking-widest text-eucalyptus mb-2">Daily Mood Check-in</h3>
+            <h3 class="text-xs font-bold font-display uppercase tracking-widest text-veranda mb-2">Daily Mood Check-in</h3>
             <div class="flex justify-around gap-2" id="moodButtonsGroup">
-              <button onclick="setMoodLog('😴')" class="mood-btn p-2.5 rounded-2xl glass-card-subtle text-xl hover:scale-110 transition" title="Exhausted / Tired">😴</button>
-              <button onclick="setMoodLog('😐')" class="mood-btn p-2.5 rounded-2xl glass-card-subtle text-xl hover:scale-110 transition" title="Neutral / Okay">😐</button>
-              <button onclick="setMoodLog('😊')" class="mood-btn p-2.5 rounded-2xl glass-card-subtle text-xl hover:scale-110 transition" title="Good / Focused">😊</button>
-              <button onclick="setMoodLog('🔥')" class="mood-btn p-2.5 rounded-2xl glass-card-subtle text-xl hover:scale-110 transition" title="On Fire / Unstoppable">🔥</button>
+              <button onclick="setMoodLog('😴')" class="mood-btn p-2.5 rounded-3xl glass-card-subtle text-xl hover:scale-110 transition" title="Exhausted / Tired">😴</button>
+              <button onclick="setMoodLog('😐')" class="mood-btn p-2.5 rounded-3xl glass-card-subtle text-xl hover:scale-110 transition" title="Neutral / Okay">😐</button>
+              <button onclick="setMoodLog('😊')" class="mood-btn p-2.5 rounded-3xl glass-card-subtle text-xl hover:scale-110 transition" title="Good / Focused">😊</button>
+              <button onclick="setMoodLog('🔥')" class="mood-btn p-2.5 rounded-3xl glass-card-subtle text-xl hover:scale-110 transition" title="On Fire / Unstoppable">🔥</button>
             </div>
           </div>
 
           <!-- Sleep Log -->
-          <div class="pt-3 border-t border-eucalyptus/15">
-            <h3 class="text-xs font-bold font-display uppercase tracking-widest text-eucalyptus mb-2">Sleep Log</h3>
+          <div class="pt-3 border-t border-veranda/15">
+            <h3 class="text-xs font-bold font-display uppercase tracking-widest text-veranda mb-2">Sleep Log</h3>
             <div class="grid grid-cols-2 gap-2 text-xs">
               <div>
-                <label class="text-[10px] text-mist block mb-1">Bedtime</label>
-                <input type="time" id="sleepBedInput" onchange="saveSleepLog()" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl px-2.5 py-1.5 text-plaster" />
+                <label class="text-[10px] text-gray-900 font-medium block mb-1">Bedtime</label>
+                <input type="time" id="sleepBedInput" onchange="saveSleepLog()" class="w-full bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 border border-veranda/20 rounded-3xl px-2.5 py-1.5 text-gray-900 font-semibold" />
               </div>
               <div>
-                <label class="text-[10px] text-mist block mb-1">Wake up</label>
-                <input type="time" id="sleepWakeInput" onchange="saveSleepLog()" class="w-full bg-soot/80 border border-eucalyptus/20 rounded-xl px-2.5 py-1.5 text-plaster" />
+                <label class="text-[10px] text-gray-900 font-medium block mb-1">Wake up</label>
+                <input type="time" id="sleepWakeInput" onchange="saveSleepLog()" class="w-full bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 border border-veranda/20 rounded-3xl px-2.5 py-1.5 text-gray-900 font-semibold" />
               </div>
             </div>
             <div id="sleepDurationDisplay" class="text-xs font-bold text-moss-light text-center mt-2"></div>
@@ -871,32 +867,32 @@
         </section>
 
         <!-- Variable Small Unlocks & Rewards Showcase -->
-        <section class="glass-card rounded-3xl p-6 border-2 border-eucalyptus/20">
-          <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2 mb-2">
+        <section class="glass-card rounded-3xl p-6 border-2 border-veranda/20">
+          <h2 class="text-base font-bold font-display text-gray-900 font-semibold flex items-center gap-2 mb-2">
             <span>🎁</span> Variable Sprint Rewards
           </h2>
-          <p class="text-xs text-mist mb-3">Complete all tracks today for a chance to unlock exclusive badges and tokens!</p>
+          <p class="text-xs text-gray-900 font-medium mb-3">Complete all tracks today for a chance to unlock exclusive badges and tokens!</p>
           <div id="unlockedBadgesContainer" class="flex flex-wrap gap-2">
             <!-- Dynamically rendered unlocked badges -->
           </div>
         </section>
 
-        <!-- Day 33 Secret Letter Locked Vault (Enkutatash / Meskerem 1) -->
-        <section class="glass-card rounded-3xl p-6 border-l-4 border-mist">
-          <h2 class="text-base font-bold font-display text-plaster flex items-center gap-2 mb-1">
-            <span>🔐</span> Day 33 Secret Letter Vault (መስከረም 1 🌼)
+        <!-- Day 33 Secret Letter Locked Vault (Enkutatash / Meskerem 6) -->
+        <section class="glass-card rounded-3xl p-6 border-l-4 border-cloud">
+          <h2 class="text-base font-bold font-display text-gray-900 font-semibold flex items-center gap-2 mb-1">
+            <span>🔐</span> Day 360 Secret Letter Vault (ጳጉሜ 🌼)
           </h2>
-          <p id="vaultHintText" class="text-xs text-mist mb-3">
-            Write your thoughts & predictions. Encrypted until Friday, September 11 (Ethiopian September 1 / መስከረም 1).
+          <p id="vaultHintText" class="text-xs text-gray-900 font-medium mb-3">
+            Write your thoughts & predictions. Encrypted until the end of the year (ጳጉሜ).
           </p>
-          <textarea id="vaultTextarea" rows="3" placeholder="Write your letter to your future self on Ethiopian New Year (Meskerem 1)..." class="w-full text-xs bg-soot/80 border border-eucalyptus/20 rounded-2xl p-3 text-plaster focus:outline-none focus:border-moss placeholder-eucalyptus/50 resize-none mb-2"></textarea>
+          <textarea id="vaultTextarea" rows="3" placeholder="Write your letter to your future self on Ethiopian New Year (Meskerem 6)..." class="w-full text-xs bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 border border-veranda/20 rounded-3xl p-3 text-gray-900 font-semibold focus:outline-none focus:border-moss placeholder-veranda/50 resize-none mb-2"></textarea>
           <div class="flex justify-between items-center">
-            <button onclick="storeSecretLetter()" class="px-4 py-2 bg-moss hover:bg-moss-light text-plaster text-xs font-bold font-display rounded-xl transition">
+            <button onclick="storeSecretLetter()" class="px-4 py-2 bg-gradient-to-r from-cupid to-melon hover:bg-gradient-to-r from-cupid to-melon-light text-gray-900 font-semibold text-xs font-bold font-display rounded-3xl transition">
               Seal in Vault 🔒
             </button>
-            <span id="sealedCountBadge" class="text-[11px] text-eucalyptus font-medium">0 sealed entries</span>
+            <span id="sealedCountBadge" class="text-[11px] text-veranda font-medium">0 sealed entries</span>
           </div>
-          <div id="sealedLettersFeed" class="mt-3 space-y-2 max-h-36 overflow-y-auto pt-2 border-t border-eucalyptus/15">
+          <div id="sealedLettersFeed" class="mt-3 space-y-2 max-h-36 overflow-y-auto pt-2 border-t border-veranda/15">
             <!-- Injected letters -->
           </div>
         </section>
@@ -907,6 +903,7 @@
     <!-- Main JavaScript Application Logic -->
     <script>
       // ===== STATE MANAGEMENT & STORAGE KEYS =====
+      const SPRINT_TOTAL_DAYS = 360;
       const TRACKS = [
         { id: 'design', name: 'Design Skill-building', icon: '🎨', xp: 50 },
         { id: 'dsa', name: 'DSA Practice', icon: '🧠', xp: 50 },
@@ -935,7 +932,7 @@
         { text: "Eat a live frog first thing in the morning and nothing worse will happen to you the rest of the day.", author: "Mark Twain" },
         { text: "Discipline is choosing between what you want now and what you want most.", author: "Abraham Lincoln" },
         { text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", author: "Aristotle" },
-        { text: "33 days of summer consistency will transform your engineering career before Meskerem 1.", author: "Sambee Maxim" },
+        { text: "360 days of New Year consistency will transform your engineering career before Meskerem 6.", author: "Sambee Maxim" },
         { text: "Hard work beats talent when talent doesn't work hard.", author: "Tim Notke" },
         { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
         { text: "You don't have to be great to start, but you have to start to be great.", author: "Zig Ziglar" },
@@ -975,6 +972,7 @@
         loadTrackStates();
         loadSupportHabits();
         loadHeatmap();
+        populateWeeklyRecapSelect();
         loadHydration();
         loadMoodAndSleep();
         loadPomodoroState();
@@ -994,10 +992,10 @@
 
       // ===== SPRINT DATES & COUNTDOWN =====
       function getSprintStartDate() {
-        let start = localStorage.getItem('sprint_start_date');
+        let start = localStorage.getItem('sprint_start_date_v3');
         if (!start) {
-          start = '2026-08-10'; // Monday, August 10, 2026
-          localStorage.setItem('sprint_start_date', start);
+          start = '2026-09-16'; // Wed, Sept 16 2026 (Meskerem 6)
+          localStorage.setItem('sprint_start_date_v3', start);
         }
         return new Date(start);
       }
@@ -1027,15 +1025,15 @@
         if (badge) {
           badge.innerText = isWeekend ? "🏖️ Weekend Sprint Mode" : "💼 Weekday Tech Grind";
           badge.className = isWeekend 
-            ? "text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-yellow-400/20 text-yellow-300 border border-yellow-400/30"
-            : "text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-moss/20 text-moss-light border border-moss/30";
+            ? "text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-yellow-400/20 text-yellow-300 shadow-[0_4px_15px_rgba(230,116,142,0.15)]"
+            : "text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-gradient-to-r from-cupid to-melon/20 text-moss-light border border-moss/30";
         }
 
         if (koreanBadge) {
           koreanBadge.innerText = isWeekend ? "🔥 Weekend Active (+75 XP)" : "🏖️ Weekend Focus (Sat/Sun)";
           koreanBadge.className = isWeekend
-            ? "text-[9px] font-black uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-            : "text-[9px] font-black uppercase px-2 py-0.5 rounded bg-mist/20 text-mist border border-mist/30";
+            ? "text-[9px] font-black uppercase px-2 py-0.5 rounded bg-veranda/20 text-veranda border border-veranda/30"
+            : "text-[9px] font-black uppercase px-2 py-0.5 rounded bg-cloud/20 text-gray-900 font-medium border border-cloud/30";
         }
 
         if (koreanTitle) {
@@ -1054,11 +1052,11 @@
         const daysLeft = Math.max(0, SPRINT_TOTAL_DAYS - currentDay);
         const pct = Math.round((currentDay / SPRINT_TOTAL_DAYS) * 100);
 
-        const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(currentDay) : { gDate: 'Aug 10', ethEn: 'Nehase 4' };
+        const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(currentDay) : { gDate: 'Sep 16', ethEn: 'Meskerem 6' };
 
         document.getElementById('sprintDayDisplay').innerText = `D${currentDay}`;
         document.getElementById('sprintCountdownText').innerText = `Day ${currentDay} of ${SPRINT_TOTAL_DAYS}`;
-        document.getElementById('sprintDaysLeftText').innerText = `${daysLeft} days to Ethiopian Sep 1 (Meskerem 1 🌼)`;
+        document.getElementById('sprintDaysLeftText').innerText = `${daysLeft} days to end of year (ጳጉሜ 5 🌼)`;
         
         const dateDetailEl = document.getElementById('todayDateDetail');
         if (dateDetailEl) {
@@ -1094,7 +1092,7 @@
           document.getElementById('themeToggleIcon').innerText = '☀️';
         } else {
           document.documentElement.classList.remove('light');
-          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('dark');
           document.getElementById('themeToggleIcon').innerText = '🌙';
         }
       }
@@ -1108,7 +1106,7 @@
           document.getElementById('themeToggleIcon').innerText = '☀️';
         } else {
           document.documentElement.classList.remove('light');
-          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('dark');
           localStorage.setItem('sprint_theme', 'dark');
           document.getElementById('themeToggleIcon').innerText = '🌙';
         }
@@ -1167,11 +1165,11 @@
         if (isCrushed) {
           if (btn) {
             btn.innerHTML = `<span>🐸</span> <span>FROG CRUSHED! 🎉 (+100 XP CLAIMED)</span>`;
-            btn.className = "flex-1 py-3 bg-moss text-plaster font-black font-display text-xs rounded-2xl shadow-lg border border-emerald-400/40 opacity-90 cursor-default";
+            btn.className = "flex-1 py-3 bg-gradient-to-r from-cupid to-melon text-gray-900 font-semibold font-black font-display text-xs rounded-3xl shadow-lg border border-emerald-400/40 opacity-90 cursor-default";
           }
           if (badge) {
             badge.innerText = "CRUSHED! 🐸🔥 (+100 XP)";
-            badge.className = "text-xs font-bold font-display px-3 py-1 rounded-full bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 shadow-sm";
+            badge.className = "text-xs font-bold font-display px-3 py-1 rounded-full bg-emerald-500/25 text-veranda border border-veranda/30 shadow-sm";
           }
           if (banner) {
             banner.classList.remove('hidden');
@@ -1180,11 +1178,11 @@
         } else {
           if (btn) {
             btn.innerHTML = `<span>🐸</span> <span>CRUSH MORNING FROG (+100 XP)</span>`;
-            btn.className = "flex-1 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-plaster font-black font-display text-xs rounded-2xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2";
+            btn.className = "flex-1 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-gray-900 font-semibold font-black font-display text-xs rounded-3xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2";
           }
           if (badge) {
             badge.innerText = "Pending Morning Action (+100 XP)";
-            badge.className = "text-xs font-bold font-display px-3 py-1 rounded-full bg-emerald-950/40 text-emerald-400 border border-emerald-500/30";
+            badge.className = "text-xs font-bold font-display px-3 py-1 rounded-full bg-veranda/20 text-veranda border border-veranda/30";
           }
           if (banner) banner.classList.add('hidden');
         }
@@ -1341,16 +1339,16 @@
         const qFrogBadge = document.getElementById('questBadge-frog');
         if (frogCrushed) {
           questsDone++;
-          if (qFrogItem) qFrogItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between border-l-4 border-emerald-500 bg-emerald-950/20";
+          if (qFrogItem) qFrogItem.className = "glass-card-subtle p-3 rounded-3xl flex items-center justify-between border-l-4 border-emerald-500 bg-emerald-950/20";
           if (qFrogBadge) {
             qFrogBadge.innerText = "Completed ✅";
-            qFrogBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+            qFrogBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-veranda/20 text-veranda border border-veranda/30";
           }
         } else {
-          if (qFrogItem) qFrogItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between";
+          if (qFrogItem) qFrogItem.className = "glass-card-subtle p-3 rounded-3xl flex items-center justify-between";
           if (qFrogBadge) {
             qFrogBadge.innerText = "Pending";
-            qFrogBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20";
+            qFrogBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 text-gray-900 font-medium border border-veranda/20";
           }
         }
 
@@ -1359,16 +1357,16 @@
         const qPomoBadge = document.getElementById('questBadge-pomo');
         if (pomoSessions >= 2) {
           questsDone++;
-          if (qPomoItem) qPomoItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between border-l-4 border-moss bg-moss/20";
+          if (qPomoItem) qPomoItem.className = "glass-card-subtle p-3 rounded-3xl flex items-center justify-between border-l-4 border-moss bg-gradient-to-r from-cupid to-melon/20";
           if (qPomoBadge) {
             qPomoBadge.innerText = `${pomoSessions} / 2 Completed ✅`;
-            qPomoBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-moss/30 text-moss-light border border-moss/40";
+            qPomoBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-gradient-to-r from-cupid to-melon/30 text-moss-light border border-moss/40";
           }
         } else {
-          if (qPomoItem) qPomoItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between";
+          if (qPomoItem) qPomoItem.className = "glass-card-subtle p-3 rounded-3xl flex items-center justify-between";
           if (qPomoBadge) {
             qPomoBadge.innerText = `${pomoSessions} / 2 Done`;
-            qPomoBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20";
+            qPomoBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 text-gray-900 font-medium border border-veranda/20";
           }
         }
 
@@ -1377,16 +1375,16 @@
         const qGrindBadge = document.getElementById('questBadge-grind');
         if (grindCompleted) {
           questsDone++;
-          if (qGrindItem) qGrindItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between border-l-4 border-yellow-400 bg-yellow-950/20";
+          if (qGrindItem) qGrindItem.className = "glass-card-subtle p-3 rounded-3xl flex items-center justify-between border-l-4 border-yellow-400 bg-yellow-950/20";
           if (qGrindBadge) {
             qGrindBadge.innerText = "Completed ✅";
-            qGrindBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-yellow-400/20 text-yellow-300 border border-yellow-400/30";
+            qGrindBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-yellow-400/20 text-yellow-300 shadow-[0_4px_15px_rgba(230,116,142,0.15)]";
           }
         } else {
-          if (qGrindItem) qGrindItem.className = "glass-card-subtle p-3 rounded-2xl flex items-center justify-between";
+          if (qGrindItem) qGrindItem.className = "glass-card-subtle p-3 rounded-3xl flex items-center justify-between";
           if (qGrindBadge) {
             qGrindBadge.innerText = `${completedTracks} / ${TRACKS.length} Done`;
-            qGrindBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-soot/80 text-mist border border-eucalyptus/20";
+            qGrindBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/80 text-gray-900 font-medium border border-veranda/20";
           }
         }
 
@@ -1529,8 +1527,8 @@
             } else {
               streakEl.innerText = `🔥 ${streak}d`;
               streakEl.className = streak >= 3 
-                ? "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-moss/20 text-moss-light border border-moss/40 shadow-sm"
-                : "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-eucalyptus border border-eucalyptus/20";
+                ? "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-gradient-to-r from-cupid to-melon/20 text-moss-light border border-moss/40 shadow-sm"
+                : "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-veranda border border-veranda/20";
             }
           }
         });
@@ -1623,7 +1621,7 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const colors = ['#98AA9D', '#B3C9D6', '#F2EFE2', '#697C70', '#E5C158', '#10B981'];
+        const colors = ['#6BB1AD', '#A7BCBD', '#EDECDB', '#697C70', '#E5C158', '#10B981'];
         const particles = Array.from({ length: 90 }).map(() => ({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height - canvas.height,
@@ -1691,22 +1689,25 @@
         if (!container) return;
 
         if (unlocked.length === 0) {
-          container.innerHTML = `<span class="text-xs text-mist/60 italic">No rewards unlocked yet. Complete all 6 tracks today!</span>`;
+          container.innerHTML = `<span class="text-xs text-gray-900 font-medium/60 italic">No rewards unlocked yet. Complete all 6 tracks today!</span>`;
           return;
         }
 
         container.innerHTML = unlocked.map(b => `
-          <div class="px-3 py-1.5 rounded-xl bg-moss/20 border border-moss/40 text-xs font-bold font-display text-plaster flex items-center gap-1.5 shadow-sm">
+          <div class="px-3 py-1.5 rounded-3xl bg-gradient-to-r from-cupid to-melon/20 border border-moss/40 text-xs font-bold font-display text-gray-900 font-semibold flex items-center gap-1.5 shadow-sm">
             <span>${b.icon}</span>
             <span>${b.title}</span>
           </div>
         `).join('');
       }
 
-      // ===== 33-DAY HEATMAP =====
+      // ===== 365-DAY YEARLY HEATMAP =====
       function loadHeatmap() {
         const grid = document.getElementById('heatmapGrid');
         if (!grid) return;
+
+        // Change the grid classes to allow horizontal scroll or wrapping for 365 days
+        grid.className = "flex flex-wrap gap-1 max-h-64 overflow-y-auto w-full p-2";
 
         const start = getSprintStartDate();
         let html = '';
@@ -1724,23 +1725,15 @@
           const pct = doneCount / TRACKS.length;
           const info = (typeof getSprintDayInfo === 'function') ? getSprintDayInfo(day) : { gDate: `D${day}`, ethEn: '' };
 
-          let colorStyle = 'bg-soot/80 border border-eucalyptus/10 text-mist/50';
-          if (pct > 0 && pct <= 0.3) colorStyle = 'bg-moss/30 text-plaster';
-          else if (pct > 0.3 && pct <= 0.6) colorStyle = 'bg-moss/60 text-plaster';
-          else if (pct > 0.6 && pct < 1) colorStyle = 'bg-moss text-plaster shadow';
-          else if (pct === 1) colorStyle = 'bg-eucalyptus text-soot font-black shadow-[0_0_8px_#98AA9D]';
-
-          const isFinale = (day === 33);
-          const isPagume = (day >= 28 && day <= 32);
-
-          let badgeIcon = '';
-          if (isFinale) badgeIcon = '🌼';
-          else if (isPagume) badgeIcon = '🌟';
+          let colorStyle = 'bg-white/40 border border-white/60 text-gray-500';
+          if (pct > 0 && pct <= 0.3) colorStyle = 'bg-gradient-to-r from-cupid/40 to-melon/40 text-gray-900 font-semibold';
+          else if (pct > 0.3 && pct <= 0.6) colorStyle = 'bg-gradient-to-r from-cupid/70 to-melon/70 text-gray-900 font-semibold';
+          else if (pct > 0.6 && pct < 1) colorStyle = 'bg-gradient-to-r from-cupid to-melon text-gray-900 font-semibold shadow';
+          else if (pct === 1) colorStyle = 'bg-veranda text-white font-bold shadow-[0_0_8px_#6BB1AD]';
 
           html += `
-            <div class="heatmap-cell h-11 rounded-xl ${colorStyle} ${isFinale ? 'border-2 border-yellow-400/80 ring-2 ring-yellow-400/30' : ''} flex flex-col items-center justify-center text-[10px] font-bold cursor-default relative p-1" title="Day ${day} (${info.gDate} / ${info.ethEn || ''}): ${doneCount}/${TRACKS.length} tracks">
-              <span class="leading-none flex items-center gap-0.5">D${day} ${badgeIcon}</span>
-              <span class="text-[8px] opacity-75 font-mono mt-0.5">${info.gDate}</span>
+            <div class="h-6 w-6 rounded-md ${colorStyle} flex flex-col items-center justify-center text-[8px] cursor-default relative" title="Day ${day} (${info.gDate} / ${info.ethEn || ''}): ${doneCount}/${TRACKS.length} tracks">
+              ${day}
             </div>
           `;
         }
@@ -1749,17 +1742,33 @@
       }
 
       // ===== AUTO-GENERATING WEEKLY RECAP CARD (5 SPRINT CYCLES) =====
+      // ===== DYNAMIC WEEKLY RECAP SELECT =====
+      function populateWeeklyRecapSelect() {
+        const select = document.getElementById('weeklyRecapSelect');
+        if (!select) return;
+        
+        let html = '';
+        const totalWeeks = Math.ceil(SPRINT_TOTAL_DAYS / 7);
+        for (let i = 1; i <= totalWeeks; i++) {
+          const startDay = (i - 1) * 7 + 1;
+          const endDay = Math.min(SPRINT_TOTAL_DAYS, i * 7);
+          html += `<option value="${i}">Week ${i}: Days ${startDay}–${endDay}</option>`;
+        }
+        select.innerHTML = html;
+        select.value = getWeekNumber(getCurrentSprintDay());
+      }
+
       function renderWeeklyRecap() {
         const weekVal = document.getElementById('weeklyRecapSelect').value;
         const container = document.getElementById('weeklyRecapContent');
         if (!container) return;
 
         const weekMap = {
-          week1: { start: 1, end: 7, title: "Week 1: Foundations Kickoff (Aug 10–16 • ነሐሴ 4–10)" },
+          week1: { start: 1, end: 7, title: "Week 1: Foundations Kickoff (Sep 16-22 • መስከረም 6-12)" },
           week2: { start: 8, end: 14, title: "Week 2: Deep Build & Velocity (Aug 17–23 • ነሐሴ 11–17)" },
           week3: { start: 15, end: 21, title: "Week 3: High-Velocity DSA & Backend (Aug 24–30 • ነሐሴ 18–24)" },
           week4: { start: 22, end: 28, title: "Week 4: August Push & Pagume Start (Aug 31–Sep 6 • ነሐሴ 25–ጳጉሜ 1)" },
-          week5: { start: 29, end: 33, title: "Week 5: Pagume Mastery & Enkutatash Finale (Sep 7–11 • ጳጉሜ 2–መስከረም 1 🌼)" }
+          week5: { start: 29, end: 360, title: "Week 5: Pagume Mastery & Enkutatash Finale (Sep 7–11 • ጳጉሜ 2–መስከረም 6 🌼)" }
         };
 
         const range = weekMap[weekVal] || weekMap.week1;
@@ -1803,22 +1812,22 @@
 
         container.innerHTML = `
           <div class="grid grid-cols-3 gap-3 text-center">
-            <div class="glass-card-subtle p-3 rounded-2xl">
-              <div class="text-[10px] uppercase font-bold text-eucalyptus">Overall Rate</div>
-              <div class="text-xl font-black font-display text-plaster mt-0.5">${overallPct}%</div>
+            <div class="glass-card-subtle p-3 rounded-3xl">
+              <div class="text-[10px] uppercase font-bold text-veranda">Overall Rate</div>
+              <div class="text-xl font-black font-display text-gray-900 font-semibold mt-0.5">${overallPct}%</div>
             </div>
-            <div class="glass-card-subtle p-3 rounded-2xl">
+            <div class="glass-card-subtle p-3 rounded-3xl">
               <div class="text-[10px] uppercase font-bold text-moss-light">Top Track</div>
-              <div class="text-xs font-bold text-plaster mt-1">${bestTrack.icon} ${bestTrack.name}</div>
+              <div class="text-xs font-bold text-gray-900 font-semibold mt-1">${bestTrack.icon} ${bestTrack.name}</div>
             </div>
-            <div class="glass-card-subtle p-3 rounded-2xl">
-              <div class="text-[10px] uppercase font-bold text-mist">Needs Focus</div>
-              <div class="text-xs font-bold text-plaster mt-1">${worstTrack.icon} ${worstTrack.name}</div>
+            <div class="glass-card-subtle p-3 rounded-3xl">
+              <div class="text-[10px] uppercase font-bold text-gray-900 font-medium">Needs Focus</div>
+              <div class="text-xs font-bold text-gray-900 font-semibold mt-1">${worstTrack.icon} ${worstTrack.name}</div>
             </div>
           </div>
-          <div class="glass-card-subtle p-3.5 rounded-2xl text-xs space-y-1">
+          <div class="glass-card-subtle p-3.5 rounded-3xl text-xs space-y-1">
             <p class="text-moss-light font-bold">✨ Encouragement: Your consistency in ${bestTrack.name} shows real engineering discipline.</p>
-            <p class="text-mist">⚠️ Coaching: ${honestLine}</p>
+            <p class="text-gray-900 font-medium">⚠️ Coaching: ${honestLine}</p>
           </div>
         `;
       }
@@ -1837,8 +1846,8 @@
           const btn = document.getElementById(`pomoTab-${m}`);
           if (btn) {
             btn.className = m === mode
-              ? "flex-1 py-1.5 font-bold font-display rounded-xl transition bg-moss text-plaster shadow"
-              : "flex-1 py-1.5 font-bold font-display rounded-xl transition text-mist hover:text-plaster";
+              ? "flex-1 py-1.5 font-bold font-display rounded-3xl transition bg-gradient-to-r from-cupid to-melon text-gray-900 font-semibold shadow"
+              : "flex-1 py-1.5 font-bold font-display rounded-3xl transition text-gray-900 font-medium hover:text-gray-900 font-semibold";
           }
         });
 
@@ -1946,10 +1955,10 @@
         if (!btn) return;
         if (pomoState.isRunning) {
           btn.innerText = "Pause Session";
-          btn.className = "flex-1 py-3 bg-red-900/80 hover:bg-red-800 text-plaster font-bold font-display rounded-2xl shadow-lg transition transform active:scale-95 text-sm border border-red-500/30";
+          btn.className = "flex-1 py-3 bg-red-900/80 hover:bg-red-800 text-gray-900 font-semibold font-bold font-display rounded-3xl shadow-lg transition transform active:scale-95 text-sm border border-red-500/30";
         } else {
           btn.innerText = "Start Session";
-          btn.className = "flex-1 py-3 bg-moss hover:bg-moss-light text-plaster font-bold font-display rounded-2xl shadow-lg transition transform active:scale-95 text-sm";
+          btn.className = "flex-1 py-3 bg-gradient-to-r from-cupid to-melon hover:bg-gradient-to-r from-cupid to-melon-light text-gray-900 font-semibold font-bold font-display rounded-3xl shadow-lg transition transform active:scale-95 text-sm";
         }
       }
 
@@ -1982,7 +1991,7 @@
 
         const keys = Object.keys(data);
         if (keys.length === 0) {
-          container.innerHTML = `<span class="text-[11px] text-mist/60 italic">No sessions logged today yet.</span>`;
+          container.innerHTML = `<span class="text-[11px] text-gray-900 font-medium/60 italic">No sessions logged today yet.</span>`;
           return;
         }
 
@@ -1992,7 +2001,7 @@
           return `
             <div class="flex items-center justify-between text-xs">
               <span>${track.icon} ${track.name}</span>
-              <span class="font-bold font-display text-plaster">${mins} min</span>
+              <span class="font-bold font-display text-gray-900 font-semibold">${mins} min</span>
             </div>
           `;
         }).join('');
@@ -2241,7 +2250,7 @@
         const container = document.getElementById('waterGlassesContainer');
         if (container) {
           container.innerHTML = Array.from({ length: 8 }).map((_, i) => `
-            <button onclick="toggleWaterGlass(${i})" class="w-9 h-9 rounded-xl flex items-center justify-center transition transform active:scale-90 ${i < count ? 'bg-mist text-soot shadow-[0_0_10px_#B3C9D6]' : 'glass-card-subtle text-mist/30 hover:bg-soot-hover'}" title="Glass ${i + 1} of 8">
+            <button onclick="toggleWaterGlass(${i})" class="w-9 h-9 rounded-3xl flex items-center justify-center transition transform active:scale-90 ${i < count ? 'bg-cloud text-white font-medium shadow-[0_0_10px_#A7BCBD]' : 'bg-white/40 text-gray-400 font-medium border border-white/60 hover:bg-white/60 backdrop-blur-md transition shadow-sm'}" title="Glass ${i + 1} of 8">
               <span class="text-base">${i < count ? '💧' : '🥛'}</span>
             </button>
           `).join('');
@@ -2262,11 +2271,11 @@
           } else if (streakInfo.streak > 0) {
             streakEl.innerText = `💧 ${streakInfo.streak}d Streak`;
             streakEl.className = streakInfo.streak >= 3 
-              ? "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-mist/25 text-mist border border-mist/40 shadow-sm"
-              : "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-mist border border-mist/20";
+              ? "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-cloud/25 text-gray-900 font-medium border border-cloud/40 shadow-sm"
+              : "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-gray-900 font-medium border border-cloud/20";
           } else {
             streakEl.innerText = `Streak: 0d`;
-            streakEl.className = "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-soot/60 text-mist/70 border border-eucalyptus/20";
+            streakEl.className = "text-xs font-bold font-display px-2.5 py-1 rounded-lg bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_30px_rgba(230,116,142,0.1)] backdrop-blur-md/60 text-gray-900 font-medium/70 border border-veranda/20";
           }
         }
 
@@ -2341,9 +2350,9 @@
 
         document.querySelectorAll('#moodButtonsGroup button').forEach(btn => {
           if (mood && btn.innerText.trim() === mood) {
-            btn.className = "mood-btn p-2.5 rounded-2xl bg-moss text-plaster text-xl shadow-md scale-110";
+            btn.className = "mood-btn p-2.5 rounded-3xl bg-gradient-to-r from-cupid to-melon text-gray-900 font-semibold text-xl shadow-md scale-110";
           } else {
-            btn.className = "mood-btn p-2.5 rounded-2xl glass-card-subtle text-xl hover:scale-110 transition";
+            btn.className = "mood-btn p-2.5 rounded-3xl glass-card-subtle text-xl hover:scale-110 transition";
           }
         });
 
@@ -2392,14 +2401,14 @@
         if (!feed) return;
 
         if (!isUnlocked) {
-          feed.innerHTML = `<div class="p-3 rounded-2xl glass-card-subtle text-xs text-mist/70 italic text-center">🔒 Entries remain encrypted until Day 33 (Friday, Sep 11 / መስከረም 1 🌼). Keep pushing!</div>`;
+          feed.innerHTML = `<div class="p-3 rounded-3xl glass-card-subtle text-xs text-gray-900 font-medium/70 italic text-center">🔒 Entries remain encrypted until Day 365 (Sep 10 / ጳጉሜ 5 🌼). Keep pushing!</div>`;
           return;
         }
 
         feed.innerHTML = letters.map(l => `
-          <div class="p-3 rounded-2xl glass-card-subtle text-xs space-y-1">
+          <div class="p-3 rounded-3xl glass-card-subtle text-xs space-y-1">
             <span class="text-[10px] text-moss-light font-bold block">${l.date}</span>
-            <p class="text-plaster/90">${l.text}</p>
+            <p class="text-gray-900 font-semibold/90">${l.text}</p>
           </div>
         `).join('');
       }
@@ -2415,7 +2424,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `sambee-summer-sprint-backup-${new Date().toISOString().slice(0,10)}.json`;
+        a.download = `sambee-autumn-sprint-backup-${new Date().toISOString().slice(0,10)}.json`;
         a.click();
         URL.revokeObjectURL(url);
       }
