@@ -1755,7 +1755,7 @@
           html += `<option value="${i}">Week ${i}: Days ${startDay}–${endDay}</option>`;
         }
         select.innerHTML = html;
-        select.value = getWeekNumber(getCurrentSprintDay());
+        select.value = Math.ceil(getCurrentSprintDay() / 7);
       }
 
       function renderWeeklyRecap() {
